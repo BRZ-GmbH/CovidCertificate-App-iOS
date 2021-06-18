@@ -684,7 +684,7 @@
 "wallet_notification_permission_button" = "Weiter";
 
 /*Externe URL im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_external_link" = "https://bag-coronavirus.ch/zertifikat/wie-erhalte-ich-ein-covid-zertifikat-und-wie-verwende-ich-es/";
+"wallet_scanner_howitworks_external_link" = "https://www.sozialministerium.at/Informationen-zum-Coronavirus/Coronavirus---Haeufig-gestellte-Fragen/FAQ-Gruener-Pass.html";
 
 /*Label der externen URL im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_external_link_title" = "Weitere Informationen";

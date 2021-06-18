@@ -67,7 +67,7 @@
                 },
                 {
                     "title": "What exactly is checked?",
-                    "text": "Three aspects are checked when scanning:\n– Does the certificate contain a valid electronic signature?\n– Is the certificate non-revoked?\n– Does the certificate meet Switzerland's validity criteria?\n\nIf the answer to all three questions is affirmative, the COVID certificate is shown as valid.",
+                    "text": "Three aspects are checked when scanning:\n– Does the certificate contain a valid electronic signature?\n– Is the certificate non-revoked?\n– Does the certificate meet Austria's validity criteria?\n\nIf the answer to all three questions is affirmative, the COVID certificate is shown as valid.",
                     "iconAndroid": null,
                     "iconIos": null,
                     "linkTitle": null,
