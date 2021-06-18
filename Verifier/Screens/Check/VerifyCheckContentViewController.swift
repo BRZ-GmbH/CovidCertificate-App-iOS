@@ -175,11 +175,12 @@ class VerifyCheckContentViewController: ViewController {
         case .loading:
             loadingView.rotate()
         case .success:
-            statusView.set(text: UBLocalized.verifier_verify_success_title, backgroundColor: .cc_greenish, icon: UIImage(named: "ic-check"))
+            statusView.set(text: UBLocalized.verifier_verify_success_title, backgroundColor: .cc_greenish, icon: UIImage(named: "ic-check")?.ub_image(with: .cc_green))
+            statusView.imageView.tintColor = .cc_green
             infoView.set(text: UBLocalized.verifier_verify_success_info, backgroundColor: .cc_blueish, icon: UIImage(named: "ic-info-outline")?.ub_image(with: .cc_blue), showReloadButton: false)
         case let .invalid(errors, errorCodes, _):
             let color: UIColor = .cc_redish
-            statusView.set(text: UBLocalized.verifier_verify_error_title, backgroundColor: color, icon: UIImage(named: "ic-info-alert-red"))
+            statusView.set(text: UBLocalized.verifier_verify_error_title, backgroundColor: color, icon: UIImage(named: "ic-info-alert-red")?.ub_image(with: .cc_red))
 
             // !: count is checked
             let text = errors.count == 1 ? errors.first!.displayName() : errors.map { "• " + $0.displayName() }.joined(separator: "\n")

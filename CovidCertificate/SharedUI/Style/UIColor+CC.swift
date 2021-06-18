@@ -11,21 +11,21 @@
 import UIKit
 
 public extension UIColor {
-    static var cc_bund = UIColor(ub_hexString: "#ff0000")!
+    static var cc_bund = UIColor(ub_hexString: "#e6320f")!
 
     static var cc_black = UIColor.black
     static var cc_grey = UIColor(ub_hexString: "#757575")!
-    static var cc_blue = UIColor(ub_hexString: "#243784")!
-    static var cc_green = UIColor(ub_hexString: "#009e89")!
-    static var cc_orange = UIColor(ub_hexString: "#ed6100")!
-    static var cc_red = UIColor(ub_hexString: "#d81f5b")!
+    static var cc_blue = UIColor(ub_hexString: "#00436b")!
+    static var cc_green = UIColor(ub_hexString: "#5fb564")!
+    static var cc_orange = UIColor(ub_hexString: "#f59c00")!
+    static var cc_red = UIColor(ub_hexString: "#e6320f")!
 
     static var cc_white = UIColor.white
     static var cc_greyish = UIColor(ub_hexString: "#ececec")!
     static var cc_blueish = UIColor(ub_hexString: "#eff5f9")!
-    static var cc_greenish = UIColor(ub_hexString: "#def3f0")!
-    static var cc_orangish = UIColor(ub_hexString: "#fdebde")!
-    static var cc_redish = UIColor(ub_hexString: "#fae2ea")!
+    static var cc_greenish = UIColor(ub_hexString: "#dfedda")!
+    static var cc_orangish = UIColor(ub_hexString: "#fee6c8")!
+    static var cc_redish = UIColor(ub_hexString: "#f2cac6")!
 
     // makes cc_black -> cc_grey
     static var cc_disabledAlpha: CGFloat = (255.0 - 117.0) / 255.0
