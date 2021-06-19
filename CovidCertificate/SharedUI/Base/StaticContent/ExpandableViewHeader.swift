@@ -42,7 +42,7 @@ class ExpandableViewHeader: UBButton {
             make.top.equalToSuperview().inset(12)
         }
 
-        cornerRadiusView.backgroundColor = UIColor(ub_hexString: "#9e0529")!
+        cornerRadiusView.backgroundColor = .cc_red
         cornerRadiusView.layer.cornerRadius = 9
         insertSubview(cornerRadiusView, belowSubview: highlightView)
         cornerRadiusView.snp.makeConstraints { make in
@@ -51,7 +51,7 @@ class ExpandableViewHeader: UBButton {
         }
         cornerRadiusView.isUserInteractionEnabled = false
 
-        backgroundColor = UIColor(ub_hexString: "#9e0529")!
+        backgroundColor = .cc_red
         layer.cornerRadius = 9
         clipsToBounds = false
         highlightView.layer.cornerRadius = 9

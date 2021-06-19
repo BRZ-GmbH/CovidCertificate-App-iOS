@@ -106,7 +106,7 @@ private class InfoView: UIView {
 
     init(text: String, image: UIImage?) {
         imageView = UIImageView(image: image)
-        textLabel = Label(.text, textColor: UIColor(ub_hexString: "#2e2e2e"), textAlignment: .center)
+        textLabel = Label(.text, textColor: .cc_grey, textAlignment: .center)
         textLabel.text = text
         super.init(frame: .zero)
         setup()

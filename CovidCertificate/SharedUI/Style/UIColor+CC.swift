@@ -11,21 +11,21 @@
 import UIKit
 
 public extension UIColor {
-    static var cc_bund = UIColor(ub_hexString: "#e6320f")!
+    static var cc_bund = UIColor(ub_hexString: "#b91e23")!
 
     static var cc_black = UIColor.black
-    static var cc_grey = UIColor(ub_hexString: "#757575")!
-    static var cc_blue = UIColor(ub_hexString: "#00436b")!
-    static var cc_green = UIColor(ub_hexString: "#5fb564")!
-    static var cc_orange = UIColor(ub_hexString: "#f59c00")!
-    static var cc_red = UIColor(ub_hexString: "#e6320f")!
+    static var cc_grey = UIColor(ub_hexString: "#394348")! // CI Dunkelgrau
+    static var cc_blue = UIColor(ub_hexString: "#00587a")! // CI Azurblau
+    static var cc_green = UIColor(ub_hexString: "#96be50")! // CI Hellgrün
+    static var cc_orange = UIColor(ub_hexString: "#f0aa00")! // CI Hellorange
+    static var cc_red = UIColor(ub_hexString: "#b91e23")! // CI Feuerrot
 
     static var cc_white = UIColor.white
-    static var cc_greyish = UIColor(ub_hexString: "#ececec")!
-    static var cc_blueish = UIColor(ub_hexString: "#eff5f9")!
-    static var cc_greenish = UIColor(ub_hexString: "#dfedda")!
-    static var cc_orangish = UIColor(ub_hexString: "#fee6c8")!
-    static var cc_redish = UIColor(ub_hexString: "#f2cac6")!
+    static var cc_greyish = UIColor(ub_hexString: "#ebeced")! // CI Dunkelgrau + 90% White
+    static var cc_blueish = UIColor(ub_hexString: "#e6eef1")! // CI Azurblau + 90% White
+    static var cc_greenish = UIColor(ub_hexString: "#eaf2dc")! // CI Hellgrün + 80% White
+    static var cc_orangish = UIColor(ub_hexString: "#feecd5")! // CI Dunkelorange + 80% White
+    static var cc_redish = UIColor(ub_hexString: "#f4ddde")! // CI Feuerrot + 85% White
 
     // makes cc_black -> cc_grey
     static var cc_disabledAlpha: CGFloat = (255.0 - 117.0) / 255.0
@@ -41,7 +41,7 @@ public extension UIColor {
     }
 
     static var cc_line: UIColor {
-        return UIColor(ub_hexString: "#dddddd")!
+        return UIColor(ub_hexString: "#e1e2e3")! // CI Dunkelgrau + 85% White
     }
 
     // MARK: - Background / Lines
@@ -51,11 +51,11 @@ public extension UIColor {
     }
 
     static var cc_greyBackground: UIColor {
-        return UIColor(ub_hexString: "#f4f5f9")!
+        return UIColor(ub_hexString: "#f4f5f5")! // CI Dunkelgrau + 95% White
     }
 
     static var cc_touchState: UIColor {
-        return UIColor(ub_hexString: "#f0f1f5")!
+        return UIColor(ub_hexString: "#eff0f0")! // CI Dunkelgrau + 92% White
     }
 
     // MARK: - UIAccessibility Contrast extension
