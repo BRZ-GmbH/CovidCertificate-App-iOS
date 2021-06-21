@@ -84,7 +84,8 @@ class CertificateEvaluator: NSObject, URLSessionDelegate {
         let bundle = Bundle.main
 
         // all these hosts have a seperate certificate
-        let hosts = []
+        // TODO: AT - Removed pinned backend host names
+        let hosts: [String] = []
         for host in hosts {
             if let certificate = bundle.getCertificate(with: host) {
                 // since we currently pin the Amazon Global CA we never want to accept self signed certificates in the trust-store
