@@ -84,9 +84,9 @@ class ConfigManager: NSObject {
     // MARK: - Start config request
 
     static func shouldLoadConfig(url: String?, lastConfigUrl: String?, lastConfigLoad: Date?) -> Bool {
-        // TODO AT - Disable backend configuration
+        // TODO: AT - Disable backend configuration
         return false
-        
+
         // if the config url was changed (by OS version or app version changing) load config in anycase
         if url != lastConfigUrl {
             return true
@@ -138,13 +138,15 @@ class ConfigManager: NSObject {
         dataTask?.resume()
     }
 
-    public func startConfigRequest(window: UIWindow?) {
-        loadConfig { config in
-            // self must be strong
-            if let config = config {
-                self.presentAlertIfNeeded(config: config, window: window)
-            }
-        }
+    public func startConfigRequest(window _: UIWindow?) {
+        // TODO: AT: Remove config loading
+
+        /* loadConfig { config in
+             // self must be strong
+             if let config = config {
+                 self.presentAlertIfNeeded(config: config, window: window)
+             }
+         } */
     }
 
     private static var configAlert: UIAlertController?
