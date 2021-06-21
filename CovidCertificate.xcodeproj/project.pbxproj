@@ -32,11 +32,9 @@
 		24780B5B2431B5A9003BB26C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24780B562431B5A9003BB26C /* DateFormatter.swift */; };
 		2485F4782456185100C3D8C3 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F4772456185000C3D8C3 /* DebugLog.swift */; };
 		2485F4802459631A00C3D8C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F47F2459631A00C3D8C3 /* NetworkError.swift */; };
-		274E946B2671E46200110DC5 /* swiss_governmentrootcaii.der in Resources */ = {isa = PBXBuildFile; fileRef = 274E946A2671E46200110DC5 /* swiss_governmentrootcaii.der */; };
-		274E946C2671E46200110DC5 /* swiss_governmentrootcaii.der in Resources */ = {isa = PBXBuildFile; fileRef = 274E946A2671E46200110DC5 /* swiss_governmentrootcaii.der */; };
-		48CCA621265F93D200887F63 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 48CCA620265F93D200887F63 /* CovidCertificateSDK */; };
-		48CCA623265F93DB00887F63 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 48CCA622265F93DB00887F63 /* CovidCertificateSDK */; };
 		48ECCD2A264F0797008678DD /* StaticContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ABDF2264A652800FDE0E1 /* StaticContentViewModel.swift */; };
+		5BA932A0268090F600F13749 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5BA9329F268090F600F13749 /* CovidCertificateSDK */; };
+		5BA932A2268090FC00F13749 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5BA932A1268090FC00F13749 /* CovidCertificateSDK */; };
 		6E0281EF2655022A00582904 /* Impressum in Resources */ = {isa = PBXBuildFile; fileRef = 6E0281EE2655022A00582904 /* Impressum */; };
 		6E0281F02655022A00582904 /* Impressum in Resources */ = {isa = PBXBuildFile; fileRef = 6E0281EE2655022A00582904 /* Impressum */; };
 		6E0281F226550E1100582904 /* InfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0281F126550E1100582904 /* InfoBoxView.swift */; };
@@ -68,12 +66,6 @@
 		6E7C0D43242E44D80017C4F9 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C0D42242E44D80017C4F9 /* WebViewController.swift */; };
 		6E8F52D9265BA94B00406430 /* CameraErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8F52D8265BA94B00406430 /* CameraErrorView.swift */; };
 		6E8F52DA265BA94B00406430 /* CameraErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8F52D8265BA94B00406430 /* CameraErrorView.swift */; };
-		6E8F52E5265EC17400406430 /* www.cc-a.bit.admin.ch.der in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F52E2265EC17300406430 /* www.cc-a.bit.admin.ch.der */; };
-		6E8F52E6265EC17400406430 /* www.cc-a.bit.admin.ch.der in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F52E2265EC17300406430 /* www.cc-a.bit.admin.ch.der */; };
-		6E8F52E7265EC17400406430 /* www.cc-d.bit.admin.ch.der in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F52E3265EC17300406430 /* www.cc-d.bit.admin.ch.der */; };
-		6E8F52E8265EC17400406430 /* www.cc-d.bit.admin.ch.der in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F52E3265EC17300406430 /* www.cc-d.bit.admin.ch.der */; };
-		6E8F52E9265EC17400406430 /* www.cc.bit.admin.ch.der in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F52E4265EC17300406430 /* www.cc.bit.admin.ch.der */; };
-		6E8F52EA265EC17400406430 /* www.cc.bit.admin.ch.der in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F52E4265EC17300406430 /* www.cc.bit.admin.ch.der */; };
 		6E8F52EC265EC33F00406430 /* CertificateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8F52EB265EC33F00406430 /* CertificateNoteView.swift */; };
 		6E8F52ED265EC33F00406430 /* CertificateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8F52EB265EC33F00406430 /* CertificateNoteView.swift */; };
 		6E8FC0FA24518BF2002AB1E5 /* UIScrollView+UBKeyboardObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8FC0F724518BF2002AB1E5 /* UIScrollView+UBKeyboardObserver.m */; };
@@ -281,7 +273,6 @@
 		24780B562431B5A9003BB26C /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		2485F4772456185000C3D8C3 /* DebugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		2485F47F2459631A00C3D8C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		274E946A2671E46200110DC5 /* swiss_governmentrootcaii.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = swiss_governmentrootcaii.der; sourceTree = "<group>"; };
 		6E0281EE2655022A00582904 /* Impressum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Impressum; sourceTree = "<group>"; };
 		6E0281F126550E1100582904 /* InfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBoxView.swift; sourceTree = "<group>"; };
 		6E0281F42655280500582904 /* InfoBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBoxButton.swift; sourceTree = "<group>"; };
@@ -321,9 +312,6 @@
 		6E7C0D38242E02A20017C4F9 /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 		6E7C0D42242E44D80017C4F9 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		6E8F52D8265BA94B00406430 /* CameraErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraErrorView.swift; sourceTree = "<group>"; };
-		6E8F52E2265EC17300406430 /* www.cc-a.bit.admin.ch.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "www.cc-a.bit.admin.ch.der"; sourceTree = "<group>"; };
-		6E8F52E3265EC17300406430 /* www.cc-d.bit.admin.ch.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "www.cc-d.bit.admin.ch.der"; sourceTree = "<group>"; };
-		6E8F52E4265EC17300406430 /* www.cc.bit.admin.ch.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.cc.bit.admin.ch.der; sourceTree = "<group>"; };
 		6E8F52EB265EC33F00406430 /* CertificateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateNoteView.swift; sourceTree = "<group>"; };
 		6E8FC0F524518BF1002AB1E5 /* CovidCertificate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CovidCertificate-Bridging-Header.h"; sourceTree = "<group>"; };
 		6E8FC0F624518BF2002AB1E5 /* UIScrollView+UBKeyboardObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UBKeyboardObserver.h"; sourceTree = "<group>"; };
@@ -436,7 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC1732926429E31002E27DB /* SnapKit in Frameworks */,
-				48CCA623265F93DB00887F63 /* CovidCertificateSDK in Frameworks */,
+				5BA932A2268090FC00F13749 /* CovidCertificateSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ECBB9BD2642FB1700007E29 /* SnapKit in Frameworks */,
-				48CCA621265F93D200887F63 /* CovidCertificateSDK in Frameworks */,
+				5BA932A0268090F600F13749 /* CovidCertificateSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,10 +633,6 @@
 		6E8F52E1265EC17300406430 /* PinnedCertificates */ = {
 			isa = PBXGroup;
 			children = (
-				274E946A2671E46200110DC5 /* swiss_governmentrootcaii.der */,
-				6E8F52E2265EC17300406430 /* www.cc-a.bit.admin.ch.der */,
-				6E8F52E3265EC17300406430 /* www.cc-d.bit.admin.ch.der */,
-				6E8F52E4265EC17300406430 /* www.cc.bit.admin.ch.der */,
 			);
 			path = PinnedCertificates;
 			sourceTree = "<group>";
@@ -1030,7 +1014,7 @@
 			name = CovidCertificateVerifier;
 			packageProductDependencies = (
 				6EC172E226429E31002E27DB /* SnapKit */,
-				48CCA622265F93DB00887F63 /* CovidCertificateSDK */,
+				5BA932A1268090FC00F13749 /* CovidCertificateSDK */,
 			);
 			productName = IVC;
 			productReference = 6EC1733D26429E31002E27DB /* CovidCertificateVerifier.app */;
@@ -1054,7 +1038,7 @@
 			name = CovidCertificateWallet;
 			packageProductDependencies = (
 				6ECBB9BC2642FB1700007E29 /* SnapKit */,
-				48CCA620265F93D200887F63 /* CovidCertificateSDK */,
+				5BA9329F268090F600F13749 /* CovidCertificateSDK */,
 			);
 			productName = IVC;
 			productReference = 8E81CC95241FCC7D006F2437 /* CovidCertificateWallet.app */;
@@ -1117,7 +1101,7 @@
 			mainGroup = 8E81CC8C241FCC7D006F2437;
 			packageReferences = (
 				6ECBB9BB2642FB1700007E29 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				48CCA61F265F93D200887F63 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */,
+				5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */,
 			);
 			productRefGroup = 8E81CC96241FCC7D006F2437 /* Products */;
 			projectDirPath = "";
@@ -1142,15 +1126,11 @@
 				6EC1732E26429E31002E27DB /* Assets.xcassets in Resources */,
 				DCF9C3652656395A00E34481 /* config_check.json in Resources */,
 				6EC1732F26429E31002E27DB /* InfoPlist.strings in Resources */,
-				6E8F52E6265EC17400406430 /* www.cc-a.bit.admin.ch.der in Resources */,
-				274E946C2671E46200110DC5 /* swiss_governmentrootcaii.der in Resources */,
 				6EC1733026429E31002E27DB /* Inter-ExtraLight.ttf in Resources */,
 				6EC1733126429E31002E27DB /* Launch Screen.storyboard in Resources */,
 				6EC1733226429E31002E27DB /* Inter-ExtraBold.ttf in Resources */,
-				6E8F52EA265EC17400406430 /* www.cc.bit.admin.ch.der in Resources */,
 				6EC1733326429E31002E27DB /* Inter-Black.ttf in Resources */,
 				6EC1733426429E31002E27DB /* Localizable.strings in Resources */,
-				6E8F52E8265EC17400406430 /* www.cc-d.bit.admin.ch.der in Resources */,
 				6EF166BA264D424800426985 /* PTMono-Regular.ttf in Resources */,
 				6EC1733526429E31002E27DB /* Inter-Regular.ttf in Resources */,
 				6E0281F02655022A00582904 /* Impressum in Resources */,
@@ -1168,15 +1148,11 @@
 				DCB4430B242DD34700F19AA5 /* Inter-Light.ttf in Resources */,
 				8E81CCA2241FCC7F006F2437 /* Assets.xcassets in Resources */,
 				DCF9C3662656395A00E34481 /* config_wallet.json in Resources */,
-				6E8F52E5265EC17400406430 /* www.cc-a.bit.admin.ch.der in Resources */,
-				274E946B2671E46200110DC5 /* swiss_governmentrootcaii.der in Resources */,
 				DC9A81AC242CE5E000AD1548 /* InfoPlist.strings in Resources */,
 				6E0281EF2655022A00582904 /* Impressum in Resources */,
 				DCB4430A242DD34700F19AA5 /* Inter-ExtraLight.ttf in Resources */,
-				6E8F52E9265EC17400406430 /* www.cc.bit.admin.ch.der in Resources */,
 				24780B34242FDF4C003BB26C /* Launch Screen.storyboard in Resources */,
 				DCB44309242DD34700F19AA5 /* Inter-ExtraBold.ttf in Resources */,
-				6E8F52E7265EC17400406430 /* www.cc-d.bit.admin.ch.der in Resources */,
 				DCB44307242DD34700F19AA5 /* Inter-Black.ttf in Resources */,
 				DC9A81AB242CE5E000AD1548 /* Localizable.strings in Resources */,
 				DCB4430D242DD34700F19AA5 /* Inter-Regular.ttf in Resources */,
@@ -2242,11 +2218,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		48CCA61F265F93D200887F63 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */ = {
+		5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/admin-ch/CovidCertificate-SDK-iOS";
+			repositoryURL = "https://github.com/martinreichart/CovidCertificate-SDK-iOS";
 			requirement = {
-				branch = main;
+				branch = feature/austria;
 				kind = branch;
 			};
 		};
@@ -2269,14 +2245,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		48CCA620265F93D200887F63 /* CovidCertificateSDK */ = {
+		5BA9329F268090F600F13749 /* CovidCertificateSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48CCA61F265F93D200887F63 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
+			package = 5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
 			productName = CovidCertificateSDK;
 		};
-		48CCA622265F93DB00887F63 /* CovidCertificateSDK */ = {
+		5BA932A1268090FC00F13749 /* CovidCertificateSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48CCA61F265F93D200887F63 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
+			package = 5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
 			productName = CovidCertificateSDK;
 		};
 		6EC172E226429E31002E27DB /* SnapKit */ = {
