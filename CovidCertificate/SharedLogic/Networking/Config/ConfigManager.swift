@@ -39,11 +39,11 @@ class ConfigManager: NSObject {
     private static var leafCertificateCommonName: String {
         switch Environment.current {
         case .dev:
-            return "CH01-AppContentCertificate-ref"
+            return ""
         case .abnahme:
-            return "CH01-AppContentCertificate-abn"
+            return ""
         case .prod:
-            return "CH01-AppContentCertificate"
+            return ""
         }
     }
 
@@ -84,6 +84,9 @@ class ConfigManager: NSObject {
     // MARK: - Start config request
 
     static func shouldLoadConfig(url: String?, lastConfigUrl: String?, lastConfigLoad: Date?) -> Bool {
+        // TODO AT - Disable backend configuration
+        return false
+        
         // if the config url was changed (by OS version or app version changing) load config in anycase
         if url != lastConfigUrl {
             return true
