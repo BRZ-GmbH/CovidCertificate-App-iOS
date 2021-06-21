@@ -19,21 +19,23 @@ class ConfigManager: NSObject {
     private let session = URLSession.certificatePinned
     private var dataTask: URLSessionDataTask?
 
-    private let jwsVerifier: JWSVerifier
+    // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
+    private let jwsVerifier: JWSVerifier? = nil
 
     // MARK: - Init
 
     /// This function will fail if anything happens to the pinning certificate. This should never happen on normal usage!
     override init() {
-        guard let data = Bundle.main.url(forResource: "swiss_governmentrootcaii", withExtension: "der") else {
-            fatalError("Signing CA not in Bundle")
-        }
+        // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
+        /* guard let data = Bundle.main.url(forResource: "swiss_governmentrootcaii", withExtension: "der") else {
+             fatalError("Signing CA not in Bundle")
+         }
 
-        guard let caPem = try? Data(contentsOf: data),
-              let verifier = JWSVerifier(rootCertificate: caPem, leafCertMustMatch: ConfigManager.leafCertificateCommonName) else {
-            fatalError("Cannot create certificate from data")
-        }
-        jwsVerifier = verifier
+         guard let caPem = try? Data(contentsOf: data),
+               let verifier = JWSVerifier(rootCertificate: caPem, leafCertMustMatch: ConfigManager.leafCertificateCommonName) else {
+             fatalError("Cannot create certificate from data")
+         }
+         jwsVerifier = verifier */
     }
 
     private static var leafCertificateCommonName: String {
@@ -119,7 +121,8 @@ class ConfigManager: NSObject {
                 return
             }
 
-            self.jwsVerifier.verifyAndDecode(httpBody: data) { (result: Result<ConfigResponseBody, JWSError>) in
+            // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
+            self.jwsVerifier?.verifyAndDecode(httpBody: data) { (result: Result<ConfigResponseBody, JWSError>) in
                 DispatchQueue.main.async {
                     if case let .success(config) = result {
                         ConfigManager.currentConfig = config
