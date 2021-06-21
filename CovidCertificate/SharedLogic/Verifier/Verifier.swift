@@ -138,7 +138,7 @@ class Verifier: NSObject {
         // var checkNationalRulesState: VerificationState = .loading
 
         checkSignature(group: group, forceUpdate: forceUpdate) { state in checkSignatureState = state }
-        // TODO AT - Disabled Revokation and National Rules Check
+        // TODO: AT - Disabled Revokation and National Rules Check
         // checkRevocationStatus(group: group, forceUpdate: forceUpdate) { state in checkRevocationState = state }
         // checkNationalRules(group: group, forceUpdate: forceUpdate) { state in checkNationalRulesState = state }
 
@@ -154,13 +154,13 @@ class Verifier: NSObject {
             let retries = states.filter { $0.isRetry() }
 
             if errors.count > 0 {
-                // TODO AT - Disabled Revokation and National Rules Check
+                // TODO: AT - Disabled Revokation and National Rules Check
                 // let validityString = checkNationalRulesState.validUntilDateString()
                 self.stateUpdate?(.invalid(errors, errorCodes, nil /* validityString */ ))
             } else if let r = retries.first {
                 self.stateUpdate?(r)
             } else if states.allSatisfy({ $0.isSuccess() }) {
-                // TODO AT - Disabled Revokation and National Rules Check
+                // TODO: AT - Disabled Revokation and National Rules Check
                 self.stateUpdate?(.success(nil) /* checkNationalRulesState */ )
             }
         }
@@ -181,7 +181,7 @@ class Verifier: NSObject {
         CovidCertificateSDK.checkSignature(cose: holder, forceUpdate: forceUpdate) { result in
             switch result {
             case let .success(result):
-                // TODO AT: Signature check currently fails because we do not fetch the correct key list
+                // TODO: AT: Signature check currently fails because we do not fetch the correct key list
                 if result.isValid {
                     callback(.success(nil))
                 } else {
