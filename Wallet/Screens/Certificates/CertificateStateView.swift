@@ -25,9 +25,11 @@ class CertificateStateView: UIView {
     private let validityView = CertificateStateValidityView()
     private let errorLabel = Label(.smallErrorLight, textAlignment: .center)
     private let certificate: UserCertificate?
-    private var hasValidityView: Bool {
-        certificate != nil
-    }
+
+    // TODO: AT - Do not show validity information
+    private var hasValidityView: Bool = false /* {
+         certificate != nil
+     } */
 
     var states: (state: VerificationState, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
         didSet { update(animated: true) }
