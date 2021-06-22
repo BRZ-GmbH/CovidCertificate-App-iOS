@@ -297,10 +297,10 @@
 "verifier_retry_flightmode_error" = "Das Gerät befindet sich im Flugmodus.";
 
 /*Wallet: Zertifikat gültig ab: {DATE}*/
-"wallet_error_valid_from" = "In der Schweiz gültig ab:\n{DATE}";
+"wallet_error_valid_from" = "In Österreich gültig ab:\n{DATE}";
 
 /*Wallet: Fehler wenn Zertifikat nicht den CH-Gültigkeitskriterien entspricht*/
-"wallet_error_national_rules" = "Entspricht nicht den Gültigkeitskriterien der Schweiz";
+"wallet_error_national_rules" = "Entspricht nicht den Gültigkeitskriterien Österreichs";
 
 /*Wallet: Gültigkeit des Zertifikats abgelaufen*/
 "wallet_error_expired" = "Gültigkeit des Zertifikats\nabgelaufen";
@@ -396,8 +396,8 @@
 
 /*Wallet: Hinweis im Zertifikat Detail*/
 "wallet_certificate_detail_note" = "Dieses Zertifikat ist kein Reisedokument. \n\nDie wissenschaftlichen Erkenntnisse über Covid-19-Impfungen und -Tests sowie über die Genesung von einer Covid-19-Infektion entwickeln sich ständig weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. \n\nBitte informieren Sie sich vor der Reise über die am Zielort geltenden Gesundheitsmassnahmen und damit verbundenen Beschränkungen.";
-"wallet_terms_privacy_link" = "https://www.bit.admin.ch/bit/de/home/dokumentation/covid-certificate-app.html";
-"verifier_terms_privacy_link" = "https://www.bit.admin.ch/bit/de/home/dokumentation/covid-certificate-check-app.html";
+"wallet_terms_privacy_link" = "https://brz.gv.at/impressum";
+"verifier_terms_privacy_link" = "https://brz.gv.at/impressum";
 
 /*Wallet: Homescreen Was wollen sie machen?*/
 "wallet_homescreen_what_to_do" = "Nächsten Schritt wählen";
@@ -433,7 +433,7 @@
 "wallet_notification_permission_button" = "Weiter";
 
 /*Externe URL im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_external_link" = "https://www.sozialministerium.at/Informationen-zum-Coronavirus/Coronavirus---Haeufig-gestellte-Fragen/FAQ-Gruener-Pass.html";
+"wallet_scanner_howitworks_external_link" = "https://gruenerpass.gv.at/";
 
 /*Label der externen URL im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_external_link_title" = "Weitere Informationen";
