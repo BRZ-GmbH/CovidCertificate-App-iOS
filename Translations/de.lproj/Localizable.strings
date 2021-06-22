@@ -1,24 +1,22 @@
 
 /*Android App Name*/
-"verifier_app_name" = "Covid Check";
+"verifier_app_name" = "BRZ Wallet";
 
 /*Title for the qr scanning screen*/
-"verifier_title_qr_scan" = "Prüfen";
+"verifier_title_qr_scan" = "Scannen";
 
 /*Titel über dem Haupttitel*/
-"verifier_homescreen_header_title" = "Covid Certificate";
+"verifier_homescreen_header_title" = "BRZ Wallet ";
 
 /*Homescreen App Name*/
-"verifier_homescreen_title" = "Check";
+"verifier_homescreen_title" = "BRZ Wallet";
 
 /*Beschreibung für Pager Bild 1*/
 "verifier_homescreen_pager_description_1" = "Vorgewiesenes Zertifikat scannen";
 
-/*Beschreibung für Pager Bild 2*/
-"verifier_homescreen_pager_description_2" = "Zertifikate werden automatisch geprüft";
 
 /*Homescreen Button für Scanning*/
-"verifier_homescreen_scan_button" = "Prüfen";
+"verifier_homescreen_scan_button" = "Scannen";
 
 /*Homescreen Button für Support*/
 "verifier_homescreen_support_button" = "So funktioniert's";
@@ -33,10 +31,10 @@
 "ok_button" = "OK";
 "camera_permission_dialog_text" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
 "camera_permission_dialog_action" = "Zugriff auf Kamera erlauben";
-"verifier_qr_scanner_scan_qr_text" = "QR-Code scannen\nzum Prüfen";
+"verifier_qr_scanner_scan_qr_text" = "QR-Code scannen ";
 
 /*Titel auf dem Verifikations-Screen*/
-"covid_certificate_title" = "Covid-Zertifikat";
+"covid_certificate_title" = "Covid-19-Zertifikat";
 
 /*Name des/der Zertifikatsinhabers/Zertifikatsinhaberin*/
 "verifier_covid_certificate_name" = "Nachname";
@@ -48,43 +46,21 @@
 "wallet_add_certificate" = "Hinzufügen";
 
 /*Wallet: Homescreen Covid-Zertifikat*/
-"wallet_certificate" = "Covid-Zertifikat";
+"wallet_certificate" = "Covid-19-Zertifikat";
 
 /*Wallet: Homescreen Erklärung*/
-"wallet_homescreen_explanation" = "Scannen Sie den QR-Code auf dem Covid-Zertifikat, um es zur App hinzuzufügen.";
+"wallet_homescreen_explanation" = "Scannen Sie den QR-Code auf dem Covid-19-Zertifikat, um es zur App hinzuzufügen.";
 
 /*Wallet: Scanner Titel*/
 "wallet_scanner_title" = "Hinzufügen";
 
-/*Titel bei erfolgreicher Prüfung*/
-"verifier_verify_success_title" = "Prüfung erfolgreich";
 
-/*Info Text bei erfolgreicher Prüfung*/
-"verifier_verify_success_info" = "Nur mit einem \nAusweisdokument gültig";
-
-/*Prüfung loading text*/
-"verifier_verify_loading_text" = "Zertifikat wird geprüft";
-
-/*Fehler Title bei Prüfung*/
-"verifier_verify_error_title" = "Covid-Zertifikat ungültig";
-
-/*Fehler Infotext bei Prüfung (Nationale Regeln)*/
-"verifier_verify_error_info_for_national_rules" = "Entspricht nicht den Gültigkeitskriterien Österreichs";
-
-/*Fehler Infotext bei Prüfung (Zertifikat Fehler)*/
-"verifier_verify_error_info_for_certificate_invalid" = "Das Covid-Zertifikat hat keine gültige Signatur";
-
-/*Fehler Infotext bei Prüfung (Blacklist)*/
-"verifier_verify_error_info_for_blacklist" = "Das Covid-Zertifikat wurde widerrufen";
-
-/*Fehler bei der geladen Liste*/
-"verifier_verify_error_list_title" = "Prüfung fehlgeschlagen";
 
 /*Fehler Info bei laden der Liste*/
 "verifier_verify_error_list_info_text" = "Ein unerwarteter Fehler ist aufgetreten.";
 
 /*Wallet: Scanner Text unten*/
-"wallet_scanner_explanation" = "Scannen Sie den QR-Code auf dem Covid-Zertifikat.";
+"wallet_scanner_explanation" = "Scannen Sie den QR-Code auf dem Covid-19-Zertifikat.";
 
 /*Wallet: Scanner Info Button unten*/
 "wallet_scanner_info_button" = "So funktioniert's";
@@ -102,16 +78,16 @@
 "delete_button" = "Löschen";
 
 /*Android App Name für die Wallet*/
-"wallet_app_name" = "Covid Cert";
+"wallet_app_name" = "BRZ Wallet";
 
 /*Header im Onboarding-Screen "Die App"*/
 "wallet_onboarding_app_header" = "Die App";
 
 /*Titel im Onboardingscreen "Die App"*/
-"wallet_onboarding_app_title" = "COVID Certificate";
+"wallet_onboarding_app_title" = "BRZ Wallet";
 
 /*Text im Onboardingscreen "Die App"*/
-"wallet_onboarding_app_text" = "Mit der App können Sie Covid-Zertifikate sicher auf dem Smartphone aufbewahren und einfach vorweisen.";
+"wallet_onboarding_app_text" = "Mit der App können Sie Covid-19-Zertifikate sicher auf dem Smartphone aufbewahren und einfach vorweisen.";
 
 /*Weiter-Button Titel*/
 "continue_button" = "Weiter";
@@ -129,7 +105,7 @@
 "wallet_onboarding_show_title" = "Zertifikate einfach vorweisen";
 
 /*Text 1 im Onboardingscreen "Vorteile, Vorweisen"*/
-"wallet_onboarding_show_text1" = "Die auf dem Covid-Zertifikat dargestellten Daten sind auch im QR-Code enthalten.";
+"wallet_onboarding_show_text1" = "Die auf dem Covid-19-Zertifikat dargestellten Daten sind auch im QR-Code enthalten.";
 
 /*Text 2 im Onboardingscreen "Vorteile, Vorweisen"*/
 "wallet_onboarding_show_text2" = "Beim Vorweisen wird der QR-Code mit einer Prüf-App gescannt. Die enthaltenen Daten werden dabei automatisch auf Echtheit und Gültigkeit überprüft.";
@@ -148,10 +124,10 @@
 "wallet_scanner_howitworks_header" = "So funktioniert's";
 
 /*Titel im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_title" = "Covid-Zertifikate\nhinzufügen";
+"wallet_scanner_howitworks_title" = "Covid-19-Zertifikate\nhinzufügen";
 
 /*Textblock 1 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_text1" = "Um ein Covid-Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.";
+"wallet_scanner_howitworks_text1" = "Um ein Covid-19-Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.";
 
 /*Textblock 2 im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_text2" = "Tippen Sie in der App auf «Hinzufügen», um ein neues Zertifikat zur App hinzuzufügen.";
@@ -160,94 +136,74 @@
 "wallet_scanner_howitworks_text3" = "Halten Sie nun die Kamera des Smartphones über den QR-Code auf dem Originalzertifikat, um den Code einzuscannen.";
 
 /*Textblock 4 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_text4" = "Es erscheint eine Vorschau des Covid-Zertifikats. Tippen Sie auf «Hinzufügen» um das Zertifikat sicher in der App zu speichern.";
+"wallet_scanner_howitworks_text4" = "Es erscheint eine Vorschau des Covid-19-Zertifikats. Tippen Sie auf «Hinzufügen» um das Zertifikat sicher in der App zu speichern.";
 
 /*Frage 1 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_question1" = "Wann und wo kann ich ein Covid-Zertifikat erhalten?";
+"wallet_scanner_howitworks_question1" = "Wann und wo kann ich ein Covid-19-Zertifikat erhalten?";
 
 /*Header im FAQ-Screen der Wallet App*/
 "wallet_faq_header" = "Häufige Fragen";
 
 /*Titel 1 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_title" = "Was sind Covid-Zertifikate?";
+"wallet_faq_questions_title" = "Wo kann ich mich über Covid-19-Zertifikate informieren?";
 
 /*Text 1im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_subtitle" = "Das Covid-Zertifikat bietet die Möglichkeit, eine Covid-19-Impfung, eine durchgemachte Erkrankung oder ein negatives Testergebnis fälschungssicher zu dokumentieren.";
-
-/*Frage 1 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_question_1" = "Wann und wo kann ich ein Covid-Zertifikat erhalten?";
+"wallet_faq_questions_subtitle" = "Alle Informationen zum Grünen Pass in Österreich und den verschiedenen Covid-19-Zertifikaten erhalten sie auf https://gruenerpass.gv.at/.";
 
 /*Frage 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_question_2" = "Wie kann ich ein Covid-Zertifikat vorweisen?";
-
+"wallet_faq_questions_question_2" = "Wie kann ich ein Covid-19-Zertifikat vorweisen?";
 /*Frage 3 im FAQ-Screen der Wallet App*/
 "wallet_faq_questions_question_3" = "Wo sind meine Daten gespeichert?";
 
-/*Frage 4 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_question_4" = "Wie werden Missbrauch und Fälschung verhindert?";
 
-/*Frage 5 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_question_5" = "Was passiert, wenn ich mein Covid-Zertifikat verliere?";
 
 /*Frage 6 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_1" = "Wie kann ich ein Covid-Zertifikat zur App hinzufügen?";
+"wallet_faq_works_question_1" = "Wie kann ich ein Covid-19Zertifikat zur App hinzufügen?";
 
 /*Frage 7 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_2" = "Können auch mehrere Covid-Zertifikate hinzugefügt werden?";
+"wallet_faq_works_question_2" = "Können auch mehrere Covid-19-Zertifikate hinzugefügt werden?";
 
-/*Frage 8 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_3" = "Wie sehe ich, ob mein Covid-Zertifikat gültig ist?";
 
 /*Frage 9 im FAQ-Screen der Wallet App*/
 "wallet_faq_works_question_4" = "Wie sind meine Daten geschützt?";
 
-/*Frage 10 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_5" = "Welche Daten sind im QR-Code enthalten?";
 
 /*Frage 11 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_6" = "Was muss ich tun, wenn ich das Covid-Zertifikat oder die App lösche?";
+"wallet_faq_works_question_6" = "Was muss ich tun, wenn ich das Covid-19-Zertifikat oder die App lösche?";
 
 /*Antwort 1 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_1" = "Ein Covid-Zertifikat können Sie nach einer vollständigen Covid-19-Impfung, nach einer durchgemachten Erkrankung oder nach einem negativen Testergebnis erhalten. Das Zertifikat stellt Ihnen in der Regel das Gesundheitsfachpersonal vor Ort auf Anfrage aus.";
+"wallet_faq_questions_answer_1" = " Alle Informationen zum Grünen Pass in Österreich und den verschiedenen Covid-19-Zertifikaten erhalten sie auf https://gruenerpass.gv.at/.";
 
 /*Antwort 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_2" = "Sie können Ihr Covid-Zertifikat in Papierform vorweisen oder Sie benutzen die COVID Certificate App, um Zertifikate in der App zu speichern und direkt aus der App vorzuweisen. Ob Sie Ihr Zertifikat auf Papier oder in der App vorweisen, ist Ihnen überlassen. \n\nBeachten Sie, dass sie in jedem Fall auf Verlangen auch noch ein Ausweisdokument vorweisen müssen.";
+"wallet_faq_questions_answer_2" = "Sie können Ihr Covid-19-Zertifikat in Papierform vorweisen oder Sie benutzen die BRZ Wallet App, um Zertifikate in der App zu speichern und direkt aus der App vorzuweisen. Ob Sie Ihr Zertifikat auf Papier oder in der App vorweisen, ist Ihnen überlassen. \n\nBeachten Sie, dass sie in jedem Fall auf Verlangen auch noch ein Ausweisdokument vorweisen müssen.";
 
 /*Antwort 3 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_3" = "Ihre Daten werden nicht in einem zentralen System gespeichert, sondern nur lokal auf Ihrem Mobilgerät, respektive im QR-Code auf dem Covid-Zertifikat in Papierform.";
+"wallet_faq_questions_answer_3" = "Ihre Daten in der BRZ Wallet App werden nicht in einem zentralen System gespeichert, sondern nur lokal auf Ihrem Mobilgerät, respektive im QR-Code auf dem Covid-19-Zertifikat in Papierform.";
 
-/*Antwort 4 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_4" = "Der QR-Code auf dem Covid-Zertifikat enthält eine elektronische Signatur. Die Signatur ist ein wichtiges Sicherheitsmerkmal und macht das Covid-Zertifikat fälschungssicher. Das Covid-Zertifikat ist zudem nur in Kombination mit einem Ausweisdokument gültig.";
 
-/*Antwort 5 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_5" = "Ihr Covid-Zertifikat wird in keinem zentralen System gespeichert. Es befindet sich ausschliesslich in Ihrem Besitz. Bewahren Sie das Covid-Zertifikat auf Papier deshalb sorgfältig auf. Bei Verlust müssen Sie das Covid-Zertifikat erneut bei der ausgebenden Stelle anfragen.";
 
 /*Antwort 6 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_1" = "Um ein Covid-Zertifikat zur App hinzuzufügen, benötigen Sie das Ihnen ausgestellte Originalzertifikat auf Papier oder als PDF-Dokument. Den darauf abgebildeten QR-Code können Sie mit der COVID Certificate App scannen und hinzufügen. Anschliessend erscheint das Covid-Zertifikat direkt in der App.";
+"wallet_faq_works_answer_1" = "Um ein Covid-19-Zertifikat zur App hinzuzufügen, benötigen Sie das Ihnen ausgestellte Originalzertifikat auf Papier oder als PDF-Dokument. Den darauf abgebildeten QR-Code können Sie mit der BRZ Wallet App scannen und hinzufügen. Anschliessend erscheint das Covid-19-Zertifikat direkt in der App.";
 
 /*Antwort 7 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_2" = "Ja das ist möglich. So können Sie z. B. alle Covid-Zertifikate von Familienangehörigen in Ihrer App speichern. Auch in diesem Fall gilt: Das Covid-Zertifikat ist nur in Kombination mit einem Ausweisdokument des Zertifikatsinhabers / der Zertifikatsinhaberin gültig.";
+"wallet_faq_works_answer_2" = "Ja das ist möglich. So können Sie z. B. alle Covid-19-Zertifikate von Familienangehörigen in Ihrer App speichern. Auch in diesem Fall gilt: Das Covid-19-Zertifikat ist nur in Kombination mit einem Ausweisdokument des Zertifikatsinhabers / der Zertifikatsinhaberin gültig.";
 
-/*Antwort 8 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_3" = "In der COVID Certificate App wird ausgewiesen, wann Ihr Covid-Zertifikat in Österreich ablaufen wird. Sie können in der Detail-Ansicht zudem per Knopfdruck überprüfen, ob Ihr Covid-Zertifikat aktuell gültig ist.";
 
 /*Antwort 9 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_4" = "Ihre persönlichen Daten werden in keinem zentralen System gespeichert, sondern befinden sich ausschliesslich bei Ihnen lokal auf dem Mobilgerät, respektive im QR-Code auf dem Covid-Zertifikat in Papierform.";
+"wallet_faq_works_answer_4" = "Ihre persönlichen Daten in der BRZ Wallet App werden in keinem zentralen System gespeichert, sondern befinden sich ausschliesslich bei Ihnen lokal auf dem Mobilgerät..";
 
-/*Antwort 10 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_5" = "Der QR-Code enthält alle Informationen, die Sie auf Ihrem Covid-Zertifikat in Papierform im Klartext finden. Weiter befindet sich im QR-Code eine elektronische Signatur, mit der sich die Echtheit des Covid-Zertifikats überprüfen lässt. Dadurch wird das Covid-Zertifikat fälschungssicher.";
 
 /*Antwort 11 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_6" = "Sie können Ihr Covid-Zertifikat einfach wieder auf Ihrem Mobilgerät speichern. Laden Sie dazu die App erneut herunter und scannen Sie anschliessend den QR-Code auf Ihrem Covid-Zertifikat auf Papier oder als PDF.";
+"wallet_faq_works_answer_6" = "Sie können Ihr Covid-19-Zertifikat einfach wieder auf Ihrem Mobilgerät speichern. Laden Sie dazu die App erneut herunter und scannen Sie anschliessend den QR-Code auf Ihrem Covid-19-Zertifikat auf Papier oder als PDF.";
 
 /*Titel 2 im FAQ-Screen der Wallet App*/
 "wallet_faq_works_title" = "Wie funktioniert \ndie App?";
 
 /*Text 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_subtitle" = "Mit der COVID Certificate App können Sie Covid-Zertifikate einfach und sicher auf Ihrem Mobilgerät abspeichern und vorweisen.";
+"wallet_faq_works_subtitle" = "Mit der BRZ Wallet App können Sie Covid-19-Zertifikate einfach und sicher auf Ihrem Mobilgerät abspeichern und vorweisen.";
 
 /*Antwort 1 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_answer1" = "Ein Covid-Zertifikat können Sie nach einer vollständigen Covid-19-Impfung, nach einer durchgemachten Erkrankung oder nach einem negativen Testergebnis erhalten. Das Zertifikat stellt Ihnen in der Regel das Gesundheitsfachpersonal vor Ort auf Anfrage aus.";
+"wallet_scanner_howitworks_answer1" = "Ein Covid-19-Zertifikat können Sie nach einer Covid-19-Impfung, nach einer durchgemachten Erkrankung oder nach einem negativen Testergebnis erhalten. ";
 
 /*Verifier: Detail Check Vorname*/
 "verifier_covid_certificate_prename" = "Vorname";
@@ -261,8 +217,6 @@
 /*Config: Update Button Aktualisieren*/
 "force_update_button" = "Aktualisieren";
 
-/*Wallet: Zertifikat gültig ab: {DATE}*/
-"wallet_certificate_valid_from" = "In Österreich gültig ab:\n{DATE}";
 
 /*Wallet: Zertifikat Detail Geimpft*/
 "certificate_reason_vaccinated" = "Impfung";
@@ -277,13 +231,11 @@
 "wallet_onboarding_store_header" = "Vorteile";
 
 /*Titel im Onboardingscreen "Vorteile, Aufbewahren"*/
-"wallet_onboarding_store_title" = "Covid-Zertifikate digital aufbewahren";
+"wallet_onboarding_store_title" = "Covid-19-Zertifikate digital aufbewahren";
 
 /*Text1 im Onboardingscreen "Vorteile, Aufbewahren"*/
-"wallet_onboarding_store_text1" = "Covid-Zertifikate können einfach zur App hinzugefügt und digital aufbewahrt werden.";
+"wallet_onboarding_store_text1" = "Covid-19-Zertifikate können einfach zur App hinzugefügt und digital aufbewahrt werden.";
 
-/*Text2 im Onboardingscreen "Vorteile, Aufbewahren"*/
-"wallet_onboarding_store_text2" = "Die App prüft die Zertifikate auf ihre Gültigkeit in Österreich. So können Sie sich versichern, dass Ihre Zertifikate gültig sind.";
 
 /*Header im Onboarding-Screen "Vorteile, Vorweisen"*/
 "wallet_onboarding_show_header" = "Vorteile";
@@ -315,11 +267,6 @@
 /*Unbekannter Fehler*/
 "unknown_error" = "Ein unbekannter Fehler ist aufgetreten.";
 
-/*Verifier: Die Gültigkeit des Zertifikat ist abgelaufen*/
-"verifier_verifiy_error_expired" = "Entspricht nicht den Gültigkeitskriterien Österreichs: Die Gültigkeit des Zertifikat ist abgelaufen.";
-
-/*Verifier: Zertifikat ist erst gültig ab {DATE}*/
-"verifier_verifiy_error_notyetvalid" = "Entspricht nicht den Gültigkeitskriterien Österreichs: Das Zertifikat ist noch nicht gültig.";
 
 /*Verifier: Ein Netzwerkfehler ist aufgetreten.*/
 "verifier_retry_network_error" = "Ein Netzwerkfehler ist aufgetreten.";
@@ -327,44 +274,11 @@
 /*Verifier: Das Gerät befindet sich im Flugmodus.*/
 "verifier_retry_flightmode_error" = "Das Gerät befindet sich im Flugmodus.";
 
-/*Wallet: Zertifikat gültig ab: {DATE}*/
-"wallet_error_valid_from" = "In Österreich gültig ab:\n{DATE}";
 
-/*Wallet: Fehler wenn Zertifikat nicht den CH-Gültigkeitskriterien entspricht*/
-"wallet_error_national_rules" = "Entspricht nicht den Gültigkeitskriterien Österreichs";
-
-/*Wallet: Gültigkeit des Zertifikats abgelaufen*/
-"wallet_error_expired" = "Gültigkeit des Zertifikats\nabgelaufen";
-
-/*Wallet: Zertifikat wurde widerrufen*/
-"wallet_error_revocation" = "Zertifikat wurde\nwiderrufen";
-
-/*Wallet: Zertifikat mit ungültiger Signatur*/
-"wallet_error_invalid_signature" = "Zertifikat mit\nungültiger Signatur";
-
-/*Wallet: ungültiger Signatur (gleiche Worte wie wallet_error_invalid_signature)*/
-"wallet_error_invalid_signature_bold" = "ungültiger Signatur";
-
-/*Wallet: widerrufen (gleiches Wort wie bei wallet_error_revocation)*/
-"wallet_error_revocation_bold" = "widerrufen";
-
-/*Wallet: abgelaufen (gleiches Wort wie bei wallet_error_expired verwenden)*/
-"wallet_error_expired_bold" = "abgelaufen";
 
 /*Meldung wenn erneute ein Zertifikat gescannt wurde, welches bereits in der App ist*/
 "wallet_certificate_already_exists" = "Dieses Zertifikat ist bereits in der App gespeichert";
 
-/*Titel Gültigkeit im Zertifikatsdetail*/
-"wallet_certificate_validity" = "Gültigkeit in \nÖsterreich";
-
-/*"Bis" Label im Zertifikats-Detail*/
-"wallet_certificate_valid_until" = "bis";
-
-/*Message im Zertifikatsdetail während Überprüfung*/
-"wallet_certificate_verifying" = "Das Zertifikat wird geprüft";
-
-/*Message nach erfolgreicher Prüfung im Zertifikatdetail*/
-"wallet_certificate_verify_success" = "Prüfung erfolgreich";
 
 /*Accessibility: Info Box Butto*/
 "accessibility_info_box" = "Information";
@@ -388,16 +302,13 @@
 "wallet_certificate_test_land" = "Land des Tests";
 "covid_certificate_test_title" = "Test";
 "wallet_certificate_test_result_title" = "Ergebnis";
-"wallet_certificate_test_result_negativ" = "Nicht erkannt (Negativ)";
+"wallet_certificate_test_result_negativ" = "Nicht nachgewiesen (Negativ)";
 "wallet_certificate_test_result_positiv" = "Positiv";
 "wallet_certificate_test_type" = "Typ";
 "wallet_certificate_test_name" = "Name";
 "wallet_certificate_test_holder" = "Hersteller";
 "wallet_certificate_test_sample_date_title" = "Datum der Probenentnahme";
 "wallet_certificate_test_result_date_title" = "Datum Resultat";
-
-/*Header im "So funktionierts" Screen der Verifier-App*/
-"verifier_support_header" = "So funktioniert's";
 
 /*Text im Bestätigungs-Dialog beim Zertifikat löschen*/
 "wallet_certificate_delete_confirm_text" = "Wollen Sie das Zertifikat wirklich löschen?";
@@ -411,8 +322,6 @@
 /*Wallet: Apple App Store URL*/
 "wallet_apple_app_store_url" = "http://itunes.apple.com/app/id1565917320";
 
-/*Verifier: Apple App Store URL*/
-"verifier_apple_app_store_url" = "http://itunes.apple.com/app/id1565917510";
 
 /*Wallet: Abkürzung "UVCI" (Unique Vaccination Certificate Identifier)*/
 "wallet_certificate_identifier" = "UVCI";
@@ -429,48 +338,6 @@
 /*iOS: Erklärung bei Kamera */
 "NSCameraUsageDescription" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
 
-/*Titel 1 im FAQ der Verifier App*/
-"verifier_faq_works_title" = "So werden Covid-Zertifikate geprüft";
-
-/*Text 1 im FAQ der Verifier App*/
-"verifier_faq_works_subtitle" = "Mit der COVID Certificate Check App können QR-Codes auf Covid-Zertifikaten gescannt und die Zertifikate auf Echtheit und Gültigkeit überprüft werden.";
-
-/*Frage 1 im FAQ der Verifier App*/
-"verifier_faq_works_question_1" = "Wie können Covid-Zertifikate geprüft werden?";
-
-/*Antwort 1 im FAQ der Verifier App*/
-"verifier_faq_works_answer_1" = "Um ein Covid-Zertifikat zu prüfen, scannen Sie den QR-Code auf dem Papierzertifikat oder in der vorgewiesenen COVID Certificate App mit der dafür vorgesehenen COVID Certificate Check App.";
-
-/*Frage 2 im FAQ der Verifier App*/
-"verifier_faq_works_question_2" = "Was wird genau geprüft?";
-
-/*Antwort 2 im FAQ der Verifier App*/
-"verifier_faq_works_answer_2" = "Beim Scannen werden drei Aspekte geprüft:\n– Enthält das Zertifikat eine gültige elektronische Signatur?\n– Ist das Zertifikat nicht widerrufen worden?\n– Entspricht das Zertifikat den Gültigkeitskriterien Österreichs?\n\nWenn alle drei Aspekte positiv bewertet werden, wird das Covid-Zertifikat als gültig ausgewiesen.";
-
-/*Frage 3 im FAQ der Verifier App*/
-"verifier_faq_works_question_3" = "Welche Ausweisdokumente sind gültig? Weshalb müssen die Personalien überprüft werden?";
-
-/*Antwort 3 im FAQ der Verifier App*/
-"verifier_faq_works_answer_3" = "Neben Pass oder ID werden auch andere Ausweisdokumente akzeptiert, die die Identität der betreffenden Person mit einem Foto belegen (z.B. Führerausweis). Das Covid-Zertifikat ist zwar fälschungssicher, mit der Überprüfung der Personalien wird aber erst sichergestellt, dass das vorgezeigte Zertifikat auch auf den Vorweisenden ausgestellt wurde.";
-
-/*Frage 4 im FAQ der Verifier App*/
-"verifier_faq_works_question_4" = "Können auch ausländische Zertifikate geprüft werden?";
-
-/*Antwort 4 im FAQ der Verifier App*/
-"verifier_faq_works_answer_4" = "Ja, Covid-Zertifikate, die mit dem digitalen COVID-Zertifikat der EU kompatibel sind, können mit der COVID Certificate Check App gegen die Gültigkeitskriterien Österreichs geprüft werden.";
-
-/*Frage 5 im FAQ der Verifier App*/
-"verifier_faq_works_question_5" = "Welche Daten sehe ich beim Prüfvorgang?";
-
-/*Antwort 5 im FAQ der Verifier App*/
-"verifier_faq_works_answer_5" = "Beim Prüfvorgang sehen Sie nur den Namen und das Geburtsdatum der Zertifikatsinhaberin oder des Zertifikatsinhabers und ob das Covid-Zertifikat gültig ist.";
-
-/*Frage 6 im FAQ der Verifier App*/
-"verifier_faq_works_question_6" = "Werden beim Prüfvorgang in der COVID Certificate Check App oder in einem zentralen System Daten gespeichert?";
-
-/*Antwort 6 im FAQ der Verifier App*/
-"verifier_faq_works_answer_6" = "Nein, beim Prüfvorgang werden keine Daten gespeichert - weder in der COVID Certificate Check App noch in einem zentralen System. Es ist somit nicht möglich nachzuvollziehen, welches Covid-Zertifikat von wem, wann und wo überprüft wurde.";
-
 /*iOS Button zum Einstellungen öffnen*/
 "ios_settings_open" = "Einstellungen";
 
@@ -482,11 +349,6 @@
 "wallet_terms_privacy_link" = "https://www.bit.admin.ch/bit/de/home/dokumentation/covid-certificate-app.html";
 "verifier_terms_privacy_link" = "https://www.bit.admin.ch/bit/de/home/dokumentation/covid-certificate-check-app.html";
 
-/*Verifier: Titel in der App (z.B. Impressum)*/
-"verifier_app_title" = "COVID Certificate Check";
-"wallet_faq_questions_question_1_1" = "Wie erhalte ich nach einer durchgemachten Covid-19-Erkrankung ein Covid-Zertifikat?";
-"wallet_faq_questions_answer_1_1" = "Von Covid-19 genesene Personen können das Covid-Zertifikat über ein Online-Formular auf der Webseite des Kantons beantragen. Das Covid-Zertifikat wird anschliessend per Post zugeschickt.";
-
 /*Wallet: Homescreen Was wollen sie machen?*/
 "wallet_homescreen_what_to_do" = "Nächsten Schritt wählen";
 
@@ -494,185 +356,22 @@
 "wallet_homescreen_add_title" = "Zertifikat hinzufügen";
 
 /*Wallet: Homescreen Zertifikat Description Text*/
-"wallet_homescreen_add_certificate_description" = "Sie haben ein Covid-Zertifikat auf Papier oder als PDF und möchten es zur App hinzufügen.";
+"wallet_homescreen_add_certificate_description" = "Sie haben ein Covid-19-Zertifikat auf Papier oder als PDF und möchten es zur App hinzufügen.";
 
-/*Wallet: Homescreen Transfer-Code erstellen*/
-"wallet_homescreen_add_transfer_code" = "Transfer-Code erstellen";
-
-/*Wallet: Transfer Codes Titel*/
-"wallet_transfer_code_onboarding_title" = "Transfer Codes";
-
-/*Wallet: Transfer Code Text*/
-"wallet_transfer_code_onboarding_text" = "Sie können Transfer-Codes z. B. bei Covid-Tests angeben. Sie erhalten darauf das Covid-Zertifikat direkt in die App geliefert.";
-
-/*Wallet: Transfer Code Onboarding Button*/
-"wallet_transfer_code_onboarding_button" = "Code erstellen";
-
-/*Wallet: Transfer Code Onboarding So funktioniert's*/
-"wallet_transfer_code_onboarding_howto" = "So funktioniert's";
-
-/*Wallet: Transfer Code: FAQ Titel*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_title" = "Covid-Zertifikate direkt in die App geliefert";
-
-/*Wallet: Transfer Code FAQ Text*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_subtitle" = "Mit Transfer-Codes können Covid-Zertifikate schnell und sicher übermittelt werden. Auf diesem Weg erhalten Sie das Covid-Zertifikat nach einem negativen Covid-Test direkt in die App geliefert.";
-
-/*Wallet: Transfer Code FAQ Frage 1*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_question_1" = "Wer bietet die Übermittlung per Transfer-Code an?";
-
-/*Wallet: Transfer Code FAQ Frage 2*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_question_2" = "Können Transfer–Codes nur für Covid-Tests genutzt werden?";
-
-/*Wallet: Transfer Code FAQ Frage 3*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_question_3" = "Wie funktioniert die Übermittlung per Transfer-Code?";
-
-/*Wallet: Transfer Code FAQ Frage 4*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_question_4" = "Kann ich den Transfer-Code mehrmals benutzen?";
-
-/*Wallet: Transfer Code FAQ Antwort 1*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_answer_1" = "Text";
-
-/*Wallet: Transfer Code FAQ Antwort 2*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_answer_2" = "Text";
-
-/*Wallet: Transfer Code FAQ Antwort 3*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_answer_3" = "Text";
-
-/*Wallet: Transfer Code FAQ Antwort 4*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_questions_answer_4" = "Text";
-
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_title" = "So funktioniert der Transfer";
-
-/*Wallet: Tranfser Code FAQ 2 Frage 1*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_question_1" = "Wie sind meine Daten beim Transfer geschützt?";
-
-/*Wallet: Tranfser Code FAQ 2 Frage 2*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_question_2" = "Was kann ich tun, wenn das Zertifikat nicht ankommt?";
-
-/*Wallet: Tranfser Code FAQ 2 Frage 3*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_question_3" = "Was passiert bei einem positiven Testresultat?";
-
-/*Wallet: Transfer Code FAQ 2 Antwort 1*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_answer_1" = "Text";
-
-/*Wallet: Transfer Code FAQ 2 Antwort 2*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_answer_2" = "Text";
-
-/*Wallet: Transfer Code FAQ 2 Antwort 3*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_answer_3" = "Text";
-
-/*Wallet: Transfer Code erstellt Titel*/
-"wallet_transfer_code_code_created_title" = "Ihr Transfer-Code wurde erstellt";
-
-/*Wallet: Transfer-Code*/
-"wallet_transfer_code_title" = "Transfer-Code";
-
-/*Wallet: Transfer Code Erstelltm am {DATE}*/
-"wallet_transfer_code_createdat" = "Erstellt am {DATE}";
-
-/*Wallet: Transfer Code Nächste Schritte*/
-"wallet_transfer_code_next_steps" = "Nächste Schritte";
-
-/*Wallet: Transfer Code Nächste Schritte 1*/
-"wallet_transfer_code_next_steps1" = "Übergeben Sie den Code bei der Testentnahme der Apotheke, dem Testcenter oder der Ärztin / dem Arzt.";
-
-/*Wallet: Transfer Code Nächste Schritte 2*/
-"wallet_transfer_code_next_steps2" = "Falls Sie mehrere Zertifikate zB. von Familienangehörigen empfangen möchten, erstellen Sie für jedes Zertifikat einen neuen Code.";
-
-/*Wallet: Transfer Code Fertig Button*/
-"wallet_transfer_code_done_button" = "Fertig";
-
-/*Wallet: Transfer Code Card Titel*/
-"wallet_transfer_code_card_title" = "Transfer";
-
-/*Wallet: Transfer Code Staus Warten auf Transfer*/
-"wallet_transfer_code_state_waiting" = "Warten auf Transfer";
-
-/*Wallet: Transfer Code Ablauf in 1 Tag*/
-"wallet_transfer_code_expire_singular" = "Noch 1 Tag gültig";
-
-/*Wallet: Transfer Code: Läuft ab in {DAYS} Tagen*/
-"wallet_transfer_code_expire_plural" = "Noch {DAYS} Tage gültig";
-
-/*Wallet: Transfer Code Status Abgelaufen*/
-"wallet_transfer_code_state_expired" = "Transfer fehlgeschlagen";
-
-/*Wallet: Transfer Code Alter Code Titel*/
-"wallet_transfer_code_old_code" = "Code abgelaufen";
-
-/*Wallet: Transfer Code State Zuletzt aktualisiert {DATE}*/
-"wallet_transfer_code_state_updated" = "Zuletzt aktualisiert\n{DATE}";
-
-/*Wallet: Transfer Code Kein Zertifikat mehr*/
-"wallet_transfer_code_state_no_certificate" = "Mit diesem Transfer kann kein  Zertifikat mehr empfangen werden.";
-
-/*Wallet: Fehler Format des Zertifikat ungültig*/
-"wallet_error_invalid_format" = "Format des Zertifikat\nungültig";
-
-/*Wallet: Fehler Format des Zertifikat ungültig Fett*/
-"wallet_error_invalid_format_bold" = "ungültig";
-
-/*Verifier: Error Ungültiges Format*/
-"verifier_error_invalid_format" = "Das Format des Covid-Zertifikats ist ungültig.";
 
 /*Homescreen Zertifikat: Offline Modus Text*/
 "wallet_homescreen_offline" = "Offline Modus";
 
-/*Wallet: Detail Offline Text*/
-"wallet_offline_description" = "Um die aktuelle Gültigkeit anzeigen zu können, muss die App regelmässig online sein.";
-
-/*Wallet: Retry Titel Offline*/
-"wallet_detail_offline_retry_title" = "Prüfung offline nicht möglich";
-
-/*Wallet: Detail Netzwerkfehler Titel*/
-"wallet_detail_network_error_title" = "Prüfung zur Zeit nicht möglich";
 
 /*Wallet: Detail Netzwerkfehler Text*/
 "wallet_detail_network_error_text" = "Versuchen Sie es später erneut.";
 
-/*Verifier: Titel Fehler wenn kein Internet*/
-"verifier_offline_error_title" = "Offline-Prüfung nicht möglich";
-
-/*Verifier: Fehlertext wenn Offline bei Verifikation*/
-"verifier_offline_error_text" = "Eine Internetverbindung wird benötigt, um die Prüflisten zu aktualisieren";
 
 /*Verifier: Fehler Titel bei Netzwerkfehler*/
 "verifier_network_error_title" = "Prüfung fehlgeschlagen";
 
 /*Verifier: Fehler Text bei Netzwerkfehler*/
 "verifier_network_error_text" = "Ein unerwarteter Fehler ist aufgetreten";
-
-/*Wallet: Text auf Zertifikat auf Homescreen bei Netzwerkfehler*/
-"wallet_homescreen_network_error" = "Gültigkeit konnte nicht ermittelt werden";
-
-/*Wallet: Transfer Code So Funktionierts Text 1*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_intro_1" = "Die App prüft regelmässig, ob ein Covid-Zertifikat für Ihren Transfer-Code verfügbar ist.";
-
-/*Wallet: Transfer Code So Funktionierts Text 2*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_intro_2" = "Sobald das Covid-Zertifikat verfügbar ist, erscheint es in der App. Wenn Sie Mitteilungen aktiviert haben, werden Sie von der App benachrichtigt.";
-
-/*Wallet: Transfer Code So Funktionierts Text 1*/
-/*Fuzzy*/
-"wallet_transfer_code_faq_works_intro_3" = "Nach 7 Tagen läuft der Transfer-Code ab. Danach wartet die App noch für weitere 72h auf einen möglichen Transfer, bevor dieser abgebrochen wird.";
 
 /*Wallet: Titel im Custom-Popup Notification Permission*/
 "wallet_notification_permission_title" = "Mitteilungen erlauben";
@@ -689,5 +388,3 @@
 /*Label der externen URL im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_external_link_title" = "Weitere Informationen";
 
-/*Buttontitel im Screen, wo ein Code erstellt werden kann*/
-"wallet_transfer_code_create_code_button" = "Code erstellen";
