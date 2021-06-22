@@ -54,7 +54,29 @@
 /*Wallet: Scanner Titel*/
 "wallet_scanner_title" = "Hinzufügen";
 
+/*Titel bei erfolgreicher Prüfung*/
+"verifier_verify_success_title" = "Prüfung erfolgreich";
 
+/*Info Text bei erfolgreicher Prüfung*/
+"verifier_verify_success_info" = "Nur mit einem \nAusweisdokument gültig";
+
+/*Prüfung loading text*/
+"verifier_verify_loading_text" = "Zertifikat wird geprüft";
+
+/*Fehler Title bei Prüfung*/
+"verifier_verify_error_title" = "Covid-Zertifikat ungültig";
+
+/*Fehler Infotext bei Prüfung (Nationale Regeln)*/
+"verifier_verify_error_info_for_national_rules" = "Entspricht nicht den Gültigkeitskriterien Österreichs";
+
+/*Fehler Infotext bei Prüfung (Zertifikat Fehler)*/
+"verifier_verify_error_info_for_certificate_invalid" = "Das Covid-Zertifikat hat keine gültige Signatur";
+
+/*Fehler Infotext bei Prüfung (Blacklist)*/
+"verifier_verify_error_info_for_blacklist" = "Das Covid-Zertifikat wurde widerrufen";
+
+/*Fehler bei der geladen Liste*/
+"verifier_verify_error_list_title" = "Prüfung fehlgeschlagen";
 
 /*Fehler Info bei laden der Liste*/
 "verifier_verify_error_list_info_text" = "Ein unerwarteter Fehler ist aufgetreten.";
