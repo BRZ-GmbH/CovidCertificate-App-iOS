@@ -296,7 +296,35 @@
 /*Verifier: Das Gerät befindet sich im Flugmodus.*/
 "verifier_retry_flightmode_error" = "Das Gerät befindet sich im Flugmodus.";
 
+/*Wallet: Zertifikat gültig ab: {DATE}*/
+"wallet_error_valid_from" = "In der Schweiz gültig ab:\n{DATE}";
 
+/*Wallet: Fehler wenn Zertifikat nicht den CH-Gültigkeitskriterien entspricht*/
+"wallet_error_national_rules" = "Entspricht nicht den Gültigkeitskriterien der Schweiz";
+
+/*Wallet: Gültigkeit des Zertifikats abgelaufen*/
+"wallet_error_expired" = "Gültigkeit des Zertifikats\nabgelaufen";
+
+/*Wallet: Zertifikat wurde widerrufen*/
+"wallet_error_revocation" = "Zertifikat wurde\nwiderrufen";
+
+/*Wallet: Zertifikat mit ungültiger Signatur*/
+"wallet_error_invalid_signature" = "Zertifikat mit\nungültiger Signatur";
+
+/*Wallet: ungültiger Signatur (gleiche Worte wie wallet_error_invalid_signature)*/
+"wallet_error_invalid_signature_bold" = "ungültiger Signatur";
+
+/*Wallet: widerrufen (gleiches Wort wie bei wallet_error_revocation)*/
+"wallet_error_revocation_bold" = "widerrufen";
+
+/*Wallet: abgelaufen (gleiches Wort wie bei wallet_error_expired verwenden)*/
+"wallet_error_expired_bold" = "abgelaufen";
+
+/*Wallet: Fehler Format des Zertifikat ungültig*/
+"wallet_error_invalid_format" = "Format des Zertifikat\nungültig";
+
+/*Wallet: Fehler Format des Zertifikat ungültig Fett*/
+"wallet_error_invalid_format_bold" = "ungültig";
 
 /*Meldung wenn erneute ein Zertifikat gescannt wurde, welches bereits in der App ist*/
 "wallet_certificate_already_exists" = "Dieses Zertifikat ist bereits in der App gespeichert";
@@ -410,3 +438,38 @@
 /*Label der externen URL im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_external_link_title" = "Weitere Informationen";
 
+
+/*Wallet: Retry Titel Offline*/
+"wallet_detail_offline_retry_title" = "Prüfung offline nicht möglich";
+
+/*Homescreen Zertifikat: Offline Modus Text*/
+"wallet_homescreen_offline" = "Offline Modus";
+
+
+/*Wallet: Detail Offline Text*/
+"wallet_offline_description" = "Um die aktuelle Gültigkeit anzeigen zu können, muss die App regelmässig online sein.";
+
+/*Wallet: Detail Netzwerkfehler Titel*/
+"wallet_detail_network_error_title" = "Prüfung zur Zeit nicht möglich";
+
+/*Wallet: Detail Netzwerkfehler Text*/
+"wallet_detail_network_error_text" = "Versuchen Sie es später erneut.";
+
+/*Wallet: Text auf Zertifikat auf Homescreen bei Netzwerkfehler*/
+"wallet_homescreen_network_error" = "Gültigkeit konnte nicht ermittelt werden";
+
+
+/*Titel Gültigkeit im Zertifikatsdetail*/
+"wallet_certificate_validity" = "Gültigkeit in\nÖsterreich";
+
+/*"Bis" Label im Zertifikats-Detail*/
+"wallet_certificate_valid_until" = "bis";
+
+/*Message im Zertifikatsdetail während Überprüfung*/
+"wallet_certificate_verifying" = "Das Zertifikat wird geprüft";
+
+/*Message nach erfolgreicher Prüfung im Zertifikatdetail*/
+"wallet_certificate_verify_success" = "Prüfung erfolgreich";
+
+/*Verifier: Error Ungültiges Format*/
+"verifier_error_invalid_format" = "Das Format des Covid-Zertifikats ist ungültig.";

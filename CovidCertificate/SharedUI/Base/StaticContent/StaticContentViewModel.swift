@@ -57,8 +57,8 @@ struct StaticContentViewModel: Equatable {
     static let store = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_store_header,
                                               foregroundImage: UIImage(named: "illu-onboarding-privacy"),
                                               title: UBLocalized.wallet_onboarding_store_title,
-                                              textGroups: [(UIImage(named: "ic-privacy"), UBLocalized.wallet_onboarding_store_text1),
-                                                           (UIImage(named: "ic-validation"), UBLocalized.wallet_onboarding_store_text2)])
+                                              textGroups: [(UIImage(named: "ic-privacy"), UBLocalized.wallet_onboarding_store_text1) /* ,
+                                               (UIImage(named: "ic-validation"), UBLocalized.wallet_onboarding_store_text2) */ ])
 
     static let show = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_show_header,
                                              foregroundImage: UIImage(named: "illu-onboarding-covid-certificate"),
