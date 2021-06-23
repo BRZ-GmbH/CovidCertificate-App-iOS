@@ -31,7 +31,7 @@
 "ok_button" = "OK";
 "camera_permission_dialog_text" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
 "camera_permission_dialog_action" = "Zugriff auf Kamera erlauben";
-"verifier_qr_scanner_scan_qr_text" = "QR-Code scannen ";
+"verifier_qr_scanner_scan_qr_text" = "QR-Code scannen";
 
 /*Titel auf dem Verifikations-Screen*/
 "covid_certificate_title" = "Covid-19-Zertifikat";
