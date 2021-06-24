@@ -28,7 +28,7 @@ class ExternalLinkButton: UBButton {
         setTitleColor(.cc_blue, for: .normal)
         titleLabel?.font = LabelType.textBold.font
 
-        setImage(UIImage(named: "ic-link-external"), for: .normal)
+        setImage(UIImage(named: "ic-link-external")?.ub_image(with: .cc_blue), for: .normal)
         imageView?.contentMode = .scaleAspectFit
 
         imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: Padding.small)
