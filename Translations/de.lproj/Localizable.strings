@@ -1,22 +1,22 @@
 
 /*Android App Name*/
-"verifier_app_name" = "BRZ Wallet";
+"verifier_app_name" = "Grüner Pass";
 
 /*Title for the qr scanning screen*/
-"verifier_title_qr_scan" = "Scannen";
+"verifier_title_qr_scan" = "QR-Code scannen";
 
 /*Titel über dem Haupttitel*/
-"verifier_homescreen_header_title" = "BRZ Wallet ";
+"verifier_homescreen_header_title" = "Grüner Pass";
 
 /*Homescreen App Name*/
-"verifier_homescreen_title" = "BRZ Wallet";
+"verifier_homescreen_title" = "Grüner Pass";
 
 /*Beschreibung für Pager Bild 1*/
-"verifier_homescreen_pager_description_1" = "Vorgewiesenes Zertifikat scannen";
+"verifier_homescreen_pager_description_1" = "EU-konformen QR-Code scannen";
 
 
 /*Homescreen Button für Scanning*/
-"verifier_homescreen_scan_button" = "Scannen";
+"verifier_homescreen_scan_button" = "QR-Code scannen";
 
 /*Homescreen Button für Support*/
 "verifier_homescreen_support_button" = "So funktioniert's";
@@ -24,7 +24,7 @@
 "error_network_text" = "Überprüfen Sie Ihre Internet Verbindung.";
 "error_action_retry" = "Erneut versuchen";
 "error_camera_permission_title" = "Kein Zugriff auf Kamera";
-"error_camera_permission_text" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
+"error_camera_permission_text" = "Die App benötigt Zugriff auf die Kamera, um das Zertifikat scannen zu können.";
 "error_action_change_settings" = "Einstellungen ändern";
 "error_title" = "Fehler";
 "qr_scanner_error" = "Kein gültiger Code";
@@ -34,7 +34,7 @@
 "verifier_qr_scanner_scan_qr_text" = "QR-Code scannen";
 
 /*Titel auf dem Verifikations-Screen*/
-"covid_certificate_title" = "Covid-19-Zertifikat";
+"covid_certificate_title" = "EU-konformes Zertifikat";
 
 /*Name des/der Zertifikatsinhabers/Zertifikatsinhaberin*/
 "verifier_covid_certificate_name" = "Nachname";
@@ -46,10 +46,10 @@
 "wallet_add_certificate" = "Hinzufügen";
 
 /*Wallet: Homescreen Covid-Zertifikat*/
-"wallet_certificate" = "Covid-19-Zertifikat";
+"wallet_certificate" = "EU-konformes Zertifikat";
 
 /*Wallet: Homescreen Erklärung*/
-"wallet_homescreen_explanation" = "Scannen Sie den QR-Code auf dem Covid-19-Zertifikat, um es zur App hinzuzufügen.";
+"wallet_homescreen_explanation" = "Scannen Sie den EU-konformen QR-Code auf dem Zertifikat, um es zur App hinzuzufügen.";
 
 /*Wallet: Scanner Titel*/
 "wallet_scanner_title" = "Hinzufügen";
@@ -58,22 +58,22 @@
 "verifier_verify_success_title" = "Prüfung erfolgreich";
 
 /*Info Text bei erfolgreicher Prüfung*/
-"verifier_verify_success_info" = "Nur mit einem \nAusweisdokument gültig";
+"verifier_verify_success_info" = "Nur mit einem amtlichen Lichtbildausweis gültig";
 
 /*Prüfung loading text*/
 "verifier_verify_loading_text" = "Zertifikat wird geprüft";
 
 /*Fehler Title bei Prüfung*/
-"verifier_verify_error_title" = "Covid-Zertifikat ungültig";
+"verifier_verify_error_title" = "Zertifikat ungültig";
 
 /*Fehler Infotext bei Prüfung (Nationale Regeln)*/
-"verifier_verify_error_info_for_national_rules" = "Entspricht nicht den Gültigkeitskriterien Österreichs";
+"verifier_verify_error_info_for_national_rules" = "Das Zertifikat entspricht nicht den gesetzlichen Erfordernissen.";
 
 /*Fehler Infotext bei Prüfung (Zertifikat Fehler)*/
-"verifier_verify_error_info_for_certificate_invalid" = "Das Covid-Zertifikat hat keine gültige Signatur";
+"verifier_verify_error_info_for_certificate_invalid" = "Das Zertifikat hat keine gültige Signatur";
 
 /*Fehler Infotext bei Prüfung (Blacklist)*/
-"verifier_verify_error_info_for_blacklist" = "Das Covid-Zertifikat wurde widerrufen";
+"verifier_verify_error_info_for_blacklist" = "Das Zertifikat wurde widerrufen";
 
 /*Fehler bei der geladen Liste*/
 "verifier_verify_error_list_title" = "Prüfung fehlgeschlagen";
@@ -82,7 +82,7 @@
 "verifier_verify_error_list_info_text" = "Ein unerwarteter Fehler ist aufgetreten.";
 
 /*Wallet: Scanner Text unten*/
-"wallet_scanner_explanation" = "Scannen Sie den QR-Code auf dem Covid-19-Zertifikat.";
+"wallet_scanner_explanation" = "Scannen Sie den EU-konformen QR-Code auf dem Zertifikat.";
 
 /*Wallet: Scanner Info Button unten*/
 "wallet_scanner_info_button" = "So funktioniert's";
@@ -94,22 +94,22 @@
 "wallet_add_certificate_button" = "Hinzufügen";
 
 /*Wallet: Titel der Liste Zertifikate*/
-"wallet_certificate_list_title" = "Zertifikate";
+"wallet_certificate_list_title" = "EU-konforme Zertifikate";
 
 /*Wallet: Löschen Button Titel*/
 "delete_button" = "Löschen";
 
 /*Android App Name für die Wallet*/
-"wallet_app_name" = "BRZ Wallet";
+"wallet_app_name" = "Grüner Pass";
 
 /*Header im Onboarding-Screen "Die App"*/
-"wallet_onboarding_app_header" = "Die App";
+"wallet_onboarding_app_header" = "Grüner Pass";
 
 /*Titel im Onboardingscreen "Die App"*/
-"wallet_onboarding_app_title" = "BRZ Wallet";
+"wallet_onboarding_app_title" = "Grüner Pass";
 
 /*Text im Onboardingscreen "Die App"*/
-"wallet_onboarding_app_text" = "Mit der App können Sie Covid-19-Zertifikate sicher auf dem Smartphone aufbewahren und einfach vorweisen.";
+"wallet_onboarding_app_text" = "Mit dieser App können Sie die EU-konformen Zertifikate des Grünen Passes sicher auf dem Smartphone aufbewahren und einfach vorweisen.";
 
 /*Weiter-Button Titel*/
 "continue_button" = "Weiter";
@@ -127,10 +127,10 @@
 "wallet_onboarding_show_title" = "Zertifikate einfach vorweisen";
 
 /*Text 1 im Onboardingscreen "Vorteile, Vorweisen"*/
-"wallet_onboarding_show_text1" = "Die auf dem Covid-19-Zertifikat dargestellten Daten sind auch im QR-Code enthalten.";
+"wallet_onboarding_show_text1" = "Die auf dem Zertifikat dargestellten Daten sind auch im EU-konformen QR-Code enthalten.";
 
 /*Text 2 im Onboardingscreen "Vorteile, Vorweisen"*/
-"wallet_onboarding_show_text2" = "Beim Vorweisen wird der QR-Code mit einer Prüf-App gescannt. Die enthaltenen Daten werden dabei automatisch auf Echtheit und Gültigkeit überprüft.";
+"wallet_onboarding_show_text2" = "Beim Vorweisen wird der EU-konforme QR-Code mit einer Prüfanwendung gescannt. Die enthaltenen Daten werden dabei automatisch auf Echtheit und Gültigkeit überprüft.";
 
 /*Titel des Datenschutzerklärungs-Elements im Onboardingscreen "Datenschutz"*/
 "wallet_onboarding_privacy_privacypolicy_title" = "Datenschutzerklärung";
@@ -146,25 +146,25 @@
 "wallet_scanner_howitworks_header" = "So funktioniert's";
 
 /*Titel im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_title" = "Covid-19-Zertifikate\nhinzufügen";
+"wallet_scanner_howitworks_title" = "Zertifikate\nhinzufügen";
 
 /*Textblock 1 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_text1" = "Um ein Covid-19-Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.";
+"wallet_scanner_howitworks_text1" = "Um ein Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.";
 
 /*Textblock 2 im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_text2" = "Tippen Sie in der App auf «Hinzufügen», um ein neues Zertifikat zur App hinzuzufügen.";
 
 /*Textblock 3 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_text3" = "Halten Sie nun die Kamera des Smartphones über den QR-Code auf dem Originalzertifikat, um den Code einzuscannen.";
+"wallet_scanner_howitworks_text3" = "Halten Sie nun die Kamera des Smartphones über den EU-konformen QR-Code auf dem Zertifikat, um diesen zu scannen.";
 
 /*Textblock 4 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_text4" = "Es erscheint eine Vorschau des Covid-19-Zertifikats. Tippen Sie auf «Hinzufügen» um das Zertifikat sicher in der App zu speichern.";
+"wallet_scanner_howitworks_text4" = "Es erscheint eine Vorschau des Zertifikats. Tippen Sie auf «Hinzufügen» um das Zertifikat sicher in der App zu speichern.";
 
 /*Frage 1 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_question1" = "Wann und wo kann ich ein Covid-19-Zertifikat erhalten?";
+"wallet_scanner_howitworks_question1" = "Wie und wo erhalte ich ein EU-konformes Zertifikat?";
 
 /*Header im FAQ-Screen der Wallet App*/
-"wallet_faq_header" = "Häufige Fragen";
+"wallet_faq_header" = "Häufig gestellte Fragen";
 
 /*Titel 1 im FAQ-Screen der Wallet App*/
 "wallet_faq_questions_title" = "Wo kann ich mich über Covid-19-Zertifikate informieren?";
@@ -225,7 +225,7 @@
 "wallet_faq_works_subtitle" = "Mit der BRZ Wallet App können Sie Covid-19-Zertifikate einfach und sicher auf Ihrem Mobilgerät abspeichern und vorweisen.";
 
 /*Antwort 1 im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_answer1" = "Ein Covid-19-Zertifikat können Sie nach einer Covid-19-Impfung, nach einer durchgemachten Erkrankung oder nach einem negativen Testergebnis erhalten. ";
+"wallet_scanner_howitworks_answer1" = "Alle EU-konformen Zertifikate des Grünen Passes können mittels Handy-Signatur oder Bürgerkarte über gesundheit.gv.at abgerufen werden.";
 
 /*Verifier: Detail Check Vorname*/
 "verifier_covid_certificate_prename" = "Vorname";
@@ -244,7 +244,7 @@
 "certificate_reason_vaccinated" = "Impfung";
 
 /*Wallet: Zertifikat Detail Genesen*/
-"certificate_reason_recovered" = "Genesen";
+"certificate_reason_recovered" = "Genesung";
 
 /*Wallet: Zertifikat Detail Getestet*/
 "certificate_reason_tested" = "Test";
@@ -253,10 +253,10 @@
 "wallet_onboarding_store_header" = "Vorteile";
 
 /*Titel im Onboardingscreen "Vorteile, Aufbewahren"*/
-"wallet_onboarding_store_title" = "Covid-19-Zertifikate digital aufbewahren";
+"wallet_onboarding_store_title" = "EU-konforme Zertifikate digital aufbewahren";
 
 /*Text1 im Onboardingscreen "Vorteile, Aufbewahren"*/
-"wallet_onboarding_store_text1" = "Covid-19-Zertifikate können einfach zur App hinzugefügt und digital aufbewahrt werden.";
+"wallet_onboarding_store_text1" = "Die EU-konformen Zertifikate des Grünen Passes können einfach zur App hinzugefügt und digital aufbewahrt werden.";
 
 
 /*Header im Onboarding-Screen "Vorteile, Vorweisen"*/
@@ -269,7 +269,7 @@
 "accessibility_faq_button" = "Häufige Fragen";
 
 /*Accessibility: Button zur Liste der Zertifikate*/
-"accessibility_list_button" = "Zertifikate Liste";
+"accessibility_list_button" = "Liste Ihrer Zertifikate";
 
 /*Accessibility: Zertifikate hinzufügen*/
 "accessibility_add_button" = "Zertifikat hinzufügen";
@@ -300,7 +300,7 @@
 "wallet_error_valid_from" = "In Österreich gültig ab:\n{DATE}";
 
 /*Wallet: Fehler wenn Zertifikat nicht den CH-Gültigkeitskriterien entspricht*/
-"wallet_error_national_rules" = "Entspricht nicht den Gültigkeitskriterien Österreichs";
+"wallet_error_national_rules" = "Das Zertifikat entspricht nicht den gesetzlichen Erfordernissen.";
 
 /*Wallet: Gültigkeit des Zertifikats abgelaufen*/
 "wallet_error_expired" = "Gültigkeit des Zertifikats\nabgelaufen";
@@ -327,7 +327,7 @@
 "wallet_error_invalid_format_bold" = "ungültig";
 
 /*Meldung wenn erneute ein Zertifikat gescannt wurde, welches bereits in der App ist*/
-"wallet_certificate_already_exists" = "Dieses Zertifikat ist bereits in der App gespeichert";
+"wallet_certificate_already_exists" = "Dieses EU-konforme Zertifikat ist bereits in der App gespeichert";
 
 
 /*Accessibility: Info Box Butto*/
@@ -386,7 +386,7 @@
 "wallet_certificate_test_done_by" = "Testcenter";
 
 /*iOS: Erklärung bei Kamera */
-"NSCameraUsageDescription" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
+"NSCameraUsageDescription" = "Die App benötigt Zugriff auf die Kamera, um den EU-konformen QR-Code scannen zu können.";
 
 /*iOS Button zum Einstellungen öffnen*/
 "ios_settings_open" = "Einstellungen";
@@ -406,7 +406,7 @@
 "wallet_homescreen_add_title" = "Zertifikat hinzufügen";
 
 /*Wallet: Homescreen Zertifikat Description Text*/
-"wallet_homescreen_add_certificate_description" = "Sie haben ein Covid-19-Zertifikat auf Papier oder als PDF und möchten es zur App hinzufügen.";
+"wallet_homescreen_add_certificate_description" = "Sie haben ein EU-konformes Zertifikat auf Papier oder als PDF und möchten es zur App hinzufügen.";
 
 
 /*Homescreen Zertifikat: Offline Modus Text*/
@@ -450,7 +450,7 @@
 "wallet_offline_description" = "Um die aktuelle Gültigkeit anzeigen zu können, muss die App regelmässig online sein.";
 
 /*Wallet: Detail Netzwerkfehler Titel*/
-"wallet_detail_network_error_title" = "Prüfung zur Zeit nicht möglich";
+"wallet_detail_network_error_title" = "Prüfung zurzeit nicht möglich";
 
 /*Wallet: Detail Netzwerkfehler Text*/
 "wallet_detail_network_error_text" = "Versuchen Sie es später erneut.";
@@ -472,4 +472,4 @@
 "wallet_certificate_verify_success" = "Prüfung erfolgreich";
 
 /*Verifier: Error Ungültiges Format*/
-"verifier_error_invalid_format" = "Das Format des Covid-Zertifikats ist ungültig.";
+"verifier_error_invalid_format" = "Das Format des EU-konformen Zertifikats ist ungültig.";
