@@ -89,7 +89,7 @@ public enum LabelType: UBLabelType {
 
     public var textColor: UIColor {
         if self == .smallError {
-            return .cc_bund
+            return .cc_red
         }
 
         if self == .uppercaseBold || self == .monospaced || self == .smallErrorLight || self == .smallUppercaseBold {

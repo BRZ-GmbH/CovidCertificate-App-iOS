@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "illu-onboarding-covid-certificate.png",
+      "filename" : "illu_onboarding_covid_certificate.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "illu-onboarding-covid-certificate@2x.png",
+      "filename" : "illu_onboarding_covid_certificate@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "illu-onboarding-covid-certificate@3x.png",
+      "filename" : "illu_onboarding_covid_certificate@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

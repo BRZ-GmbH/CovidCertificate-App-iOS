@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic-bund.png",
+      "filename" : "ic_bundwappen_big.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic-bund@2x.png",
+      "filename" : "ic_bundwappen_big@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic-bund@3x.png",
+      "filename" : "ic_bundwappen_big@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

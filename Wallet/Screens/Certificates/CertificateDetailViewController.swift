@@ -28,7 +28,7 @@ class CertificateDetailViewController: ViewController {
     private lazy var stateView = CertificateStateView(certificate: certificate, isHomescreen: false)
     private lazy var detailView = CertificateDetailView(certificate: certificate, showEnglishLabelsIfNeeded: true)
 
-    private let removeButton = Button(title: UBLocalized.delete_button, style: .normal(.cc_bund))
+    private let removeButton = Button(title: UBLocalized.delete_button, style: .normal(.cc_red))
 
     private let verifyButton = Button(image: UIImage(named: "ic-load")?.withRenderingMode(.alwaysTemplate), accessibilityName: "")
 

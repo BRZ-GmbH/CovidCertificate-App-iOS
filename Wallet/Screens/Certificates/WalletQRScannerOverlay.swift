@@ -18,7 +18,7 @@ class WalletQRScannerFullOverlayView: UIView {
     private let fillLayer = CAShapeLayer()
 
     private let requestLabel = Label(.text, textAlignment: .center)
-    private let errorView = QRScanErrorView(imageColor: .cc_white, backgroundColor: .cc_bund, textColor: .cc_white)
+    private let errorView = QRScanErrorView(imageColor: .cc_white, backgroundColor: .cc_red, textColor: .cc_white)
 
     private let errorLabel = Label(.smallError)
 
@@ -40,7 +40,7 @@ class WalletQRScannerFullOverlayView: UIView {
             self.errorView.alpha = error != nil ? 1.0 : 0.0
             self.errorLabel.alpha = error != nil ? 1.0 : 0.0
             self.errorLabel.text = error?.errorCode
-            self.scannerOverlay.lineColor = error == nil ? .cc_blue : .cc_bund
+            self.scannerOverlay.lineColor = error == nil ? .cc_blue : .cc_red
         }
 
         if animated {

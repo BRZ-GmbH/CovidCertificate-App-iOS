@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "illu-how-it-works.png",
+      "filename" : "illu_how_it_works.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "illu-how-it-works@2x.png",
+      "filename" : "illu_how_it_works@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "illu-how-it-works@3x.png",
+      "filename" : "illu_how_it_works@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

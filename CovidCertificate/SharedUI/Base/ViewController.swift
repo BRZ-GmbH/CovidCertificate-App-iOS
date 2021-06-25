@@ -43,7 +43,7 @@ class ViewController: UIViewController {
 
     func addDismissButton() {
         hasDismissButton = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic-close")?.ub_image(with: .cc_bund).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(dismissAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic-close")?.ub_image(with: .cc_red).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(dismissAction))
         navigationItem.rightBarButtonItem?.accessibilityLabel = UBLocalized.accessibility_close_button
     }
 
