@@ -30,7 +30,8 @@ class CertificateDetailView: UIView {
     // MARK: - Init
 
     init(certificate: UserCertificate, showEnglishLabelsIfNeeded: Bool) {
-        showEnglishLabels = showEnglishLabelsIfNeeded && !UBLocalized.languageIsEnglish()
+        // TODO: AT - Hide english labels for now since we do not have english localization
+        showEnglishLabels = false//showEnglishLabelsIfNeeded && !UBLocalized.languageIsEnglish()
         self.certificate = certificate
         super.init(frame: .zero)
 
