@@ -31,7 +31,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
     let bottomView = HomescreenBottomView()
 
     init() {
-        super.init(color: .cc_blue)
+        super.init(color: .cc_green_dark)
     }
 
     override func viewDidLoad() {

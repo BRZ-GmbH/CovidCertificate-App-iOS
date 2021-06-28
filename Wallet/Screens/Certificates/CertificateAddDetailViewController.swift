@@ -42,7 +42,7 @@ class CertificateAddDetailViewController: ViewController {
     private let certificateDetailView = CertificateAddDetailView()
 
     private let addOkButton = Button(title: UBLocalized.wallet_add_certificate_button)
-    private let scanAgainButton = SimpleTextButton(title: UBLocalized.wallet_scan_again, color: .cc_blue)
+    private let scanAgainButton = SimpleTextButton(title: UBLocalized.wallet_scan_again, color: .cc_green_dark)
 
     let showScanAgainButton: Bool
 

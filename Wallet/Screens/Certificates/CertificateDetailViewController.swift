@@ -134,7 +134,7 @@ class CertificateDetailViewController: ViewController {
 
         stackScrollView.addSpacerView(5.0 * Padding.large)
 
-        verifyButton.backgroundColor = .cc_blue
+        verifyButton.backgroundColor = .cc_green_dark
         verifyButton.tintColor = .cc_white
         let size: CGFloat = 50.0
         verifyButton.layer.cornerRadius = size * 0.5

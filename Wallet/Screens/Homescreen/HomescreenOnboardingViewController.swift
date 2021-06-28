@@ -22,7 +22,7 @@ class HomescreenOnboardingViewController: ViewController {
 
     private let titleLabel = Label(.uppercaseBold, textColor: .white, textAlignment: .center)
     private var explanationLabel = Label(.textLarge, textColor: .white, textAlignment: .center)
-    private let button = Button(title: UBLocalized.wallet_add_certificate, style: .normal(.white), customTextColor: .cc_blue)
+    private let button = Button(title: UBLocalized.wallet_add_certificate, style: .normal(.white), customTextColor: .cc_green_dark)
 
     // MARK: - View
 

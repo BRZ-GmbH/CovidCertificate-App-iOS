@@ -235,12 +235,15 @@ private class StateLabel: UIView {
         if enabled {
             if let r = type {
                 switch r {
-                case .recovery, .vaccination:
-                    backgroundColor = .cc_blue
-                    label.textColor = .cc_white
+                case .recovery:
+                    backgroundColor = .cc_recovery
+                    label.textColor = .cc_recovery_contrast
+                case .vaccination:
+                    backgroundColor = .cc_vaccination
+                    label.textColor = .cc_vaccination_contrast
                 case .test:
-                    backgroundColor = .cc_blueish
-                    label.textColor = .cc_blue
+                    backgroundColor = .cc_test
+                    label.textColor = .cc_test_contrast
                 }
             } else {
                 backgroundColor = .clear

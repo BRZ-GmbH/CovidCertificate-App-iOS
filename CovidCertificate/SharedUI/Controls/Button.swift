@@ -70,7 +70,7 @@ class Button: UBButton {
         }
     }
 
-    init(title: String, style: Style = .normal(UIColor.cc_blue), customTextColor: UIColor? = nil) {
+    init(title: String, style: Style = .normal(UIColor.cc_green_dark), customTextColor: UIColor? = nil) {
         self.style = style
         self.customTextColor = customTextColor
 
