@@ -166,64 +166,6 @@
 /*Header im FAQ-Screen der Wallet App*/
 "wallet_faq_header" = "Häufig gestellte Fragen";
 
-/*Titel 1 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_title" = "Wo kann ich mich über Covid-19-Zertifikate informieren?";
-
-/*Text 1im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_subtitle" = "Alle Informationen zum Grünen Pass in Österreich und den verschiedenen Covid-19-Zertifikaten erhalten sie auf https://gruenerpass.gv.at/.";
-
-/*Frage 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_question_2" = "Wie kann ich ein Covid-19-Zertifikat vorweisen?";
-/*Frage 3 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_question_3" = "Wo sind meine Daten gespeichert?";
-
-
-
-/*Frage 6 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_1" = "Wie kann ich ein Covid-19Zertifikat zur App hinzufügen?";
-
-/*Frage 7 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_2" = "Können auch mehrere Covid-19-Zertifikate hinzugefügt werden?";
-
-
-/*Frage 9 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_4" = "Wie sind meine Daten geschützt?";
-
-
-/*Frage 11 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_question_6" = "Was muss ich tun, wenn ich das Covid-19-Zertifikat oder die App lösche?";
-
-/*Antwort 1 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_1" = " Alle Informationen zum Grünen Pass in Österreich und den verschiedenen Covid-19-Zertifikaten erhalten sie auf https://gruenerpass.gv.at/.";
-
-/*Antwort 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_2" = "Sie können Ihr Covid-19-Zertifikat in Papierform vorweisen oder Sie benutzen die BRZ Wallet App, um Zertifikate in der App zu speichern und direkt aus der App vorzuweisen. Ob Sie Ihr Zertifikat auf Papier oder in der App vorweisen, ist Ihnen überlassen. \n\nBeachten Sie, dass sie in jedem Fall auf Verlangen auch noch ein Ausweisdokument vorweisen müssen.";
-
-/*Antwort 3 im FAQ-Screen der Wallet App*/
-"wallet_faq_questions_answer_3" = "Ihre Daten in der BRZ Wallet App werden nicht in einem zentralen System gespeichert, sondern nur lokal auf Ihrem Mobilgerät, respektive im QR-Code auf dem Covid-19-Zertifikat in Papierform.";
-
-
-
-/*Antwort 6 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_1" = "Um ein Covid-19-Zertifikat zur App hinzuzufügen, benötigen Sie das Ihnen ausgestellte Originalzertifikat auf Papier oder als PDF-Dokument. Den darauf abgebildeten QR-Code können Sie mit der BRZ Wallet App scannen und hinzufügen. Anschliessend erscheint das Covid-19-Zertifikat direkt in der App.";
-
-/*Antwort 7 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_2" = "Ja das ist möglich. So können Sie z. B. alle Covid-19-Zertifikate von Familienangehörigen in Ihrer App speichern. Auch in diesem Fall gilt: Das Covid-19-Zertifikat ist nur in Kombination mit einem Ausweisdokument des Zertifikatsinhabers / der Zertifikatsinhaberin gültig.";
-
-
-/*Antwort 9 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_4" = "Ihre persönlichen Daten in der BRZ Wallet App werden in keinem zentralen System gespeichert, sondern befinden sich ausschliesslich bei Ihnen lokal auf dem Mobilgerät..";
-
-
-/*Antwort 11 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_6" = "Sie können Ihr Covid-19-Zertifikat einfach wieder auf Ihrem Mobilgerät speichern. Laden Sie dazu die App erneut herunter und scannen Sie anschliessend den QR-Code auf Ihrem Covid-19-Zertifikat auf Papier oder als PDF.";
-
-/*Titel 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_title" = "Wie funktioniert \ndie App?";
-
-/*Text 2 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_subtitle" = "Mit der BRZ Wallet App können Sie Covid-19-Zertifikate einfach und sicher auf Ihrem Mobilgerät abspeichern und vorweisen.";
-
 /*Antwort 1 im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_answer1" = "Alle EU-konformen Zertifikate des Grünen Passes können mittels Handy-Signatur oder Bürgerkarte über gesundheit.gv.at abgerufen werden.";
 
