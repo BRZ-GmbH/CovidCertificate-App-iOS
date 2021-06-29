@@ -118,7 +118,7 @@ import Foundation
      case verifier_retry_flightmode_error_key = "verifier_retry_flightmode_error"
     /// Ein Netzwerkfehler ist aufgetreten.
      case verifier_retry_network_error_key = "verifier_retry_network_error"
-    /// https://brz.gv.at/impressum
+    /// https://www.gruenerpass.gv.at
      case verifier_terms_privacy_link_key = "verifier_terms_privacy_link"
     /// QR-Code scannen
      case verifier_title_qr_scan_key = "verifier_title_qr_scan"
@@ -146,7 +146,7 @@ import Foundation
      case wallet_add_certificate_button_key = "wallet_add_certificate_button"
     /// Grüner Pass
      case wallet_app_name_key = "wallet_app_name"
-    /// http://itunes.apple.com/app/id1565917320
+    /// http://itunes.apple.com/app/id1574155774
      case wallet_apple_app_store_url_key = "wallet_apple_app_store_url"
     /// EU-konformes Zertifikat
      case wallet_certificate_key = "wallet_certificate"
@@ -322,7 +322,7 @@ import Foundation
      case wallet_scanner_info_button_key = "wallet_scanner_info_button"
     /// Hinzufügen
      case wallet_scanner_title_key = "wallet_scanner_title"
-    /// https://brz.gv.at/impressum
+    /// https://www.gruenerpass.gv.at
      case wallet_terms_privacy_link_key = "wallet_terms_privacy_link"
   }
 
@@ -434,7 +434,7 @@ import Foundation
    static let verifier_retry_flightmode_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_flightmode_error_key)
   /// Ein Netzwerkfehler ist aufgetreten.
    static let verifier_retry_network_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_network_error_key)
-  /// https://brz.gv.at/impressum
+  /// https://www.gruenerpass.gv.at
    static let verifier_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.verifier_terms_privacy_link_key)
   /// QR-Code scannen
    static let verifier_title_qr_scan = UBLocalized.tr(UBLocalizedKey.verifier_title_qr_scan_key)
@@ -462,7 +462,7 @@ import Foundation
    static let wallet_add_certificate_button = UBLocalized.tr(UBLocalizedKey.wallet_add_certificate_button_key)
   /// Grüner Pass
    static let wallet_app_name = UBLocalized.tr(UBLocalizedKey.wallet_app_name_key)
-  /// http://itunes.apple.com/app/id1565917320
+  /// http://itunes.apple.com/app/id1574155774
    static let wallet_apple_app_store_url = UBLocalized.tr(UBLocalizedKey.wallet_apple_app_store_url_key)
   /// EU-konformes Zertifikat
    static let wallet_certificate = UBLocalized.tr(UBLocalizedKey.wallet_certificate_key)
@@ -638,7 +638,7 @@ import Foundation
    static let wallet_scanner_info_button = UBLocalized.tr(UBLocalizedKey.wallet_scanner_info_button_key)
   /// Hinzufügen
    static let wallet_scanner_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_title_key)
-  /// https://brz.gv.at/impressum
+  /// https://www.gruenerpass.gv.at
    static let wallet_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.wallet_terms_privacy_link_key)
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
