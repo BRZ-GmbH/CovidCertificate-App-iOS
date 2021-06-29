@@ -46,14 +46,14 @@ public enum LabelType: UBLabelType {
     public var font: UIFont {
         let bfs = FontSize.bodyFontSize()
 
-        var boldFontName = "Inter-Bold"
-        var lightFontName = "Inter-Light"
+        var boldFontName = "SourceSansPro-Bold"
+        var lightFontName = "SourceSansPro-Regular"
 
         if #available(iOS 13.0, *) {
             switch UITraitCollection.current.legibilityWeight {
             case .bold:
-                boldFontName = "Inter-ExtraBold"
-                lightFontName = "Inter-Medium"
+                boldFontName = "SourceSansPro-Black"
+                lightFontName = "SourceSansPro-SemiBold"
             default:
                 break
             }
