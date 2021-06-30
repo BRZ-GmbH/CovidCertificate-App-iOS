@@ -294,7 +294,7 @@
 "wallet_certificate_test_land" = "Land des Tests";
 "covid_certificate_test_title" = "Test";
 "wallet_certificate_test_result_title" = "Ergebnis";
-"wallet_certificate_test_result_negativ" = "Nicht nachgewiesen (Negativ)";
+"wallet_certificate_test_result_negativ" = "Nicht nachgewiesen";
 "wallet_certificate_test_result_positiv" = "Positiv";
 "wallet_certificate_test_type" = "Typ";
 "wallet_certificate_test_name" = "Name";
