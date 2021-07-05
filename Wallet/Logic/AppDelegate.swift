@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var blurView: UIVisualEffectView?
     private(set) var importHandler: ImportHandler?
 
+    private let screenProtecter = ScreenProtector()
+
     @UBUserDefault(key: "isFirstLaunch", defaultValue: true)
     var isFirstLaunch: Bool
 
@@ -52,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            let url = launchOptions[UIApplication.LaunchOptionsKey.url] as? URL {
             linkHandler.handle(url: url)
         }
+
+        screenProtecter.startPreventingRecording()
 
         return true
     }

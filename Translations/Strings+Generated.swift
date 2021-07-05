@@ -328,6 +328,8 @@ import Foundation
      case wallet_scanner_title_key = "wallet_scanner_title"
     /// https://gruenerpass.gv.at/walletapp
      case wallet_terms_privacy_link_key = "wallet_terms_privacy_link"
+    /// Bildschirmaufnahme ist nicht erlaubt!
+     case warning_screen_recording_key = "warning_screen_recording"
   }
 
   /// Zertifikat hinzufügen
@@ -648,6 +650,8 @@ import Foundation
    static let wallet_scanner_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_title_key)
   /// https://gruenerpass.gv.at/walletapp
    static let wallet_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.wallet_terms_privacy_link_key)
+  /// Bildschirmaufnahme ist nicht erlaubt!
+   static let warning_screen_recording = UBLocalized.tr(UBLocalizedKey.warning_screen_recording_key)
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 

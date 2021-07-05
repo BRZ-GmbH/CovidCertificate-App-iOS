@@ -422,4 +422,8 @@
 /*Button zum PDF importieren*/
 "wallet_homescreen_pdf_import" = "PDF importieren";
 
+/*Wallet: Homescreen Was wollen sie machen?*/
 "wallet_homescreen_what_to_do" = "Nächsten Schritt wählen";
+
+/* Warnung bei aktivem Screen Recording */
+"warning_screen_recording" = "Bildschirmaufnahme ist nicht erlaubt!";

@@ -33,6 +33,7 @@
 		2485F4782456185100C3D8C3 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F4772456185000C3D8C3 /* DebugLog.swift */; };
 		2485F4802459631A00C3D8C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F47F2459631A00C3D8C3 /* NetworkError.swift */; };
 		48ECCD2A264F0797008678DD /* StaticContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ABDF2264A652800FDE0E1 /* StaticContentViewModel.swift */; };
+		5B825B8426931EF000129C1A /* ScreenProtector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B825B8326931EF000129C1A /* ScreenProtector.swift */; };
 		5BA932A0268090F600F13749 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5BA9329F268090F600F13749 /* CovidCertificateSDK */; };
 		5BA932A2268090FC00F13749 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5BA932A1268090FC00F13749 /* CovidCertificateSDK */; };
 		5BB6F3B3268B533C006EA014 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B1268B533C006EA014 /* SourceSansPro-Bold.ttf */; };
@@ -268,6 +269,7 @@
 		24780B562431B5A9003BB26C /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		2485F4772456185000C3D8C3 /* DebugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		2485F47F2459631A00C3D8C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		5B825B8326931EF000129C1A /* ScreenProtector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenProtector.swift; sourceTree = "<group>"; };
 		5BB6F3B1268B533C006EA014 /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
 		5BB6F3B2268B533C006EA014 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		5BB6F3B7268B5439006EA014 /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -556,6 +558,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5B825B8226931EE600129C1A /* ScreenProtector */ = {
+			isa = PBXGroup;
+			children = (
+				5B825B8326931EF000129C1A /* ScreenProtector.swift */,
+			);
+			path = ScreenProtector;
+			sourceTree = "<group>";
+		};
 		6E0281F826565A7500582904 /* Brightness */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,6 +738,7 @@
 		6EC1735B2642A0D5002E27DB /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				5B825B8226931EE600129C1A /* ScreenProtector */,
 				6E361223267239A4008C0C86 /* ImportHandler */,
 				6E701454265409090097BBC8 /* Error */,
 				6E5A0F21264336B4004718B4 /* UIStateManager */,
@@ -1444,6 +1455,7 @@
 				DC286A26242CE0B9001D5344 /* Environment.swift in Sources */,
 				DC8ABDFB264AA2BF00FDE0E1 /* OnboardingDisclaimerViewController.swift in Sources */,
 				5BDBF08A26930CF100FA5B1C /* WalletHomescreenActionView.swift in Sources */,
+				5B825B8426931EF000129C1A /* ScreenProtector.swift in Sources */,
 				DC702B01243F6F640066C773 /* String+CC.swift in Sources */,
 				6EC172C926407F5F002E27DB /* CertificateAddDetailViewController.swift in Sources */,
 				6E0281FE265660E500582904 /* CertificateDetailView.swift in Sources */,
