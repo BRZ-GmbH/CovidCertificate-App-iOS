@@ -40,6 +40,6 @@ Bugs oder Probleme sollten als Github issues gemeldet werden. Diese App steht in
 Das Projekt sollte mit Xcode 12.5 oder einer neueren Version geöffnet werden.
 Abhängigkeiten werden mit [Swift Package Manager](https://swift.org/package-manager) verwaltet, kein weiteres Setup benötigt.
 
-## License
+## Lizenz
 
 Dieses Projekt ist lizenziert unter den Bestimmungen der MPL 2 license. Siehe [LICENSE](LICENSE) für Details.
