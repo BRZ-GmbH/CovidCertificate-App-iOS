@@ -2,30 +2,31 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://github.com/BRZ-GmbH/CovidCertificate-App-iOS/blob/main/LICENSE)
 
-This project is released by the [Bundesrechenzentrum GmbH](https://www.brz.gv.at/).
-
-It is based on the open source work of the Swiss [Federal Office of Information Technology, Systems and Telecommunication FOITT](https://github.com/admin-ch/CovidCertificate-App-iOS)
+Dieses Projekt wurde veröffentlicht durch [Bundesrechenzentrum GmbH](https://www.brz.gv.at/).
+Es basiert auf auf der OpenSource-App des [Schweizer Bundesamt für Information und Telekommunikation (BIT)](https://github.com/admin-ch/CovidCertificate-App-iOS)
 
 ## Grüner Pass App
 
-Grüner Pass is the official app for storing and presenting COVID certificates issued in Austria.
-The certificates are kept and checked locally on the user's phone.
+Der Grüne Pass ist die offizielle App des Bundesministeriums für Soziales, Gesundheit, Pflege und Konsumentenschutz (BMSGPK) zum Verwahren und Vorzeigen von EU-konformen Covid-19-Zertifikaten aus Österreich. Geladene Zertifikate werden ausschließlich lokal gespeichert.
+
+<p>
+<a href='https://apps.apple.com/at/app/grüner-pass/id1574155774'>
+<img alt='Download on the App Store' src='Documentation/download.svg' width="20%"/>
+</a>
+</p>
 
 <p align="center">
-<img src="Documentation/screenshots/wallet/en/screenshot1.png" width="20%">
-<img src="Documentation/screenshots/wallet/en/screenshot2.png" width="20%">
-<img src="Documentation/screenshots/wallet/en/screenshot3.png" width="20%">
-<img src="Documentation/screenshots/wallet/en/screenshot4.png" width="20%">
+<img src="Documentation/screenshots/wallet/de/screenshot1.png" width="20%">
+<img src="Documentation/screenshots/wallet/de/screenshot2.png" width="20%">
+<img src="Documentation/screenshots/wallet/de/screenshot3.png" width="20%">
+<img src="Documentation/screenshots/wallet/de/screenshot4.png" width="20%">
 </p>
 
 
-## Contribution Guide
+## Beiträge zur Weiterentwicklung der App
 
-This project is truly open-source and we welcome any feedback on the code regarding both the implementation and security aspects.
-
-Bugs or potential problems should be reported using Github issues.
-We welcome all pull requests that improve the quality of the source code.
-Please note that the app will be available with approved translations in English, German.
+Dieses Projekt ist als OpenSource-Projekt gestaltet. Feedback zum Quellcode nehmen wir gerne entgegen.
+Bugs oder Probleme sollten als Github issues gemeldet werden. Diese App steht in deutscher Sprache zur Verfügung.
 
 ## Repositories
 
@@ -36,9 +37,9 @@ Please note that the app will be available with approved translations in English
 
 ## Installation and Building
 
-The project should be opened with the Xcode 12.5 or newer.
-Dependencies are managed with [Swift Package Manager](https://swift.org/package-manager), no further setup is needed.
+Das Projekt sollte mit Xcode 12.5 oder einer neueren Version geöffnet werden.
+Abhängigkeiten werden mit [Swift Package Manager](https://swift.org/package-manager) verwaltet, kein weiteres Setup benötigt.
 
 ## License
 
-This project is licensed under the terms of the MPL 2 license. See the [LICENSE](LICENSE) file for details.
+Dieses Projekt ist lizenziert unter den Bestimmungen der MPL 2 license. Siehe [LICENSE](LICENSE) für Details.
