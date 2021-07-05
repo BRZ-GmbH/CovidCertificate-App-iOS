@@ -415,3 +415,11 @@
 
 /*Verifier: Error Ungültiges Format*/
 "verifier_error_invalid_format" = "Das Format des EU-konformen Zertifikats ist ungültig.";
+
+/*Button zum QR Code Scannen öffnen*/
+"wallet_homescreen_qr_code_scannen" = "QR-Code scannen";
+
+/*Button zum PDF importieren*/
+"wallet_homescreen_pdf_import" = "PDF importieren";
+
+"wallet_homescreen_what_to_do" = "Nächsten Schritt wählen";

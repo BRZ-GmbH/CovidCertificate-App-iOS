@@ -118,7 +118,7 @@ import Foundation
      case verifier_retry_flightmode_error_key = "verifier_retry_flightmode_error"
     /// Ein Netzwerkfehler ist aufgetreten.
      case verifier_retry_network_error_key = "verifier_retry_network_error"
-    /// https://www.gruenerpass.gv.at
+    /// https://gruenerpass.gv.at/walletapp
      case verifier_terms_privacy_link_key = "verifier_terms_privacy_link"
     /// QR-Code scannen
      case verifier_title_qr_scan_key = "verifier_title_qr_scan"
@@ -186,7 +186,7 @@ import Foundation
      case wallet_certificate_test_name_key = "wallet_certificate_test_name"
     /// Datum Resultat
      case wallet_certificate_test_result_date_title_key = "wallet_certificate_test_result_date_title"
-    /// Nicht nachgewiesen (Negativ)
+    /// Nicht nachgewiesen
      case wallet_certificate_test_result_negativ_key = "wallet_certificate_test_result_negativ"
     /// Positiv
      case wallet_certificate_test_result_positiv_key = "wallet_certificate_test_result_positiv"
@@ -250,6 +250,10 @@ import Foundation
      case wallet_homescreen_network_error_key = "wallet_homescreen_network_error"
     /// Offline Modus
      case wallet_homescreen_offline_key = "wallet_homescreen_offline"
+    /// PDF importieren
+     case wallet_homescreen_pdf_import_key = "wallet_homescreen_pdf_import"
+    /// QR-Code scannen
+     case wallet_homescreen_qr_code_scannen_key = "wallet_homescreen_qr_code_scannen"
     /// Nächsten Schritt wählen
      case wallet_homescreen_what_to_do_key = "wallet_homescreen_what_to_do"
     /// Weiter
@@ -322,7 +326,7 @@ import Foundation
      case wallet_scanner_info_button_key = "wallet_scanner_info_button"
     /// Hinzufügen
      case wallet_scanner_title_key = "wallet_scanner_title"
-    /// https://www.gruenerpass.gv.at
+    /// https://gruenerpass.gv.at/walletapp
      case wallet_terms_privacy_link_key = "wallet_terms_privacy_link"
   }
 
@@ -434,7 +438,7 @@ import Foundation
    static let verifier_retry_flightmode_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_flightmode_error_key)
   /// Ein Netzwerkfehler ist aufgetreten.
    static let verifier_retry_network_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_network_error_key)
-  /// https://www.gruenerpass.gv.at
+  /// https://gruenerpass.gv.at/walletapp
    static let verifier_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.verifier_terms_privacy_link_key)
   /// QR-Code scannen
    static let verifier_title_qr_scan = UBLocalized.tr(UBLocalizedKey.verifier_title_qr_scan_key)
@@ -502,7 +506,7 @@ import Foundation
    static let wallet_certificate_test_name = UBLocalized.tr(UBLocalizedKey.wallet_certificate_test_name_key)
   /// Datum Resultat
    static let wallet_certificate_test_result_date_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_test_result_date_title_key)
-  /// Nicht nachgewiesen (Negativ)
+  /// Nicht nachgewiesen
    static let wallet_certificate_test_result_negativ = UBLocalized.tr(UBLocalizedKey.wallet_certificate_test_result_negativ_key)
   /// Positiv
    static let wallet_certificate_test_result_positiv = UBLocalized.tr(UBLocalizedKey.wallet_certificate_test_result_positiv_key)
@@ -566,6 +570,10 @@ import Foundation
    static let wallet_homescreen_network_error = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_network_error_key)
   /// Offline Modus
    static let wallet_homescreen_offline = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_offline_key)
+  /// PDF importieren
+   static let wallet_homescreen_pdf_import = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_pdf_import_key)
+  /// QR-Code scannen
+   static let wallet_homescreen_qr_code_scannen = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_qr_code_scannen_key)
   /// Nächsten Schritt wählen
    static let wallet_homescreen_what_to_do = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_what_to_do_key)
   /// Weiter
@@ -638,7 +646,7 @@ import Foundation
    static let wallet_scanner_info_button = UBLocalized.tr(UBLocalizedKey.wallet_scanner_info_button_key)
   /// Hinzufügen
    static let wallet_scanner_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_title_key)
-  /// https://www.gruenerpass.gv.at
+  /// https://gruenerpass.gv.at/walletapp
    static let wallet_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.wallet_terms_privacy_link_key)
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
