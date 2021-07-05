@@ -69,7 +69,7 @@
 "verifier_verify_error_title" = "COVID Certificate invalid";
 
 /*Fehler Infotext bei Prüfung (Nationale Regeln)*/
-"verifier_verify_error_info_for_national_rules" = "Does not meet Switzerland's validity criteria";
+"verifier_verify_error_info_for_national_rules" = "Does not meet Austria's validity criteria";
 
 /*Fehler Infotext bei Prüfung (Zertifikat Fehler)*/
 "verifier_verify_error_info_for_certificate_invalid" = "The COVID certificate does not have a valid signature";
@@ -229,7 +229,7 @@
 "wallet_faq_works_answer_2" = "Yes, that is possible. For example, you can save the COVID certificates of all family members in your app. Also in this case, each COVID certificate is valid only in combination with an identification document (passport or ID card) of the certificate holder.";
 
 /*Antwort 8 im FAQ-Screen der Wallet App*/
-"wallet_faq_works_answer_3" = "The COVID Certificate app shows when your COVID certificate will expire in Switzerland. You can also use the details view to check at the touch of a button whether your COVID certificate is currently valid.";
+"wallet_faq_works_answer_3" = "The COVID Certificate app shows when your COVID certificate will expire in Austria. You can also use the details view to check at the touch of a button whether your COVID certificate is currently valid.";
 
 /*Antwort 9 im FAQ-Screen der Wallet App*/
 "wallet_faq_works_answer_4" = "Your personal data is not stored in a central system; instead, it can be found solely locally on the mobile device or in the QR code in the case of the paper COVID certificate.";
@@ -262,7 +262,7 @@
 "force_update_button" = "Update";
 
 /*Wallet: Zertifikat gültig ab: {DATE}*/
-"wallet_certificate_valid_from" = "Valid in Switzerland from:\n{DATE}";
+"wallet_certificate_valid_from" = "Valid in Austria from:\n{DATE}";
 
 /*Wallet: Zertifikat Detail Geimpft*/
 "certificate_reason_vaccinated" = "Vaccination";
@@ -283,7 +283,7 @@
 "wallet_onboarding_store_text1" = "COVID certificates can be simply added to the app and stored digitally. ";
 
 /*Text2 im Onboardingscreen "Vorteile, Aufbewahren"*/
-"wallet_onboarding_store_text2" = "The app checks the validity of certificates in Switzerland. This way, you can be sure that your certificates are valid.";
+"wallet_onboarding_store_text2" = "The app checks the validity of certificates in Austria. This way, you can be sure that your certificates are valid.";
 
 /*Header im Onboarding-Screen "Vorteile, Vorweisen"*/
 "wallet_onboarding_show_header" = "Advantages";
@@ -316,10 +316,10 @@
 "unknown_error" = "An unknown error has occurred";
 
 /*Verifier: Die Gültigkeit des Zertifikat ist abgelaufen*/
-"verifier_verifiy_error_expired" = "Does not meet Switzerland's validity criteria: The certificate is no longer valid.";
+"verifier_verifiy_error_expired" = "Does not meet Austria's validity criteria: The certificate is no longer valid.";
 
 /*Verifier: Zertifikat ist erst gültig ab {DATE}*/
-"verifier_verifiy_error_notyetvalid" = "Does not meet Switzerland's validity criteria: The certificate is not yet valid";
+"verifier_verifiy_error_notyetvalid" = "Does not meet Austria's validity criteria: The certificate is not yet valid";
 
 /*Verifier: Ein Netzwerkfehler ist aufgetreten.*/
 "verifier_retry_network_error" = "A network error has occurred";
@@ -328,10 +328,10 @@
 "verifier_retry_flightmode_error" = "Your device is in flight mode";
 
 /*Wallet: Zertifikat gültig ab: {DATE}*/
-"wallet_error_valid_from" = "Valid in Switzerland from:\n{DATE}";
+"wallet_error_valid_from" = "Valid in Austria from:\n{DATE}";
 
 /*Wallet: Fehler wenn Zertifikat nicht den CH-Gültigkeitskriterien entspricht*/
-"wallet_error_national_rules" = "Does not meet the validity criteria for Switzerland";
+"wallet_error_national_rules" = "Does not meet the validity criteria for Austria";
 
 /*Wallet: Gültigkeit des Zertifikats abgelaufen*/
 "wallet_error_expired" = "Certificate validity \nexpired";
@@ -355,7 +355,7 @@
 "wallet_certificate_already_exists" = "This certificate is already saved in the app";
 
 /*Titel Gültigkeit im Zertifikatsdetail*/
-"wallet_certificate_validity" = "Validity in \nSwitzerland";
+"wallet_certificate_validity" = "Validity in \nAustria";
 
 /*"Bis" Label im Zertifikats-Detail*/
 "wallet_certificate_valid_until" = "until";
@@ -445,7 +445,7 @@
 "verifier_faq_works_question_2" = "What exactly is checked?";
 
 /*Antwort 2 im FAQ der Verifier App*/
-"verifier_faq_works_answer_2" = "Three aspects are checked when scanning:\n– Does the certificate contain a valid electronic signature?\n– Is the certificate non-revoked?\n– Does the certificate meet Switzerland's validity criteria?\n\nIf the answer to all three questions is affirmative, the COVID certificate is shown as valid.";
+"verifier_faq_works_answer_2" = "Three aspects are checked when scanning:\n– Does the certificate contain a valid electronic signature?\n– Is the certificate non-revoked?\n– Does the certificate meet Austria's validity criteria?\n\nIf the answer to all three questions is affirmative, the COVID certificate is shown as valid.";
 
 /*Frage 3 im FAQ der Verifier App*/
 "verifier_faq_works_question_3" = "Which identification documents are valid? Why do personal details have to be checked?";
@@ -457,7 +457,7 @@
 "verifier_faq_works_question_4" = "Can foreign certificates also be checked?";
 
 /*Antwort 4 im FAQ der Verifier App*/
-"verifier_faq_works_answer_4" = "Yes, COVID certificates that are compatible with the EU digital COVID certificate can be checked according to Switzerland's validity criteria using the COVID Certificate check app.";
+"verifier_faq_works_answer_4" = "Yes, COVID certificates that are compatible with the EU digital COVID certificate can be checked according to Austria's validity criteria using the COVID Certificate check app.";
 
 /*Frage 5 im FAQ der Verifier App*/
 "verifier_faq_works_question_5" = "What data do I see during the verification process?";
@@ -663,7 +663,7 @@
 "wallet_notification_permission_button" = "Weiter";
 
 /*Externe URL im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_external_link" = "https://foph-coronavirus.ch/certificate/how-do-i-get-a-covid-certificate-and-how-do-i-use-it/";
+"wallet_scanner_howitworks_external_link" = "https://www.sozialministerium.at/Informationen-zum-Coronavirus/Coronavirus---Haeufig-gestellte-Fragen/FAQ-Gruener-Pass.html";
 
 /*Label der externen URL im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_external_link_title" = "Further information";

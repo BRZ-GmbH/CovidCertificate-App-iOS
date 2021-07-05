@@ -24,7 +24,7 @@ class WalletScannerViewController: ViewController {
 
     private let imageView = UIImageView(image: UIImage(named: "ic-scan-code"))
     private let explanationLabel = Label(.textBoldLarge, textAlignment: .center)
-    private let moreInfoButton = SimpleTextButton(title: UBLocalized.wallet_scanner_info_button, color: .cc_blue)
+    private let moreInfoButton = SimpleTextButton(title: UBLocalized.wallet_scanner_info_button, color: .cc_green_dark)
 
     private var isLightOn: Bool = false
     private let lightButton = ScannerLightButton.walletButton()

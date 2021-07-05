@@ -111,10 +111,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Refresh config
             startConfigRequest()
 
+            // TODO: AT - Remove update of keys, revocation list and national rules
+
             // Refresh trust list (public keys, revocation list, business rules,...)
-            CovidCertificateSDK.restartTrustListUpdate(completionHandler: {
-                UIStateManager.shared.stateChanged(forceRefresh: true)
-            }, updateTimeInterval: TimeInterval(60 * 60))
+            /* CovidCertificateSDK.restartTrustListUpdate(completionHandler: {
+                 UIStateManager.shared.stateChanged(forceRefresh: true)
+             }, updateTimeInterval: TimeInterval(60 * 60)) */
         }
     }
 

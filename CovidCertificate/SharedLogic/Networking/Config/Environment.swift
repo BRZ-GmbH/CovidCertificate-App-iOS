@@ -51,11 +51,11 @@ enum Environment {
     var configService: Backend {
         switch self {
         case .dev:
-            return Backend("https://www.cc-d.bit.admin.ch/app", version: nil)
+            return Backend("", version: nil)
         case .abnahme:
-            return Backend("https://www.cc-a.bit.admin.ch/app", version: nil)
+            return Backend("", version: nil)
         case .prod:
-            return Backend("https://www.cc.bit.admin.ch/app", version: nil)
+            return Backend("", version: nil)
         }
     }
 
@@ -76,20 +76,20 @@ enum Environment {
         #if VERIFIER
             switch self {
             case .dev:
-                return "7f64903d-4420-4cc3-ac90-c14306b5e556"
+                return ""
             case .abnahme:
-                return "f731fd3b-cb55-4cfd-9c46-fb3a927ffcd8"
+                return ""
             case .prod:
-                return "25958ed0-7790-4846-9341-7c7ef87ec389"
+                return ""
             }
         #elseif WALLET
             switch self {
             case .dev:
-                return "c838a4c4-39e5-4bbb-8e75-e4382df2edfe"
+                return ""
             case .abnahme:
-                return "e9802c49-4f2b-49cc-a645-24c206366455"
+                return ""
             case .prod:
-                return "0795dc8b-d8d0-4313-abf2-510b12d50939"
+                return ""
             }
         #endif
     }

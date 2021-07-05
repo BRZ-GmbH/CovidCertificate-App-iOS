@@ -12,9 +12,9 @@
 import UIKit
 
 class ExpandableViewHeader: UBButton {
-    private let headerLabel = Label(.textBoldLarge, textColor: .cc_blue)
+    private let headerLabel = Label(.textBoldLarge, textColor: .cc_white)
 
-    private let arrowImageview = UIImageView(image: UIImage(named: "ic-arrow-expand"))
+    private let arrowImageview = UIImageView(image: UIImage(named: "ic-arrow-expand")?.ub_image(with: .cc_white))
 
     private let cornerRadiusView = UIView()
 
@@ -42,7 +42,7 @@ class ExpandableViewHeader: UBButton {
             make.top.equalToSuperview().inset(12)
         }
 
-        cornerRadiusView.backgroundColor = .cc_blueish
+        cornerRadiusView.backgroundColor = .cc_green_dark
         cornerRadiusView.layer.cornerRadius = 9
         insertSubview(cornerRadiusView, belowSubview: highlightView)
         cornerRadiusView.snp.makeConstraints { make in
@@ -51,7 +51,7 @@ class ExpandableViewHeader: UBButton {
         }
         cornerRadiusView.isUserInteractionEnabled = false
 
-        backgroundColor = .cc_blueish
+        backgroundColor = .cc_green_dark
         layer.cornerRadius = 9
         clipsToBounds = false
         highlightView.layer.cornerRadius = 9

@@ -57,25 +57,25 @@ struct StaticContentViewModel: Equatable {
     static let store = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_store_header,
                                               foregroundImage: UIImage(named: "illu-onboarding-privacy"),
                                               title: UBLocalized.wallet_onboarding_store_title,
-                                              textGroups: [(UIImage(named: "ic-privacy"), UBLocalized.wallet_onboarding_store_text1),
-                                                           (UIImage(named: "ic-validation"), UBLocalized.wallet_onboarding_store_text2)])
+                                              textGroups: [(UIImage(named: "ic-privacy")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_store_text1) /* ,
+                                               (UIImage(named: "ic-validation"), UBLocalized.wallet_onboarding_store_text2) */ ])
 
     static let show = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_show_header,
                                              foregroundImage: UIImage(named: "illu-onboarding-covid-certificate"),
                                              title: UBLocalized.wallet_onboarding_show_title,
-                                             textGroups: [(UIImage(named: "ic-qr-certificate"), UBLocalized.wallet_onboarding_show_text1),
-                                                          (UIImage(named: "ic-check-mark"), UBLocalized.wallet_onboarding_show_text2)])
+                                             textGroups: [(UIImage(named: "ic-qr-certificate")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_show_text1),
+                                                          (UIImage(named: "ic-check-mark")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_show_text2)])
 
     static let privacy = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_privacy_header,
                                                 foregroundImage: UIImage(named: "illu-onboarding-data-protection"),
                                                 title: UBLocalized.wallet_onboarding_privacy_title,
-                                                textGroups: [(UIImage(named: "ic-data-protection"), UBLocalized.wallet_onboarding_privacy_text)])
+                                                textGroups: [(UIImage(named: "ic-data-protection")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_privacy_text)])
 
     static let howItWorks = StaticContentViewModel(foregroundImage: UIImage(named: "illu-how-it-works"),
                                                    title: UBLocalized.wallet_scanner_howitworks_title,
                                                    textGroups: [(UIImage(named: "ic-bund-small"), UBLocalized.wallet_scanner_howitworks_text1),
-                                                                (UIImage(named: "ic-one"), UBLocalized.wallet_scanner_howitworks_text2),
-                                                                (UIImage(named: "ic-two"), UBLocalized.wallet_scanner_howitworks_text3),
-                                                                (UIImage(named: "ic-three"), UBLocalized.wallet_scanner_howitworks_text4)],
+                                                                (UIImage(named: "ic-one")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_scanner_howitworks_text2),
+                                                                (UIImage(named: "ic-two")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_scanner_howitworks_text3),
+                                                                (UIImage(named: "ic-three")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_scanner_howitworks_text4)],
                                                    expandableTextGroups: [(UBLocalized.wallet_scanner_howitworks_question1, UBLocalized.wallet_scanner_howitworks_answer1, UBLocalized.wallet_scanner_howitworks_external_link_title, URL(string: UBLocalized.wallet_scanner_howitworks_external_link))])
 }

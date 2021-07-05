@@ -61,7 +61,7 @@ class ExpandableViewBody: UIView {
     }
 
     private func commonInit() {
-        backgroundColor = .cc_blueish
+        backgroundColor = .cc_greyBackground
         layer.cornerRadius = 9
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 

@@ -34,7 +34,7 @@ class CertificateNoteView: UIView {
 
     private func setup() {
         let v = UIView()
-        v.backgroundColor = UIColor.cc_blueish
+        v.backgroundColor = UIColor.cc_greenish
         v.layer.cornerRadius = 9.0
 
         addSubview(v)

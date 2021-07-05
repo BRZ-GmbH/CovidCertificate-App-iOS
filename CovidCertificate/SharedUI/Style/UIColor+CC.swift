@@ -11,21 +11,30 @@
 import UIKit
 
 public extension UIColor {
-    static var cc_bund = UIColor(ub_hexString: "#ff0000")!
+    static var cc_bund = UIColor(ub_hexString: "#e6320f")!
 
     static var cc_black = UIColor.black
-    static var cc_grey = UIColor(ub_hexString: "#757575")!
-    static var cc_blue = UIColor(ub_hexString: "#243784")!
-    static var cc_green = UIColor(ub_hexString: "#009e89")!
-    static var cc_orange = UIColor(ub_hexString: "#ed6100")!
-    static var cc_red = UIColor(ub_hexString: "#d81f5b")!
+    static var cc_grey = UIColor(ub_hexString: "#2B2A29")!
+    static var cc_blue = UIColor(ub_hexString: "#143E7F")!
+    static var cc_green_dark = UIColor(ub_hexString: "#4D9553")!
+    static var cc_green = UIColor(ub_hexString: "#91C88D")!
+    static var cc_orange = UIColor(ub_hexString: "#C9872C")!
+    static var cc_red = UIColor(ub_hexString: "#a72702")!
+
+    static var cc_recovery = UIColor(ub_hexString: "#892252")!
+    static var cc_vaccination = UIColor(ub_hexString: "#143E7F")!
+    static var cc_test = UIColor(ub_hexString: "#C9872C")!
+
+    static var cc_recovery_contrast = UIColor(ub_hexString: "#FFFFFF")!
+    static var cc_vaccination_contrast = UIColor(ub_hexString: "#FFFFFF")!
+    static var cc_test_contrast = UIColor(ub_hexString: "#FFFFFF")!
 
     static var cc_white = UIColor.white
-    static var cc_greyish = UIColor(ub_hexString: "#ececec")!
-    static var cc_blueish = UIColor(ub_hexString: "#eff5f9")!
-    static var cc_greenish = UIColor(ub_hexString: "#def3f0")!
-    static var cc_orangish = UIColor(ub_hexString: "#fdebde")!
-    static var cc_redish = UIColor(ub_hexString: "#fae2ea")!
+    static var cc_greyish = UIColor(ub_hexString: "#E9E4DF")!
+    static var cc_blueish = UIColor(ub_hexString: "#BFCFE0")!
+    static var cc_greenish = UIColor(ub_hexString: "#dfedda")!
+    static var cc_orangish = UIColor(ub_hexString: "#FCE6BF")!
+    static var cc_redish = UIColor(ub_hexString: "#f2cac6")!
 
     // makes cc_black -> cc_grey
     static var cc_disabledAlpha: CGFloat = (255.0 - 117.0) / 255.0
@@ -41,7 +50,7 @@ public extension UIColor {
     }
 
     static var cc_line: UIColor {
-        return UIColor(ub_hexString: "#dddddd")!
+        return UIColor(ub_hexString: "#E9E4DF")!
     }
 
     // MARK: - Background / Lines
@@ -51,11 +60,11 @@ public extension UIColor {
     }
 
     static var cc_greyBackground: UIColor {
-        return UIColor(ub_hexString: "#f4f5f9")!
+        return UIColor(ub_hexString: "#F6F4F0")!
     }
 
     static var cc_touchState: UIColor {
-        return UIColor(ub_hexString: "#f0f1f5")!
+        return UIColor(ub_hexString: "#F0ECE8")!
     }
 
     // MARK: - UIAccessibility Contrast extension

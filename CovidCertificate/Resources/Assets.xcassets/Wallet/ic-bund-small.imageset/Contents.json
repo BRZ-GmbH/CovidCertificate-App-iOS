@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic-navbar-schweiz-wappen.png",
+      "filename" : "ic_bund_small.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic-navbar-schweiz-wappen@2x.png",
+      "filename" : "ic_bund_small@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic-navbar-schweiz-wappen@3x.png",
+      "filename" : "ic_bund_small@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -162,7 +162,7 @@ private class HoleView: UIView {
         let shadowOffset = CGSize(width: 0, height: 0)
 
         let rectanglePath = UIBezierPath(rect: bounds)
-        UIColor.cc_blue.setFill()
+        UIColor.cc_green_dark.setFill()
         rectanglePath.fill()
         context?.saveGState()
         UIRectClip(rectanglePath.bounds)

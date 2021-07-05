@@ -19,31 +19,33 @@ class ConfigManager: NSObject {
     private let session = URLSession.certificatePinned
     private var dataTask: URLSessionDataTask?
 
-    private let jwsVerifier: JWSVerifier
+    // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
+    private let jwsVerifier: JWSVerifier? = nil
 
     // MARK: - Init
 
     /// This function will fail if anything happens to the pinning certificate. This should never happen on normal usage!
     override init() {
-        guard let data = Bundle.main.url(forResource: "swiss_governmentrootcaii", withExtension: "der") else {
-            fatalError("Signing CA not in Bundle")
-        }
+        // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
+        /* guard let data = Bundle.main.url(forResource: "swiss_governmentrootcaii", withExtension: "der") else {
+             fatalError("Signing CA not in Bundle")
+         }
 
-        guard let caPem = try? Data(contentsOf: data),
-              let verifier = JWSVerifier(rootCertificate: caPem, leafCertMustMatch: ConfigManager.leafCertificateCommonName) else {
-            fatalError("Cannot create certificate from data")
-        }
-        jwsVerifier = verifier
+         guard let caPem = try? Data(contentsOf: data),
+               let verifier = JWSVerifier(rootCertificate: caPem, leafCertMustMatch: ConfigManager.leafCertificateCommonName) else {
+             fatalError("Cannot create certificate from data")
+         }
+         jwsVerifier = verifier */
     }
 
     private static var leafCertificateCommonName: String {
         switch Environment.current {
         case .dev:
-            return "CH01-AppContentCertificate-ref"
+            return ""
         case .abnahme:
-            return "CH01-AppContentCertificate-abn"
+            return ""
         case .prod:
-            return "CH01-AppContentCertificate"
+            return ""
         }
     }
 
@@ -84,6 +86,9 @@ class ConfigManager: NSObject {
     // MARK: - Start config request
 
     static func shouldLoadConfig(url: String?, lastConfigUrl: String?, lastConfigLoad: Date?) -> Bool {
+        // TODO: AT - Disable backend configuration
+        return false
+
         // if the config url was changed (by OS version or app version changing) load config in anycase
         if url != lastConfigUrl {
             return true
@@ -116,7 +121,8 @@ class ConfigManager: NSObject {
                 return
             }
 
-            self.jwsVerifier.verifyAndDecode(httpBody: data) { (result: Result<ConfigResponseBody, JWSError>) in
+            // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
+            self.jwsVerifier?.verifyAndDecode(httpBody: data) { (result: Result<ConfigResponseBody, JWSError>) in
                 DispatchQueue.main.async {
                     if case let .success(config) = result {
                         ConfigManager.currentConfig = config
@@ -135,13 +141,15 @@ class ConfigManager: NSObject {
         dataTask?.resume()
     }
 
-    public func startConfigRequest(window: UIWindow?) {
-        loadConfig { config in
-            // self must be strong
-            if let config = config {
-                self.presentAlertIfNeeded(config: config, window: window)
-            }
-        }
+    public func startConfigRequest(window _: UIWindow?) {
+        // TODO: AT: Remove config loading
+
+        /* loadConfig { config in
+             // self must be strong
+             if let config = config {
+                 self.presentAlertIfNeeded(config: config, window: window)
+             }
+         } */
     }
 
     private static var configAlert: UIAlertController?

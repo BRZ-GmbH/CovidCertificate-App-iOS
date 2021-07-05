@@ -25,9 +25,11 @@ class CertificateStateView: UIView {
     private let validityView = CertificateStateValidityView()
     private let errorLabel = Label(.smallErrorLight, textAlignment: .center)
     private let certificate: UserCertificate?
-    private var hasValidityView: Bool {
-        certificate != nil
-    }
+
+    // TODO: AT - Do not show validity information
+    private var hasValidityView: Bool = false /* {
+         certificate != nil
+     } */
 
     var states: (state: VerificationState, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
         didSet { update(animated: true) }
@@ -133,7 +135,7 @@ class CertificateStateView: UIView {
 
             switch self.states.temporaryVerifierState {
             case let .success(validUntil):
-                self.imageView.image = UIImage(named: "ic-check-filled")
+                self.imageView.image = UIImage(named: "ic-check-filled")?.ub_image(with: .cc_green)
                 self.textLabel.attributedText = UBLocalized.wallet_certificate_verify_success.bold()
                 self.backgroundView.backgroundColor = .cc_greenish
                 self.validityView.backgroundColor = .cc_greenish
@@ -187,10 +189,10 @@ class CertificateStateView: UIView {
                     self.validityErrorStackView.ub_setHidden(true)
 
                 case let .success(validUntil):
-                    self.imageView.image = UIImage(named: "ic-info-filled")
+                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_dark)
                     self.textLabel.attributedText = NSAttributedString(string: UBLocalized.verifier_verify_success_info)
-                    self.backgroundView.backgroundColor = .cc_blueish
-                    self.validityView.backgroundColor = .cc_blueish
+                    self.backgroundView.backgroundColor = .cc_greenish
+                    self.validityView.backgroundColor = .cc_greenish
                     self.validityView.textColor = .cc_black
                     self.validityView.untilText = validUntil
 

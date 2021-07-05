@@ -28,7 +28,7 @@ class CertificateDetailViewController: ViewController {
     private lazy var stateView = CertificateStateView(certificate: certificate, isHomescreen: false)
     private lazy var detailView = CertificateDetailView(certificate: certificate, showEnglishLabelsIfNeeded: true)
 
-    private let removeButton = Button(title: UBLocalized.delete_button, style: .normal(.cc_bund))
+    private let removeButton = Button(title: UBLocalized.delete_button, style: .normal(.cc_red))
 
     private let verifyButton = Button(image: UIImage(named: "ic-load")?.withRenderingMode(.alwaysTemplate), accessibilityName: "")
 
@@ -134,7 +134,7 @@ class CertificateDetailViewController: ViewController {
 
         stackScrollView.addSpacerView(5.0 * Padding.large)
 
-        verifyButton.backgroundColor = .cc_blue
+        verifyButton.backgroundColor = .cc_green_dark
         verifyButton.tintColor = .cc_white
         let size: CGFloat = 50.0
         verifyButton.layer.cornerRadius = size * 0.5

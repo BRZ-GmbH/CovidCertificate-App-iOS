@@ -19,7 +19,7 @@
                 },
                 {
                     "title": "Was wird genau geprüft?",
-                    "text": "Beim Scannen werden drei Aspekte geprüft:\n– Enthält das Zertifikat eine gültige elektronische Signatur?\n– Ist das Zertifikat nicht widerrufen worden?\n– Entspricht das Zertifikat den Gültigkeitskriterien der Schweiz?\n\nWenn alle drei Aspekte positiv bewertet werden, wird das Covid-Zertifikat als gültig ausgewiesen.",
+                    "text": "Beim Scannen werden drei Aspekte geprüft:\n– Enthält das Zertifikat eine gültige elektronische Signatur?\n– Ist das Zertifikat nicht widerrufen worden?\n– Entspricht das Zertifikat den Gültigkeitskriterien Österreichs?\n\nWenn alle drei Aspekte positiv bewertet werden, wird das Covid-Zertifikat als gültig ausgewiesen.",
                     "iconAndroid": null,
                     "iconIos": null,
                     "linkTitle": null,
@@ -67,7 +67,7 @@
                 },
                 {
                     "title": "What exactly is checked?",
-                    "text": "Three aspects are checked when scanning:\n– Does the certificate contain a valid electronic signature?\n– Is the certificate non-revoked?\n– Does the certificate meet Switzerland's validity criteria?\n\nIf the answer to all three questions is affirmative, the COVID certificate is shown as valid.",
+                    "text": "Three aspects are checked when scanning:\n– Does the certificate contain a valid electronic signature?\n– Is the certificate non-revoked?\n– Does the certificate meet Austria's validity criteria?\n\nIf the answer to all three questions is affirmative, the COVID certificate is shown as valid.",
                     "iconAndroid": null,
                     "iconIos": null,
                     "linkTitle": null,

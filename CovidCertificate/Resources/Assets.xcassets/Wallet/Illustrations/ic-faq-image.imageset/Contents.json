@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "illu-faq-what-are-covid-certificates.png",
+      "filename" : "ic_faq_image.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "illu-faq-what-are-covid-certificates@2x.png",
+      "filename" : "ic_faq_image@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "illu-faq-what-are-covid-certificates@3x.png",
+      "filename" : "ic_faq_image@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

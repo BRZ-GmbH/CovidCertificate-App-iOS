@@ -6,26 +6,6 @@
     <loc>/de/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="it"
-                href="/it/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="rm"
-                href="/rm/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="de"
                 href="/de/"
                 />
@@ -36,26 +16,6 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="/en/impressum.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="/fr/impressum.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="it"
-                href="/it/impressum.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="rm"
-                href="/rm/impressum.html"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="de"
                 href="/de/impressum.html"
                 />
@@ -64,26 +24,6 @@
   <url>
     <loc>/de/licence.html</loc>
     <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/licence.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="/fr/licence.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="it"
-                href="/it/licence.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="rm"
-                href="/rm/licence.html"
-                />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"

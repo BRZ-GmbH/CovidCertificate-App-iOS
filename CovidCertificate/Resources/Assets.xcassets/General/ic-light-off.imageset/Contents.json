@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic-light-off.png",
+      "filename" : "ic_light_off_blue.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic-light-off@2x.png",
+      "filename" : "ic_light_off_blue@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic-light-off@3x.png",
+      "filename" : "ic_light_off_blue@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -19,7 +19,7 @@ class ScannerLightButton: UBButton {
     }
 
     public static func walletButton() -> ScannerLightButton {
-        return ScannerLightButton(offBackgroundColor: .cc_white, onBackgroundColor: .cc_blue, offImageColor: .cc_blue, onImageColor: .cc_white)
+        return ScannerLightButton(offBackgroundColor: .cc_white, onBackgroundColor: .cc_green_dark, offImageColor: .cc_green_dark, onImageColor: .cc_white)
     }
 
     // MARK: - Properties

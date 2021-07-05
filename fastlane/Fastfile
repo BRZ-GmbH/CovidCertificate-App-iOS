@@ -17,7 +17,7 @@ platform :ios do
     path: ENV["XCODE_PROJ"],
     profile_name: ENV["sigh_"+ENV["APP_IDENTIFIER"] +"_appstore_profile-name"],
     code_sign_identity: "iPhone Distribution",
-    bundle_identifier: ENV["APP_IDENTIFIER"] 
+    bundle_identifier: ENV["APP_IDENTIFIER"]
   )
 
   build_number = getCustomBundleVersion()
@@ -47,6 +47,17 @@ platform :ios do
       device: "iPhone 11 Pro"
     )
   end
+
+  lane :resignbrz do
+    resign(
+      ipa: "./CovidCertificateWallet.ipa",
+      signing_identity: "iPhone Distribution: ...",
+      bundle_id: "at.gv.brz.wallet",
+      bundle_version: "1",
+      short_version: "1.0.0",
+      provisioning_profile: {
+        "at.gv.brz.wallet" => "./ProvisioningProfile.mobileprovision"
+      }
+    )
+  end
 end
-
-
