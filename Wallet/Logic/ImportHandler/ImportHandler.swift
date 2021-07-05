@@ -110,6 +110,8 @@ class ImportHandler {
     func drawImagesFromPDF(url: URL) -> [UIImage] {
         guard let document = CGPDFDocument(url as CFURL) else { return [] }
 
+        guard document.numberOfPages > 2 else { return [] }
+
         var images: [UIImage] = []
 
         // CGPDFDocument pages start at 1
