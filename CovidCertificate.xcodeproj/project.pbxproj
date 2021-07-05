@@ -33,9 +33,9 @@
 		2485F4782456185100C3D8C3 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F4772456185000C3D8C3 /* DebugLog.swift */; };
 		2485F4802459631A00C3D8C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F47F2459631A00C3D8C3 /* NetworkError.swift */; };
 		48ECCD2A264F0797008678DD /* StaticContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ABDF2264A652800FDE0E1 /* StaticContentViewModel.swift */; };
+		5B661CFE2693318100E75DCF /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5B661CFD2693318100E75DCF /* CovidCertificateSDK */; };
+		5B661D002693318A00E75DCF /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5B661CFF2693318A00E75DCF /* CovidCertificateSDK */; };
 		5B825B8426931EF000129C1A /* ScreenProtector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B825B8326931EF000129C1A /* ScreenProtector.swift */; };
-		5BA932A0268090F600F13749 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5BA9329F268090F600F13749 /* CovidCertificateSDK */; };
-		5BA932A2268090FC00F13749 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5BA932A1268090FC00F13749 /* CovidCertificateSDK */; };
 		5BB6F3B3268B533C006EA014 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B1268B533C006EA014 /* SourceSansPro-Bold.ttf */; };
 		5BB6F3B4268B533C006EA014 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B1268B533C006EA014 /* SourceSansPro-Bold.ttf */; };
 		5BB6F3B5268B533C006EA014 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B2268B533C006EA014 /* SourceSansPro-Regular.ttf */; };
@@ -412,7 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC1732926429E31002E27DB /* SnapKit in Frameworks */,
-				5BA932A2268090FC00F13749 /* CovidCertificateSDK in Frameworks */,
+				5B661D002693318A00E75DCF /* CovidCertificateSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ECBB9BD2642FB1700007E29 /* SnapKit in Frameworks */,
-				5BA932A0268090F600F13749 /* CovidCertificateSDK in Frameworks */,
+				5B661CFE2693318100E75DCF /* CovidCertificateSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,7 +1010,7 @@
 			name = CovidCertificateVerifier;
 			packageProductDependencies = (
 				6EC172E226429E31002E27DB /* SnapKit */,
-				5BA932A1268090FC00F13749 /* CovidCertificateSDK */,
+				5B661CFF2693318A00E75DCF /* CovidCertificateSDK */,
 			);
 			productName = IVC;
 			productReference = 6EC1733D26429E31002E27DB /* CovidCertificateVerifier.app */;
@@ -1034,7 +1034,7 @@
 			name = CovidCertificateWallet;
 			packageProductDependencies = (
 				6ECBB9BC2642FB1700007E29 /* SnapKit */,
-				5BA9329F268090F600F13749 /* CovidCertificateSDK */,
+				5B661CFD2693318100E75DCF /* CovidCertificateSDK */,
 			);
 			productName = IVC;
 			productReference = 8E81CC95241FCC7D006F2437 /* CovidCertificateWallet.app */;
@@ -1093,7 +1093,7 @@
 			mainGroup = 8E81CC8C241FCC7D006F2437;
 			packageReferences = (
 				6ECBB9BB2642FB1700007E29 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */,
+				5B661CFC2693318100E75DCF /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */,
 			);
 			productRefGroup = 8E81CC96241FCC7D006F2437 /* Products */;
 			projectDirPath = "";
@@ -2198,9 +2198,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */ = {
+		5B661CFC2693318100E75DCF /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/martinreichart/CovidCertificate-SDK-iOS";
+			repositoryURL = "https://github.com/BRZ-GmbH/CovidCertificate-SDK-iOS.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -2225,14 +2225,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5BA9329F268090F600F13749 /* CovidCertificateSDK */ = {
+		5B661CFD2693318100E75DCF /* CovidCertificateSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
+			package = 5B661CFC2693318100E75DCF /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
 			productName = CovidCertificateSDK;
 		};
-		5BA932A1268090FC00F13749 /* CovidCertificateSDK */ = {
+		5B661CFF2693318A00E75DCF /* CovidCertificateSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5BA9329E268090F600F13749 /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
+			package = 5B661CFC2693318100E75DCF /* XCRemoteSwiftPackageReference "CovidCertificate-SDK-iOS" */;
 			productName = CovidCertificateSDK;
 		};
 		6EC172E226429E31002E27DB /* SnapKit */ = {
