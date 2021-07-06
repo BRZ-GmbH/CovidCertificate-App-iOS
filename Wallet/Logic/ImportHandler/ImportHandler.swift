@@ -119,13 +119,18 @@ class ImportHandler {
             if let page = document.page(at: i) {
                 let pageRect = page.getBoxRect(.mediaBox)
 
-                let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+                var scaling: CGFloat = 3
+                if #available(iOS 13.0, *) {
+                    scaling = 1
+                }
+
+                let renderer = UIGraphicsImageRenderer(size: CGSize(width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
                 let img = renderer.image { ctx in
                     UIColor.white.set()
                     ctx.fill(pageRect)
 
-                    ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-                    ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+                    ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height * scaling)
+                    ctx.cgContext.scaleBy(x: scaling, y: -scaling)
 
                     ctx.cgContext.drawPDFPage(page)
                 }
