@@ -19,19 +19,20 @@ class CertificateStateView: UIView {
     private let imageView = UIImageView()
     private let roundImageBackgroundView = UIView()
     private let loadingView = UIActivityIndicatorView(style: .gray)
-    private let textLabel = Label(.text, textAlignment: .center)
+    private let textLabel = Label(.textLarge, textAlignment: .center)
 
     private let validityErrorStackView = UIStackView()
     private let validityView = CertificateStateValidityView()
     private let errorLabel = Label(.smallErrorLight, textAlignment: .center)
     private let certificate: UserCertificate?
 
-    // TODO: AT - Do not show validity information
-    private var hasValidityView: Bool = false /* {
-         certificate != nil
-     } */
+    private let validityHintView = Label(.smallErrorLight, textAlignment: .center)
 
-    var states: (state: VerificationState, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
+    private let regionStateView = CertificateRegionStateView()
+
+    private var hasValidityView: Bool = false
+
+    var states: (state: VerificationResultStatus, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
         didSet { update(animated: true) }
     }
 
@@ -59,20 +60,35 @@ class CertificateStateView: UIView {
     // MARK: - Setup
 
     private func setup() {
+        addSubview(validityHintView)
+
         addSubview(backgroundView)
         addSubview(roundImageBackgroundView)
         addSubview(imageView)
         addSubview(loadingView)
         addSubview(textLabel)
+        addSubview(regionStateView)
+
+        validityHintView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(Padding.medium)
+            make.top.equalToSuperview()
+        }
 
         backgroundView.layer.cornerRadius = 10
         backgroundView.backgroundColor = .cc_blueish
         backgroundView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalTo(validityHintView.snp.bottom).offset(Padding.medium)
+            make.leading.trailing.equalToSuperview()
             if !hasValidityView {
                 make.bottom.equalToSuperview()
             }
             make.height.greaterThanOrEqualTo(76)
+        }
+
+        regionStateView.layer.cornerRadius = 10
+        regionStateView.layer.masksToBounds = true
+        regionStateView.snp.makeConstraints { make in
+            make.edges.equalTo(backgroundView)
         }
 
         imageView.snp.makeConstraints { make in
@@ -129,47 +145,36 @@ class CertificateStateView: UIView {
 
         // switch animatable states
         let actions = {
+            self.validityHintView.text = UBLocalized.wallet_3g_status_disclaimer
             self.validityView.isOfflineMode = false
             self.errorLabel.ub_setHidden(true)
             self.validityErrorStackView.ub_setHidden(false)
 
+            self.textLabel.textColor = .cc_text
+
             switch self.states.temporaryVerifierState {
-            case let .success(validUntil):
+            case let .success(results):
                 self.imageView.image = UIImage(named: "ic-check-filled")?.ub_image(with: .cc_green)
                 self.textLabel.attributedText = UBLocalized.wallet_certificate_verify_success.bold()
                 self.backgroundView.backgroundColor = .cc_greenish
                 self.validityView.backgroundColor = .cc_greenish
                 self.validityView.textColor = .cc_black
-                self.validityView.untilText = validUntil
+                self.regionStateView.results = results
+                self.regionStateView.ub_setHidden(false)
+                self.imageView.ub_setHidden(true)
+                self.validityHintView.ub_setHidden(false)
             case .failure:
-                if case let .invalid(errors, errorCodes, validUntil) = self.states.state {
-                    self.imageView.image = errors.first?.icon(with: .cc_red)
-                    self.textLabel.attributedText = errors.first?.displayName()
-                    self.backgroundView.backgroundColor = .cc_redish
-                    self.validityView.backgroundColor = .cc_redish
-                    self.validityView.textColor = .cc_grey
-                    self.validityView.untilText = validUntil
-
-                    let codes = errorCodes.joined(separator: ", ")
-                    if codes.count > 0 {
-                        self.errorLabel.ub_setHidden(false)
-                        self.errorLabel.text = codes
-                    }
+                if case .error = self.states.state {
+                    self.imageView.image = VerificationError.signature.icon(with: .cc_red)
+                    self.textLabel.attributedText = VerificationError.signature.displayName()
+                    self.backgroundView.backgroundColor = .cc_red
+                    self.validityView.backgroundColor = .cc_red
+                    self.textLabel.textColor = .cc_white
+                    self.validityView.textColor = .cc_white
                 }
-            case let .retry(error, errorCodes):
-                self.imageView.image = error.icon(with: .cc_orange)
-                self.textLabel.attributedText = error.displayTitle(isReload: true, isHomescreen: self.isHomescreen)
-                self.backgroundView.backgroundColor = .cc_orangish
-                self.validityView.backgroundColor = .cc_orangish
-                self.validityView.offlineText = error.displayText(isReload: true)
-                self.validityView.isOfflineMode = true
-
-                let codes = errorCodes.joined(separator: ", ")
-                if codes.count > 0 {
-                    self.errorLabel.ub_setHidden(false)
-                    self.errorLabel.text = codes
-                }
-
+                self.regionStateView.ub_setHidden(true)
+                self.imageView.ub_setHidden(false)
+                self.validityHintView.ub_setHidden(true)
             case .verifying:
                 self.imageView.image = nil
                 self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_certificate_verifying)
@@ -177,7 +182,9 @@ class CertificateStateView: UIView {
                 self.validityView.backgroundColor = .cc_greyish
                 self.validityView.textColor = .cc_grey
                 self.validityErrorStackView.ub_setHidden(true)
-
+                self.regionStateView.ub_setHidden(true)
+                self.imageView.ub_setHidden(false)
+                self.validityHintView.ub_setHidden(true)
             case .idle:
                 switch self.states.state {
                 case .loading:
@@ -187,48 +194,60 @@ class CertificateStateView: UIView {
                     self.validityView.backgroundColor = .cc_greyish
                     self.validityView.textColor = .cc_grey
                     self.validityErrorStackView.ub_setHidden(true)
-
-                case let .success(validUntil):
-                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_dark)
+                    self.regionStateView.ub_setHidden(true)
+                    self.imageView.ub_setHidden(false)
+                    self.validityHintView.ub_setHidden(true)
+                case let .success(results):
+                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_light)
                     self.textLabel.attributedText = NSAttributedString(string: UBLocalized.verifier_verify_success_info)
-                    self.backgroundView.backgroundColor = .cc_greenish
-                    self.validityView.backgroundColor = .cc_greenish
+                    self.backgroundView.backgroundColor = .cc_green_light
+                    self.validityView.backgroundColor = .cc_green_light
+                    self.textLabel.textColor = .cc_white
                     self.validityView.textColor = .cc_black
-                    self.validityView.untilText = validUntil
-
-                case let .invalid(errors, errorCodes, validUntil):
-                    self.imageView.image = errors.first?.icon()
-                    self.textLabel.attributedText = errors.first?.displayName()
-                    if let e = errors.first, case .expired = e {
-                        self.backgroundView.backgroundColor = .cc_blueish
-                        self.validityView.backgroundColor = .cc_blueish
-                    } else {
-                        self.backgroundView.backgroundColor = .cc_greyish
-                        self.validityView.backgroundColor = .cc_greyish
-                    }
-                    self.validityView.textColor = .cc_grey
-                    self.validityView.untilText = validUntil
-
-                    let codes = errorCodes.joined(separator: ", ")
-                    if codes.count > 0 {
-                        self.errorLabel.ub_setHidden(false)
-                        self.errorLabel.text = codes
-                    }
-
-                case let .retry(error, errorCodes):
-                    self.imageView.image = error.icon(with: nil)
-                    self.textLabel.attributedText = error.displayTitle(isReload: false, isHomescreen: self.isHomescreen)
-                    self.backgroundView.backgroundColor = .cc_greyish
-                    self.validityView.backgroundColor = .cc_greyish
-                    self.validityView.textColor = .cc_text
-                    self.validityView.offlineText = error.displayText(isReload: false)
-                    self.validityView.isOfflineMode = true
-
-                    let codes = errorCodes.joined(separator: ", ")
-                    if codes.count > 0 {
-                        self.errorLabel.ub_setHidden(false)
-                        self.errorLabel.text = codes
-                    }
+                    self.regionStateView.results = results
+                    self.regionStateView.ub_setHidden(false)
+                    self.imageView.ub_setHidden(true)
+                    self.validityHintView.ub_setHidden(false)
+                case .error:
+                    self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
+                    self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
+                    self.backgroundView.backgroundColor = .cc_red
+                    self.validityView.backgroundColor = .cc_red
+                    self.textLabel.textColor = .cc_white
+                    self.validityView.textColor = .cc_white
+                    self.regionStateView.ub_setHidden(true)
+                    self.imageView.ub_setHidden(false)
+                    self.validityHintView.ub_setHidden(true)
+                case .signatureInvalid:
+                    self.imageView.image = VerificationError.signature.icon()?.ub_image(with: .cc_red)
+                    self.textLabel.attributedText = VerificationError.signature.displayName()
+                    self.backgroundView.backgroundColor = .cc_red
+                    self.validityView.backgroundColor = .cc_red
+                    self.textLabel.textColor = .cc_white
+                    self.validityView.textColor = .cc_white
+                    self.regionStateView.ub_setHidden(true)
+                    self.imageView.ub_setHidden(false)
+                    self.validityHintView.ub_setHidden(true)
+                case .timeMissing:
+                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_orange)
+                    self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_time_missing)
+                    self.backgroundView.backgroundColor = .cc_orange
+                    self.validityView.backgroundColor = .cc_orange
+                    self.textLabel.textColor = .cc_white
+                    self.validityView.textColor = .cc_white
+                    self.regionStateView.ub_setHidden(true)
+                    self.imageView.ub_setHidden(false)
+                    self.validityHintView.ub_setHidden(true)
+                case .dataExpired:
+                    self.imageView.image = UIImage(named: "ic-offline")?.ub_image(with: .cc_orange)
+                    self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_validation_data_expired)
+                    self.backgroundView.backgroundColor = .cc_orange
+                    self.validityView.backgroundColor = .cc_orange
+                    self.textLabel.textColor = .cc_white
+                    self.validityView.textColor = .cc_white
+                    self.regionStateView.ub_setHidden(true)
+                    self.imageView.ub_setHidden(false)
+                    self.validityHintView.ub_setHidden(true)
                 }
             }
 

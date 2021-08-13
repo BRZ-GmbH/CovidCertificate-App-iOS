@@ -427,3 +427,12 @@
 
 /* Warnung bei aktivem Screen Recording */
 "warning_screen_recording" = "Bildschirmaufnahme ist nicht erlaubt!";
+
+"region_type_ET" = "Eintritt";
+"region_type_NG" = "Nachtgastronomie";
+
+/* Warnung bei fehlender aktueller Zeit durch Timeserver */
+"wallet_time_missing" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
+"wallet_validation_data_expired" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
+
+"wallet_3g_status_disclaimer" = "3-G Voransicht: Nur gültig mit GreenCheck und Ausweis";

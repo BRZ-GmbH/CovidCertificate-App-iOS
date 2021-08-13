@@ -14,20 +14,14 @@ import Foundation
 class HomescreenBaseViewController: ViewController {
     // MARK: - Content
 
-    public var backgroundTopLayoutGuide = UILayoutGuide()
-
-    private let backgroundView: RoundBackgroundView
-    private let logoView = UIImageView(image: UIImage(named: "ic-bund"))
+    private let backgroundView: AngledBackgroundView
+    public let logoView = UIImageView(image: UIImage(named: "ic-bund"))
     private let infoButton = Button(image: UIImage(named: "ic-info-outline"), accessibilityName: UBLocalized.accessibility_info_button)
     private let boxView = InfoBoxView()
 
     public let infoBoxButton = InfoBoxButton()
 
-    public var backgroundViewOffset: CGPoint = .zero {
-        didSet {
-            backgroundView.offset = backgroundViewOffset
-        }
-    }
+    public var backgroundViewOffset: CGPoint = .zero
 
     public var infoBox: InfoBox? {
         didSet { updateInfoBox(true) }
@@ -38,7 +32,7 @@ class HomescreenBaseViewController: ViewController {
     // MARK: - Init
 
     init(color: UIColor) {
-        backgroundView = RoundBackgroundView(backgroundColor: color, down: true)
+        backgroundView = AngledBackgroundView(backgroundColor: color)
         super.init()
     }
 
@@ -55,18 +49,12 @@ class HomescreenBaseViewController: ViewController {
         logoView.snp.makeConstraints { make in
             let statusHeight = UIApplication.shared.statusBarFrame.height
             make.top.equalTo(view.safeAreaLayoutGuide).inset(statusHeight > 20.0 ? 11.0 : 18.0)
-            make.centerX.equalToSuperview()
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(48)
         }
 
         backgroundView.snp.makeConstraints { make in
-            make.top.equalTo(self.logoView.snp.bottom).offset(10.0)
+            make.top.equalTo(view)
             make.left.right.bottom.equalToSuperview()
-        }
-
-        view.addLayoutGuide(backgroundTopLayoutGuide)
-
-        backgroundTopLayoutGuide.snp.makeConstraints { make in
-            make.top.equalTo(self.backgroundView.snp.top).offset(21.0)
         }
 
         view.addSubview(infoButton)

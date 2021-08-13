@@ -51,11 +51,11 @@ enum Environment {
     var configService: Backend {
         switch self {
         case .dev:
-            return Backend("", version: nil)
+            return Backend("https://gruenerpass.gesundheit.gv.at", version: nil)
         case .abnahme:
-            return Backend("", version: nil)
+            return Backend("https://gruenerpass.gesundheit.gv.at", version: nil)
         case .prod:
-            return Backend("", version: nil)
+            return Backend("https://gruenerpass.gesundheit.gv.at", version: nil)
         }
     }
 
@@ -87,9 +87,9 @@ enum Environment {
             case .dev:
                 return ""
             case .abnahme:
-                return ""
+                return "GixQfE3Oje1dGOWT6S5eVF9Iv4GHTJMm"
             case .prod:
-                return ""
+                return "qAFg7d3kRdTN9A0IzoAComdd1lU8SwKf"
             }
         #endif
     }
@@ -99,14 +99,14 @@ extension Endpoint {
     /// Load Config
     /// let av = "ios-10"
     /// let os = "ios13"
-    static func config(appversion av: String, osversion os: String, buildnr: String) -> Endpoint {
+    static func config(appversion _: String, osversion _: String, buildnr _: String) -> Endpoint {
         #if WALLET
-            let path = "wallet/v1/config"
+            let path = "wallet-app/config"
         #elseif VERIFIER
             let path = "verifier/v1/config"
         #else
             let path = "" // Not supported
         #endif
-        return Environment.current.configService.endpoint(path, queryParameters: ["appversion": av, "osversion": os, "buildnr": buildnr], headers: ["Accept": "application/json+jws"])
+        return Environment.current.configService.endpoint(path)
     }
 }

@@ -11,6 +11,7 @@
 
 import CovidCertificateSDK
 import Foundation
+import ValidationCore
 
 class CertificateTableViewCell: UITableViewCell {
     // MARK: - Public API
@@ -27,7 +28,7 @@ class CertificateTableViewCell: UITableViewCell {
 
     private let stateLabel = StateLabel()
 
-    private var state: VerificationState = .loading {
+    private var state: VerificationResultStatus = .loading {
         didSet { self.updateState(animated: true) }
     }
 
@@ -113,9 +114,9 @@ class CertificateTableViewCell: UITableViewCell {
         switch c {
         case let .success(holder):
             nameLabel.text = holder.healthCert.displayFullName
-            stateLabel.type = holder.healthCert.certType
+            stateLabel.certificate = holder.healthCert
 
-            VerifierManager.shared.addObserver(self, for: cert.qrCode) { [weak self] state in
+            VerifierManager.shared.addObserver(self, for: cert.qrCode, regions: ["ET", "NG"], checkDefaultRegion: false) { [weak self] state in
                 guard let strongSelf = self else { return }
                 strongSelf.state = state
             }
@@ -137,36 +138,21 @@ class CertificateTableViewCell: UITableViewCell {
 
         let actions = {
             let normal = UIImage(named: "ic-qrcode-small")
-            let notYetValid = UIImage(named: "ic-qrcode-small-temporary")
             let invalid = UIImage(named: "ic-qrcode-small-invalid")
-            let expired = UIImage(named: "ic-qrcode-small-expired")
             let load = UIImage(named: "ic-qrcode-small-load")
-            let networkError = UIImage(named: "ic-qrcode-small-network-error")
-            let noInternetError = UIImage(named: "ic-qrcode-small-nointernet-error")
+            let noInternet = UIImage(named: "ic-qrcode-small-nointernet-error")
 
             switch self.state {
             case .loading:
                 self.qrCodeStateImageView.image = load
-            case .success:
-                self.qrCodeStateImageView.image = normal
-            case let .retry(err, _):
-                switch err {
-                case .network, .unknown:
-                    self.qrCodeStateImageView.image = networkError
-                case .noInternetConnection:
-                    self.qrCodeStateImageView.image = noInternetError
-                }
-            case let .invalid(errors, _, _):
-                if let e = errors.first {
-                    switch e {
-                    case .signature, .revocation, .otherNationalRules, .unknown, .typeInvalid:
-                        self.qrCodeStateImageView.image = invalid
-                    case .expired:
-                        self.qrCodeStateImageView.image = expired
-                    case .notYetValid:
-                        self.qrCodeStateImageView.image = notYetValid
-                    }
-                }
+            case .success, .timeMissing:
+                self.qrCodeStateImageView.image = self.state.containsOnlyInvalidVerification() ? invalid : normal
+            case .error:
+                self.qrCodeStateImageView.image = invalid
+            case .signatureInvalid:
+                self.qrCodeStateImageView.image = invalid
+            case .dataExpired:
+                self.qrCodeStateImageView.image = noInternet
             }
 
             let isInvalid = self.state.isInvalid()
@@ -185,14 +171,14 @@ class CertificateTableViewCell: UITableViewCell {
     }
 }
 
-private class StateLabel: UIView {
+class StateLabel: UIView {
     // MARK: - Subviews
 
-    private let label = Label(.smallUppercaseBold)
+    private lazy var label = Label(self.labelType)
 
     // MARK: - Properties
 
-    public var type: CertType? {
+    public var certificate: EuHealthCert? {
         didSet { update() }
     }
 
@@ -200,9 +186,12 @@ private class StateLabel: UIView {
         didSet { update() }
     }
 
+    private let labelType: LabelType
+
     // MARK: - Init
 
-    init() {
+    init(labelType: LabelType = .smallUppercaseBold) {
+        self.labelType = labelType
         super.init(frame: .zero)
         setup()
 
@@ -229,26 +218,55 @@ private class StateLabel: UIView {
     }
 
     private func update() {
-        label.text = type?.displayName
-        accessibilityLabel = type?.displayName
+        label.text = ""
+        accessibilityLabel = ""
 
-        if enabled {
-            if let r = type {
-                switch r {
-                case .recovery:
-                    backgroundColor = .cc_recovery
-                    label.textColor = .cc_recovery_contrast
-                case .vaccination:
-                    backgroundColor = .cc_vaccination
-                    label.textColor = .cc_vaccination_contrast
-                case .test:
-                    backgroundColor = .cc_test
-                    label.textColor = .cc_test_contrast
-                }
-            } else {
-                backgroundColor = .clear
+        if let certificate = certificate {
+            switch certificate.type {
+            case .recovery:
+                label.text = certificate.type.displayName
+                accessibilityLabel = certificate.type.displayName
+
+                backgroundColor = .cc_recovery
+                label.textColor = .cc_recovery_contrast
+            case .vaccination:
+                /* if let vaccination = certificate.vaccinations?.first, vaccination.doseNumber == vaccination.totalDoses {
+                     label.text = UBLocalized.certificate_type_full_vaccination
+                     accessibilityLabel = UBLocalized.certificate_type_full_vaccination
+                 } else {
+                     label.text = UBLocalized.certificate_type_partial_vaccination
+                     accessibilityLabel = UBLocalized.certificate_type_partial_vaccination
+                 } */
+                label.text = certificate.type.displayName
+                accessibilityLabel = certificate.type.displayName
+
+                backgroundColor = .cc_vaccination
+                label.textColor = .cc_vaccination_contrast
+            case .test:
+                /* if certificate.tests?.first?.isPcrTest == true {
+                     label.text = UBLocalized.certificate_type_pcr_test
+                     accessibilityLabel = UBLocalized.certificate_type_pcr_test
+                 } else if certificate.tests?.first?.isRatTest == true {
+                     label.text = UBLocalized.certificate_type_rat_test
+                     accessibilityLabel = UBLocalized.certificate_type_rat_test
+                 } else {
+                     label.text = certificate.type.displayName
+                     accessibilityLabel = certificate.type.displayName
+                 } */
+
+                label.text = certificate.type.displayName
+                accessibilityLabel = certificate.type.displayName
+
+                backgroundColor = .cc_test
+                label.textColor = .cc_test_contrast
             }
         } else {
+            backgroundColor = .clear
+        }
+
+        if !enabled {
+            // backgroundColor = .cc_red
+            // label.textColor = .cc_white
             backgroundColor = .cc_greyBackground
             label.textColor = .cc_greyText
         }

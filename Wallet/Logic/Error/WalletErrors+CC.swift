@@ -22,7 +22,7 @@ extension VerificationError {
             return UBLocalized.wallet_error_revocation.formattingOccurrenceBold(bold)
         case .otherNationalRules:
             return UBLocalized.wallet_error_national_rules.formattingOccurrenceBold("")
-        case .expired:
+        case .expired, .signatureExpired:
             let bold = UBLocalized.wallet_error_expired_bold
             return UBLocalized.wallet_error_expired.formattingOccurrenceBold(bold)
         case let .notYetValid(date):
@@ -41,7 +41,7 @@ extension VerificationError {
         case .signature, .typeInvalid: return UIImage(named: "ic-info-alert")?.ub_image(with: color ?? UIColor.cc_grey)
         case .revocation: return UIImage(named: "ic-info-alert")?.ub_image(with: color ?? UIColor.cc_grey)
         case .otherNationalRules: return UIImage(named: "ic-info-alert")?.ub_image(with: color ?? UIColor.cc_grey)
-        case .expired:
+        case .expired, .signatureExpired:
             if let c = color {
                 return UIImage(named: "ic-invalid")?.ub_image(with: c)
             } else {

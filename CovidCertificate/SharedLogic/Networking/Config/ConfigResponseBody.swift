@@ -45,10 +45,10 @@ struct InfoBox: UBCodable, Equatable {
 }
 
 class ConfigResponseBody: UBCodable, JWTExtension {
-    let forceUpdate: Bool
+    let ios: String?
     let infoBox: LocalizedValue<InfoBox>?
     let questions: LocalizedValue<FAQEntriesContainer>?
-    let works: LocalizedValue<FAQEntriesContainer>
+    let works: LocalizedValue<FAQEntriesContainer>?
 
     class FAQEntriesContainer: UBCodable {
         let faqTitle: String
@@ -80,14 +80,14 @@ extension ConfigResponseBody {
                                                  expandableTextGroups: questions?.value?.faqEntries.compactMap { ($0.title, $0.text, $0.linkTitle, $0.linkUrl) } ?? []))
         }
 
-        if let imageString2 = works.value?.faqIconIos,
-           let title2 = works.value?.faqTitle,
-           let subtitle2 = works.value?.faqSubTitle {
+        if let imageString2 = works?.value?.faqIconIos,
+           let title2 = works?.value?.faqTitle,
+           let subtitle2 = works?.value?.faqSubTitle {
             models.append(StaticContentViewModel(heading: nil,
                                                  foregroundImage: UIImage(named: imageString2),
                                                  title: title2,
                                                  textGroups: [(nil, subtitle2)],
-                                                 expandableTextGroups: works.value?.faqEntries.compactMap { ($0.title, $0.text, $0.linkTitle, $0.linkUrl) } ?? []))
+                                                 expandableTextGroups: works?.value?.faqEntries.compactMap { ($0.title, $0.text, $0.linkTitle, $0.linkUrl) } ?? []))
         }
 
         return models

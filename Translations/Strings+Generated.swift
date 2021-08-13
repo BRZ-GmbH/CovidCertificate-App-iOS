@@ -84,6 +84,10 @@ import Foundation
      case ok_button_key = "ok_button"
     /// Kein gültiger Code
      case qr_scanner_error_key = "qr_scanner_error"
+    /// Eintritt
+     case region_type_ET_key = "region_type_ET"
+    /// Nachtgastronomie
+     case region_type_NG_key = "region_type_NG"
     /// Covid-19
      case target_disease_name_key = "target_disease_name"
     /// Ein unbekannter Fehler ist aufgetreten.
@@ -118,7 +122,7 @@ import Foundation
      case verifier_retry_flightmode_error_key = "verifier_retry_flightmode_error"
     /// Ein Netzwerkfehler ist aufgetreten.
      case verifier_retry_network_error_key = "verifier_retry_network_error"
-    /// https://gruenerpass.gv.at/walletapp
+    /// https://gruenerpass.gv.at/app/datenschutz
      case verifier_terms_privacy_link_key = "verifier_terms_privacy_link"
     /// QR-Code scannen
      case verifier_title_qr_scan_key = "verifier_title_qr_scan"
@@ -140,6 +144,8 @@ import Foundation
      case verifier_verify_success_info_key = "verifier_verify_success_info"
     /// Prüfung erfolgreich
      case verifier_verify_success_title_key = "verifier_verify_success_title"
+    /// 3-G Voransicht: Nur gültig mit GreenCheck und Ausweis
+     case wallet_3g_status_disclaimer_key = "wallet_3g_status_disclaimer"
     /// Hinzufügen
      case wallet_add_certificate_key = "wallet_add_certificate"
     /// Hinzufügen
@@ -326,8 +332,12 @@ import Foundation
      case wallet_scanner_info_button_key = "wallet_scanner_info_button"
     /// Hinzufügen
      case wallet_scanner_title_key = "wallet_scanner_title"
-    /// https://gruenerpass.gv.at/walletapp
+    /// https://gruenerpass.gv.at/app/datenschutz
      case wallet_terms_privacy_link_key = "wallet_terms_privacy_link"
+    /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+     case wallet_time_missing_key = "wallet_time_missing"
+    /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+     case wallet_validation_data_expired_key = "wallet_validation_data_expired"
     /// Bildschirmaufnahme ist nicht erlaubt!
      case warning_screen_recording_key = "warning_screen_recording"
   }
@@ -406,6 +416,10 @@ import Foundation
    static let ok_button = UBLocalized.tr(UBLocalizedKey.ok_button_key)
   /// Kein gültiger Code
    static let qr_scanner_error = UBLocalized.tr(UBLocalizedKey.qr_scanner_error_key)
+  /// Eintritt
+   static let region_type_ET = UBLocalized.tr(UBLocalizedKey.region_type_ET_key)
+  /// Nachtgastronomie
+   static let region_type_NG = UBLocalized.tr(UBLocalizedKey.region_type_NG_key)
   /// Covid-19
    static let target_disease_name = UBLocalized.tr(UBLocalizedKey.target_disease_name_key)
   /// Ein unbekannter Fehler ist aufgetreten.
@@ -440,7 +454,7 @@ import Foundation
    static let verifier_retry_flightmode_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_flightmode_error_key)
   /// Ein Netzwerkfehler ist aufgetreten.
    static let verifier_retry_network_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_network_error_key)
-  /// https://gruenerpass.gv.at/walletapp
+  /// https://gruenerpass.gv.at/app/datenschutz
    static let verifier_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.verifier_terms_privacy_link_key)
   /// QR-Code scannen
    static let verifier_title_qr_scan = UBLocalized.tr(UBLocalizedKey.verifier_title_qr_scan_key)
@@ -462,6 +476,8 @@ import Foundation
    static let verifier_verify_success_info = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_info_key)
   /// Prüfung erfolgreich
    static let verifier_verify_success_title = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_title_key)
+  /// 3-G Voransicht: Nur gültig mit GreenCheck und Ausweis
+   static let wallet_3g_status_disclaimer = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_disclaimer_key)
   /// Hinzufügen
    static let wallet_add_certificate = UBLocalized.tr(UBLocalizedKey.wallet_add_certificate_key)
   /// Hinzufügen
@@ -648,8 +664,12 @@ import Foundation
    static let wallet_scanner_info_button = UBLocalized.tr(UBLocalizedKey.wallet_scanner_info_button_key)
   /// Hinzufügen
    static let wallet_scanner_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_title_key)
-  /// https://gruenerpass.gv.at/walletapp
+  /// https://gruenerpass.gv.at/app/datenschutz
    static let wallet_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.wallet_terms_privacy_link_key)
+  /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+   static let wallet_time_missing = UBLocalized.tr(UBLocalizedKey.wallet_time_missing_key)
+  /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+   static let wallet_validation_data_expired = UBLocalized.tr(UBLocalizedKey.wallet_validation_data_expired_key)
   /// Bildschirmaufnahme ist nicht erlaubt!
    static let warning_screen_recording = UBLocalized.tr(UBLocalizedKey.warning_screen_recording_key)
 }

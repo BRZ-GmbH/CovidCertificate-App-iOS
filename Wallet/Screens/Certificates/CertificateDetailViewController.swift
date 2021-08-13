@@ -14,9 +14,8 @@ import Foundation
 enum TemporaryVerifierState: Equatable {
     case idle
     case verifying
-    case success(String?)
+    case success([VerificationRegionResult])
     case failure
-    case retry(RetryError, [String])
 }
 
 class CertificateDetailViewController: ViewController {
@@ -38,7 +37,7 @@ class CertificateDetailViewController: ViewController {
 
     public var deinitCallback: (() -> Void)?
 
-    private var state: VerificationState = .loading {
+    private var state: VerificationResultStatus = .loading {
         didSet {
             update()
         }
@@ -167,31 +166,35 @@ class CertificateDetailViewController: ViewController {
     // MARK: - Check
 
     private func startTemporaryCheck() {
-        temporaryVerifierState = .verifying
-        state = .loading
-        UIView.animate(withDuration: 0.2) {
-            // self.verifyButton.alpha = 0
-            self.qrCodeStateView.state = self.temporaryVerifierState
-        }
+        /* No manual recheck offered at the moment
+         temporaryVerifierState = .verifying
+         state = .loading
+         UIView.animate(withDuration: 0.2) {
+             // self.verifyButton.alpha = 0
+             self.qrCodeStateView.state = self.temporaryVerifierState
+         }
 
-        VerifierManager.shared.addObserver(self, for: certificate.qrCode, forceUpdate: true) { [weak self] state in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                guard let strongSelf = self else { return }
-                switch state {
-                case .loading: strongSelf.temporaryVerifierState = .verifying
-                case let .success(validUntil): strongSelf.temporaryVerifierState = .success(validUntil)
-                case .invalid: strongSelf.temporaryVerifierState = .failure
-                case let .retry(error, errorCodes): strongSelf.temporaryVerifierState = .retry(error, errorCodes)
-                }
+         VerifierManager.shared.addObserver(self, for: certificate.qrCode, regions: ["ET", "NG"], checkDefaultRegion: false, forceUpdate: true) { [weak self] state in
+             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                 guard let strongSelf = self else { return }
+                 switch state {
+                 case .loading: strongSelf.temporaryVerifierState = .verifying
+                 case .error, .signatureInvalid: strongSelf.temporaryVerifierState = .failure
+                 case let .success(results): strongSelf.temporaryVerifierState = .success(results)
+                 case .timeMissing:
+                     // TODO: Missing
+                     break
+                 }
 
-                strongSelf.state = state
-            }
-        }
+                 strongSelf.state = state
+             }
+         }
+          */
     }
 
     private func startCheck() {
         state = .loading
-        VerifierManager.shared.addObserver(self, for: certificate.qrCode) { [weak self] state in
+        VerifierManager.shared.addObserver(self, for: certificate.qrCode, regions: ["ET", "NG"], checkDefaultRegion: false) { [weak self] state in
             guard let strongSelf = self else { return }
             strongSelf.qrCodeStateView.alpha = 0
             // strongSelf.verifyButton.alpha = 1

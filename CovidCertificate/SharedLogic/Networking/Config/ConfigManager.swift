@@ -16,38 +16,10 @@ import UIKit
 class ConfigManager: NSObject {
     // MARK: - Data Task
 
-    private let session = URLSession.certificatePinned
+    private let session = URLSession(configuration: .default,
+                                     delegate: nil,
+                                     delegateQueue: nil)
     private var dataTask: URLSessionDataTask?
-
-    // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
-    private let jwsVerifier: JWSVerifier? = nil
-
-    // MARK: - Init
-
-    /// This function will fail if anything happens to the pinning certificate. This should never happen on normal usage!
-    override init() {
-        // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
-        /* guard let data = Bundle.main.url(forResource: "swiss_governmentrootcaii", withExtension: "der") else {
-             fatalError("Signing CA not in Bundle")
-         }
-
-         guard let caPem = try? Data(contentsOf: data),
-               let verifier = JWSVerifier(rootCertificate: caPem, leafCertMustMatch: ConfigManager.leafCertificateCommonName) else {
-             fatalError("Cannot create certificate from data")
-         }
-         jwsVerifier = verifier */
-    }
-
-    private static var leafCertificateCommonName: String {
-        switch Environment.current {
-        case .dev:
-            return ""
-        case .abnahme:
-            return ""
-        case .prod:
-            return ""
-        }
-    }
 
     // MARK: - Last Loaded Config
 
@@ -58,13 +30,13 @@ class ConfigManager: NSObject {
         }
     }
 
-    @UBUserDefault(key: "lastConfigLoad", defaultValue: nil)
+    // @UBUserDefault(key: "lastConfigLoad", defaultValue: nil)
     static var lastConfigLoad: Date?
 
-    @UBUserDefault(key: "lastConfigURL", defaultValue: nil)
+    // @UBUserDefault(key: "lastConfigURL", defaultValue: nil)
     static var lastConfigUrl: String?
 
-    static let configForegroundValidityInterval: TimeInterval = 60 * 60 * 1 // 1h
+    static let configForegroundValidityInterval: TimeInterval = 60 * 60 * 8 // 1h
 
     // MARK: - Version Numbers
 
@@ -86,9 +58,7 @@ class ConfigManager: NSObject {
     // MARK: - Start config request
 
     static func shouldLoadConfig(url: String?, lastConfigUrl: String?, lastConfigLoad: Date?) -> Bool {
-        // TODO: AT - Disable backend configuration
         return false
-
         // if the config url was changed (by OS version or app version changing) load config in anycase
         if url != lastConfigUrl {
             return true
@@ -112,7 +82,6 @@ class ConfigManager: NSObject {
         Logger.log("Load Config", appState: true)
 
         dataTask = session.dataTask(with: request, completionHandler: { data, response, error in
-
             guard let _ = response as? HTTPURLResponse,
                   let data = data
             else {
@@ -121,41 +90,37 @@ class ConfigManager: NSObject {
                 return
             }
 
-            // TODO: AT - Disable JWSVerifier temporarily since we removed pinned backend certificates
-            self.jwsVerifier?.verifyAndDecode(httpBody: data) { (result: Result<ConfigResponseBody, JWSError>) in
-                DispatchQueue.main.async {
-                    if case let .success(config) = result {
-                        ConfigManager.currentConfig = config
-                        Self.lastConfigLoad = Date()
-                        Self.lastConfigUrl = request.url?.absoluteString
-                        completion(config)
-                    } else {
-                        Logger.log("Failed to load config, error: \(error?.localizedDescription ?? "?")")
-                        completion(nil)
-                    }
+            DispatchQueue.main.async {
+                do {
+                    let config = try JSONDecoder().decode(ConfigResponseBody.self, from: data)
+                    // Do not store configuration as it is only used for mandatory update for now
+                    // ConfigManager.currentConfig = config
+                    Self.lastConfigLoad = Date()
+                    Self.lastConfigUrl = request.url?.absoluteString
+                    completion(config)
+                } catch {
+                    Logger.log("Failed to load config, error: \(error.localizedDescription)")
+                    completion(nil)
                 }
             }
-
         })
 
         dataTask?.resume()
     }
 
-    public func startConfigRequest(window _: UIWindow?) {
-        // TODO: AT: Remove config loading
-
-        /* loadConfig { config in
-             // self must be strong
-             if let config = config {
-                 self.presentAlertIfNeeded(config: config, window: window)
-             }
-         } */
+    public func startConfigRequest(window: UIWindow?) {
+        loadConfig { config in
+            // self must be strong
+            if let config = config {
+                self.presentAlertIfNeeded(config: config, window: window)
+            }
+        }
     }
 
     private static var configAlert: UIAlertController?
 
     private func presentAlertIfNeeded(config: ConfigResponseBody, window: UIWindow?) {
-        if config.forceUpdate {
+        if let minVersion = config.ios, Bundle.appVersion.versionCompare(minVersion) == .orderedAscending {
             if Self.configAlert == nil {
                 let alert = UIAlertController(title: UBLocalized.force_update_title,
                                               message: UBLocalized.force_update_text,

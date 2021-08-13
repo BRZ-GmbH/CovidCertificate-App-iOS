@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+import CovidCertificateSDK
 import Foundation
 
 class HomescreenCertificateView: UIView {
@@ -23,11 +24,12 @@ class HomescreenCertificateView: UIView {
     private let nameView = QRCodeNameView(qrCodeInset: Padding.large)
     private let contentView = UIView()
 
+    // private let stateLabel = HomescreenStateLabel()
     private let stateView = CertificateStateView()
 
     public let certificate: UserCertificate
 
-    public var state: VerificationState = .loading {
+    public var state: VerificationResultStatus = .loading {
         didSet {
             stateView.states = (state, .idle)
             update(animated: true)
@@ -72,8 +74,10 @@ class HomescreenCertificateView: UIView {
         }
 
         contentView.addSubview(nameView)
+        // contentView.addSubview(stateLabel)
 
         nameView.snp.makeConstraints { make in
+            // make.top.equalTo(self.stateLabel.snp.bottom).offset(Padding.medium)
             make.top.equalTo(self.titleLabel.snp.bottom).offset(Padding.medium)
             make.left.right.equalToSuperview().inset(Padding.large)
         }
@@ -89,6 +93,20 @@ class HomescreenCertificateView: UIView {
 
         titleLabel.text = UBLocalized.wallet_certificate
         nameView.certificate = certificate
+
+        /* stateLabel.snp.makeConstraints { make in
+             make.top.equalTo(self.titleLabel.snp.bottom).offset(Padding.medium)
+             make.left.greaterThanOrEqualToSuperview().inset(2.0 * Padding.small)
+             make.right.lessThanOrEqualToSuperview().inset(2.0 * Padding.small)
+             make.centerX.equalToSuperview()
+         }
+
+         let c = CovidCertificateSDK.decode(encodedData: certificate.qrCode)
+         switch c {
+         case let .success(holder):
+             stateLabel.certificate = holder.healthCert
+         default: break
+         } */
 
         contentView.addSubview(stateView)
         stateView.snp.makeConstraints { make in
@@ -122,6 +140,8 @@ class HomescreenCertificateView: UIView {
         nameView.enabled = !isInvalid
 
         accessibilityLabel = [titleLabel.text, nameView.accessibilityLabel, stateView.accessibilityLabel].compactMap { $0 }.joined(separator: ", ")
+
+        // stateLabel.enabled = !isInvalid
     }
 }
 
@@ -130,10 +150,12 @@ private class HoleView: UIView {
 
     private let shadowRadius: CGFloat
     private let shadowOpacity: CGFloat
+    private let left: Bool
 
     init(radius: CGFloat, shadowRadius: CGFloat, shadowOpacity: CGFloat, left: Bool) {
         self.shadowOpacity = shadowOpacity
         self.shadowRadius = shadowRadius
+        self.left = left
         super.init(frame: .zero)
 
         snp.makeConstraints { make in
@@ -162,7 +184,11 @@ private class HoleView: UIView {
         let shadowOffset = CGSize(width: 0, height: 0)
 
         let rectanglePath = UIBezierPath(rect: bounds)
-        UIColor.cc_green_dark.setFill()
+        if left {
+            UIColor.cc_green_dark.setFill()
+        } else {
+            UIColor.cc_white.setFill()
+        }
         rectanglePath.fill()
         context?.saveGState()
         UIRectClip(rectanglePath.bounds)
@@ -180,5 +206,11 @@ private class HoleView: UIView {
         }
         context!.endTransparencyLayer()
         context?.restoreGState()
+    }
+}
+
+class HomescreenStateLabel: StateLabel {
+    init() {
+        super.init(labelType: .uppercaseBold)
     }
 }

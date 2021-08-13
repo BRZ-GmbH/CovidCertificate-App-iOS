@@ -21,8 +21,8 @@ class HomescreenOnboardingViewController: ViewController {
 
     private let stackScrollView = StackScrollView(axis: .vertical)
 
-    private let titleLabel = Label(.uppercaseBold, textColor: .white, textAlignment: .center)
-    private var questionLabel = Label(.title, textColor: .white, textAlignment: .center)
+    private let titleLabel = Label(.uppercaseBold, textColor: .cc_text, textAlignment: .center)
+    private var questionLabel = Label(.title, textColor: .cc_text, textAlignment: .center)
     private let homescreenButtons = WalletHomescreenActionView()
 
     // MARK: - View

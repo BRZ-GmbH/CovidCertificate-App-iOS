@@ -23,7 +23,7 @@ extension String {
         let range = (self as NSString).range(of: occurrence)
         let attributedText = NSMutableAttributedString(string: self)
         attributedText.addAttributes([
-            .font: LabelType.textBold.font,
+            .font: LabelType.textBoldLarge.font,
         ], range: range)
         return attributedText
     }

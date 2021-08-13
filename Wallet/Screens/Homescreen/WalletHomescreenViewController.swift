@@ -64,7 +64,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             self.certificatesViewController.view.alpha = self.state == .certificates ? 1.0 : 0.0
             self.onboardingViewController.view.alpha = self.state == .onboarding ? 1.0 : 0.0
 
-            self.backgroundViewOffset = self.state == .certificates ? CGPoint(x: -Padding.large, y: 170.0) : .zero
+            self.backgroundViewOffset = self.state == .certificates ? CGPoint(x: -Padding.large, y: 120.0) : .zero
 
             self.bottomView.state = self.state
         }
@@ -155,8 +155,10 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
     }
 
     private func setupViews() {
+        addCertificateButton.ub_addShadow(radius: 4.0, opacity: 0.2, xOffset: 0.0, yOffset: 0.0)
+
         addSubviewController(onboardingViewController) { make in
-            make.top.equalTo(self.backgroundTopLayoutGuide)
+            make.top.equalTo(self.logoView.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
@@ -168,7 +170,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         }
 
         addSubviewController(certificatesViewController) { make in
-            make.top.equalTo(self.backgroundTopLayoutGuide)
+            make.top.equalTo(self.logoView.snp.bottom).offset(48)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(self.bottomView.snp.top)
         }

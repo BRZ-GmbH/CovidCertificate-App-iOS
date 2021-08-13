@@ -11,6 +11,7 @@
 
 import CovidCertificateSDK
 import Foundation
+import ValidationCore
 
 public extension CertType {
     var displayName: String {
@@ -82,7 +83,7 @@ extension Vaccination {
     }
 }
 
-extension PastInfection {
+extension Recovery {
     var displayCountry: String {
         return Locale.current.localizedString(forRegionCode: countryOfTest) ?? countryOfTest
     }

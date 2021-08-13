@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "ASN1Decoder",
+        "repositoryURL": "https://github.com/filom/ASN1Decoder",
+        "state": {
+          "branch": null,
+          "revision": "65953a42a0f039f53c73e48fd88c02809f7db607",
+          "version": "1.8.0"
+        }
+      },
+      {
         "package": "base45-swift",
         "repositoryURL": "https://github.com/ehn-digital-green-development/base45-swift",
         "state": {
@@ -38,11 +47,20 @@
         }
       },
       {
-        "package": "CovidCertificateSDK",
-        "repositoryURL": "https://github.com/BRZ-GmbH/CovidCertificate-SDK-iOS.git",
+        "package": "CocoaLumberjack",
+        "repositoryURL": "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
+        "state": {
+          "branch": null,
+          "revision": "e518eb6e362df327574ba5e04269cd6d29f40aec",
+          "version": "3.7.2"
+        }
+      },
+      {
+        "package": "CertLogic",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios.git",
         "state": {
           "branch": "main",
-          "revision": "ecc73848527a75882b89df76778ded4ee998df2a",
+          "revision": "8f07a22ec2adc2335b4a4cb75b408c8c93d86208",
           "version": null
         }
       },
@@ -57,10 +75,10 @@
       },
       {
         "package": "jsonlogic",
-        "repositoryURL": "https://github.com/admin-ch/json-logic-swift",
+        "repositoryURL": "https://github.com/martinreichart/json-logic-swift.git",
         "state": {
-          "branch": "master",
-          "revision": "f0f9fa1f6d7326f59bf45e1d31548134cd8cb6f4",
+          "branch": "feature/dateformatter-performance",
+          "revision": "a706f78475ed25ed15e0a5c65168bbb269feec0b",
           "version": null
         }
       },
@@ -74,21 +92,21 @@
         }
       },
       {
+        "package": "Kronos",
+        "repositoryURL": "https://github.com/MobileNativeFoundation/Kronos.git",
+        "state": {
+          "branch": "master",
+          "revision": "3b2783e4d7b13fa9934692522b2c011ee0a12231",
+          "version": null
+        }
+      },
+      {
         "package": "LoggerAPI",
         "repositoryURL": "https://github.com/Kitura/LoggerAPI.git",
         "state": {
           "branch": null,
           "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
           "version": "1.9.200"
-        }
-      },
-      {
-        "package": "SnapKit",
-        "repositoryURL": "https://github.com/SnapKit/SnapKit",
-        "state": {
-          "branch": null,
-          "revision": "d458564516e5676af9c70b4f4b2a9178294f1bc6",
-          "version": "5.0.1"
         }
       },
       {
@@ -116,6 +134,15 @@
           "branch": "master",
           "revision": "b76024995f6909e4615f943c7a03268fd29778fc",
           "version": null
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
+          "version": "5.0.1"
         }
       }
     ]

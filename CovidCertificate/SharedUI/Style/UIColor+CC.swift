@@ -18,6 +18,7 @@ public extension UIColor {
     static var cc_blue = UIColor(ub_hexString: "#143E7F")!
     static var cc_green_dark = UIColor(ub_hexString: "#4D9553")!
     static var cc_green = UIColor(ub_hexString: "#91C88D")!
+    static var cc_green_light = UIColor(ub_hexString: "#5fb564")!
     static var cc_orange = UIColor(ub_hexString: "#C9872C")!
     static var cc_red = UIColor(ub_hexString: "#a72702")!
 

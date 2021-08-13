@@ -68,7 +68,7 @@ class VerifierHomescreenViewController: HomescreenBaseViewController {
         view.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(p)
-            make.top.equalTo(self.backgroundTopLayoutGuide).offset(Padding.large)
+            make.top.equalTo(self.logoView.snp.bottom).offset(Padding.large)
         }
 
         view.addSubview(titleLabel)

@@ -17,6 +17,7 @@ enum VerificationError: Equatable, Comparable {
     case typeInvalid
     case revocation
     case expired(Date)
+    case signatureExpired
     case notYetValid(Date)
     case otherNationalRules
     case unknown
@@ -28,23 +29,24 @@ enum RetryError: Equatable {
     case unknown
 }
 
-enum VerificationState: Equatable {
-    case loading
-    // validity as formatted date as String
-    case success(String?)
-    // sorted errors, error codes, validity as formatted date as String
-    case invalid([VerificationError], [String], String?)
-    // retry error, error codes
-    case retry(RetryError, [String])
+/**
+ Represents the verification result for an invididual region
+ */
+struct VerificationRegionResult: Equatable {
+    let region: String?
+    let valid: Bool
+}
 
-    public func isInvalid() -> Bool {
-        switch self {
-        case .invalid:
-            return true
-        default:
-            return false
-        }
-    }
+/**
+ Represents the verification result for a certificate
+ */
+enum VerificationResultStatus: Equatable {
+    case loading
+    case signatureInvalid
+    case error
+    case timeMissing
+    case dataExpired
+    case success([VerificationRegionResult])
 
     public func isSuccess() -> Bool {
         switch self {
@@ -55,56 +57,61 @@ enum VerificationState: Equatable {
         }
     }
 
-    public func isRetry() -> Bool {
+    /**
+     Return the invididual region results for the success state
+     */
+    public func results() -> [VerificationRegionResult] {
         switch self {
-        case .retry:
-            return true
-        default:
-            return false
+        case let .success(result): return result
+        default: return []
         }
     }
 
-    public func verificationErrors() -> [VerificationError]? {
+    /**
+     Returns true if the result is error, signatureInvalid or contains any invalid region result
+     */
+    public func isInvalid() -> Bool {
         switch self {
-        case let .invalid(errors, _, _):
-            return errors
-        default:
-            return nil
+        case .signatureInvalid: return true
+        case .error: return true
+        case .success: return containsOnlyInvalidVerification()
+        default: return false
         }
     }
 
-    public func validUntilDateString() -> String? {
+    /**
+     Returns true if the result contains any invalid region result
+     */
+    public func containsOnlyInvalidVerification() -> Bool {
         switch self {
-        case let .invalid(_, _, date):
-            return date
-        default:
-            return nil
-        }
-    }
-
-    public func errorCodes() -> [String] {
-        switch self {
-        case let .invalid(_, codes, _):
-            return codes
-        default:
-            return []
+        case let .success(result): return result.filter { $0.valid }.count == 0
+        default: return false
         }
     }
 }
 
 class Verifier: NSObject {
     private let holder: DGCHolder?
-    private var stateUpdate: ((VerificationState) -> Void)?
+    private let regions: [String]
+    private let checkDefaultRegion: Bool
+    private var stateUpdate: ((VerificationResultStatus) -> Void)?
+    private var validationTime: Date?
 
     // MARK: - Init
 
     init(holder: DGCHolder) {
         self.holder = holder
+        regions = []
+        checkDefaultRegion = true
         super.init()
     }
 
-    init(qrString: String) {
+    init(qrString: String, regions: [String], checkDefaultRegion: Bool, validationTime: Date?) {
         let result = CovidCertificateSDK.decode(encodedData: qrString)
+
+        self.regions = regions
+        self.checkDefaultRegion = checkDefaultRegion
+        self.validationTime = validationTime
 
         switch result {
         case let .success(holder):
@@ -118,12 +125,12 @@ class Verifier: NSObject {
 
     // MARK: - Start
 
-    public func start(forceUpdate: Bool = false, stateUpdate: @escaping ((VerificationState) -> Void)) {
+    public func start(forceUpdate: Bool = false, stateUpdate: @escaping ((VerificationResultStatus) -> Void)) {
         self.stateUpdate = stateUpdate
 
         guard holder != nil else {
             // should never happen
-            self.stateUpdate?(.invalid([.unknown], ["V|HN"], nil))
+            self.stateUpdate?(.error)
             return
         }
 
@@ -133,172 +140,111 @@ class Verifier: NSObject {
 
         let group = DispatchGroup()
 
-        var checkSignatureState: VerificationState = .loading
-        // var checkRevocationState: VerificationState = .loading
-        // var checkNationalRulesState: VerificationState = .loading
+        var states: [VerificationResultStatus] = [.loading]
 
-        checkSignature(group: group, forceUpdate: forceUpdate) { state in checkSignatureState = state }
-        // TODO: AT - Disabled Revokation and National Rules Check
-        // checkRevocationStatus(group: group, forceUpdate: forceUpdate) { state in checkRevocationState = state }
-        // checkNationalRules(group: group, forceUpdate: forceUpdate) { state in checkNationalRulesState = state }
+        checkSignature(group: group, forceUpdate: forceUpdate) { state in states[0] = state }
+
+        if validationTime != nil {
+            if checkDefaultRegion {
+                let index = states.count
+                states.append(.loading)
+                checkNationalRules(group: group, region: nil, forceUpdate: forceUpdate, callback: { state in states[index] = state })
+            }
+
+            regions.forEach { region in
+                let index = states.count
+                states.append(.loading)
+                checkNationalRules(group: group, region: region, forceUpdate: forceUpdate, callback: { state in states[index] = state })
+            }
+        }
 
         group.notify(queue: .main) {
-            let states = [checkSignatureState /* , checkRevocationState, checkNationalRulesState */ ]
-
-            var errors = states.compactMap { $0.verificationErrors() }.flatMap { $0 }
-            errors.sort()
-
-            var errorCodes = states.compactMap { $0.errorCodes() }.flatMap { $0 }
-            errorCodes.sort()
-
-            let retries = states.filter { $0.isRetry() }
-
-            if errors.count > 0 {
-                // TODO: AT - Disabled Revokation and National Rules Check
-                // let validityString = checkNationalRulesState.validUntilDateString()
-                self.stateUpdate?(.invalid(errors, errorCodes, nil /* validityString */ ))
-            } else if let r = retries.first {
-                self.stateUpdate?(r)
+            if states[0] == .error || states[0] == .signatureInvalid {
+                self.stateUpdate?(states[0])
+            } else if states.contains(where: { $0 == VerificationResultStatus.dataExpired }) {
+                self.stateUpdate?(.dataExpired)
             } else if states.allSatisfy({ $0.isSuccess() }) {
-                // TODO: AT - Disabled Revokation and National Rules Check
-                self.stateUpdate?(.success(nil) /* checkNationalRulesState */ )
+                if self.validationTime != nil {
+                    let results = states.flatMap { $0.results() }
+                    self.stateUpdate?(.success(results))
+                } else {
+                    self.stateUpdate?(.timeMissing)
+                }
+            } else {
+                self.stateUpdate?(.error)
             }
         }
     }
 
-    public func restart(forceUpdate: Bool = false) {
+    public func restart(forceUpdate: Bool = false, validationTime: Date?) {
         guard let su = stateUpdate else { return }
+        self.validationTime = validationTime
         start(forceUpdate: forceUpdate, stateUpdate: su)
     }
 
     // MARK: - Signature
 
-    private func checkSignature(group: DispatchGroup, forceUpdate: Bool, callback: @escaping (VerificationState) -> Void) {
+    private func checkSignature(group: DispatchGroup, forceUpdate _: Bool, callback: @escaping (VerificationResultStatus) -> Void) {
         guard let holder = self.holder else { return }
 
         group.enter()
 
-        CovidCertificateSDK.checkSignature(cose: holder, forceUpdate: forceUpdate) { result in
-            switch result {
-            case let .success(result):
-                // TODO: AT: Signature check currently fails because we do not fetch the correct key list
-                if result.isValid {
-                    callback(.success(nil))
-                } else {
-                    // !: checked
-                    let errorCodes = result.error != nil ? [result.error!.errorCode] : []
-                    callback(.invalid([.signature], errorCodes, nil))
-                }
+        DispatchQueue.global(qos: .userInteractive).async {
+            CovidCertificateSDK.decodeAndCheckSignature(encodedData: holder.encodedData, validationClock: self.validationTime ?? Date()) { result in
+                switch result {
+                case let .success(result):
+                    if result.isValid {
+                        callback(.success([]))
+                    } else {
+                        callback(.signatureInvalid)
+                    }
 
-            case let .failure(err):
-                switch err {
-                case .NETWORK_NO_INTERNET_CONNECTION:
-                    // retry possible
-                    callback(.retry(.noInternetConnection, [err.errorCode]))
-                case .NETWORK_PARSE_ERROR, .NETWORK_ERROR:
-                    callback(.retry(.network, [err.errorCode]))
-                case .SIGNATURE_TYPE_INVALID:
-                    // type invalid (multiple vaccines, tests
-                    callback(.invalid([.typeInvalid], [err.errorCode], nil))
-                default:
-                    // error
-                    callback(.invalid([.signature], [err.errorCode], nil))
-                }
-            }
-
-            group.leave()
-        }
-    }
-
-    private func checkRevocationStatus(group: DispatchGroup, forceUpdate: Bool, callback: @escaping (VerificationState) -> Void) {
-        guard let holder = self.holder else { return }
-
-        group.enter()
-
-        CovidCertificateSDK.checkRevocationStatus(dgc: holder.healthCert, forceUpdate: forceUpdate) { result in
-            switch result {
-            case let .success(result):
-                if result.isValid {
-                    callback(.success(nil))
-                } else {
-                    // !: checked
-                    let errorCodes = result.error != nil ? [result.error!.errorCode] : []
-                    callback(.invalid([.revocation], errorCodes, nil))
-                }
-
-            case let .failure(err):
-                switch err {
-                case .NETWORK_NO_INTERNET_CONNECTION:
-                    // retry possible
-                    callback(.retry(.noInternetConnection, [err.errorCode]))
-                case .NETWORK_PARSE_ERROR, .NETWORK_ERROR:
-                    callback(.retry(.network, [err.errorCode]))
-                default:
-                    callback(.invalid([.revocation], [err.errorCode], nil))
-                }
-            }
-
-            group.leave()
-        }
-    }
-
-    private func checkNationalRules(group: DispatchGroup, forceUpdate: Bool, callback: @escaping (VerificationState) -> Void) {
-        guard let holder = self.holder else { return }
-
-        group.enter()
-
-        CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, forceUpdate: forceUpdate) { result in
-            switch result {
-            case let .success(result):
-                var validUntil: String?
-
-                // get expired date string
-                if let date = result.validUntil {
-                    switch holder.healthCert.certType {
-                    case .test:
-                        validUntil = DateFormatter.ub_dayTimeString(from: date)
-                    case .recovery:
-                        validUntil = DateFormatter.ub_dayString(from: date)
-                    case .vaccination:
-                        validUntil = DateFormatter.ub_dayString(from: date)
-                    case .none:
-                        break
+                case let .failure(err):
+                    switch err {
+                    case .CBOR_DESERIALIZATION_FAILED:
+                        callback(.error)
+                    case .CWT_EXPIRED:
+                        callback(.success([]))
+                    case .KEY_NOT_IN_TRUST_LIST:
+                        callback(.signatureInvalid)
+                    case .DATA_EXPIRED:
+                        callback(.dataExpired)
+                    default:
+                        callback(.error)
                     }
                 }
 
-                // check for validity
-                if result.isValid {
-                    callback(.success(validUntil))
-                } else if let dateError = result.dateError {
-                    switch dateError {
-                    case .NOT_YET_VALID:
-                        callback(.invalid([.notYetValid(result.validFrom ?? Date())], [], validUntil))
-                    case .EXPIRED:
-                        callback(.invalid([.expired(result.validUntil ?? Date())], [], validUntil))
-                    }
-                } else {
-                    callback(.invalid([.otherNationalRules], [], validUntil))
-                }
-            case let .failure(err):
-                switch err {
-                case .NETWORK_NO_INTERNET_CONNECTION:
-                    // retry possible
-                    callback(.retry(.noInternetConnection, [err.errorCode]))
-                case .NETWORK_PARSE_ERROR, .NETWORK_ERROR:
-                    // retry possible
-                    callback(.retry(.network, [err.errorCode]))
-                default:
-                    // do not show the explicit error code on the verifier app, s.t.
-                    // no information is shown about the checked user (e.g. certificate type)
-                    #if WALLET
-                        callback(.invalid([.otherNationalRules], [err.errorCode], nil))
-                    #elseif VERIFIER
-                        callback(.invalid([.otherNationalRules], [], nil))
-                    #endif
-                }
+                group.leave()
             }
+        }
+    }
 
-            group.leave()
+    private func checkNationalRules(group: DispatchGroup, region: String?, forceUpdate: Bool, callback: @escaping (VerificationResultStatus) -> Void) {
+        guard let holder = self.holder else { return }
+        guard let issuedAt = holder.issuedAt else { return }
+        guard let expiresAt = holder.expiresAt else { return }
+        guard let validationClock = validationTime else { return }
+
+        group.enter()
+        DispatchQueue.global(qos: .userInitiated).async {
+            CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, validationClock: validationClock, issuedAt: issuedAt, expiresAt: expiresAt, countryCode: "AT", region: region, forceUpdate: forceUpdate) { result in
+                switch result {
+                case let .success(result):
+                    if result.isValid {
+                        callback(.success([VerificationRegionResult(region: region, valid: true)]))
+                    } else {
+                        callback(.success([VerificationRegionResult(region: region, valid: false)]))
+                    }
+                case let .failure(error):
+                    if error == .DATA_EXPIRED {
+                        callback(.dataExpired)
+                    } else {
+                        callback(.success([VerificationRegionResult(region: region, valid: false)]))
+                    }
+                }
+
+                group.leave()
+            }
         }
     }
 }

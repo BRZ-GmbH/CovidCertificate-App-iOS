@@ -39,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             isFirstLaunch = false
         }
 
+        VerifierManager.shared.resetTime()
+
         CovidCertificateSDK.initialize(environment: Environment.current.sdkEnvironment, apiKey: Environment.current.appToken)
 
         // defer window initialization if app was launched in
@@ -109,19 +111,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupImportHandler()
     }
 
-    private func willAppearAfterColdstart(_: UIApplication, coldStart _: Bool, backgroundTime _: TimeInterval) {
-        // Logic for coldstart / background
-        if WalletUserStorage.shared.hasCompletedOnboarding {
-            // Refresh config
-            startConfigRequest()
+    private func willAppearAfterColdstart(_: UIApplication, coldStart _: Bool, backgroundTime: TimeInterval) {
+        VerifierManager.shared.updateTime()
 
-            // TODO: AT - Remove update of keys, revocation list and national rules
+        // Refresh config
+        startConfigRequest()
 
-            // Refresh trust list (public keys, revocation list, business rules,...)
-            /* CovidCertificateSDK.restartTrustListUpdate(completionHandler: {
-                 UIStateManager.shared.stateChanged(forceRefresh: true)
-             }, updateTimeInterval: TimeInterval(60 * 60)) */
-        }
+        // Refresh trust list (public keys, revocation list, business rules,...)
+        CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: {
+            UIStateManager.shared.stateChanged(forceRefresh: true)
+        })
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -132,6 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
 
         addBlurView()
+        VerifierManager.shared.resetTime()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
@@ -144,7 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if window == nil {
             setupWindow()
             willAppearAfterColdstart(application, coldStart: true, backgroundTime: 0)
-
         } else {
             let backgroundTime = -(lastForegroundActivity?.timeIntervalSinceNow ?? 0)
             willAppearAfterColdstart(application, coldStart: false, backgroundTime: backgroundTime)

@@ -18,7 +18,7 @@ class CertificateDetailView: UIView {
 
     private let stackView = UIStackView()
 
-    var states: (state: VerificationState, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
+    var states: (state: VerificationResultStatus, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
         didSet { update(animated: true) }
     }
 
@@ -29,9 +29,8 @@ class CertificateDetailView: UIView {
 
     // MARK: - Init
 
-    init(certificate: UserCertificate, showEnglishLabelsIfNeeded _: Bool) {
-        // TODO: AT - Hide english labels for now since we do not have english localization
-        showEnglishLabels = false // showEnglishLabelsIfNeeded && !UBLocalized.languageIsEnglish()
+    init(certificate: UserCertificate, showEnglishLabelsIfNeeded: Bool) {
+        showEnglishLabels = showEnglishLabelsIfNeeded && !UBLocalized.languageIsEnglish()
         self.certificate = certificate
         super.init(frame: .zero)
 
@@ -107,7 +106,7 @@ class CertificateDetailView: UIView {
     }
 
     private func addRecoveryEntries() {
-        guard let pastInfections = holder?.healthCert.pastInfections,
+        guard let pastInfections = holder?.healthCert.recovery,
               pastInfections.count > 0
         else { return }
 
@@ -161,8 +160,8 @@ class CertificateDetailView: UIView {
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_result_title_key), value: text)
 
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_type_key), value: test.testType)
-            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_name_key), value: test.testName)
-            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_holder_key), value: test.manufacturer)
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_name_key), value: test.readableTestName)
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_holder_key), value: test.readableManufacturer)
 
             addDividerLine()
 
@@ -296,20 +295,18 @@ class CertificateDetailView: UIView {
                 self.applySuccessState()
             case .failure:
                 self.applyErrorState()
-            case .retry:
-                self.applyErrorState()
             case .verifying:
                 self.applyLoadingState()
             case .idle:
                 switch self.states.state {
                 case .loading:
                     self.applyLoadingState()
-                case .success:
+                case .success, .timeMissing:
                     self.applySuccessState()
-                case .invalid:
+                case .error, .signatureInvalid:
                     self.applyErrorState()
-                case .retry:
-                    self.applyErrorState()
+                case .dataExpired:
+                    self.applySuccessState()
                 }
             }
         }
