@@ -194,7 +194,7 @@ class CertificateDetailViewController: ViewController {
 
     private func startCheck() {
         state = .loading
-        VerifierManager.shared.addObserver(self, for: certificate.qrCode, regions: ["ET", "NG"], checkDefaultRegion: false) { [weak self] state in
+        VerifierManager.shared.addObserver(self, for: certificate.qrCode, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false, important: true) { [weak self] state in
             guard let strongSelf = self else { return }
             strongSelf.qrCodeStateView.alpha = 0
             // strongSelf.verifyButton.alpha = 1

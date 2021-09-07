@@ -25,13 +25,7 @@ class ImportHandler {
     // MARK: - Handle URL
 
     public func handle(url: URL) {
-        let accessingSecurityScopedResource = url.startAccessingSecurityScopedResource()
-
-        defer {
-            if accessingSecurityScopedResource {
-                url.stopAccessingSecurityScopedResource()
-            }
-        }
+        _ = url.startAccessingSecurityScopedResource()
 
         var images: [UIImage] = []
 
@@ -52,6 +46,8 @@ class ImportHandler {
         } else {
             presentWrongFileError()
         }
+
+        url.stopAccessingSecurityScopedResource()
     }
 
     public func handleMessage(message: String) {
@@ -119,16 +115,14 @@ class ImportHandler {
             if let page = document.page(at: i) {
                 let pageRect = page.getBoxRect(.mediaBox)
 
-                var scaling: CGFloat = 3
-                if #available(iOS 13.0, *) {
-                    scaling = 1
-                }
+                let scaling: CGFloat = 300.0 / 72.0
 
                 let renderer = UIGraphicsImageRenderer(size: CGSize(width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
                 let img = renderer.image { ctx in
                     UIColor.white.set()
-                    ctx.fill(pageRect)
+                    ctx.fill(CGRect(x: 0, y: 0, width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
 
+                    ctx.cgContext.interpolationQuality = .high
                     ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height * scaling)
                     ctx.cgContext.scaleBy(x: scaling, y: -scaling)
 
@@ -144,7 +138,7 @@ class ImportHandler {
 
     func findQrCodeContent(image: UIImage) -> String? {
         guard let cgImage = image.cgImage,
-              let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil) else {
+              let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]) else {
             return nil
         }
 

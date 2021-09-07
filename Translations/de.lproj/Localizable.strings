@@ -436,3 +436,19 @@
 "wallet_validation_data_expired" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
 
 "wallet_3g_status_disclaimer" = "3-G Voransicht: Nur gültig mit GreenCheck und Ausweis";
+
+"wallet_region_selection_title" = "Bundeslandauswahl";
+
+"wallet_region_selection_header_title" = "Bundesland wählen";
+"wallet_region_selection_header_message" = "Je nach Bundesland können andere Zutrittsregeln gelten. Sie können das Bundesland jederzeit ändern.";
+
+"region_nationwide" = "Bundesweit";
+"region_burgenland" = "Burgenland";
+"region_wien" = "Wien";
+"region_kaernten" = "Kärnten";
+"region_niederoesterreich" = "Niederösterreich";
+"region_oberoesterreich" = "Oberösterreich";
+"region_salzburg" = "Salzburg";
+"region_steiermark" = "Steiermark";
+"region_tirol" = "Tirol";
+"region_vorarlberg" = "Vorarlberg";

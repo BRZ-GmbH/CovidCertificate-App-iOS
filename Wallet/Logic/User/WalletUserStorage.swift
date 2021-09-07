@@ -18,6 +18,11 @@ class WalletUserStorage {
             ConfigManager().startConfigRequest(window: UIApplication.shared.keyWindow?.window)
         }
     }
+    
+    @UBUserDefault(key: "wallet.user.selectedValidationRegion", defaultValue: "")
+    var selectedValidationRegion: String {
+        didSet { UIStateManager.shared.stateChanged(forceRefresh: true) }
+    }
 }
 
 class CertificateStorage {

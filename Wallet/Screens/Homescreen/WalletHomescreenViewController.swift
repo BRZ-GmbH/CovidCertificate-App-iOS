@@ -49,6 +49,8 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             guard let strongSelf = self else { return }
             strongSelf.state = s.certificateState.certificates.count == 0 ? .onboarding : .certificates
             strongSelf.infoBox = s.infoBoxState
+            
+            strongSelf.regionSelectionButton.region = Region.init(rawValue: WalletUserStorage.shared.selectedValidationRegion)
         }
 
         setupViews()
@@ -144,6 +146,12 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         infoButtonCallback = { [weak self] in
             guard let strongSelf = self else { return }
             let vc = WalletImprintViewController()
+            vc.presentInNavigationController(from: strongSelf)
+        }
+        
+        regionSelectionButtonCallback = { [weak self] in
+            guard let strongSelf = self else { return }
+            let vc = RegionSelectionViewController()
             vc.presentInNavigationController(from: strongSelf)
         }
 

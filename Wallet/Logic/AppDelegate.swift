@@ -111,15 +111,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupImportHandler()
     }
 
-    private func willAppearAfterColdstart(_: UIApplication, coldStart _: Bool, backgroundTime: TimeInterval) {
+    private func willAppearAfterColdstart(_: UIApplication, coldStart: Bool, backgroundTime: TimeInterval) {
         VerifierManager.shared.updateTime()
 
         // Refresh config
         startConfigRequest()
-
-        // Refresh trust list (public keys, revocation list, business rules,...)
-        CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: {
+        
+        if !coldStart {
             UIStateManager.shared.stateChanged(forceRefresh: true)
+        }
+        
+        // Refresh trust list (public keys, revocation list, business rules,...)
+        CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: { wasUpdated in
+            UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)
         })
     }
 

@@ -26,8 +26,12 @@ class HomescreenBaseViewController: ViewController {
     public var infoBox: InfoBox? {
         didSet { updateInfoBox(true) }
     }
+    
+    public let regionSelectionButton = RegionSelectionButton()
 
     public var infoButtonCallback: (() -> Void)?
+    
+    public var regionSelectionButtonCallback: (() -> Void)?
 
     // MARK: - Init
 
@@ -69,7 +73,17 @@ class HomescreenBaseViewController: ViewController {
             guard let strongSelf = self else { return }
             strongSelf.infoButtonCallback?()
         }
-
+        
+        view.addSubview(regionSelectionButton)
+        regionSelectionButton.snp.makeConstraints { make in
+            make.centerY.equalTo(self.logoView)
+            make.right.equalTo(infoButton.snp.left).offset(-Padding.small)
+        }
+        
+        regionSelectionButton.touchUpCallback = { [weak self] in
+            self?.regionSelectionButtonCallback?()
+        }
+        
         view.addSubview(infoBoxButton)
 
         infoBoxButton.snp.makeConstraints { make in

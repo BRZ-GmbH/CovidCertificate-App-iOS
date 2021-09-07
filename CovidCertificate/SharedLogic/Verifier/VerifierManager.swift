@@ -38,7 +38,7 @@ final class VerifierManager {
     private var timeRetryTimer: Timer?
 
     func resetTime() {
-        timeStatus = (false, nil)
+        timeStatus = (false, Clock.now)
         timeRetryTimer?.invalidate()
         timeRetryTimer = nil
     }
@@ -70,8 +70,14 @@ final class VerifierManager {
             }
 
             if oldStatus != self.timeStatus?.time {
-                self.verifiers.forEach { _, verifier in
-                    verifier.restart(forceUpdate: true, validationTime: self.timeStatus?.time)
+                var shouldRestart = true
+                if let old = oldStatus, let new = self.timeStatus?.time, abs(old.timeIntervalSince(new)) < 5 {
+                    shouldRestart = false
+                }
+                if shouldRestart {
+                    self.verifiers.forEach { _, verifier in
+                        verifier.restart(forceUpdate: true, validationTime: self.timeStatus?.time)
+                    }
                 }
             }
         }
@@ -79,6 +85,7 @@ final class VerifierManager {
 
     func updateTime() {
         fetchTime()
+        timeStatus = (false, Clock.now)
     }
 
     private func updateObservers(for qrString: String, state: VerificationResultStatus) {
@@ -97,7 +104,7 @@ final class VerifierManager {
 
     // MARK: - Public API
 
-    func addObserver(_ object: AnyObject, for qrString: String, regions: [String], checkDefaultRegion: Bool, forceUpdate: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
+    func addObserver(_ object: AnyObject, for qrString: String, regions: [String], checkDefaultRegion: Bool, forceUpdate: Bool = false, important: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
         if observers[qrString] != nil {
             observers[qrString] = observers[qrString]!.filter { $0.object != nil && !$0.object!.isEqual(object) }
             observers[qrString]?.append(Observer(object: object, block: block))
@@ -105,10 +112,17 @@ final class VerifierManager {
             observers[qrString] = [Observer(object: object, block: block)]
         }
 
-        if let v = verifiers[qrString] {
-            v.restart(forceUpdate: forceUpdate, validationTime: timeStatus?.time)
+        if let v = verifiers[qrString], v.regions.elementsEqual(regions) {
+            if v.isRunningWith(timeStatus?.time) == false {
+                v.important = important
+                v.restart(forceUpdate: forceUpdate, validationTime: timeStatus?.time)
+            }
         } else {
+            if let v = verifiers[qrString] {
+                v.cancelled = true
+            }
             let v = Verifier(qrString: qrString, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: timeStatus?.time)
+            v.important = important
             verifiers[qrString] = v
             v.start(forceUpdate: forceUpdate) { state in
                 self.updateObservers(for: qrString, state: state)

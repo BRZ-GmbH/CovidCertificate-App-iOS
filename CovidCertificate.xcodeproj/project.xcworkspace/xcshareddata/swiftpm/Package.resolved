@@ -110,6 +110,15 @@
         }
       },
       {
+        "package": "SnapKit",
+        "repositoryURL": "https://github.com/SnapKit/SnapKit.git",
+        "state": {
+          "branch": null,
+          "revision": "d458564516e5676af9c70b4f4b2a9178294f1bc6",
+          "version": "5.0.1"
+        }
+      },
+      {
         "package": "SwiftJWT",
         "repositoryURL": "https://github.com/Kitura/Swift-JWT.git",
         "state": {
@@ -129,10 +138,10 @@
       },
       {
         "package": "SwiftCBOR",
-        "repositoryURL": "https://github.com/eu-digital-green-certificates/SwiftCBOR",
+        "repositoryURL": "https://github.com/martinreichart/SwiftCBOR.git",
         "state": {
           "branch": "master",
-          "revision": "b76024995f6909e4615f943c7a03268fd29778fc",
+          "revision": "e2a36dbead2d90eaec4dd62e04404c77bf2a50cb",
           "version": null
         }
       },

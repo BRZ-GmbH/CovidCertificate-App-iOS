@@ -91,8 +91,11 @@ enum VerificationResultStatus: Equatable {
 }
 
 class Verifier: NSObject {
+    private var finished: Bool = false
+    public var cancelled: Bool = false
+    public var important: Bool = false
     private let holder: DGCHolder?
-    private let regions: [String]
+    public let regions: [String]
     private let checkDefaultRegion: Bool
     private var stateUpdate: ((VerificationResultStatus) -> Void)?
     private var validationTime: Date?
@@ -124,8 +127,23 @@ class Verifier: NSObject {
     }
 
     // MARK: - Start
+    
+    public func isRunningWith(_ time: Date?) -> Bool {
+        if self.finished {
+            return false
+        }
+        if let time = time {
+            if let validationTime = validationTime {
+                return validationTime == time
+            } else {
+                return false
+            }
+        }
+        return false
+    }
 
     public func start(forceUpdate: Bool = false, stateUpdate: @escaping ((VerificationResultStatus) -> Void)) {
+        self.finished = false
         self.stateUpdate = stateUpdate
 
         guard holder != nil else {
@@ -159,6 +177,10 @@ class Verifier: NSObject {
         }
 
         group.notify(queue: .main) {
+            self.finished = true
+            if self.cancelled {
+                return
+            }
             if states[0] == .error || states[0] == .signatureInvalid {
                 self.stateUpdate?(states[0])
             } else if states.contains(where: { $0 == VerificationResultStatus.dataExpired }) {
@@ -226,7 +248,7 @@ class Verifier: NSObject {
         guard let validationClock = validationTime else { return }
 
         group.enter()
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: important ? .userInitiated : .utility).async {
             CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, validationClock: validationClock, issuedAt: issuedAt, expiresAt: expiresAt, countryCode: "AT", region: region, forceUpdate: forceUpdate) { result in
                 switch result {
                 case let .success(result):

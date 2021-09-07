@@ -163,6 +163,8 @@ class CertificateStateView: UIView {
                 self.regionStateView.ub_setHidden(false)
                 self.imageView.ub_setHidden(true)
                 self.validityHintView.ub_setHidden(false)
+                self.backgroundView.ub_setHidden(true)
+                self.textLabel.ub_setHidden(true)
             case .failure:
                 if case .error = self.states.state {
                     self.imageView.image = VerificationError.signature.icon(with: .cc_red)
@@ -175,6 +177,8 @@ class CertificateStateView: UIView {
                 self.regionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.backgroundView.ub_setHidden(false)
+                self.textLabel.ub_setHidden(false)
             case .verifying:
                 self.imageView.image = nil
                 self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_certificate_verifying)
@@ -185,11 +189,14 @@ class CertificateStateView: UIView {
                 self.regionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.backgroundView.ub_setHidden(false)
+                self.textLabel.ub_setHidden(false)
             case .idle:
                 switch self.states.state {
                 case .loading:
                     self.imageView.image = nil
-                    self.textLabel.attributedText = nil
+                    self.textLabel.textColor = .cc_white
+                    self.textLabel.text = UBLocalized.wallet_certificate_verifying
                     self.backgroundView.backgroundColor = .cc_greyish
                     self.validityView.backgroundColor = .cc_greyish
                     self.validityView.textColor = .cc_grey
@@ -197,9 +204,11 @@ class CertificateStateView: UIView {
                     self.regionStateView.ub_setHidden(true)
                     self.imageView.ub_setHidden(false)
                     self.validityHintView.ub_setHidden(true)
+                    self.backgroundView.ub_setHidden(false)
+                    self.textLabel.ub_setHidden(false)
                 case let .success(results):
                     self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_light)
-                    self.textLabel.attributedText = NSAttributedString(string: UBLocalized.verifier_verify_success_info)
+                    self.textLabel.attributedText = nil
                     self.backgroundView.backgroundColor = .cc_green_light
                     self.validityView.backgroundColor = .cc_green_light
                     self.textLabel.textColor = .cc_white
@@ -208,6 +217,8 @@ class CertificateStateView: UIView {
                     self.regionStateView.ub_setHidden(false)
                     self.imageView.ub_setHidden(true)
                     self.validityHintView.ub_setHidden(false)
+                    self.backgroundView.ub_setHidden(true)
+                    self.textLabel.ub_setHidden(true)
                 case .error:
                     self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
                     self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
@@ -218,6 +229,8 @@ class CertificateStateView: UIView {
                     self.regionStateView.ub_setHidden(true)
                     self.imageView.ub_setHidden(false)
                     self.validityHintView.ub_setHidden(true)
+                    self.backgroundView.ub_setHidden(false)
+                    self.textLabel.ub_setHidden(false)
                 case .signatureInvalid:
                     self.imageView.image = VerificationError.signature.icon()?.ub_image(with: .cc_red)
                     self.textLabel.attributedText = VerificationError.signature.displayName()
@@ -228,6 +241,8 @@ class CertificateStateView: UIView {
                     self.regionStateView.ub_setHidden(true)
                     self.imageView.ub_setHidden(false)
                     self.validityHintView.ub_setHidden(true)
+                    self.backgroundView.ub_setHidden(false)
+                    self.textLabel.ub_setHidden(false)
                 case .timeMissing:
                     self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_orange)
                     self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_time_missing)
@@ -238,6 +253,8 @@ class CertificateStateView: UIView {
                     self.regionStateView.ub_setHidden(true)
                     self.imageView.ub_setHidden(false)
                     self.validityHintView.ub_setHidden(true)
+                    self.backgroundView.ub_setHidden(false)
+                    self.textLabel.ub_setHidden(false)
                 case .dataExpired:
                     self.imageView.image = UIImage(named: "ic-offline")?.ub_image(with: .cc_orange)
                     self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_validation_data_expired)
@@ -248,6 +265,8 @@ class CertificateStateView: UIView {
                     self.regionStateView.ub_setHidden(true)
                     self.imageView.ub_setHidden(false)
                     self.validityHintView.ub_setHidden(true)
+                    self.backgroundView.ub_setHidden(false)
+                    self.textLabel.ub_setHidden(false)
                 }
             }
 

@@ -84,10 +84,30 @@ import Foundation
      case ok_button_key = "ok_button"
     /// Kein gültiger Code
      case qr_scanner_error_key = "qr_scanner_error"
+    /// Burgenland
+     case region_burgenland_key = "region_burgenland"
+    /// Kärnten
+     case region_kaernten_key = "region_kaernten"
+    /// Bundesweit
+     case region_nationwide_key = "region_nationwide"
+    /// Niederösterreich
+     case region_niederoesterreich_key = "region_niederoesterreich"
+    /// Oberösterreich
+     case region_oberoesterreich_key = "region_oberoesterreich"
+    /// Salzburg
+     case region_salzburg_key = "region_salzburg"
+    /// Steiermark
+     case region_steiermark_key = "region_steiermark"
+    /// Tirol
+     case region_tirol_key = "region_tirol"
     /// Eintritt
      case region_type_ET_key = "region_type_ET"
     /// Nachtgastronomie
      case region_type_NG_key = "region_type_NG"
+    /// Vorarlberg
+     case region_vorarlberg_key = "region_vorarlberg"
+    /// Wien
+     case region_wien_key = "region_wien"
     /// Covid-19
      case target_disease_name_key = "target_disease_name"
     /// Ein unbekannter Fehler ist aufgetreten.
@@ -304,6 +324,12 @@ import Foundation
      case wallet_onboarding_store_text1_key = "wallet_onboarding_store_text1"
     /// EU-konforme Zertifikate digital aufbewahren
      case wallet_onboarding_store_title_key = "wallet_onboarding_store_title"
+    /// Je nach Bundesland können andere Zutrittsregeln gelten. Sie können das Bundesland jederzeit ändern.
+     case wallet_region_selection_header_message_key = "wallet_region_selection_header_message"
+    /// Bundesland wählen
+     case wallet_region_selection_header_title_key = "wallet_region_selection_header_title"
+    /// Bundeslandauswahl
+     case wallet_region_selection_title_key = "wallet_region_selection_title"
     /// Erneut scannen
      case wallet_scan_again_key = "wallet_scan_again"
     /// Scannen Sie den EU-konformen QR-Code auf dem Zertifikat.
@@ -416,10 +442,30 @@ import Foundation
    static let ok_button = UBLocalized.tr(UBLocalizedKey.ok_button_key)
   /// Kein gültiger Code
    static let qr_scanner_error = UBLocalized.tr(UBLocalizedKey.qr_scanner_error_key)
+  /// Burgenland
+   static let region_burgenland = UBLocalized.tr(UBLocalizedKey.region_burgenland_key)
+  /// Kärnten
+   static let region_kaernten = UBLocalized.tr(UBLocalizedKey.region_kaernten_key)
+  /// Bundesweit
+   static let region_nationwide = UBLocalized.tr(UBLocalizedKey.region_nationwide_key)
+  /// Niederösterreich
+   static let region_niederoesterreich = UBLocalized.tr(UBLocalizedKey.region_niederoesterreich_key)
+  /// Oberösterreich
+   static let region_oberoesterreich = UBLocalized.tr(UBLocalizedKey.region_oberoesterreich_key)
+  /// Salzburg
+   static let region_salzburg = UBLocalized.tr(UBLocalizedKey.region_salzburg_key)
+  /// Steiermark
+   static let region_steiermark = UBLocalized.tr(UBLocalizedKey.region_steiermark_key)
+  /// Tirol
+   static let region_tirol = UBLocalized.tr(UBLocalizedKey.region_tirol_key)
   /// Eintritt
    static let region_type_ET = UBLocalized.tr(UBLocalizedKey.region_type_ET_key)
   /// Nachtgastronomie
    static let region_type_NG = UBLocalized.tr(UBLocalizedKey.region_type_NG_key)
+  /// Vorarlberg
+   static let region_vorarlberg = UBLocalized.tr(UBLocalizedKey.region_vorarlberg_key)
+  /// Wien
+   static let region_wien = UBLocalized.tr(UBLocalizedKey.region_wien_key)
   /// Covid-19
    static let target_disease_name = UBLocalized.tr(UBLocalizedKey.target_disease_name_key)
   /// Ein unbekannter Fehler ist aufgetreten.
@@ -636,6 +682,12 @@ import Foundation
    static let wallet_onboarding_store_text1 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_store_text1_key)
   /// EU-konforme Zertifikate digital aufbewahren
    static let wallet_onboarding_store_title = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_store_title_key)
+  /// Je nach Bundesland können andere Zutrittsregeln gelten. Sie können das Bundesland jederzeit ändern.
+   static let wallet_region_selection_header_message = UBLocalized.tr(UBLocalizedKey.wallet_region_selection_header_message_key)
+  /// Bundesland wählen
+   static let wallet_region_selection_header_title = UBLocalized.tr(UBLocalizedKey.wallet_region_selection_header_title_key)
+  /// Bundeslandauswahl
+   static let wallet_region_selection_title = UBLocalized.tr(UBLocalizedKey.wallet_region_selection_title_key)
   /// Erneut scannen
    static let wallet_scan_again = UBLocalized.tr(UBLocalizedKey.wallet_scan_again_key)
   /// Scannen Sie den EU-konformen QR-Code auf dem Zertifikat.

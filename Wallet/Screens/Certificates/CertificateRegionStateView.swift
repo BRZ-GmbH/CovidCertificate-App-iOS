@@ -54,10 +54,10 @@ class CertificateRegionStateView: UIView {
 
         results.forEach { result in
             let textLabel = Label(.textLarge, textAlignment: .center)
-            switch result.region {
-            case "ET": textLabel.text = UBLocalized.region_type_ET
-            case "NG": textLabel.text = UBLocalized.region_type_NG
-            default: break
+            if result.region?.hasPrefix("ET") == true {
+                textLabel.text = UBLocalized.region_type_ET
+            } else if result.region?.hasPrefix("NG") == true {
+                textLabel.text = UBLocalized.region_type_NG
             }
             textLabel.textColor = .cc_white
             textLabel.backgroundColor = result.valid ? .cc_green_light : .cc_red

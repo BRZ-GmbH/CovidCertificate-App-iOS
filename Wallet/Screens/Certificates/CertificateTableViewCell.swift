@@ -116,7 +116,7 @@ class CertificateTableViewCell: UITableViewCell {
             nameLabel.text = holder.healthCert.displayFullName
             stateLabel.certificate = holder.healthCert
 
-            VerifierManager.shared.addObserver(self, for: cert.qrCode, regions: ["ET", "NG"], checkDefaultRegion: false) { [weak self] state in
+            VerifierManager.shared.addObserver(self, for: cert.qrCode, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false) { [weak self] state in
                 guard let strongSelf = self else { return }
                 strongSelf.state = state
             }

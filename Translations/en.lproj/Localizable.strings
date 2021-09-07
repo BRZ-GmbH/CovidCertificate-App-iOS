@@ -432,8 +432,24 @@
 "region_type_NG" = "Night Club";
 
 /* Warnung bei fehlender aktueller Zeit durch Timeserver */
-"wallet_time_missing" = "3-G Status not available, please active internet connection";
+"wallet_time_missing" = "3-G Status not available, please activate internet connection";
 
-"wallet_validation_data_expired" = "3-G Status not available, please active internet connection";
+"wallet_validation_data_expired" = "3-G Status not available, please activate internet connection";
 
 "wallet_3g_status_disclaimer" = "3-G Preview: Only valid with GreenCheck scan and ID";
+
+"wallet_region_selection_title" = "Federal State Selection";
+
+"wallet_region_selection_header_title" = "Select a federal state";
+"wallet_region_selection_header_message" = "Different regulations may apply depending on the federal state. You can change the federal state at any time.";
+
+"region_nationwide" = "Nationwide";
+"region_burgenland" = "Burgenland";
+"region_wien" = "Vienna";
+"region_kaernten" = "Carinthia";
+"region_niederoesterreich" = "Lower Austria";
+"region_oberoesterreich" = "Upper Austria";
+"region_salzburg" = "Salzburg";
+"region_steiermark" = "Styria";
+"region_tirol" = "Tirol";
+"region_vorarlberg" = "Vorarlberg";
