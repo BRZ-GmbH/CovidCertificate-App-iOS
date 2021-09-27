@@ -77,7 +77,13 @@ class OnboardingContentViewController: ViewController {
         header.didExpand = { expanded in
             body.superview?.ub_setHidden(!expanded)
             body.alpha = expanded ? 1 : 0
-            UIAccessibility.post(notification: .screenChanged, argument: expanded ? body : header)
+        }
+        
+        if(UIAccessibility.isVoiceOverRunning) {
+            // This will trigger the expand Logic from the ExpandableViewHeader
+            header.touchUpCallback?()
+            // Remove the callback otherwise the User can toggle the ExpandableViewHeader.
+            header.touchUpCallback = nil
         }
 
         stackScrollView.addSpacerView(Padding.medium)

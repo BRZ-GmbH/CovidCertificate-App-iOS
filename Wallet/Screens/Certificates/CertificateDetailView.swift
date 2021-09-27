@@ -203,11 +203,18 @@ class CertificateDetailView: UIView {
         sv.axis = .vertical
         sv.isAccessibilityElement = true
 
+        var accessibilityLabels = [title.0, v]
         // we add what the screen shows to accessibility
-        if UBLocalized.languageIsEnglish() || !addEnglishLabels {
-            sv.accessibilityLabel = [title.0, v].joined(separator: ", ")
-        } else {
-            sv.accessibilityLabel = [title.0, title.1, v].joined(separator: ", ")
+
+        if !UBLocalized.languageIsEnglish() && addEnglishLabels && showEnglishLabels  {
+            accessibilityLabels.insert(title.1, at: accessibilityLabels.startIndex + 1)
+        }
+        
+        sv.accessibilityLabel = accessibilityLabels.joined(separator: ", ")
+        
+        // This is only for the "Vaccine Dose", where "/" gets replaced with "of".
+        if title == UBLocalized.translationWithEnglish(key: .wallet_certificate_impfdosis_title_key) {
+            sv.accessibilityLabel = sv.accessibilityLabel?.replacingOccurrences(of: "/", with: " \(UBLocalized.accessibility_of_text) ")
         }
 
         let titleLabel = Label(.textBold)
@@ -328,12 +335,20 @@ class CertificateDetailView: UIView {
     }
 }
 
-private class DashedLineView: UIView {
+class DashedLineView: UIView {
+    
+    enum Style {
+        case thick
+        case thin
+    }
+    
     private var shapeLayer = CAShapeLayer()
+    private let style: Style
 
     // MARK: - Init
 
-    init() {
+    init(style: Style = .thick) {
+        self.style = style
         super.init(frame: .zero)
         setup()
     }
@@ -348,10 +363,19 @@ private class DashedLineView: UIView {
     private func setup() {
         layer.addSublayer(shapeLayer)
 
-        shapeLayer.strokeColor = UIColor.cc_line.cgColor
-        shapeLayer.lineWidth = 2.0
-        shapeLayer.lineDashPattern = [NSNumber(value: Float(Padding.small)), NSNumber(value: Float(2.0 * Padding.small))]
-        shapeLayer.lineCap = .round
+        switch style {
+        case .thick:
+            shapeLayer.strokeColor = UIColor.cc_line.cgColor
+            shapeLayer.lineWidth = 2.0
+            shapeLayer.lineDashPattern = [NSNumber(value: Float(Padding.small)), NSNumber(value: Float(2.0 * Padding.small))]
+            shapeLayer.lineCap = .round
+        case .thin:
+            shapeLayer.strokeColor = UIColor.cc_dashedLine.cgColor
+            shapeLayer.lineWidth = 1.0
+            shapeLayer.lineDashPattern = [NSNumber(value: Float(6)), NSNumber(value: Float(2.0))]
+            shapeLayer.lineCap = .square
+        }
+        
     }
 
     // MARK: - Layout

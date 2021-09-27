@@ -82,6 +82,6 @@ class RegionSelectionButton: Button {
     private func update() {
         title = region?.name
         leftIconImageView.image = region?.flag
-        accessibilityLabel = region?.name
+        accessibilityLabel = [UBLocalized.accessibility_selected_region, region?.name, UBLocalized.accessibility_change_selected_region].compactMap({ $0 }).joined(separator: ",")
     }
 }

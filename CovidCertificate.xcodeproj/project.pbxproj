@@ -33,8 +33,13 @@
 		2485F4782456185100C3D8C3 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F4772456185000C3D8C3 /* DebugLog.swift */; };
 		2485F4802459631A00C3D8C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F47F2459631A00C3D8C3 /* NetworkError.swift */; };
 		48ECCD2A264F0797008678DD /* StaticContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ABDF2264A652800FDE0E1 /* StaticContentViewModel.swift */; };
+		4B327F7226F09E1C00246E4E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B327F7126F09E1C00246E4E /* UIView.swift */; };
+		4B327F7326F09E1C00246E4E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B327F7126F09E1C00246E4E /* UIView.swift */; };
 		5B10DE2026B1770A00F6F19F /* AngledBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B10DE1F26B1770A00F6F19F /* AngledBackgroundView.swift */; };
 		5B10DE2126B1770A00F6F19F /* AngledBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B10DE1F26B1770A00F6F19F /* AngledBackgroundView.swift */; };
+		5B2BB28B26E8AC99003A89DA /* CovidCertificateWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2BB28A26E8AC99003A89DA /* CovidCertificateWalletTests.swift */; };
+		5B2BB29426E8ACDD003A89DA /* MockKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84089EF24936D8700A66CD1 /* MockKeychain.swift */; };
+		5B2E7C5E26E7532F005420F5 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E7C5D26E7532F005420F5 /* NotificationHandler.swift */; };
 		5B55B15826A5959700466116 /* CovidCertificateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5B55B15726A5959700466116 /* CovidCertificateSDK */; };
 		5B5BBC7F26A5B6E400D08868 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5B5BBC7E26A5B6E400D08868 /* SnapKit */; };
 		5B67DA4326A9C51C00F1FBCA /* String+VersionCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67DA4226A9C51C00F1FBCA /* String+VersionCompare.swift */; };
@@ -49,6 +54,7 @@
 		5BB6F3BA268B5439006EA014 /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B7268B5439006EA014 /* SourceSansPro-SemiBold.ttf */; };
 		5BB6F3BB268B5439006EA014 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B8268B5439006EA014 /* SourceSansPro-Black.ttf */; };
 		5BB6F3BC268B5439006EA014 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB6F3B8268B5439006EA014 /* SourceSansPro-Black.ttf */; };
+		5BBAB52126EFC3E3001CACC8 /* CertificateRegionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAB52026EFC3E3001CACC8 /* CertificateRegionStatusView.swift */; };
 		5BCF8AFC26A960BF0042407A /* CertificateRegionStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF8AFB26A960BF0042407A /* CertificateRegionStateView.swift */; };
 		5BDBF08A26930CF100FA5B1C /* WalletHomescreenActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDBF08926930CF100FA5B1C /* WalletHomescreenActionView.swift */; };
 		5BDBF08C26930D0700FA5B1C /* WalletHomescreenActionPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDBF08B26930D0700FA5B1C /* WalletHomescreenActionPopupView.swift */; };
@@ -116,7 +122,6 @@
 		6EA5C38526453E0000EA066F /* EuHealthCert+CC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA5C38326453D1400EA066F /* EuHealthCert+CC.swift */; };
 		6EA5C38B2645CF3B00EA066F /* VerifyCheckContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA5C38A2645CF3B00EA066F /* VerifyCheckContentViewController.swift */; };
 		6EC172BB2640769D002E27DB /* LinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC172BA2640769D002E27DB /* LinkHandler.swift */; };
-		6EC172BC26407753002E27DB /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84089EB2493695200A66CD1 /* Keychain.swift */; };
 		6EC172BF26407EBF002E27DB /* WalletHomescreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC172BE26407EBF002E27DB /* WalletHomescreenViewController.swift */; };
 		6EC172C226407EE6002E27DB /* WalletImprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC172C126407EE6002E27DB /* WalletImprintViewController.swift */; };
 		6EC172C526407F1A002E27DB /* WalletScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC172C426407F1A002E27DB /* WalletScannerViewController.swift */; };
@@ -249,7 +254,6 @@
 		F80E7376245AF74C00C934B8 /* UBPinnedCertificatesTrustEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80E7375245AF74C00C934B8 /* UBPinnedCertificatesTrustEvaluator.swift */; };
 		F84089EC2493695200A66CD1 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84089EB2493695200A66CD1 /* Keychain.swift */; };
 		F84089EE2493696500A66CD1 /* KeychainPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84089ED2493696500A66CD1 /* KeychainPersisted.swift */; };
-		F84089F024936D8700A66CD1 /* MockKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84089EF24936D8700A66CD1 /* MockKeychain.swift */; };
 		F8454AA3263983B8005CF491 /* NSMutableAttributedString+CC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8454AA2263983B8005CF491 /* NSMutableAttributedString+CC.swift */; };
 		F85ED9A32499EF93007EBC49 /* Bundle+BuildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85ED9A22499EF93007EBC49 /* Bundle+BuildInfo.swift */; };
 		F86A6A832637F93D003CAC1B /* UICollection+CC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A6A822637F93D003CAC1B /* UICollection+CC.swift */; };
@@ -259,12 +263,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E81CCAC241FCC7F006F2437 /* PBXContainerItemProxy */ = {
+		5B2BB28D26E8AC99003A89DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8E81CC8D241FCC7D006F2437 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8E81CC94241FCC7D006F2437;
-			remoteInfo = IVC;
+			remoteInfo = CovidCertificateWallet;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -282,7 +286,12 @@
 		24780B562431B5A9003BB26C /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		2485F4772456185000C3D8C3 /* DebugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		2485F47F2459631A00C3D8C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4B327F7126F09E1C00246E4E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		5B10DE1F26B1770A00F6F19F /* AngledBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngledBackgroundView.swift; sourceTree = "<group>"; };
+		5B2BB28826E8AC99003A89DA /* CovidCertificateWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidCertificateWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B2BB28A26E8AC99003A89DA /* CovidCertificateWalletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCertificateWalletTests.swift; sourceTree = "<group>"; };
+		5B2BB28C26E8AC99003A89DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B2E7C5D26E7532F005420F5 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		5B55B15926A5968400466116 /* covidcertificate-sdk-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "covidcertificate-sdk-ios"; sourceTree = "<group>"; };
 		5B67DA4226A9C51C00F1FBCA /* String+VersionCompare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+VersionCompare.swift"; sourceTree = "<group>"; };
 		5B825B8326931EF000129C1A /* ScreenProtector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenProtector.swift; sourceTree = "<group>"; };
@@ -290,6 +299,7 @@
 		5BB6F3B2268B533C006EA014 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		5BB6F3B7268B5439006EA014 /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
 		5BB6F3B8268B5439006EA014 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
+		5BBAB52026EFC3E3001CACC8 /* CertificateRegionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRegionStatusView.swift; sourceTree = "<group>"; };
 		5BCF8AFB26A960BF0042407A /* CertificateRegionStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRegionStateView.swift; sourceTree = "<group>"; };
 		5BDBF08926930CF100FA5B1C /* WalletHomescreenActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomescreenActionView.swift; sourceTree = "<group>"; };
 		5BDBF08B26930D0700FA5B1C /* WalletHomescreenActionPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomescreenActionPopupView.swift; sourceTree = "<group>"; };
@@ -384,8 +394,6 @@
 		8E81CC98241FCC7D006F2437 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E81CC9C241FCC7D006F2437 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8E81CCA1241FCC7F006F2437 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8E81CCAB241FCC7F006F2437 /* CovidCertificateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidCertificateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E81CCB1241FCC7F006F2437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EB23D77245AF2C30073E83A /* RandomGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerators.swift; sourceTree = "<group>"; };
 		A6BBA10F246BFCBC00E42EE7 /* UIDevice+ScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ScreenType.swift"; sourceTree = "<group>"; };
 		AAF73667242F3D030051E34A /* UIStackView+CC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+CC.swift"; sourceTree = "<group>"; };
@@ -431,6 +439,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5B2BB28526E8AC99003A89DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EC1732826429E31002E27DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,13 +462,6 @@
 				5BE852DC26D6DEB200E0BF7F /* SnapKit in Frameworks */,
 				5B55B15826A5959700466116 /* CovidCertificateSDK in Frameworks */,
 				5B5BBC7F26A5B6E400D08868 /* SnapKit in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8E81CCA8241FCC7F006F2437 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +580,7 @@
 				DC702B16243F70060066C773 /* UIView+CC.swift */,
 				6EA5C3572643C91A00EA066F /* UIImageView+CC.swift */,
 				6EA5C3592643CF0C00EA066F /* QRCodeUtils.swift */,
+				4B327F7126F09E1C00246E4E /* UIView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -582,6 +591,24 @@
 				F87C369F258B6652008DCC81 /* ExposureNotification.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B2BB28926E8AC99003A89DA /* CovidCertificateWalletTests */ = {
+			isa = PBXGroup;
+			children = (
+				F84089EF24936D8700A66CD1 /* MockKeychain.swift */,
+				5B2BB28A26E8AC99003A89DA /* CovidCertificateWalletTests.swift */,
+				5B2BB28C26E8AC99003A89DA /* Info.plist */,
+			);
+			path = CovidCertificateWalletTests;
+			sourceTree = "<group>";
+		};
+		5B2E7C5A26E752D7005420F5 /* NotificationHandler */ = {
+			isa = PBXGroup;
+			children = (
+				5B2E7C5D26E7532F005420F5 /* NotificationHandler.swift */,
+			);
+			path = NotificationHandler;
 			sourceTree = "<group>";
 		};
 		5B825B8226931EE600129C1A /* ScreenProtector */ = {
@@ -749,6 +776,7 @@
 				6E0281FD265660E500582904 /* CertificateDetailView.swift */,
 				6E8F52EB265EC33F00406430 /* CertificateNoteView.swift */,
 				5BCF8AFB26A960BF0042407A /* CertificateRegionStateView.swift */,
+				5BBAB52026EFC3E3001CACC8 /* CertificateRegionStatusView.swift */,
 			);
 			path = Certificates;
 			sourceTree = "<group>";
@@ -784,6 +812,7 @@
 		6EC1735B2642A0D5002E27DB /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				5B2E7C5A26E752D7005420F5 /* NotificationHandler */,
 				5BE852E226D6E60900E0BF7F /* Regions */,
 				5B825B8226931EE600129C1A /* ScreenProtector */,
 				6E361223267239A4008C0C86 /* ImportHandler */,
@@ -880,7 +909,7 @@
 				6EC172DF26429D43002E27DB /* Wallet */,
 				6EC172E026429D51002E27DB /* Verifier */,
 				8E81CC97241FCC7D006F2437 /* CovidCertificate */,
-				8E81CCAE241FCC7F006F2437 /* CovidCertificateTests */,
+				5B2BB28926E8AC99003A89DA /* CovidCertificateWalletTests */,
 				8E81CC96241FCC7D006F2437 /* Products */,
 				24780B3B2430BC00003BB26C /* Frameworks */,
 			);
@@ -890,8 +919,8 @@
 			isa = PBXGroup;
 			children = (
 				8E81CC95241FCC7D006F2437 /* CovidCertificateWallet.app */,
-				8E81CCAB241FCC7F006F2437 /* CovidCertificateTests.xctest */,
 				6EC1733D26429E31002E27DB /* CovidCertificateVerifier.app */,
+				5B2BB28826E8AC99003A89DA /* CovidCertificateWalletTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -905,15 +934,6 @@
 				DC9A8197242CE46F00AD1548 /* Supporting Files */,
 			);
 			path = CovidCertificate;
-			sourceTree = "<group>";
-		};
-		8E81CCAE241FCC7F006F2437 /* CovidCertificateTests */ = {
-			isa = PBXGroup;
-			children = (
-				8E81CCB1241FCC7F006F2437 /* Info.plist */,
-				F84089EF24936D8700A66CD1 /* MockKeychain.swift */,
-			);
-			path = CovidCertificateTests;
 			sourceTree = "<group>";
 		};
 		DC286A24242CE0AD001D5344 /* SharedLogic */ = {
@@ -1042,6 +1062,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5B2BB28726E8AC99003A89DA /* CovidCertificateWalletTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B2BB29326E8AC99003A89DA /* Build configuration list for PBXNativeTarget "CovidCertificateWalletTests" */;
+			buildPhases = (
+				5B2BB28426E8AC99003A89DA /* Sources */,
+				5B2BB28526E8AC99003A89DA /* Frameworks */,
+				5B2BB28626E8AC99003A89DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B2BB28E26E8AC99003A89DA /* PBXTargetDependency */,
+			);
+			name = CovidCertificateWalletTests;
+			productName = CovidCertificateWalletTests;
+			productReference = 5B2BB28826E8AC99003A89DA /* CovidCertificateWalletTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6EC172E126429E31002E27DB /* CovidCertificateVerifier */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EC1733826429E31002E27DB /* Build configuration list for PBXNativeTarget "CovidCertificateVerifier" */;
@@ -1069,12 +1107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E81CCB4241FCC7F006F2437 /* Build configuration list for PBXNativeTarget "CovidCertificateWallet" */;
 			buildPhases = (
+				5B76297C26E27AC900B06D46 /* Pick InfoPlist.strings according to Build Configuration */,
 				8E81CCC0241FD2BC006F2437 /* Swift Format */,
 				8E81CCC1241FD2EE006F2437 /* Swift Lint */,
 				8E81CC91241FCC7D006F2437 /* Sources */,
 				8E81CC92241FCC7D006F2437 /* Frameworks */,
 				8E81CC93241FCC7D006F2437 /* Resources */,
-				240879652440504500001462 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -1091,24 +1129,6 @@
 			productReference = 8E81CC95241FCC7D006F2437 /* CovidCertificateWallet.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E81CCAA241FCC7F006F2437 /* CovidCertificateTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8E81CCB7241FCC7F006F2437 /* Build configuration list for PBXNativeTarget "CovidCertificateTests" */;
-			buildPhases = (
-				8E81CCA7241FCC7F006F2437 /* Sources */,
-				8E81CCA8241FCC7F006F2437 /* Frameworks */,
-				8E81CCA9241FCC7F006F2437 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8E81CCAD241FCC7F006F2437 /* PBXTargetDependency */,
-			);
-			name = CovidCertificateTests;
-			productName = IVCTests;
-			productReference = 8E81CCAB241FCC7F006F2437 /* CovidCertificateTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1116,17 +1136,17 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "BRZ GmbH";
 				TargetAttributes = {
+					5B2BB28726E8AC99003A89DA = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 8E81CC94241FCC7D006F2437;
+					};
 					8E81CC94241FCC7D006F2437 = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
-					};
-					8E81CCAA241FCC7F006F2437 = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 8E81CC94241FCC7D006F2437;
 					};
 					8E81CCC2241FD475006F2437 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -1153,13 +1173,20 @@
 			targets = (
 				8E81CC94241FCC7D006F2437 /* CovidCertificateWallet */,
 				6EC172E126429E31002E27DB /* CovidCertificateVerifier */,
-				8E81CCAA241FCC7F006F2437 /* CovidCertificateTests */,
 				8E81CCC2241FD475006F2437 /* Translation */,
+				5B2BB28726E8AC99003A89DA /* CovidCertificateWalletTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5B2BB28626E8AC99003A89DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EC1732A26429E31002E27DB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1196,17 +1223,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E81CCA9241FCC7F006F2437 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		240879652440504500001462 /* Run Script */ = {
+		5B76297C26E27AC900B06D46 /* Pick InfoPlist.strings according to Build Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1215,14 +1235,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = "Pick InfoPlist.strings according to Build Configuration";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "CURRENT_PROJECT_VERSION=7\n";
+			shellScript = "if [ \"$CONFIGURATION\" == \"Release-Prod\" ]; then\ngit restore ${SRCROOT}/Translations/de.lproj/InfoPlist.strings\ngit restore ${SRCROOT}/Translations/en.lproj/InfoPlist.strings\nfi\n\nif [ \"$CONFIGURATION\" == \"Release-Abn\" ]; then\ncp ${SRCROOT}/Translations/de.lproj-Abn/InfoPlist.strings ${SRCROOT}/Translations/de.lproj/InfoPlist.strings\ncp ${SRCROOT}/Translations/de.lproj-Abn/InfoPlist.strings ${SRCROOT}/Translations/en.lproj/InfoPlist.strings\nfi\n\nif [ \"$CONFIGURATION\" == \"Release-Prod-Test\" ]; then\ncp ${SRCROOT}/Translations/de.lproj-PTest/InfoPlist.strings ${SRCROOT}/Translations/de.lproj/InfoPlist.strings\ncp ${SRCROOT}/Translations/de.lproj-PTest/InfoPlist.strings ${SRCROOT}/Translations/en.lproj/InfoPlist.strings\nfi\n";
 		};
 		6EC172E426429E31002E27DB /* Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1353,6 +1373,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5B2BB28426E8AC99003A89DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B2BB28B26E8AC99003A89DA /* CovidCertificateWalletTests.swift in Sources */,
+				5B2BB29426E8ACDD003A89DA /* MockKeychain.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EC172E626429E31002E27DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1433,6 +1462,7 @@
 				6EC1731C26429E31002E27DB /* LinkHandler.swift in Sources */,
 				6E6B1A962649D89500DB4A38 /* VerifyStatusView.swift in Sources */,
 				48ECCD2A264F0797008678DD /* StaticContentViewModel.swift in Sources */,
+				4B327F7326F09E1C00246E4E /* UIView.swift in Sources */,
 				6EC1731F26429E31002E27DB /* Endpoint+Request.swift in Sources */,
 				6EC1732026429E31002E27DB /* RoundBackgroundView.swift in Sources */,
 				6E8F52ED265EC33F00406430 /* CertificateNoteView.swift in Sources */,
@@ -1459,6 +1489,7 @@
 				2485F4782456185100C3D8C3 /* DebugLog.swift in Sources */,
 				DC702AFD243F6E410066C773 /* UBButton.swift in Sources */,
 				AAF73668242F3D030051E34A /* UIStackView+CC.swift in Sources */,
+				4B327F7226F09E1C00246E4E /* UIView.swift in Sources */,
 				6E8FC0FB24518BF2002AB1E5 /* UBKeyboardObserver.m in Sources */,
 				5B67DA4326A9C51C00F1FBCA /* String+VersionCompare.swift in Sources */,
 				6E7C0D22242CE2100017C4F9 /* Button.swift in Sources */,
@@ -1527,11 +1558,13 @@
 				8EB23D78245AF2C30073E83A /* RandomGenerators.swift in Sources */,
 				6E7C0D43242E44D80017C4F9 /* WebViewController.swift in Sources */,
 				DC8AC7472653B7F5005A2543 /* CertificateQRCodeStateView.swift in Sources */,
+				5B2E7C5E26E7532F005420F5 /* NotificationHandler.swift in Sources */,
 				6E8F52EC265EC33F00406430 /* CertificateNoteView.swift in Sources */,
 				6EF28CFF26370538001C1565 /* NSQRScanningView.swift in Sources */,
 				6EC172D126414EBA002E27DB /* HomescreenBaseViewController.swift in Sources */,
 				6EC172D726416FF7002E27DB /* HomescreenCertificatesViewController.swift in Sources */,
 				F80E735A245AD7B400C934B8 /* URLSession+pinning.swift in Sources */,
+				5BBAB52126EFC3E3001CACC8 /* CertificateRegionStatusView.swift in Sources */,
 				F88D99DB2497938E0081790E /* UIImage+localizedImage.swift in Sources */,
 				6EC172C726407F2C002E27DB /* CertificateListViewController.swift in Sources */,
 				DC8ABDF3264A652800FDE0E1 /* StaticContentViewModel.swift in Sources */,
@@ -1572,22 +1605,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E81CCA7241FCC7F006F2437 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F84089F024936D8700A66CD1 /* MockKeychain.swift in Sources */,
-				6EC172BC26407753002E27DB /* Keychain.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8E81CCAD241FCC7F006F2437 /* PBXTargetDependency */ = {
+		5B2BB28E26E8AC99003A89DA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E81CC94241FCC7D006F2437 /* CovidCertificateWallet */;
-			targetProxy = 8E81CCAC241FCC7F006F2437 /* PBXContainerItemProxy */;
+			targetProxy = 5B2BB28D26E8AC99003A89DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1683,14 +1707,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.dev;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1699,27 +1723,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "CovidCertificate/Supporting Files/CovidCertificate-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = "Release-Dev";
-		};
-		486EAFC8247492A500D686BE /* Release-Dev */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JH7CQD4MLU;
-				INFOPLIST_FILE = CovidCertificateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.admin.cc-wallet.tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificate.app/CovidCertificate";
 			};
 			name = "Release-Dev";
 		};
@@ -1732,6 +1735,423 @@
 				SDKROOT = macosx;
 			};
 			name = "Release-Dev";
+		};
+		5B2BB28F26E8AC99003A89DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CovidCertificateWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.CovidCertificateWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificateWallet.app/CovidCertificateWallet";
+			};
+			name = Debug;
+		};
+		5B2BB29026E8AC99003A89DA /* Release-Abnahme */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CovidCertificateWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.CovidCertificateWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificateWallet.app/CovidCertificateWallet";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Abnahme";
+		};
+		5B2BB29126E8AC99003A89DA /* Release-Dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CovidCertificateWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.CovidCertificateWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificateWallet.app/CovidCertificateWallet";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Dev";
+		};
+		5B2BB29226E8AC99003A89DA /* Release-Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CovidCertificateWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.CovidCertificateWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificateWallet.app/CovidCertificateWallet";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Prod";
+		};
+		5BE4FD4226F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_NUMBER = 20200000.0.0;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EN_DEVELOPER_REGION = CH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE_PROD=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D RELEASE_PROD_TEST";
+				PRIMARY_BUNDLE_IDENTIFIER = "ch.admin.cc-wallet.dev";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE_PROD_TEST;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Prod-Test";
+		};
+		5BE4FD4326F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Wallet";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 41;
+				DEVELOPMENT_TEAM = M8HLLAZUQZ;
+				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.3;
+				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.ptest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE_PROD_TEST WALLET";
+				SWIFT_OBJC_BRIDGING_HEADER = "CovidCertificate/Supporting Files/CovidCertificate-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-Prod-Test";
+		};
+		5BE4FD4426F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Verifier";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "${BUILD_NUMBER}";
+				DEVELOPMENT_TEAM = JH7CQD4MLU;
+				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Verifier-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.verifier;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRIMARY_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE_PROD VERIFIER";
+				SWIFT_OBJC_BRIDGING_HEADER = "CovidCertificate/Supporting Files/CovidCertificate-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-Prod-Test";
+		};
+		5BE4FD4526F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JH7CQD4MLU;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = "Release-Prod-Test";
+		};
+		5BE4FD4626F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CovidCertificateWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.CovidCertificateWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificateWallet.app/CovidCertificateWallet";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Prod-Test";
 		};
 		6EC1733926429E31002E27DB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1908,43 +2328,22 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.abn;
-				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.abn;
+				PRODUCT_BUNDLE_IDENTIFIER = "at.gv.brz.wallet-abn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE_ABNAHME ENABLE_TESTING ENABLE_OS_LOG WALLET";
 				SWIFT_OBJC_BRIDGING_HEADER = "CovidCertificate/Supporting Files/CovidCertificate-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = "Release-Abnahme";
-		};
-		8E3016982459D0D2002A3970 /* Release-Abnahme */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JH7CQD4MLU;
-				INFOPLIST_FILE = CovidCertificateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.admin.cc-wallet.tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificate.app/CovidCertificate";
 			};
 			name = "Release-Abnahme";
 		};
@@ -2032,14 +2431,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.debug;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.oe.covid.wallet.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2049,27 +2448,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		8E81CCB8241FCC7F006F2437 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JH7CQD4MLU;
-				INFOPLIST_FILE = CovidCertificateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.admin.cc-wallet.tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificate.app/CovidCertificate";
 			};
 			name = Debug;
 		};
@@ -2143,14 +2521,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2159,27 +2537,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "CovidCertificate/Supporting Files/CovidCertificate-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = "Release-Prod";
-		};
-		8E81CCBD241FCE08006F2437 /* Release-Prod */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JH7CQD4MLU;
-				INFOPLIST_FILE = CovidCertificateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.admin.cc-wallet.tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificate.app/CovidCertificate";
 			};
 			name = "Release-Prod";
 		};
@@ -2206,6 +2563,18 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5B2BB29326E8AC99003A89DA /* Build configuration list for PBXNativeTarget "CovidCertificateWalletTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B2BB28F26E8AC99003A89DA /* Debug */,
+				5B2BB29026E8AC99003A89DA /* Release-Abnahme */,
+				5B2BB29126E8AC99003A89DA /* Release-Dev */,
+				5B2BB29226E8AC99003A89DA /* Release-Prod */,
+				5BE4FD4626F1D8DC00F11CC2 /* Release-Prod-Test */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		6EC1733826429E31002E27DB /* Build configuration list for PBXNativeTarget "CovidCertificateVerifier" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2213,6 +2582,7 @@
 				6EC1733A26429E31002E27DB /* Release-Abnahme */,
 				6EC1733B26429E31002E27DB /* Release-Dev */,
 				6EC1733C26429E31002E27DB /* Release-Prod */,
+				5BE4FD4426F1D8DC00F11CC2 /* Release-Prod-Test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2224,6 +2594,7 @@
 				8E3016962459D0D2002A3970 /* Release-Abnahme */,
 				486EAFC5247492A500D686BE /* Release-Dev */,
 				8E81CCBB241FCE08006F2437 /* Release-Prod */,
+				5BE4FD4226F1D8DC00F11CC2 /* Release-Prod-Test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2235,17 +2606,7 @@
 				8E3016972459D0D2002A3970 /* Release-Abnahme */,
 				486EAFC6247492A500D686BE /* Release-Dev */,
 				8E81CCBC241FCE08006F2437 /* Release-Prod */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		8E81CCB7241FCC7F006F2437 /* Build configuration list for PBXNativeTarget "CovidCertificateTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8E81CCB8241FCC7F006F2437 /* Debug */,
-				8E3016982459D0D2002A3970 /* Release-Abnahme */,
-				486EAFC8247492A500D686BE /* Release-Dev */,
-				8E81CCBD241FCE08006F2437 /* Release-Prod */,
+				5BE4FD4326F1D8DC00F11CC2 /* Release-Prod-Test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2257,6 +2618,7 @@
 				8E3016992459D0D2002A3970 /* Release-Abnahme */,
 				486EAFC9247492A500D686BE /* Release-Dev */,
 				8E81CCC6241FD475006F2437 /* Release-Prod */,
+				5BE4FD4526F1D8DC00F11CC2 /* Release-Prod-Test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

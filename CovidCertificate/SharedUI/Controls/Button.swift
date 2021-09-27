@@ -69,6 +69,10 @@ class Button: UBButton {
             make.height.greaterThanOrEqualTo(44.0)
         }
     }
+    
+    public func changeAccessibilityTitle(title: String) {
+        accessibilityLabel = title
+    }
 
     init(title: String, style: Style = .normal(UIColor.cc_green_dark), customTextColor: UIColor? = nil) {
         self.style = style

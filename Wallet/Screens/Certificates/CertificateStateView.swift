@@ -84,6 +84,10 @@ class CertificateStateView: UIView {
             }
             make.height.greaterThanOrEqualTo(76)
         }
+        
+        regionStateView.snp.makeConstraints { make in
+            make.edges.equalTo(backgroundView)
+        }
 
         regionStateView.layer.cornerRadius = 10
         regionStateView.layer.masksToBounds = true
@@ -169,8 +173,8 @@ class CertificateStateView: UIView {
                 if case .error = self.states.state {
                     self.imageView.image = VerificationError.signature.icon(with: .cc_red)
                     self.textLabel.attributedText = VerificationError.signature.displayName()
-                    self.backgroundView.backgroundColor = .cc_red
-                    self.validityView.backgroundColor = .cc_red
+                    self.backgroundView.backgroundColor = .cc_red_invalid
+                    self.validityView.backgroundColor = .cc_red_invalid
                     self.textLabel.textColor = .cc_white
                     self.validityView.textColor = .cc_white
                 }
@@ -207,10 +211,10 @@ class CertificateStateView: UIView {
                     self.backgroundView.ub_setHidden(false)
                     self.textLabel.ub_setHidden(false)
                 case let .success(results):
-                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_light)
+                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_valid)
                     self.textLabel.attributedText = nil
-                    self.backgroundView.backgroundColor = .cc_green_light
-                    self.validityView.backgroundColor = .cc_green_light
+                    self.backgroundView.backgroundColor = .cc_green_valid
+                    self.validityView.backgroundColor = .cc_green_valid
                     self.textLabel.textColor = .cc_white
                     self.validityView.textColor = .cc_black
                     self.regionStateView.results = results
@@ -222,8 +226,8 @@ class CertificateStateView: UIView {
                 case .error:
                     self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
                     self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
-                    self.backgroundView.backgroundColor = .cc_red
-                    self.validityView.backgroundColor = .cc_red
+                    self.backgroundView.backgroundColor = .cc_red_invalid
+                    self.validityView.backgroundColor = .cc_red_invalid
                     self.textLabel.textColor = .cc_white
                     self.validityView.textColor = .cc_white
                     self.regionStateView.ub_setHidden(true)
@@ -234,8 +238,8 @@ class CertificateStateView: UIView {
                 case .signatureInvalid:
                     self.imageView.image = VerificationError.signature.icon()?.ub_image(with: .cc_red)
                     self.textLabel.attributedText = VerificationError.signature.displayName()
-                    self.backgroundView.backgroundColor = .cc_red
-                    self.validityView.backgroundColor = .cc_red
+                    self.backgroundView.backgroundColor = .cc_red_invalid
+                    self.validityView.backgroundColor = .cc_red_invalid
                     self.textLabel.textColor = .cc_white
                     self.validityView.textColor = .cc_white
                     self.regionStateView.ub_setHidden(true)
@@ -270,7 +274,11 @@ class CertificateStateView: UIView {
                 }
             }
 
-            self.accessibilityLabel = self.textLabel.attributedText?.string
+            if let text = self.textLabel.attributedText?.string {
+                self.accessibilityLabel = text
+            } else {
+                self.accessibilityLabel = [self.validityHintView.text, self.regionStateView.accessibilityLabel].compactMap({$0}).joined(separator: ",")
+            }
         }
 
         if animated {

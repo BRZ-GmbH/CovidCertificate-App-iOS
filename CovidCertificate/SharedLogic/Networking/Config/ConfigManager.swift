@@ -58,7 +58,10 @@ class ConfigManager: NSObject {
     // MARK: - Start config request
 
     static func shouldLoadConfig(url: String?, lastConfigUrl: String?, lastConfigLoad: Date?) -> Bool {
-        return false
+        // Deactivate Config loading for Forced Update for now
+        if true {
+            return false
+        }
         // if the config url was changed (by OS version or app version changing) load config in anycase
         if url != lastConfigUrl {
             return true
@@ -121,27 +124,33 @@ class ConfigManager: NSObject {
 
     private func presentAlertIfNeeded(config: ConfigResponseBody, window: UIWindow?) {
         if let minVersion = config.ios, Bundle.appVersion.versionCompare(minVersion) == .orderedAscending {
-            if Self.configAlert == nil {
-                let alert = UIAlertController(title: UBLocalized.force_update_title,
-                                              message: UBLocalized.force_update_text,
-                                              preferredStyle: .alert)
-
-                alert.addAction(UIAlertAction(title: UBLocalized.force_update_button, style: .default, handler: { _ in
-                    // Schedule tasks to next run loop
-                    DispatchQueue.main.async {
-                        // show alert again -> app should always be blocked
-                        Self.configAlert = nil
-                        self.presentAlertIfNeeded(config: config, window: window)
-
-                        // jump to app store
-                        UIApplication.shared.open(Environment.current.appStoreURL, options: [:], completionHandler: nil)
-                    }
-
-                }))
-
-                window?.rootViewController?.topViewController.present(alert, animated: false, completion: nil)
-                Self.configAlert = alert
+            if Self.configAlert != nil {
+                Self.configAlert?.dismiss(animated: false, completion: nil)
+                Self.configAlert = nil
             }
+            let alert = UIAlertController(title: config.forceUpdate ? UBLocalized.force_update_title : UBLocalized.force_update_grace_period_title,
+                                          message: config.forceUpdate ? UBLocalized.force_update_text : String(format: NSLocalizedString("force_update_grace_period_text", comment: ""), config.formattedForceUpdateDate),
+                                          preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: config.forceUpdate ? UBLocalized.force_update_button : UBLocalized.force_update_grace_period_update_button, style: .default, handler: { _ in
+                // Schedule tasks to next run loop
+                DispatchQueue.main.async {
+                    // show alert again -> app should always be blocked
+                    Self.configAlert = nil
+                    self.presentAlertIfNeeded(config: config, window: window)
+
+                    // jump to app store
+                    UIApplication.shared.open(Environment.current.appStoreURL, options: [:], completionHandler: nil)
+                }
+
+            }))
+            
+            if config.forceUpdate == false {
+                alert.addAction(UIAlertAction(title: UBLocalized.force_update_grace_period_skip_button, style: .default, handler: nil))
+            }
+
+            window?.rootViewController?.topViewController.present(alert, animated: false, completion: nil)
+            Self.configAlert = alert
         } else {
             if Self.configAlert != nil {
                 Self.configAlert?.dismiss(animated: true, completion: nil)

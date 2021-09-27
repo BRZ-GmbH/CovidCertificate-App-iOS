@@ -27,12 +27,12 @@ class ImportHandler {
     public func handle(url: URL) {
         _ = url.startAccessingSecurityScopedResource()
 
-        var images: [UIImage] = []
+        var images: [CGImage] = []
 
         if isPdf(url: url) {
             images = drawImagesFromPDF(url: url)
-        } else if let img = UIImage(contentsOfFile: url.path) {
-            images = [img]
+        } else if let img = UIImage(contentsOfFile: url.path), let cgImage = img.cgImage {
+            images = [cgImage]
         }
 
         if images.count > 0 {
@@ -63,12 +63,17 @@ class ImportHandler {
 
             let navVC = NavigationController(rootViewController: vc, useNavigationBar: true)
 
-            vc.addOrOkCertificateTouchUpCallback = { certificate in
-                guard let c = certificate else { return }
+            vc.addOrOkCertificateTouchUpCallback = { [weak self] certificate in
+                guard let c = certificate, let strongSelf = self else { return }
 
                 CertificateStorage.shared.insertCertificate(userCertificate: c)
 
-                navVC.dismiss(animated: true, completion: nil)
+                navVC.dismiss(animated: true, completion: {
+                    
+                    if let vc = strongSelf.delegate?.viewControllers.first as? WalletHomescreenViewController {
+                        vc.certificatesViewController.changeAccessibilityFocus(toCertificate: c)
+                    }
+                })
             }
 
             delegate?.present(navVC, animated: true, completion: nil)
@@ -103,42 +108,40 @@ class ImportHandler {
         return url.pathExtension.caseInsensitiveEquals("pdf")
     }
 
-    func drawImagesFromPDF(url: URL) -> [UIImage] {
+    func drawImagesFromPDF(url: URL) -> [CGImage] {
         guard let document = CGPDFDocument(url as CFURL) else { return [] }
 
         guard document.numberOfPages <= 2 else { return [] }
 
-        var images: [UIImage] = []
+        var images: [CGImage] = []
 
         // CGPDFDocument pages start at 1
         for i in 1 ..< document.numberOfPages + 1 {
             if let page = document.page(at: i) {
                 let pageRect = page.getBoxRect(.mediaBox)
 
-                let scaling: CGFloat = 300.0 / 72.0
-
-                let renderer = UIGraphicsImageRenderer(size: CGSize(width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
-                let img = renderer.image { ctx in
-                    UIColor.white.set()
-                    ctx.fill(CGRect(x: 0, y: 0, width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
-
-                    ctx.cgContext.interpolationQuality = .high
-                    ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height * scaling)
-                    ctx.cgContext.scaleBy(x: scaling, y: -scaling)
-
-                    ctx.cgContext.drawPDFPage(page)
+                let scaling: CGFloat = 300 / 72
+                        
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let bitmapInfo = CGImageAlphaInfo.noneSkipLast.rawValue
+                
+                guard let context = CGContext(data: nil, width: Int(pageRect.size.width * scaling), height: Int(pageRect.size.height * scaling), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) else { continue }
+                context.interpolationQuality = .high
+                context.setFillColor(UIColor.white.cgColor)
+                context.fill(CGRect(x: 0, y: 0, width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
+                context.drawPDFPage(page)
+                
+                if let image = context.makeImage() {
+                    images.append(image)
                 }
-
-                images.append(img)
             }
         }
 
         return images
     }
 
-    func findQrCodeContent(image: UIImage) -> String? {
-        guard let cgImage = image.cgImage,
-              let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]) else {
+    func findQrCodeContent(image cgImage: CGImage) -> String? {
+        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]) else {
             return nil
         }
 

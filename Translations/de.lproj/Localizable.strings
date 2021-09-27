@@ -181,6 +181,17 @@
 /*Config: Update Button Aktualisieren*/
 "force_update_button" = "Aktualisieren";
 
+/*Config: Titel wenn App muss geupdatet werden sollte*/
+"force_update_grace_period_title" = "Update benötigt";
+
+/*Config: Text der angezeigt wird falls App muss geupdatet sollte, aber noch nicht geupdated werden muss*/
+"force_update_grace_period_text" = "Bitte laden Sie vor %@ die neueste Version der App.";
+
+/*Config: Update Button Aktualisieren*/
+"force_update_grace_period_update_button" = "Aktualisieren";
+
+/*Config: Update Button Jetzt nicht*/
+"force_update_grace_period_skip_button" = "Jetzt nicht";
 
 /*Wallet: Zertifikat Detail Geimpft*/
 "certificate_reason_vaccinated" = "Impfung";
@@ -224,6 +235,48 @@
 
 /*Accessibility: Lampe abschalten*/
 "accessibility_lamp_off_button" = "Taschenlampe ausschalten";
+
+/*Accessibility: So Funktioniert's Erster Schritt*/
+"wallet_scanner_howitworks_icon1" = "Erster Schritt";
+
+/*Accessibility: So Funktioniert's Zweiter Schritt*/
+"wallet_scanner_howitworks_icon2" = "Zweiter Schritt";
+
+/*Accessibility: So Funktioniert's Dritter Schritt*/
+"wallet_scanner_howitworks_icon3" = "Dritter Schritt";
+
+/*Accessibility: So Funktioniert's Österreich Flagge*/
+"wallet_scanner_howitworks_icon_Flag" = "Österreich-Flagge";
+
+/*Accessibility: Onboarding Schloss*/
+"wallet_onboarding_store_icon1" = "Schloss";
+
+/*Accessibility: Onboarding QR Code*/
+"wallet_onboarding_show_icon1" = "QR Code";
+
+/*Accessibility: Onboarding Grünes Häkchen*/
+"wallet_onboarding_show_icon2" = "Grünes Häkchen";
+
+/*Accessibility: Onboarding Grünes Schild mit Häkchen*/
+"wallet_onboarding_privacy_icon1" = "Grünes Schild mit Häkchen";
+
+/*Accessibility: Zertifikat Gültig für*/
+"region_type_valid" = "Gültig für";
+
+/*Accessibility: Zertifikat Ungültig für*/
+"region_type_invalid" = "Ungültig für";
+
+/*Accessibility: Homescreen Ausgewählte Region*/
+"accessibility_selected_region" = "Aktuelle Region";
+
+/*Accessibility: Homescreen Region ändern*/
+"accessibility_change_selected_region" = "Zum Ändern Doppeltippen";
+
+/*Accessibility: Zertifikat Details QR Code*/
+"certificate_details_qr_icon" = "QR Code, Bild";
+
+/*Accessibility: Zertifikat Details 2 "von" 2 Impfdosen */
+"accessibility_of_text" = "von";
 
 /*Titel des Impressum-Screens*/
 "impressum_title" = "Impressum";
@@ -435,7 +488,7 @@
 "wallet_time_missing" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
 "wallet_validation_data_expired" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
 
-"wallet_3g_status_disclaimer" = "3-G Voransicht: Nur gültig mit GreenCheck und Ausweis";
+"wallet_3g_status_disclaimer" = "Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.";
 
 "wallet_region_selection_title" = "Bundeslandauswahl";
 
@@ -452,3 +505,8 @@
 "region_steiermark" = "Steiermark";
 "region_tirol" = "Tirol";
 "region_vorarlberg" = "Vorarlberg";
+
+"vaccination_booster_notification_title" = "Achtung Zertifikat läuft ab!";
+"vaccination_booster_notification_message" = "Um weiterhin ein gültiges Zertifikat vorweisen zu können, wird eine Auffrischungsimpfung in den nächsten 3 Monaten empfohlen.";
+"vaccination_booster_notification_later" = "Erneut erinnern";
+"vaccination_booster_notification_read" = "Gelesen";

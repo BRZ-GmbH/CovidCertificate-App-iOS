@@ -23,6 +23,7 @@ class CertificateDetailViewController: ViewController {
 
     private let stackScrollView = StackScrollView()
     private let qrCodeNameView = QRCodeNameView()
+    private let dashedView = DashedLineView(style: .thin)
 
     private lazy var stateView = CertificateStateView(certificate: certificate, isHomescreen: false)
     private lazy var detailView = CertificateDetailView(certificate: certificate, showEnglishLabelsIfNeeded: true)
@@ -111,6 +112,9 @@ class CertificateDetailViewController: ViewController {
         stackScrollView.addSpacerView(Padding.large)
         stackScrollView.addArrangedView(qrCodeNameView)
 
+        stackScrollView.addSpacerView(Padding.small * 2.0)
+        stackScrollView.addArrangedView(dashedView)
+        
         qrCodeNameView.certificate = certificate
 
         view.addSubview(qrCodeStateView)
@@ -119,7 +123,7 @@ class CertificateDetailViewController: ViewController {
         }
         qrCodeStateView.alpha = 0
 
-        stackScrollView.addSpacerView(2.0 * Padding.large)
+        stackScrollView.addSpacerView(Padding.small * 2.0)
         stackScrollView.addArrangedView(stateView)
 
         stackScrollView.addSpacerView(2.0 * Padding.large)
@@ -206,6 +210,7 @@ class CertificateDetailViewController: ViewController {
         let alert = UIAlertController(title: nil, message: UBLocalized.wallet_certificate_delete_confirm_text, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: UBLocalized.delete_button, style: .destructive, handler: { _ in
             CertificateStorage.shared.userCertificates = CertificateStorage.shared.userCertificates.filter { $0 != self.certificate }
+            (UIApplication.shared.delegate as? AppDelegate)?.notificationHandler.removeCertificate(self.certificate)
             self.dismiss(animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: UBLocalized.cancel_button, style: .cancel, handler: nil))

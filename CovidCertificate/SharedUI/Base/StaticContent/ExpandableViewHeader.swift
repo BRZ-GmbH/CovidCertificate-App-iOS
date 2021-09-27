@@ -68,12 +68,10 @@ class ExpandableViewHeader: UBButton {
                     self.cornerRadiusView.layer.cornerRadius = 9
                 }
                 self.didExpand?(self.isExpanded)
-            }, completion: { _ in
-                UIAccessibility.post(notification: .screenChanged, argument: nil)
-            })
+            }, completion: nil)
         }
 
         accessibilityLabel = headerLabel.text
-        accessibilityTraits = [.button, .header]
+        accessibilityTraits = [.header]
     }
 }

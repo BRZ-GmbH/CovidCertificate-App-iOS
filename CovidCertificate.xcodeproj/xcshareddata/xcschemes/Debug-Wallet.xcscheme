@@ -38,6 +38,20 @@
                ReferencedContainer = "container:CovidCertificate.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8E81CCAA241FCC7F006F2437"
+               BuildableName = "CovidCertificateTests.xctest"
+               BlueprintName = "CovidCertificateTests"
+               ReferencedContainer = "container:CovidCertificate.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -50,16 +64,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8E81CCAA241FCC7F006F2437"
-               BuildableName = "CovidCertificateTests.xctest"
-               BlueprintName = "CovidCertificateTests"
+               BlueprintIdentifier = "5B2BB28726E8AC99003A89DA"
+               BuildableName = "CovidCertificateWalletTests.xctest"
+               BlueprintName = "CovidCertificateWalletTests"
                ReferencedContainer = "container:CovidCertificate.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release-Abnahme"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = "de"

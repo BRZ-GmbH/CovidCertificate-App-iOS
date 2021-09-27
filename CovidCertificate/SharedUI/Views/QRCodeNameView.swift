@@ -27,7 +27,7 @@ class QRCodeNameView: UIView {
 
     private let imageView = UIImageView()
     private let nameView = Label(.title, textAlignment: .center)
-    private let birthdayLabelView = Label(.text, textAlignment: .center)
+    private let birthdayLabelView = Label(.textSmall, textAlignment: .center)
 
     private let qrCodeInset: CGFloat
     let qrCodeLayoutGuide = UILayoutGuide()
@@ -73,7 +73,7 @@ class QRCodeNameView: UIView {
         }
 
         birthdayLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.nameView.snp.bottom).offset(2.0 * Padding.small)
+            make.top.equalTo(self.nameView.snp.bottom).offset(Padding.small)
             make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
             make.bottom.equalToSuperview()
         }
@@ -99,6 +99,6 @@ class QRCodeNameView: UIView {
 
         imageView.setQrCode(cert.qrCode)
 
-        accessibilityLabel = [nameView.text, birthdayLabelView.text].compactMap { $0 }.joined(separator: ", ")
+        accessibilityLabel = [imageView.accessibilityLabel, nameView.text, birthdayLabelView.text].compactMap { $0 }.joined(separator: ", ")
     }
 }

@@ -15,6 +15,8 @@ public extension UIImageView {
     func setQrCode(_ qrCode: String) {
         image = QRCodeUtils.createQrCodeImage(from: qrCode)
         layer.magnificationFilter = .nearest
+        
+        accessibilityLabel = UBLocalized.certificate_details_qr_icon
     }
 
     func rotate(time: Double) {

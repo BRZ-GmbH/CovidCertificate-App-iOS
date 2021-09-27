@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isFirstLaunch: Bool
 
     private let linkHandler = LinkHandler()
+    
+    let notificationHandler = NotificationHandler()
 
     lazy var navigationController = NavigationController(rootViewController: WalletHomescreenViewController())
 
@@ -57,8 +59,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             linkHandler.handle(url: url)
         }
 
+        #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+        #else
         screenProtecter.startPreventingRecording()
-
+        #endif
+        
+        /**
+        Disable for release 2.1.0 - EPIEMSCO-1527 will be launched with release 2.2.0
+        UIStateManager.shared.addObserver(self) { [weak self] s in
+            guard let self = self else { return }
+            
+            self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: s.certificateState.certificates)
+        }
+        */
+    
         return true
     }
 
@@ -136,6 +150,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         addBlurView()
         VerifierManager.shared.resetTime()
+        
+        notificationHandler.dismissAlert()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {

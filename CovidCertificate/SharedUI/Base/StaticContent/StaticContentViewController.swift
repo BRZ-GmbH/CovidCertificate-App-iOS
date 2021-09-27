@@ -58,7 +58,7 @@ class StaticContentViewController: OnboardingContentViewController {
             }
 
             for (icon, text) in model.textGroups {
-                let v = OnboardingInfoView(icon: icon, text: text, alignment: model.alignment)
+                let v = OnboardingInfoView(accessibilityImage: icon, text: text, alignment: model.alignment)
                 addArrangedView(v)
                 v.snp.makeConstraints { make in
                     make.leading.trailing.equalTo(self.stackScrollView.stackView)

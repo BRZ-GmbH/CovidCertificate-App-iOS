@@ -1,5 +1,14 @@
 # Grüner Pass - Release Notes
 
+## v.2.0.3 (09.2021)
+
+- Übernahme Bugfix in ValidationCore (EPIEMSCO-1670)
+- Design-Verbesserungen (EPIEMSCO-1556)
+- Accessibility-Verbesserungen (EPIEMSCO-1335)
+- Angepasster Hinweistext zu 3G-Voransicht (EPIEMSCO-1675)
+- Aktualisierung der FAQ-Inhalte (EPIEMSCO-1709/EPIEMSCO-1650)
+- Probleme beim Import von PDFs auf älteren Geräten (EPIEMSCO-1653)
+
 ## v.2.0.2 (08.2021)
 - neue Wiener Regeln - Wallet App (EPIEMSCO-1562)
 - Optimierung App-Verhalten (EPIEMSCO-1506)

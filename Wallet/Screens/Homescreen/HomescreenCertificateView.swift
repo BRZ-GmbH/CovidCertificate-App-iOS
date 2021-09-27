@@ -22,6 +22,7 @@ class HomescreenCertificateView: UIView {
     private let titleLabel = Label(.uppercaseBold, textColor: .cc_greyText, textAlignment: .center)
 
     private let nameView = QRCodeNameView(qrCodeInset: Padding.large)
+    private let dashedView = DashedLineView(style: .thin)
     private let contentView = UIView()
 
     // private let stateLabel = HomescreenStateLabel()
@@ -107,10 +108,18 @@ class HomescreenCertificateView: UIView {
              stateLabel.certificate = holder.healthCert
          default: break
          } */
+        
+        contentView.addSubview(dashedView)
+        dashedView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(Padding.large)
+            make.right.equalToSuperview().offset(-Padding.large)
+            make.top.equalTo(nameView.snp.bottom).offset(2.0 * Padding.small)
+            make.height.equalTo(1)
+        }
 
         contentView.addSubview(stateView)
         stateView.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(nameView.snp.bottom).offset(Padding.medium + Padding.small)
+            make.top.greaterThanOrEqualTo(dashedView.snp.bottom).offset(2.0 * Padding.small)
             make.bottom.left.right.equalToSuperview().inset(2.0 * Padding.small)
         }
 

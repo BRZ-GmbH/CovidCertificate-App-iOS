@@ -75,9 +75,7 @@ final class VerifierManager {
                     shouldRestart = false
                 }
                 if shouldRestart {
-                    self.verifiers.forEach { _, verifier in
-                        verifier.restart(forceUpdate: true, validationTime: self.timeStatus?.time)
-                    }
+                    self.restartAllVerifiers()
                 }
             }
         }
@@ -101,10 +99,49 @@ final class VerifierManager {
             newList.forEach { $0.block(state) }
         }
     }
+    
+    /**
+     In test builds (for Q as well as P environment) we allow switching a setting for the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
+     */
+    #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+    @UBUserDefault(key: "wallet.test.useDeviceTime", defaultValue: false)
+    public var useDeviceTime: Bool {
+        didSet {
+            self.restartAllVerifiers()
+        }
+    }
+    #endif
+    
+    private func restartAllVerifiers() {
+        var validationTime = timeStatus?.time
+        
+        /**
+         In test builds (for Q as well as P environment) we allow switching a setting for the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
+         */
+        #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+        if useDeviceTime {
+            validationTime = Date()
+        }
+        #endif
+        
+        self.verifiers.forEach { _, verifier in
+            verifier.restart(forceUpdate: true, validationTime: validationTime)
+        }
+    }
 
     // MARK: - Public API
 
     func addObserver(_ object: AnyObject, for qrString: String, regions: [String], checkDefaultRegion: Bool, forceUpdate: Bool = false, important: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
+        var validationTime = timeStatus?.time
+        /**
+         In test builds (for Q as well as P environment) we allow switching a setting for the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
+         */
+        #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+            if useDeviceTime {
+                validationTime = Date()
+            }
+        #endif
+        
         if observers[qrString] != nil {
             observers[qrString] = observers[qrString]!.filter { $0.object != nil && !$0.object!.isEqual(object) }
             observers[qrString]?.append(Observer(object: object, block: block))
@@ -113,15 +150,15 @@ final class VerifierManager {
         }
 
         if let v = verifiers[qrString], v.regions.elementsEqual(regions) {
-            if v.isRunningWith(timeStatus?.time) == false {
+            if v.isRunningWith(validationTime) == false {
                 v.important = important
-                v.restart(forceUpdate: forceUpdate, validationTime: timeStatus?.time)
+                v.restart(forceUpdate: forceUpdate, validationTime: validationTime)
             }
         } else {
             if let v = verifiers[qrString] {
                 v.cancelled = true
             }
-            let v = Verifier(qrString: qrString, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: timeStatus?.time)
+            let v = Verifier(qrString: qrString, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: validationTime)
             v.important = important
             verifiers[qrString] = v
             v.start(forceUpdate: forceUpdate) { state in

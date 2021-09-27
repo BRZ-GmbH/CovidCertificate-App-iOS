@@ -8,6 +8,7 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+@testable import CovidCertificateWallet
 import Foundation
 
 class MockKeychain: KeychainProtocol {

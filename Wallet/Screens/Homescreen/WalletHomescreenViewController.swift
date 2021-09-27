@@ -37,6 +37,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
     let actionPopupView = WalletHomescreenActionPopupView()
 
     let documentPickerDelegate = DocumentPickerDelegate()
+    var accessibilityViews = [UIView]()
 
     init() {
         super.init(color: .cc_green_dark)
@@ -97,7 +98,9 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
 
         actionPopupView.addQRCertificateTouchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
+            strongSelf.changeAccessibilityStatus(isEnabled: true)
             strongSelf.actionPopupView.dismiss()
+            strongSelf.addCertificateButton.changeAccessibilityTitle(title: UBLocalized.accessibility_add_button)
 
             let vc = WalletScannerViewController()
             vc.presentInNavigationController(from: strongSelf)
@@ -105,7 +108,9 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
 
         actionPopupView.addPDFCertificateTouchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
+            strongSelf.changeAccessibilityStatus(isEnabled: true)
             strongSelf.actionPopupView.dismiss()
+            strongSelf.addCertificateButton.changeAccessibilityTitle(title: UBLocalized.accessibility_add_button)
 
             strongSelf.openDocumentFromPDF()
         }
@@ -126,8 +131,15 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         addCertificateButton.touchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
             if strongSelf.actionViewIsShown {
+                strongSelf.changeAccessibilityStatus(isEnabled: true)
                 strongSelf.actionPopupView.dismiss()
+                strongSelf.addCertificateButton.changeAccessibilityTitle(title: UBLocalized.accessibility_add_button)
+
             } else {
+                strongSelf.setAccessibilityView(forView: strongSelf.view)
+
+                strongSelf.addCertificateButton.changeAccessibilityTitle(title: UBLocalized.accessibility_close_button)
+                strongSelf.changeAccessibilityStatus(isEnabled: false)
                 strongSelf.actionPopupView.presentFrom(view: strongSelf.addCertificateButton)
             }
         }
@@ -160,8 +172,48 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             let vc = CertificateDetailViewController(certificate: cert)
             vc.presentInNavigationController(from: strongSelf)
         }
+        
+        /**
+         In test builds (for Q as well as P environment) we support a double tap on the country flag to change the device time setting.
+         This setting allows the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
+         */
+        #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleDeviceTimeSettings))
+            tapGestureRecognizer.numberOfTapsRequired = 2
+            logoView.isUserInteractionEnabled = true
+            logoView.addGestureRecognizer(tapGestureRecognizer)
+        #endif
+    }
+    
+    private func changeAccessibilityStatus(isEnabled: Bool) {
+        accessibilityViews.forEach({
+            $0.isAccessibilityElement = isEnabled
+        })
+    }
+    
+    private func setAccessibilityView(forView: UIView) {
+        guard accessibilityViews.isEmpty else { return }
+        
+        forView.recursiveSubviews.forEach({
+            if $0.isAccessibilityElement {
+                if let superView = $0.superview, !superView.isKind(of: AddCertificateView.self)
+                    && $0 != addCertificateButton {
+                    accessibilityViews.append($0)
+                }
+            }
+        })
     }
 
+    #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+    @objc private func toggleDeviceTimeSettings() {
+        VerifierManager.shared.useDeviceTime = !VerifierManager.shared.useDeviceTime
+        
+        let alert = UIAlertController(title: VerifierManager.shared.useDeviceTime ? "Using Device Time" : "Using Real Time", message: VerifierManager.shared.useDeviceTime ? "The app now uses the current device time for Business Rule Validation" : "The app now uses the real time (fetched from NTP-Server) for Business Rule Validation", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    #endif
+    
     private func setupViews() {
         addCertificateButton.ub_addShadow(radius: 4.0, opacity: 0.2, xOffset: 0.0, yOffset: 0.0)
 

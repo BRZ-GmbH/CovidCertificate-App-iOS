@@ -65,7 +65,11 @@ class CertificateAddDetailView: UIView {
 
         stackScrollView.addSpacerView(Padding.large + Padding.medium)
 
-        stackScrollView.addArrangedView(UIImageView.centered(with: UIImage(named: "ic-qrcode")))
+        let qrCodeImageView = UIImageView.centered(with: UIImage(named: "ic-qrcode"))
+        qrCodeImageView.isAccessibilityElement = true
+        qrCodeImageView.accessibilityLabel = UBLocalized.certificate_details_qr_icon
+        
+        stackScrollView.addArrangedView(qrCodeImageView)
         stackScrollView.addSpacerView(Padding.large + Padding.medium)
 
         let nameLabel = Label(.title, textAlignment: .center)

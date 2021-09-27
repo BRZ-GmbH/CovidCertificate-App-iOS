@@ -50,6 +50,12 @@ public extension EuHealthCert {
 
         return dateOfBirth
     }
+    
+    var birthDate: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: dateOfBirth)
+    }
 
     var displayLastName: String? {
         return person.familyName

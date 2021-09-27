@@ -40,28 +40,25 @@ class CertificateRegionStateView: UIView {
 
     private func setup() {
         addSubview(validityStackView)
-        validityStackView.spacing = 0
+        validityStackView.spacing = 8
+        validityStackView.distribution = .fillEqually
         validityStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         validityStackView.axis = .horizontal
 
-        backgroundColor = .cc_orange
+        backgroundColor = .cc_white
     }
 
     private func update(animated _: Bool) {
         validityStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         results.forEach { result in
-            let textLabel = Label(.textLarge, textAlignment: .center)
-            if result.region?.hasPrefix("ET") == true {
-                textLabel.text = UBLocalized.region_type_ET
-            } else if result.region?.hasPrefix("NG") == true {
-                textLabel.text = UBLocalized.region_type_NG
-            }
-            textLabel.textColor = .cc_white
-            textLabel.backgroundColor = result.valid ? .cc_green_light : .cc_red
-            validityStackView.addArrangedSubview(textLabel)
+
+            let statusView = CertificateRegionStatusView()
+            statusView.result = result
+            validityStackView.addArrangedSubview(statusView)
         }
+        accessibilityLabel = validityStackView.subviews.compactMap({$0.accessibilityLabel}).joined(separator: ", ")
     }
 }

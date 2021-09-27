@@ -12,6 +12,8 @@ import Foundation
    enum UBLocalizedKey : String {
     /// Zertifikat hinzufügen
      case accessibility_add_button_key = "accessibility_add_button"
+    /// Zum Ändern Doppeltippen
+     case accessibility_change_selected_region_key = "accessibility_change_selected_region"
     /// Schliessen
      case accessibility_close_button_key = "accessibility_close_button"
     /// Häufige Fragen
@@ -26,12 +28,18 @@ import Foundation
      case accessibility_lamp_on_button_key = "accessibility_lamp_on_button"
     /// Liste Ihrer Zertifikate
      case accessibility_list_button_key = "accessibility_list_button"
+    /// von
+     case accessibility_of_text_key = "accessibility_of_text"
+    /// Aktuelle Region
+     case accessibility_selected_region_key = "accessibility_selected_region"
     /// Zugriff auf Kamera erlauben
      case camera_permission_dialog_action_key = "camera_permission_dialog_action"
     /// Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.
      case camera_permission_dialog_text_key = "camera_permission_dialog_text"
     /// Abbrechen
      case cancel_button_key = "cancel_button"
+    /// QR Code, Bild
+     case certificate_details_qr_icon_key = "certificate_details_qr_icon"
     /// Genesung
      case certificate_reason_recovered_key = "certificate_reason_recovered"
     /// Test
@@ -68,6 +76,14 @@ import Foundation
      case error_title_key = "error_title"
     /// Aktualisieren
      case force_update_button_key = "force_update_button"
+    /// Jetzt nicht
+     case force_update_grace_period_skip_button_key = "force_update_grace_period_skip_button"
+    /// Bitte laden Sie vor %@ die neueste Version der App.
+     case force_update_grace_period_text_key = "force_update_grace_period_text"
+    /// Update benötigt
+     case force_update_grace_period_title_key = "force_update_grace_period_title"
+    /// Aktualisieren
+     case force_update_grace_period_update_button_key = "force_update_grace_period_update_button"
     /// Laden Sie die neue Version der App.
      case force_update_text_key = "force_update_text"
     /// Update benötigt
@@ -102,8 +118,12 @@ import Foundation
      case region_tirol_key = "region_tirol"
     /// Eintritt
      case region_type_ET_key = "region_type_ET"
+    /// Ungültig für
+     case region_type_invalid_key = "region_type_invalid"
     /// Nachtgastronomie
      case region_type_NG_key = "region_type_NG"
+    /// Gültig für
+     case region_type_valid_key = "region_type_valid"
     /// Vorarlberg
      case region_vorarlberg_key = "region_vorarlberg"
     /// Wien
@@ -112,6 +132,14 @@ import Foundation
      case target_disease_name_key = "target_disease_name"
     /// Ein unbekannter Fehler ist aufgetreten.
      case unknown_error_key = "unknown_error"
+    /// Erneut erinnern
+     case vaccination_booster_notification_later_key = "vaccination_booster_notification_later"
+    /// Um weiterhin ein gültiges Zertifikat vorweisen zu können, wird eine Auffrischungsimpfung in den nächsten 3 Monaten empfohlen.
+     case vaccination_booster_notification_message_key = "vaccination_booster_notification_message"
+    /// Gelesen
+     case vaccination_booster_notification_read_key = "vaccination_booster_notification_read"
+    /// Achtung Zertifikat läuft ab!
+     case vaccination_booster_notification_title_key = "vaccination_booster_notification_title"
     /// Grüner Pass
      case verifier_app_name_key = "verifier_app_name"
     /// Geburtsdatum
@@ -164,7 +192,7 @@ import Foundation
      case verifier_verify_success_info_key = "verifier_verify_success_info"
     /// Prüfung erfolgreich
      case verifier_verify_success_title_key = "verifier_verify_success_title"
-    /// 3-G Voransicht: Nur gültig mit GreenCheck und Ausweis
+    /// Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.
      case wallet_3g_status_disclaimer_key = "wallet_3g_status_disclaimer"
     /// Hinzufügen
      case wallet_add_certificate_key = "wallet_add_certificate"
@@ -304,6 +332,8 @@ import Foundation
      case wallet_onboarding_privacy_conditionsofuse_title_key = "wallet_onboarding_privacy_conditionsofuse_title"
     /// Datenschutz
      case wallet_onboarding_privacy_header_key = "wallet_onboarding_privacy_header"
+    /// Grünes Schild mit Häkchen
+     case wallet_onboarding_privacy_icon1_key = "wallet_onboarding_privacy_icon1"
     /// Datenschutzerklärung
      case wallet_onboarding_privacy_privacypolicy_title_key = "wallet_onboarding_privacy_privacypolicy_title"
     /// Die Zertifikate sind nur lokal auf Ihrem Smartphone hinterlegt. Die Daten werden nicht in einem zentralen System gespeichert.
@@ -312,6 +342,10 @@ import Foundation
      case wallet_onboarding_privacy_title_key = "wallet_onboarding_privacy_title"
     /// Vorteile
      case wallet_onboarding_show_header_key = "wallet_onboarding_show_header"
+    /// QR Code
+     case wallet_onboarding_show_icon1_key = "wallet_onboarding_show_icon1"
+    /// Grünes Häkchen
+     case wallet_onboarding_show_icon2_key = "wallet_onboarding_show_icon2"
     /// Die auf dem Zertifikat dargestellten Daten sind auch im EU-konformen QR-Code enthalten.
      case wallet_onboarding_show_text1_key = "wallet_onboarding_show_text1"
     /// Beim Vorweisen wird der EU-konforme QR-Code mit einer Prüfanwendung gescannt. Die enthaltenen Daten werden dabei automatisch auf Echtheit und Gültigkeit überprüft.
@@ -320,6 +354,8 @@ import Foundation
      case wallet_onboarding_show_title_key = "wallet_onboarding_show_title"
     /// Vorteile
      case wallet_onboarding_store_header_key = "wallet_onboarding_store_header"
+    /// Schloss
+     case wallet_onboarding_store_icon1_key = "wallet_onboarding_store_icon1"
     /// Die EU-konformen Zertifikate des Grünen Passes können einfach zur App hinzugefügt und digital aufbewahrt werden.
      case wallet_onboarding_store_text1_key = "wallet_onboarding_store_text1"
     /// EU-konforme Zertifikate digital aufbewahren
@@ -342,6 +378,14 @@ import Foundation
      case wallet_scanner_howitworks_external_link_title_key = "wallet_scanner_howitworks_external_link_title"
     /// So funktioniert's
      case wallet_scanner_howitworks_header_key = "wallet_scanner_howitworks_header"
+    /// Erster Schritt
+     case wallet_scanner_howitworks_icon1_key = "wallet_scanner_howitworks_icon1"
+    /// Zweiter Schritt
+     case wallet_scanner_howitworks_icon2_key = "wallet_scanner_howitworks_icon2"
+    /// Dritter Schritt
+     case wallet_scanner_howitworks_icon3_key = "wallet_scanner_howitworks_icon3"
+    /// Österreich-Flagge
+     case wallet_scanner_howitworks_icon_Flag_key = "wallet_scanner_howitworks_icon_Flag"
     /// Wie und wo erhalte ich ein EU-konformes Zertifikat?
      case wallet_scanner_howitworks_question1_key = "wallet_scanner_howitworks_question1"
     /// Um ein Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.
@@ -370,6 +414,8 @@ import Foundation
 
   /// Zertifikat hinzufügen
    static let accessibility_add_button = UBLocalized.tr(UBLocalizedKey.accessibility_add_button_key)
+  /// Zum Ändern Doppeltippen
+   static let accessibility_change_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_change_selected_region_key)
   /// Schliessen
    static let accessibility_close_button = UBLocalized.tr(UBLocalizedKey.accessibility_close_button_key)
   /// Häufige Fragen
@@ -384,12 +430,18 @@ import Foundation
    static let accessibility_lamp_on_button = UBLocalized.tr(UBLocalizedKey.accessibility_lamp_on_button_key)
   /// Liste Ihrer Zertifikate
    static let accessibility_list_button = UBLocalized.tr(UBLocalizedKey.accessibility_list_button_key)
+  /// von
+   static let accessibility_of_text = UBLocalized.tr(UBLocalizedKey.accessibility_of_text_key)
+  /// Aktuelle Region
+   static let accessibility_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_selected_region_key)
   /// Zugriff auf Kamera erlauben
    static let camera_permission_dialog_action = UBLocalized.tr(UBLocalizedKey.camera_permission_dialog_action_key)
   /// Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.
    static let camera_permission_dialog_text = UBLocalized.tr(UBLocalizedKey.camera_permission_dialog_text_key)
   /// Abbrechen
    static let cancel_button = UBLocalized.tr(UBLocalizedKey.cancel_button_key)
+  /// QR Code, Bild
+   static let certificate_details_qr_icon = UBLocalized.tr(UBLocalizedKey.certificate_details_qr_icon_key)
   /// Genesung
    static let certificate_reason_recovered = UBLocalized.tr(UBLocalizedKey.certificate_reason_recovered_key)
   /// Test
@@ -426,6 +478,16 @@ import Foundation
    static let error_title = UBLocalized.tr(UBLocalizedKey.error_title_key)
   /// Aktualisieren
    static let force_update_button = UBLocalized.tr(UBLocalizedKey.force_update_button_key)
+  /// Jetzt nicht
+   static let force_update_grace_period_skip_button = UBLocalized.tr(UBLocalizedKey.force_update_grace_period_skip_button_key)
+  /// Bitte laden Sie vor %@ die neueste Version der App.
+   static func force_update_grace_period_text(_ p1: Any) -> String {
+    return UBLocalized.tr(UBLocalizedKey.force_update_grace_period_text_key, String(describing: p1))
+  }
+  /// Update benötigt
+   static let force_update_grace_period_title = UBLocalized.tr(UBLocalizedKey.force_update_grace_period_title_key)
+  /// Aktualisieren
+   static let force_update_grace_period_update_button = UBLocalized.tr(UBLocalizedKey.force_update_grace_period_update_button_key)
   /// Laden Sie die neue Version der App.
    static let force_update_text = UBLocalized.tr(UBLocalizedKey.force_update_text_key)
   /// Update benötigt
@@ -460,8 +522,12 @@ import Foundation
    static let region_tirol = UBLocalized.tr(UBLocalizedKey.region_tirol_key)
   /// Eintritt
    static let region_type_ET = UBLocalized.tr(UBLocalizedKey.region_type_ET_key)
+  /// Ungültig für
+   static let region_type_invalid = UBLocalized.tr(UBLocalizedKey.region_type_invalid_key)
   /// Nachtgastronomie
    static let region_type_NG = UBLocalized.tr(UBLocalizedKey.region_type_NG_key)
+  /// Gültig für
+   static let region_type_valid = UBLocalized.tr(UBLocalizedKey.region_type_valid_key)
   /// Vorarlberg
    static let region_vorarlberg = UBLocalized.tr(UBLocalizedKey.region_vorarlberg_key)
   /// Wien
@@ -470,6 +536,14 @@ import Foundation
    static let target_disease_name = UBLocalized.tr(UBLocalizedKey.target_disease_name_key)
   /// Ein unbekannter Fehler ist aufgetreten.
    static let unknown_error = UBLocalized.tr(UBLocalizedKey.unknown_error_key)
+  /// Erneut erinnern
+   static let vaccination_booster_notification_later = UBLocalized.tr(UBLocalizedKey.vaccination_booster_notification_later_key)
+  /// Um weiterhin ein gültiges Zertifikat vorweisen zu können, wird eine Auffrischungsimpfung in den nächsten 3 Monaten empfohlen.
+   static let vaccination_booster_notification_message = UBLocalized.tr(UBLocalizedKey.vaccination_booster_notification_message_key)
+  /// Gelesen
+   static let vaccination_booster_notification_read = UBLocalized.tr(UBLocalizedKey.vaccination_booster_notification_read_key)
+  /// Achtung Zertifikat läuft ab!
+   static let vaccination_booster_notification_title = UBLocalized.tr(UBLocalizedKey.vaccination_booster_notification_title_key)
   /// Grüner Pass
    static let verifier_app_name = UBLocalized.tr(UBLocalizedKey.verifier_app_name_key)
   /// Geburtsdatum
@@ -522,7 +596,7 @@ import Foundation
    static let verifier_verify_success_info = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_info_key)
   /// Prüfung erfolgreich
    static let verifier_verify_success_title = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_title_key)
-  /// 3-G Voransicht: Nur gültig mit GreenCheck und Ausweis
+  /// Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.
    static let wallet_3g_status_disclaimer = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_disclaimer_key)
   /// Hinzufügen
    static let wallet_add_certificate = UBLocalized.tr(UBLocalizedKey.wallet_add_certificate_key)
@@ -662,6 +736,8 @@ import Foundation
    static let wallet_onboarding_privacy_conditionsofuse_title = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_privacy_conditionsofuse_title_key)
   /// Datenschutz
    static let wallet_onboarding_privacy_header = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_privacy_header_key)
+  /// Grünes Schild mit Häkchen
+   static let wallet_onboarding_privacy_icon1 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_privacy_icon1_key)
   /// Datenschutzerklärung
    static let wallet_onboarding_privacy_privacypolicy_title = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_privacy_privacypolicy_title_key)
   /// Die Zertifikate sind nur lokal auf Ihrem Smartphone hinterlegt. Die Daten werden nicht in einem zentralen System gespeichert.
@@ -670,6 +746,10 @@ import Foundation
    static let wallet_onboarding_privacy_title = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_privacy_title_key)
   /// Vorteile
    static let wallet_onboarding_show_header = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_show_header_key)
+  /// QR Code
+   static let wallet_onboarding_show_icon1 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_show_icon1_key)
+  /// Grünes Häkchen
+   static let wallet_onboarding_show_icon2 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_show_icon2_key)
   /// Die auf dem Zertifikat dargestellten Daten sind auch im EU-konformen QR-Code enthalten.
    static let wallet_onboarding_show_text1 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_show_text1_key)
   /// Beim Vorweisen wird der EU-konforme QR-Code mit einer Prüfanwendung gescannt. Die enthaltenen Daten werden dabei automatisch auf Echtheit und Gültigkeit überprüft.
@@ -678,6 +758,8 @@ import Foundation
    static let wallet_onboarding_show_title = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_show_title_key)
   /// Vorteile
    static let wallet_onboarding_store_header = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_store_header_key)
+  /// Schloss
+   static let wallet_onboarding_store_icon1 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_store_icon1_key)
   /// Die EU-konformen Zertifikate des Grünen Passes können einfach zur App hinzugefügt und digital aufbewahrt werden.
    static let wallet_onboarding_store_text1 = UBLocalized.tr(UBLocalizedKey.wallet_onboarding_store_text1_key)
   /// EU-konforme Zertifikate digital aufbewahren
@@ -700,6 +782,14 @@ import Foundation
    static let wallet_scanner_howitworks_external_link_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_external_link_title_key)
   /// So funktioniert's
    static let wallet_scanner_howitworks_header = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_header_key)
+  /// Erster Schritt
+   static let wallet_scanner_howitworks_icon1 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon1_key)
+  /// Zweiter Schritt
+   static let wallet_scanner_howitworks_icon2 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon2_key)
+  /// Dritter Schritt
+   static let wallet_scanner_howitworks_icon3 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon3_key)
+  /// Österreich-Flagge
+   static let wallet_scanner_howitworks_icon_Flag = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon_Flag_key)
   /// Wie und wo erhalte ich ein EU-konformes Zertifikat?
    static let wallet_scanner_howitworks_question1 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_question1_key)
   /// Um ein Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.

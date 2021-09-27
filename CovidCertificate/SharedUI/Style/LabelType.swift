@@ -34,6 +34,7 @@ public enum LabelType: UBLabelType {
     case title
     case textBold
     case textBoldLarge
+    case textSmall
     case text
     case textLarge
     case uppercaseBold
@@ -68,6 +69,8 @@ public enum LabelType: UBLabelType {
             return UIFont(name: boldFontName, size: bfs)!
         case .text:
             return UIFont(name: lightFontName, size: bfs)!
+        case .textSmall:
+            return UIFont(name: lightFontName, size: bfs - 1.0)!
         case .textLarge:
             return UIFont(name: lightFontName, size: bfs + 3.0)!
         case .textBoldLarge:
@@ -81,7 +84,7 @@ public enum LabelType: UBLabelType {
         case .smallError:
             return UIFont(name: boldFontName, size: bfs - 4.0)!
         case .smallErrorLight:
-            return UIFont(name: lightFontName, size: bfs - 4.0)!
+            return UIFont(name: lightFontName, size: bfs - 2.0)!
         case .monospaced:
             return UIFont(name: "PTMono-Regular", size: bfs)!
         }
@@ -92,8 +95,11 @@ public enum LabelType: UBLabelType {
             return .cc_red
         }
 
-        if self == .uppercaseBold || self == .monospaced || self == .smallErrorLight || self == .smallUppercaseBold {
+        if self == .uppercaseBold || self == .monospaced || self == .smallUppercaseBold {
             return .cc_greyText
+        }
+        if self == .smallErrorLight {
+            return .cc_greyTextLight
         }
 
         return .cc_text
@@ -109,6 +115,8 @@ public enum LabelType: UBLabelType {
             return 22.0 / 16.0
         case .text:
             return 22.0 / 16.0
+        case .textSmall:
+            return 19.0 / 16.0
         case .textLarge:
             return 26.0 / 19.0
         case .textBoldLarge:

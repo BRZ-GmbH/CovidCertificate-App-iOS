@@ -32,6 +32,12 @@ class HomescreenCertificatesViewController: ViewController {
             strongSelf.refresh(state.certificateState.certificates)
         }
     }
+    
+    public func changeAccessibilityFocus(toCertificate certificate: UserCertificate) {
+        if let certView = certificateViews.first(where: { $0.certificate == certificate }) {
+            UIAccessibility.post(notification: .screenChanged, argument: certView)
+        }
+    }
 
     private func setup() {
         view.backgroundColor = .clear

@@ -118,6 +118,7 @@ extension CertificateListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CertificateListViewController.reuseIdentifier, for: indexPath) as! CertificateTableViewCell
         cell.certificate = certificates[indexPath.row]
+        cell.isAccessibilityElement = true
         cell.showsReorderControl = true
         return cell
     }

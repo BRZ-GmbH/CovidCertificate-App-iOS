@@ -75,11 +75,11 @@
       },
       {
         "package": "jsonlogic",
-        "repositoryURL": "https://github.com/martinreichart/json-logic-swift.git",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
         "state": {
-          "branch": "feature/dateformatter-performance",
-          "revision": "a706f78475ed25ed15e0a5c65168bbb269feec0b",
-          "version": null
+          "branch": null,
+          "revision": "e59a317e03491abe1f04c87b965a52abae243ddd",
+          "version": "1.1.8"
         }
       },
       {
@@ -141,7 +141,7 @@
         "repositoryURL": "https://github.com/martinreichart/SwiftCBOR.git",
         "state": {
           "branch": "master",
-          "revision": "e2a36dbead2d90eaec4dd62e04404c77bf2a50cb",
+          "revision": "642e9e93fb4a51b564c1bf21bf3c5b4c6bc79416",
           "version": null
         }
       },

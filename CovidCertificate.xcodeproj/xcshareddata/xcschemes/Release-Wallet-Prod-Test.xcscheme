@@ -14,9 +14,9 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "242D21D2245C4BD8005DAEA8"
-                     BuildableName = "CovidCertificateCalibration.app"
-                     BlueprintName = "CovidCertificateCalibration"
+                     BlueprintIdentifier = "8E81CC94241FCC7D006F2437"
+                     BuildableName = "CovidCertificateWallet.app"
+                     BlueprintName = "CovidCertificateWallet"
                      ReferencedContainer = "container:CovidCertificate.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -41,15 +41,25 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release-Dev"
+      buildConfiguration = "Release-Prod-Test"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5B2BB28726E8AC99003A89DA"
+               BuildableName = "CovidCertificateWalletTests.xctest"
+               BlueprintName = "CovidCertificateWalletTests"
+               ReferencedContainer = "container:CovidCertificate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release-Dev"
+      buildConfiguration = "Release-Prod-Test"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -58,9 +68,19 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8E81CC94241FCC7D006F2437"
+            BuildableName = "CovidCertificateWallet.app"
+            BlueprintName = "CovidCertificateWallet"
+            ReferencedContainer = "container:CovidCertificate.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release-Dev"
+      buildConfiguration = "Release-Prod-Test"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -76,10 +96,10 @@
       </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release-Dev">
+      buildConfiguration = "Release-Prod-Test">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release-Dev"
+      buildConfiguration = "Release-Prod-Test"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

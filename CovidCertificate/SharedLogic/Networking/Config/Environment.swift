@@ -20,12 +20,14 @@ enum Environment {
     /// The current environment, as configured in build settings.
     static var current: Environment {
         #if DEBUG
-            return .dev
+            return .abnahme
         #elseif RELEASE_DEV
-            return .dev
+            return .abnahme
         #elseif RELEASE_ABNAHME
             return .abnahme
         #elseif RELEASE_PROD
+            return .prod
+        #elseif RELEASE_PROD_TEST
             return .prod
         #else
             fatalError("Missing build setting for environment")

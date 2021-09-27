@@ -46,9 +46,34 @@ struct InfoBox: UBCodable, Equatable {
 
 class ConfigResponseBody: UBCodable, JWTExtension {
     let ios: String?
+    let iosForceDate: String?
     let infoBox: LocalizedValue<InfoBox>?
     let questions: LocalizedValue<FAQEntriesContainer>?
     let works: LocalizedValue<FAQEntriesContainer>?
+    
+    var forceUpdate: Bool {
+        guard let iosForceDate = iosForceDate else { return false }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: iosForceDate) else { return false }
+        return date.timeIntervalSinceNow < 0
+    }
+    
+    var formattedForceUpdateDate: String {
+        guard let iosForceDate = iosForceDate else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: iosForceDate) else { return "" }
+        return DateFormatter.ub_dayString(from: date)
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case ios = "ios"
+        case iosForceDate = "ios_force_date"
+        case infoBox = "infoBox"
+        case questions = "questions"
+        case works = "works"
+    }
 
     class FAQEntriesContainer: UBCodable {
         let faqTitle: String

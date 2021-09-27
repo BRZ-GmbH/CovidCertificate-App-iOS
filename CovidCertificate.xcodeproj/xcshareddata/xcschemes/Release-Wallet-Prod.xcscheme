@@ -46,6 +46,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5B2BB28726E8AC99003A89DA"
+               BuildableName = "CovidCertificateWalletTests.xctest"
+               BlueprintName = "CovidCertificateWalletTests"
+               ReferencedContainer = "container:CovidCertificate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

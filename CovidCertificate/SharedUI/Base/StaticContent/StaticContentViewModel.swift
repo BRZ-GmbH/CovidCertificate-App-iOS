@@ -11,19 +11,30 @@
 
 import UIKit
 
+struct AccessibilityImage: Equatable {
+    let image: UIImage?
+    let altText: String
+    
+    static func == (lhs: AccessibilityImage, rhs: AccessibilityImage) -> Bool {
+        return lhs.image == rhs.image &&
+            lhs.altText == rhs.altText
+    }
+}
+
 struct StaticContentViewModel: Equatable {
+    
     let heading: String?
     let foregroundImage: UIImage?
     let title: String
     let alignment: NSTextAlignment
-    let textGroups: [(UIImage?, String)]
+    let textGroups: [(AccessibilityImage?, String)]
     let expandableTextGroups: [(String, String, String?, URL?)]
 
     init(heading: String? = nil,
          foregroundImage: UIImage? = nil,
          title: String,
          alignment: NSTextAlignment = .left,
-         textGroups: [(UIImage?, String)] = [],
+         textGroups: [(AccessibilityImage?, String)] = [],
          expandableTextGroups: [(String, String, String?, URL?)] = [])
     {
         self.heading = heading
@@ -57,25 +68,25 @@ struct StaticContentViewModel: Equatable {
     static let store = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_store_header,
                                               foregroundImage: UIImage(named: "illu-onboarding-privacy"),
                                               title: UBLocalized.wallet_onboarding_store_title,
-                                              textGroups: [(UIImage(named: "ic-privacy")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_store_text1) /* ,
+                                              textGroups: [(AccessibilityImage(image: UIImage(named: "ic-privacy")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_onboarding_store_icon1), UBLocalized.wallet_onboarding_store_text1) /* ,
                                                (UIImage(named: "ic-validation"), UBLocalized.wallet_onboarding_store_text2) */ ])
 
     static let show = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_show_header,
                                              foregroundImage: UIImage(named: "illu-onboarding-covid-certificate"),
                                              title: UBLocalized.wallet_onboarding_show_title,
-                                             textGroups: [(UIImage(named: "ic-qr-certificate")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_show_text1),
-                                                          (UIImage(named: "ic-check-mark")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_show_text2)])
+                                             textGroups: [(AccessibilityImage(image: UIImage(named: "ic-qr-certificate")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_onboarding_show_icon1), UBLocalized.wallet_onboarding_show_text1),
+                                                          (AccessibilityImage(image: UIImage(named: "ic-check-mark")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_onboarding_show_icon2), UBLocalized.wallet_onboarding_show_text2)])
 
     static let privacy = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_privacy_header,
-                                                foregroundImage: UIImage(named: "illu-onboarding-data-protection"),
+                                                foregroundImage: UIImage(named: "illu-onboarding-dxata-protection"),
                                                 title: UBLocalized.wallet_onboarding_privacy_title,
-                                                textGroups: [(UIImage(named: "ic-data-protection")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_onboarding_privacy_text)])
+                                                textGroups: [(AccessibilityImage(image: UIImage(named: "ic-data-protection")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_onboarding_privacy_icon1), UBLocalized.wallet_onboarding_privacy_text)])
 
     static let howItWorks = StaticContentViewModel(foregroundImage: UIImage(named: "illu-how-it-works"),
                                                    title: UBLocalized.wallet_scanner_howitworks_title,
-                                                   textGroups: [(UIImage(named: "ic-bund-small"), UBLocalized.wallet_scanner_howitworks_text1),
-                                                                (UIImage(named: "ic-one")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_scanner_howitworks_text2),
-                                                                (UIImage(named: "ic-two")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_scanner_howitworks_text3),
-                                                                (UIImage(named: "ic-three")?.ub_image(with: .cc_green_dark), UBLocalized.wallet_scanner_howitworks_text4)],
+                                                   textGroups: [(AccessibilityImage(image: UIImage(named: "ic-bund-small"), altText: UBLocalized.wallet_scanner_howitworks_icon_Flag), UBLocalized.wallet_scanner_howitworks_text1),
+                                                                (AccessibilityImage(image: UIImage(named: "ic-one")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_scanner_howitworks_icon1), UBLocalized.wallet_scanner_howitworks_text2),
+                                                                (AccessibilityImage(image: UIImage(named: "ic-two")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_scanner_howitworks_icon2), UBLocalized.wallet_scanner_howitworks_text3),
+                                                                (AccessibilityImage(image: UIImage(named: "ic-three")?.ub_image(with: .cc_green_dark), altText: UBLocalized.wallet_scanner_howitworks_icon3), UBLocalized.wallet_scanner_howitworks_text4)],
                                                    expandableTextGroups: [(UBLocalized.wallet_scanner_howitworks_question1, UBLocalized.wallet_scanner_howitworks_answer1, UBLocalized.wallet_scanner_howitworks_external_link_title, URL(string: UBLocalized.wallet_scanner_howitworks_external_link))])
 }

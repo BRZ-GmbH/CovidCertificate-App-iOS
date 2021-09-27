@@ -16,7 +16,7 @@ class OnboardingInfoView: UIView {
 
     private let leftRightInset: CGFloat
 
-    init(icon: UIImage?, text: String, alignment: NSTextAlignment, leftRightInset: CGFloat = 2 * Padding.medium) {
+    init(accessibilityImage: AccessibilityImage?, text: String, alignment: NSTextAlignment, leftRightInset: CGFloat = 2 * Padding.medium) {
         self.leftRightInset = leftRightInset
 
         super.init(frame: .zero)
@@ -26,10 +26,10 @@ class OnboardingInfoView: UIView {
 
         addSubview(label)
 
-        let imgView = UIImageView(image: icon)
+        let imgView = UIImageView(image: accessibilityImage?.image)
         imgView.ub_setContentPriorityRequired()
 
-        if icon != nil {
+        if accessibilityImage != nil {
             addSubview(imgView)
             imgView.snp.makeConstraints { make in
                 make.top.equalToSuperview().inset(Padding.medium)
@@ -39,15 +39,17 @@ class OnboardingInfoView: UIView {
 
         label.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(Padding.medium)
-            if icon != nil {
+            if accessibilityImage != nil {
                 make.leading.equalTo(imgView.snp.trailing).offset(Padding.medium + Padding.small)
             } else {
                 make.leading.equalToSuperview().inset(leftRightInset)
             }
             make.trailing.equalToSuperview().inset(leftRightInset)
         }
-
-        accessibilityLabel = text
+        
+        self.isAccessibilityElement = true
+        self.accessibilityElements = [imgView, label]
+        self.accessibilityLabel = [accessibilityImage?.altText, text].compactMap { $0 }.joined(separator: ", ")
     }
 
     @available(*, unavailable)
