@@ -89,12 +89,6 @@ class CertificateStateView: UIView {
             make.edges.equalTo(backgroundView)
         }
 
-        regionStateView.layer.cornerRadius = 10
-        regionStateView.layer.masksToBounds = true
-        regionStateView.snp.makeConstraints { make in
-            make.edges.equalTo(backgroundView)
-        }
-
         imageView.snp.makeConstraints { make in
             make.centerY.equalTo(self.backgroundView.snp.top)
             make.centerX.equalToSuperview()

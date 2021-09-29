@@ -1707,14 +1707,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.dev;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2030,14 +2030,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.ptest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2328,14 +2328,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.abn;
 				PRODUCT_BUNDLE_IDENTIFIER = "at.gv.brz.wallet-abn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2431,14 +2431,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.debug;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.oe.covid.wallet.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2521,14 +2521,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

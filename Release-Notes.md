@@ -1,5 +1,9 @@
 # Grüner Pass - Release Notes
 
+## v.2.0.4 (09.2021)
+
+- Fehlerbehebung (EPIEMSCO-1772)
+
 ## v.2.0.3 (09.2021)
 
 - Übernahme Bugfix in ValidationCore (EPIEMSCO-1670)

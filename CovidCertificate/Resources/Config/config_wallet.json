@@ -61,38 +61,6 @@
                     "iconAndroid": null,
                     "iconIos": null,
                     "linkTitle": null,
-
-                    "linkUrl": null
-                }
-            ]
-        },
-        "en": {
-            "faqTitle": "Where can I get information about EU-compliant certificates?",
-            "faqSubTitle": "For detailed information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
-            "faqIconIos": "ic-faq-image",
-            "faqIconAndroid": "ic_faq_image",
-            "faqEntries": [{
-                    "title": "Where can I get information about EU-compliant certificates?",
-                    "text": "For all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "More information",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
-                {
-                    "title": "In what ways can I present my EU-compliant certificates?",
-                    "text": "Any EU-compliant Green Pass certificates can be presented either as printout (analogue) or in a digital form. The Green Pass app is available for digital presentation. In this app you can store your EU-compliant certificates and present them directly from the app. \n\nPlease note that you will also need to present an official photo ID upon request by the person performing the check.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": null,
-                    "linkUrl": null
-                },
-                {
-                    "title": "Where have my data been stored?",
-                    "text": "Your data in the Green Pass app is not stored in a central system, but only locally on your mobile phone, or in the EU-compliant QR code on the printed certificate.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": null,
                     "linkUrl": null
                 }
             ]
