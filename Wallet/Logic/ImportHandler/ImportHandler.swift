@@ -51,14 +51,14 @@ class ImportHandler {
     }
 
     public func handleMessage(message: String) {
-        let result = CovidCertificateSDK.decode(encodedData: message)
-
-        switch result {
+        let certificate = UserCertificate(qrCode: message)
+        
+        switch certificate.decodedCertificate {
         case .success:
             delegate?.topViewController?.dismiss(animated: false, completion: nil)
 
             let vc = CertificateAddDetailViewController(showScanAgainButton: false)
-            vc.certificate = UserCertificate(qrCode: message)
+            vc.certificate = certificate
             vc.addDismissButton()
 
             let navVC = NavigationController(rootViewController: vc, useNavigationBar: true)

@@ -81,16 +81,7 @@ class HomescreenCertificateView: UIView {
             // make.top.equalTo(self.stateLabel.snp.bottom).offset(Padding.medium)
             make.top.equalTo(self.titleLabel.snp.bottom).offset(Padding.medium)
             make.left.right.equalToSuperview().inset(Padding.large)
-        }
-
-        let holeViews = [HoleView(radius: 10.0, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, left: true), HoleView(radius: 10.0, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, left: false)]
-        for (i, h) in holeViews.enumerated() {
-            contentView.addSubview(h)
-            h.snp.makeConstraints { make in
-                make.centerX.equalTo(i == 0 ? self.contentView.snp.left : self.contentView.snp.right)
-                make.top.equalTo(self.contentView.snp.bottom).multipliedBy(0.618)
-            }
-        }
+        }   
 
         titleLabel.text = UBLocalized.wallet_certificate
         nameView.certificate = certificate
@@ -154,67 +145,9 @@ class HomescreenCertificateView: UIView {
     }
 }
 
-private class HoleView: UIView {
-    // MARK: - Subviews
-
-    private let shadowRadius: CGFloat
-    private let shadowOpacity: CGFloat
-    private let left: Bool
-
-    init(radius: CGFloat, shadowRadius: CGFloat, shadowOpacity: CGFloat, left: Bool) {
-        self.shadowOpacity = shadowOpacity
-        self.shadowRadius = shadowRadius
-        self.left = left
-        super.init(frame: .zero)
-
-        snp.makeConstraints { make in
-            make.size.equalTo(radius * 2.0)
-        }
-
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: -CGFloat(Double.pi) * 0.5, endAngle: CGFloat(0.5 * Double.pi), clockwise: left)
-        let circleShape = CAShapeLayer()
-        circleShape.path = circlePath.cgPath
-
-        layer.mask = circleShape
-        layer.cornerRadius = radius
-    }
-
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - Draw
-
-    override func draw(_: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
-
-        let shadow = UIColor.black.withAlphaComponent(shadowOpacity)
-        let shadowOffset = CGSize(width: 0, height: 0)
-
-        let rectanglePath = UIBezierPath(rect: bounds)
-        if left {
-            UIColor.cc_green_dark.setFill()
-        } else {
-            UIColor.cc_white.setFill()
-        }
-        rectanglePath.fill()
-        context?.saveGState()
-        UIRectClip(rectanglePath.bounds)
-        context?.setShadow(offset: CGSize.zero, blur: 0, color: nil)
-        context?.setAlpha(shadow.cgColor.alpha)
-        context?.beginTransparencyLayer(auxiliaryInfo: nil)
-        do {
-            let opaqueShadow: UIColor? = shadow.withAlphaComponent(1)
-            context?.setShadow(offset: shadowOffset, blur: shadowRadius, color: opaqueShadow?.cgColor)
-            context!.setBlendMode(.sourceOut)
-            context?.beginTransparencyLayer(auxiliaryInfo: nil)
-            opaqueShadow?.setFill()
-            rectanglePath.fill()
-            context!.endTransparencyLayer()
-        }
-        context!.endTransparencyLayer()
-        context?.restoreGState()
+class HomescreenStateLabel: StateLabel {
+    init() {
+        super.init(labelType: .uppercaseBold)
     }
 }
 

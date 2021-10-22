@@ -10,7 +10,24 @@
  */
 
 import Foundation
+import CovidCertificateSDK
 
-struct UserCertificate: Codable, Equatable {
+class UserCertificate: Codable, Equatable {
     let qrCode: String
+        
+    lazy var decodedCertificate: Result<DGCHolder, CovidCertError> = {
+        return CovidCertificateSDK.decode(encodedData: qrCode)
+    }()
+    
+    init(qrCode: String) {
+        self.qrCode = qrCode
+    }
+    
+    static func == (lhs: UserCertificate, rhs: UserCertificate) -> Bool {
+        return lhs.qrCode == rhs.qrCode
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case qrCode
+    }
 }

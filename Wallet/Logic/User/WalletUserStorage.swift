@@ -15,7 +15,7 @@ class WalletUserStorage {
     @UBUserDefault(key: "wallet.user.hasCompletedOnboarding", defaultValue: false)
     var hasCompletedOnboarding: Bool {
         didSet {
-            ConfigManager().startConfigRequest(window: UIApplication.shared.keyWindow?.window)
+            ConfigManager().startConfigRequest(force: false, window: UIApplication.shared.keyWindow?.window)
         }
     }
     
@@ -23,6 +23,9 @@ class WalletUserStorage {
     var selectedValidationRegion: String {
         didSet { UIStateManager.shared.stateChanged(forceRefresh: true) }
     }
+    
+    @UBUserDefault(key: "lastInstalledAppVersion", defaultValue: ConfigManager.shortAppVersion)
+    static var lastInstalledAppVersion: String
 }
 
 class CertificateStorage {

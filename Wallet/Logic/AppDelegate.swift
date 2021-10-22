@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @UBUserDefault(key: "isFirstLaunch", defaultValue: true)
     var isFirstLaunch: Bool
-
+    
+    private var isHandlingImport = false
+    
     private let linkHandler = LinkHandler()
     
     let notificationHandler = NotificationHandler()
@@ -64,14 +66,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         screenProtecter.startPreventingRecording()
         #endif
         
-        /**
-        Disable for release 2.1.0 - EPIEMSCO-1527 will be launched with release 2.2.0
         UIStateManager.shared.addObserver(self) { [weak self] s in
             guard let self = self else { return }
             
+            guard let vaccinationRefreshCampaignStartDate = ConfigManager.currentConfig?.vaccinationRefreshCampaignStartDate else { return }
+            
+            guard vaccinationRefreshCampaignStartDate.isBefore(Date()) else { return }
+            
             self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: s.certificateState.certificates)
         }
-        */
     
         return true
     }
@@ -120,6 +123,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let onboardingViewController = OnboardingViewController()
             onboardingViewController.modalPresentationStyle = .fullScreen
             window?.rootViewController?.present(onboardingViewController, animated: false)
+        } else if ConfigManager.shortAppVersion != WalletUserStorage.lastInstalledAppVersion, Intro.hasAvailableIntro {
+            // show Intro
+            let introViewController = IntroViewController()
+            introViewController.modalPresentationStyle = .fullScreen
+            window?.rootViewController?.present(introViewController, animated: false)
+        } else {
+            WalletUserStorage.lastInstalledAppVersion = ConfigManager.shortAppVersion
         }
 
         setupImportHandler()
@@ -127,9 +137,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func willAppearAfterColdstart(_: UIApplication, coldStart: Bool, backgroundTime: TimeInterval) {
         VerifierManager.shared.updateTime()
-
-        // Refresh config
-        startConfigRequest()
         
         if !coldStart {
             UIStateManager.shared.stateChanged(forceRefresh: true)
@@ -137,7 +144,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Refresh trust list (public keys, revocation list, business rules,...)
         CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: { wasUpdated in
-            UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)
+            if wasUpdated {
+                VerifierManager.shared.restartAllVerifiers()
+            }
+            UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)                       
         })
     }
 
@@ -152,10 +162,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         VerifierManager.shared.resetTime()
         
         notificationHandler.dismissAlert()
+        
+        isHandlingImport = false
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
         removeBlurView()
+        
+        // Refresh config
+        let backgroundTime = -(lastForegroundActivity?.timeIntervalSinceNow ?? 0)
+        ConfigManager().startConfigRequest(force: backgroundTime == 0, window: window, showForceUpdateDialogIfNecessary: isHandlingImport == false)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -169,12 +185,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             willAppearAfterColdstart(application, coldStart: false, backgroundTime: backgroundTime)
             application.applicationIconBadgeNumber = 0
         }
-    }
-
-    // MARK: - Force update
-
-    private func startConfigRequest() {
-        ConfigManager().startConfigRequest(window: window)
     }
 
     // MARK: - Appearance
@@ -230,7 +240,9 @@ extension AppDelegate {
             return false
         }
 
+        isHandlingImport = true
         importHandler?.handle(url: url)
+        
         return true
     }
 }

@@ -1,6 +1,7 @@
 //
 /*
  * Copyright (c) 2021 Ubique Innovation AG <https://www.ubique.ch>
+ * Copyright (c) 2021 BRZ GmbH <https://www.brz.gv.at>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,16 +10,10 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import UIKit
-
-class OnboardingViewController: OnboardingBaseViewController {
+import Foundation
+class IntroViewController: OnboardingBaseViewController {
     
-    var viewControllers: [StaticContentViewController] = {
-        var vcs = [.theApp, .store, .show].compactMap({ StaticContentViewController(models: [$0] )})
-        /// OnboardingDisclaimerViewController needs to be created because of the extra settings inside
-        vcs.append(OnboardingDisclaimerViewController())
-        return vcs
-    }()
+    let viewControllers = Intro.introModelForCurrentVersion.compactMap({ StaticContentViewController(models: [$0] )})
 
     override internal var stepViewControllers: [OnboardingContentViewController] {
         return viewControllers
@@ -29,7 +24,6 @@ class OnboardingViewController: OnboardingBaseViewController {
     }
 
     override public func completedOnboarding() {
-        WalletUserStorage.shared.hasCompletedOnboarding = true
         WalletUserStorage.lastInstalledAppVersion = ConfigManager.shortAppVersion
     }
 }

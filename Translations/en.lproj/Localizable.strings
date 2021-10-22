@@ -365,7 +365,7 @@
 "covid_certificate_vaccination_title" = "Vaccination";
 
 /*Wallet: Apple App Store URL*/
-"wallet_apple_app_store_url" = "http://itunes.apple.com/app/id1574155774";
+"wallet_apple_app_store_url" = "https://itunes.apple.com/app/id1574155774";
 
 
 /*Wallet: Abkürzung "UVCI" (Unique Vaccination Certificate Identifier)*/

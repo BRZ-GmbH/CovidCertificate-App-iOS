@@ -53,11 +53,11 @@ enum Environment {
     var configService: Backend {
         switch self {
         case .dev:
-            return Backend("https://gruenerpass.gesundheit.gv.at", version: nil)
+            return Backend("https://dgc-trusttest.qr.gv.at", version: nil)
         case .abnahme:
-            return Backend("https://gruenerpass.gesundheit.gv.at", version: nil)
+            return Backend("https://dgc-trusttest.qr.gv.at", version: nil)
         case .prod:
-            return Backend("https://gruenerpass.gesundheit.gv.at", version: nil)
+            return Backend("https://dgc-trust.qr.gv.at", version: nil)
         }
     }
 
@@ -103,7 +103,7 @@ extension Endpoint {
     /// let os = "ios13"
     static func config(appversion _: String, osversion _: String, buildnr _: String) -> Endpoint {
         #if WALLET
-            let path = "wallet-app/config"
+            let path = "config_wallet.json"
         #elseif VERIFIER
             let path = "verifier/v1/config"
         #else

@@ -36,11 +36,20 @@ final class VerifierManager {
     private var observers: [String: [Observer]] = [:]
 
     private var timeRetryTimer: Timer?
+    
+    struct VerificationResult {
+        let timestamp: Date
+        let state: VerificationResultStatus
+    }
+    
+    private var lastKnownResults: [String: VerificationResult] = [:]
 
     func resetTime() {
         timeStatus = (false, Clock.now)
         timeRetryTimer?.invalidate()
         timeRetryTimer = nil
+        lastKnownResults = [:]
+        verifiers.values.forEach({ $0.cancelled = true })
     }
 
     @objc private func fetchTime() {
@@ -51,9 +60,11 @@ final class VerifierManager {
     }
 
     private func fetchCurrentTime(main: Bool) {
+        let syncStart = Date().timeIntervalSinceReferenceDate
         Clock.sync(from: main ? "ts1.univie.ac.at" : "ts2.univie.ac.at", samples: 2, first: nil) { [weak self] fetchedDate, _ in
             guard let self = self else { return }
             let oldStatus = self.timeStatus?.time
+            let syncDuration = Date().timeIntervalSinceReferenceDate - syncStart
 
             if fetchedDate != nil {
                 self.timeStatus = (true, Clock.now)
@@ -71,7 +82,8 @@ final class VerifierManager {
 
             if oldStatus != self.timeStatus?.time {
                 var shouldRestart = true
-                if let old = oldStatus, let new = self.timeStatus?.time, abs(old.timeIntervalSince(new)) < 5 {
+                // We need to take the response time for the sync into account to correctly compare
+                if let old = oldStatus, let new = self.timeStatus?.time, abs(old.addingTimeInterval(syncDuration).timeIntervalSince(new)) < 30 {
                     shouldRestart = false
                 }
                 if shouldRestart {
@@ -94,6 +106,8 @@ final class VerifierManager {
             verifiers[qrString] = nil
             return
         }
+        
+        lastKnownResults[qrString] = VerificationResult(timestamp: Clock.now ?? Date(), state: state)
 
         DispatchQueue.main.async {
             newList.forEach { $0.block(state) }
@@ -112,7 +126,7 @@ final class VerifierManager {
     }
     #endif
     
-    private func restartAllVerifiers() {
+    public func restartAllVerifiers() {
         var validationTime = timeStatus?.time
         
         /**
@@ -124,6 +138,8 @@ final class VerifierManager {
         }
         #endif
         
+        lastKnownResults = [:]
+        
         self.verifiers.forEach { _, verifier in
             verifier.restart(forceUpdate: true, validationTime: validationTime)
         }
@@ -131,7 +147,7 @@ final class VerifierManager {
 
     // MARK: - Public API
 
-    func addObserver(_ object: AnyObject, for qrString: String, regions: [String], checkDefaultRegion: Bool, forceUpdate: Bool = false, important: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
+    func addObserver(_ object: AnyObject, for certificate: UserCertificate, regions: [String], checkDefaultRegion: Bool, forceUpdate: Bool = false, important: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
         var validationTime = timeStatus?.time
         /**
          In test builds (for Q as well as P environment) we allow switching a setting for the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
@@ -142,28 +158,37 @@ final class VerifierManager {
             }
         #endif
         
-        if observers[qrString] != nil {
-            observers[qrString] = observers[qrString]!.filter { $0.object != nil && !$0.object!.isEqual(object) }
-            observers[qrString]?.append(Observer(object: object, block: block))
+        if observers[certificate.qrCode] != nil {
+            observers[certificate.qrCode] = observers[certificate.qrCode]!.filter { $0.object != nil && !$0.object!.isEqual(object) }
+            observers[certificate.qrCode]?.append(Observer(object: object, block: block))
         } else {
-            observers[qrString] = [Observer(object: object, block: block)]
+            observers[certificate.qrCode] = [Observer(object: object, block: block)]
         }
 
-        if let v = verifiers[qrString], v.regions.elementsEqual(regions) {
+        if let v = verifiers[certificate.qrCode], v.regions.elementsEqual(regions) {
             if v.isRunningWith(validationTime) == false {
+                // EPIEMSCO-1506: Cache the last known result for up to five minutes if not invalidated for some other reason
+                if let knownResult = lastKnownResults[certificate.qrCode], (Clock.now ?? Date()).timeIntervalSince(knownResult.timestamp) < (5 * 60) {
+                    block(knownResult.state)
+                    return
+                }
                 v.important = important
                 v.restart(forceUpdate: forceUpdate, validationTime: validationTime)
             }
         } else {
-            if let v = verifiers[qrString] {
+            if let v = verifiers[certificate.qrCode] {
                 v.cancelled = true
             }
-            let v = Verifier(qrString: qrString, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: validationTime)
+            let v = Verifier(certificate: certificate, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: validationTime)
             v.important = important
-            verifiers[qrString] = v
+            verifiers[certificate.qrCode] = v
             v.start(forceUpdate: forceUpdate) { state in
-                self.updateObservers(for: qrString, state: state)
+                self.updateObservers(for: certificate.qrCode, state: state)
             }
         }
+    }
+    
+    func removeObserver(_ object: AnyObject, for certificate: UserCertificate) {
+        observers[certificate.qrCode] = observers[certificate.qrCode]!.filter { $0.object != nil && !$0.object!.isEqual(object) }
     }
 }

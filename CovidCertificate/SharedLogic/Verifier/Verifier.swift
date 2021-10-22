@@ -109,14 +109,12 @@ class Verifier: NSObject {
         super.init()
     }
 
-    init(qrString: String, regions: [String], checkDefaultRegion: Bool, validationTime: Date?) {
-        let result = CovidCertificateSDK.decode(encodedData: qrString)
-
+    init(certificate: UserCertificate, regions: [String], checkDefaultRegion: Bool, validationTime: Date?) {
         self.regions = regions
         self.checkDefaultRegion = checkDefaultRegion
         self.validationTime = validationTime
 
-        switch result {
+        switch certificate.decodedCertificate {
         case let .success(holder):
             self.holder = holder
         case .failure:
@@ -129,7 +127,7 @@ class Verifier: NSObject {
     // MARK: - Start
     
     public func isRunningWith(_ time: Date?) -> Bool {
-        if self.finished {
+        if self.finished || self.cancelled {
             return false
         }
         if let time = time {
@@ -144,6 +142,7 @@ class Verifier: NSObject {
 
     public func start(forceUpdate: Bool = false, stateUpdate: @escaping ((VerificationResultStatus) -> Void)) {
         self.finished = false
+        self.cancelled = false
         self.stateUpdate = stateUpdate
 
         guard holder != nil else {

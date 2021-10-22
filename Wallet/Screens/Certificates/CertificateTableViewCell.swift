@@ -17,7 +17,12 @@ class CertificateTableViewCell: UITableViewCell {
     // MARK: - Public API
 
     public var certificate: UserCertificate? {
-        didSet { update() }
+        didSet {
+            if let oldCertificate = oldValue {
+                VerifierManager.shared.removeObserver(self, for: oldCertificate)
+            }
+            update()
+        }
     }
 
     // MARK: - Subviews
@@ -29,7 +34,7 @@ class CertificateTableViewCell: UITableViewCell {
     private let stateLabel = StateLabel()
 
     private var state: VerificationResultStatus = .loading {
-        didSet { self.updateState(animated: true) }
+        didSet { self.updateState(animated: false) }
     }
 
     // MARK: - Init
@@ -109,14 +114,12 @@ class CertificateTableViewCell: UITableViewCell {
             return
         }
 
-        let c = CovidCertificateSDK.decode(encodedData: cert.qrCode)
-
-        switch c {
+        switch cert.decodedCertificate {
         case let .success(holder):
             nameLabel.text = holder.healthCert.displayFullName
             stateLabel.certificate = holder.healthCert
 
-            VerifierManager.shared.addObserver(self, for: cert.qrCode, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false) { [weak self] state in
+            VerifierManager.shared.addObserver(self, for: cert, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false) { [weak self] state in
                 guard let strongSelf = self else { return }
                 strongSelf.state = state
             }

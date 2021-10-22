@@ -111,7 +111,7 @@ class HomescreenCertificatesViewController: ViewController {
     private func startChecks() {
         var index = 0
         for i in certificateViews {
-            VerifierManager.shared.addObserver(self, for: i.certificate.qrCode, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false, important: index < 2) { [weak i] state in
+            VerifierManager.shared.addObserver(self, for: i.certificate, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false, important: index < 2) { [weak i] state in
                 i?.state = state
             }
             index = index + 1

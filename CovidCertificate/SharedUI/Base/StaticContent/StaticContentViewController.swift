@@ -27,9 +27,10 @@ class StaticContentViewController: OnboardingContentViewController {
 
     internal func setupViews(addBottomSpacer: Bool = true) {
         for model in models {
-            if model.heading != nil {
+            if let heading = model.heading {
                 let headingLabel = Label(.uppercaseBold)
-                headingLabel.text = model.heading
+                
+                headingLabel.text = heading
                 headingLabel.accessibilityTraits = [.header]
                 let headingContainer = UIView()
                 headingContainer.addSubview(headingLabel)
@@ -41,10 +42,11 @@ class StaticContentViewController: OnboardingContentViewController {
             }
 
             if let img = model.foregroundImage {
-                addArrangedView(UIImageView(image: img), spacing: 20)
+                addArrangedView(UIImageView(image: UIImage(named: img)), spacing: 20)
             }
 
-            let titleLabel = Label(.title, textAlignment: model.alignment)
+            let titleLabel = Label(.title, textAlignment: model.textAlignment)
+
             titleLabel.text = model.title
             let titleContainer = UIView()
             titleContainer.addSubview(titleLabel)
@@ -57,8 +59,8 @@ class StaticContentViewController: OnboardingContentViewController {
                 make.leading.trailing.equalTo(self.stackScrollView.stackView)
             }
 
-            for (icon, text) in model.textGroups {
-                let v = OnboardingInfoView(accessibilityImage: icon, text: text, alignment: model.alignment)
+            for textgroup in model.textGroups {
+                let v = OnboardingInfoView(accessibilityImage: textgroup.loadAccessibilityImage, text: textgroup.text, alignment: model.textAlignment)
                 addArrangedView(v)
                 v.snp.makeConstraints { make in
                     make.leading.trailing.equalTo(self.stackScrollView.stackView)
@@ -67,8 +69,9 @@ class StaticContentViewController: OnboardingContentViewController {
 
             if !model.expandableTextGroups.isEmpty {
                 stackScrollView.addSpacerView(2 * Padding.medium)
-                for (title, text, linkTitle, linkUrl) in model.expandableTextGroups {
-                    addExpandableBox((title, text, linkTitle, linkUrl))
+                
+                for expandableTextGroup in model.expandableTextGroups {
+                    addExpandableBox((expandableTextGroup.title, expandableTextGroup.text, expandableTextGroup.linkTitle, expandableTextGroup.link))
                 }
             }
 

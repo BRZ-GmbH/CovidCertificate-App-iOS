@@ -57,10 +57,10 @@
       },
       {
         "package": "CertLogic",
-        "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios.git",
+        "repositoryURL": "https://github.com/BRZ-GmbH/dgc-certlogic-ios.git",
         "state": {
-          "branch": "main",
-          "revision": "8f07a22ec2adc2335b4a4cb75b408c8c93d86208",
+          "branch": "feature/avoid-unnecessary-parsing",
+          "revision": "ab5b7f3e10e0a77f96f588698899405eaca42951",
           "version": null
         }
       },
@@ -75,11 +75,11 @@
       },
       {
         "package": "jsonlogic",
-        "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
+        "repositoryURL": "https://github.com/BRZ-GmbH/json-logic-swift.git",
         "state": {
-          "branch": null,
-          "revision": "e59a317e03491abe1f04c87b965a52abae243ddd",
-          "version": "1.1.8"
+          "branch": "feature/avoid-date-parsing-attempts",
+          "revision": "877692ea3135e9e5f4ac427836e6b8325a4d6b39",
+          "version": null
         }
       },
       {
@@ -93,10 +93,10 @@
       },
       {
         "package": "Kronos",
-        "repositoryURL": "https://github.com/MobileNativeFoundation/Kronos.git",
+        "repositoryURL": "https://github.com/BRZ-GmbH/Kronos.git",
         "state": {
-          "branch": "master",
-          "revision": "3b2783e4d7b13fa9934692522b2c011ee0a12231",
+          "branch": "feature/ipv4-preference",
+          "revision": "516a98699098f60d2724012c38df221a18bdc3c1",
           "version": null
         }
       },
@@ -138,10 +138,10 @@
       },
       {
         "package": "SwiftCBOR",
-        "repositoryURL": "https://github.com/martinreichart/SwiftCBOR.git",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/SwiftCBOR.git",
         "state": {
           "branch": "master",
-          "revision": "642e9e93fb4a51b564c1bf21bf3c5b4c6bc79416",
+          "revision": "0209a2d1a30b1b42334c4ad3f8bd221b977b2273",
           "version": null
         }
       },

@@ -1,6 +1,25 @@
 {
-    "forceUpdate": false,
-    "infoBox": null,
+    "ios": "2.1.0",
+    "ios_force_date": "2021-12-30",
+    "android": "2.1.0",
+    "android_force_date": "2021-12-30",
+    "huawei": "2.1.0",
+    "huawei_force_date": "2021-12-30",
+    "refresh_vaccination_campaign_start": "2030-12-30T00:00:00Z",
+    "refresh_vaccination_campaign_text": {
+        "de": {
+            "title": "Achtung Zertifikat läuft ab!",
+            "message": "Um weiterhin ein gültiges Zertifikat vorweisen zu können, wird eine Auffrischungsimpfung in den nächsten 3 Monaten empfohlen.",
+            "remind_again_button": "Erneut erinnern",
+            "read_button": "Gelesen"
+        },
+        "en": {
+            "title": "Achtung Zertifikat läuft ab!",
+            "message": "Um weiterhin ein gültiges Zertifikat vorweisen zu können, wird eine Auffrischungsimpfung in den nächsten 3 Monaten empfohlen.",
+            "remind_again_button": "Erneut erinnern",
+            "read_button": "Gelesen"
+        }
+    },
     "questions": {
         "de": {
             "faqTitle": "Wo kann ich mich über die EU-konformen Zertifikate informieren?",

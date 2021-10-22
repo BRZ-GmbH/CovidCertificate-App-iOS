@@ -50,6 +50,8 @@ class ConfigResponseBody: UBCodable, JWTExtension {
     let infoBox: LocalizedValue<InfoBox>?
     let questions: LocalizedValue<FAQEntriesContainer>?
     let works: LocalizedValue<FAQEntriesContainer>?
+    let vaccinationRefreshCampaignStart: String?
+    let vaccinationRefreshCampaignText: LocalizedValue<VaccinationRefreshCampaignText>?
     
     var forceUpdate: Bool {
         guard let iosForceDate = iosForceDate else { return false }
@@ -67,12 +69,19 @@ class ConfigResponseBody: UBCodable, JWTExtension {
         return DateFormatter.ub_dayString(from: date)
     }
     
+    var vaccinationRefreshCampaignStartDate: Date? {
+        guard let vaccinationRefreshCampaignStart = vaccinationRefreshCampaignStart else { return nil }
+        return ISO8601DateFormatter().date(from: vaccinationRefreshCampaignStart)
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case ios = "ios"
         case iosForceDate = "ios_force_date"
         case infoBox = "infoBox"
         case questions = "questions"
         case works = "works"
+        case vaccinationRefreshCampaignText = "refresh_vaccination_campaign_text"
+        case vaccinationRefreshCampaignStart = "refresh_vaccination_campaign_start"
     }
 
     class FAQEntriesContainer: UBCodable {
@@ -90,6 +99,20 @@ class ConfigResponseBody: UBCodable, JWTExtension {
         let linkTitle: String?
         let linkUrl: URL?
     }
+    
+    class VaccinationRefreshCampaignText: UBCodable {
+        let title: String
+        let message: String
+        let remindAgainButton: String
+        let readButton: String
+        
+        private enum CodingKeys: String, CodingKey {
+            case title
+            case message
+            case remindAgainButton = "remind_again_button"
+            case readButton = "read_button"
+        }
+    }
 }
 
 extension ConfigResponseBody {
@@ -99,20 +122,20 @@ extension ConfigResponseBody {
            let title1 = questions?.value?.faqTitle,
            let subtitle1 = questions?.value?.faqSubTitle {
             models.append(StaticContentViewModel(heading: nil,
-                                                 foregroundImage: UIImage(named: imageString1),
+                                                 foregroundImage: imageString1,
                                                  title: title1,
-                                                 textGroups: [(nil, subtitle1)],
-                                                 expandableTextGroups: questions?.value?.faqEntries.compactMap { ($0.title, $0.text, $0.linkTitle, $0.linkUrl) } ?? []))
+                                                 textGroups: [TextGroup(image: nil,imageColor: nil,imageAltText: nil, text: subtitle1)],
+                                                 expandableTextGroups: questions?.value?.faqEntries.compactMap { ExpandableTextGroup(title: $0.title, text: $0.text, linkTitle: $0.linkTitle, linkUrl: $0.linkUrl?.absoluteString) } ?? []))
         }
 
         if let imageString2 = works?.value?.faqIconIos,
            let title2 = works?.value?.faqTitle,
            let subtitle2 = works?.value?.faqSubTitle {
             models.append(StaticContentViewModel(heading: nil,
-                                                 foregroundImage: UIImage(named: imageString2),
+                                                 foregroundImage: imageString2,
                                                  title: title2,
-                                                 textGroups: [(nil, subtitle2)],
-                                                 expandableTextGroups: works?.value?.faqEntries.compactMap { ($0.title, $0.text, $0.linkTitle, $0.linkUrl) } ?? []))
+                                                 textGroups: [TextGroup(image: nil,imageColor: nil,imageAltText: nil, text: subtitle2)],
+                                                 expandableTextGroups: works?.value?.faqEntries.compactMap { ExpandableTextGroup(title: $0.title, text: $0.text, linkTitle: $0.linkTitle, linkUrl: $0.linkUrl?.absoluteString) } ?? []))
         }
 
         return models

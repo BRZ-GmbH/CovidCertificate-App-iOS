@@ -87,9 +87,7 @@ class QRCodeNameView: UIView {
     private func update() {
         guard let cert = certificate else { return }
 
-        let c = CovidCertificateSDK.decode(encodedData: cert.qrCode)
-
-        switch c {
+        switch cert.decodedCertificate {
         case let .success(holder):
             nameView.text = holder.healthCert.displayFullName
             birthdayLabelView.text = holder.healthCert.displayBirthDate

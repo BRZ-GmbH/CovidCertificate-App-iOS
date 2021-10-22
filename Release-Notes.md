@@ -1,5 +1,13 @@
 # Grüner Pass - Release Notes
 
+## v2.1.0  (10.2021)
+- Notification für Erinnerung an Auffrischungsimpfung (EPIEMSCO-1527)
+- Support für Forced Update (EPIEMSCO-1125)
+- Support für Intro/Vorstellung von neuen Features (EPIEMSCO-1649)
+- Optimierung App-Verhalten & Performance (EPIEMSCO-1506)
+- Aktualisierung der FAQ-Texte (EPIEMSCO-1762)
+- Entfernen der Halbkreise der Zertifikats-Karte (EPIEMSCO-1761)
+
 ## v.2.0.4 (09.2021)
 
 - Fehlerbehebung (EPIEMSCO-1772)

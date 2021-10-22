@@ -29,20 +29,20 @@ class ConfigManager: NSObject {
             UIStateManager.shared.stateChanged()
         }
     }
-
-    // @UBUserDefault(key: "lastConfigLoad", defaultValue: nil)
+    
+    @UBUserDefault(key: "lastConfigLoad", defaultValue: nil)
     static var lastConfigLoad: Date?
-
-    // @UBUserDefault(key: "lastConfigURL", defaultValue: nil)
-    static var lastConfigUrl: String?
 
     static let configForegroundValidityInterval: TimeInterval = 60 * 60 * 8 // 1h
 
     // MARK: - Version Numbers
+    
+    static var shortAppVersion: String {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    }
 
     static var appVersion: String {
-        let shortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        return "ios-\(shortVersion)"
+        return "ios-\(shortAppVersion)"
     }
 
     static var osVersion: String {
@@ -57,25 +57,14 @@ class ConfigManager: NSObject {
 
     // MARK: - Start config request
 
-    static func shouldLoadConfig(url: String?, lastConfigUrl: String?, lastConfigLoad: Date?) -> Bool {
-        // Deactivate Config loading for Forced Update for now
-        if true {
-            return false
-        }
-        // if the config url was changed (by OS version or app version changing) load config in anycase
-        if url != lastConfigUrl {
-            return true
-        }
-
+    static func shouldLoadConfig(lastConfigLoad: Date?) -> Bool {
         return lastConfigLoad == nil || Date().timeIntervalSince(lastConfigLoad!) > Self.configForegroundValidityInterval
     }
 
-    public func loadConfig(completion: @escaping (ConfigResponseBody?) -> Void) {
+    public func loadConfig(force: Bool, completion: @escaping (ConfigResponseBody?) -> Void) {
         let request = Endpoint.config(appversion: ConfigManager.appVersion, osversion: ConfigManager.osVersion, buildnr: ConfigManager.buildNumber).request()
 
-        guard Self.shouldLoadConfig(url: request.url?.absoluteString,
-                                    lastConfigUrl: Self.lastConfigUrl,
-                                    lastConfigLoad: Self.lastConfigLoad)
+        guard force || Self.shouldLoadConfig(lastConfigLoad: Self.lastConfigLoad)
         else {
             Logger.log("Skipping config load request and returning from cache", appState: true)
             completion(Self.currentConfig)
@@ -84,6 +73,12 @@ class ConfigManager: NSObject {
 
         Logger.log("Load Config", appState: true)
 
+        guard Self.shouldLoadConfig(lastConfigLoad: Self.lastConfigLoad)
+          else {
+              Logger.log("Skipping config load request and returning from cache", appState: true)
+              completion(Self.currentConfig)
+              return
+          }
         dataTask = session.dataTask(with: request, completionHandler: { data, response, error in
             guard let _ = response as? HTTPURLResponse,
                   let data = data
@@ -97,9 +92,9 @@ class ConfigManager: NSObject {
                 do {
                     let config = try JSONDecoder().decode(ConfigResponseBody.self, from: data)
                     // Do not store configuration as it is only used for mandatory update for now
-                    // ConfigManager.currentConfig = config
+                    ConfigManager.currentConfig = config
                     Self.lastConfigLoad = Date()
-                    Self.lastConfigUrl = request.url?.absoluteString
+
                     completion(config)
                 } catch {
                     Logger.log("Failed to load config, error: \(error.localizedDescription)")
@@ -111,10 +106,10 @@ class ConfigManager: NSObject {
         dataTask?.resume()
     }
 
-    public func startConfigRequest(window: UIWindow?) {
-        loadConfig { config in
+    public func startConfigRequest(force: Bool, window: UIWindow?, showForceUpdateDialogIfNecessary: Bool = true) {
+        loadConfig(force: force) { config in
             // self must be strong
-            if let config = config {
+            if let config = config, showForceUpdateDialogIfNecessary {
                 self.presentAlertIfNeeded(config: config, window: window)
             }
         }
@@ -160,7 +155,7 @@ class ConfigManager: NSObject {
     }
 
     // In case the config has not yet been loaded at least once from the request, we use the bundled config as fallback
-    private static var fallbackConfig: ConfigResponseBody? {
+    public static var fallbackConfig: ConfigResponseBody? {
         #if WALLET
             let path = "config_wallet"
         #elseif VERIFIER

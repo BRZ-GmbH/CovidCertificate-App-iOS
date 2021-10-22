@@ -33,8 +33,7 @@ class NotificationHandler: NSObject {
     public func startCertificateNotificationCheck(window: UIWindow?, certificates: [UserCertificate]) {
         certificateCombinationHash = certificates.map({ $0.qrCode }).joined(separator: "_").hash
         let certificateHolders: [DGCHolder] = certificates.compactMap({
-            let result = CovidCertificateSDK.decode(encodedData: $0.qrCode)
-            switch result {
+            switch $0.decodedCertificate {
             case let .success(result): return result
             case .failure(_): return nil
             }
@@ -93,7 +92,7 @@ class NotificationHandler: NSObject {
      Removes the notification display status for the provided certificate
      */
     public func removeCertificate(_ certificate: UserCertificate) {
-        if case let .success(result) = CovidCertificateSDK.decode(encodedData: certificate.qrCode) {
+        if case let .success(result) = certificate.decodedCertificate {
             if let identifier = result.healthCert.vaccinations?.first?.certificateIdentifier {
                 notifications[identifier] = nil
             }
@@ -118,23 +117,31 @@ class NotificationHandler: NSObject {
         }
         if let certificate = certificates.first, let certificateIdentifier = certificate.healthCert.vaccinations?.first?.certificateIdentifier, certificateHash == certificateCombinationHash {
             let remainingCertificates = certificates.dropFirst()
-            let alert = UIAlertController(title: UBLocalized.vaccination_booster_notification_title, message: UBLocalized.vaccination_booster_notification_message, preferredStyle: .alert)
+            let campaignText = ConfigManager.currentConfig?.vaccinationRefreshCampaignText?.value
+            let title = campaignText?.title ?? UBLocalized.vaccination_booster_notification_title
+            let message = campaignText?.message ?? UBLocalized.vaccination_booster_notification_message
+            let readButton = campaignText?.readButton ?? UBLocalized.vaccination_booster_notification_read
+            let remindAgainButton = campaignText?.remindAgainButton ?? UBLocalized.vaccination_booster_notification_later
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             // Read
-            alert.addAction(UIAlertAction(title: UBLocalized.vaccination_booster_notification_read, style: .cancel, handler: { _ in
+            alert.addAction(UIAlertAction(title: readButton, style: .cancel, handler: { _ in
                 self.notifications[certificateIdentifier] = Calendar.current.date(byAdding: .year, value: 100, to: Date())
                 DispatchQueue.main.async {
                     Self.notificationAlert = nil
                     self.presentAlertForCertificateIfNeeded(certificates: Array(remainingCertificates), window: window, certificateHash: certificateHash)
                 }
             }))
-            // Later
-            alert.addAction(UIAlertAction(title: UBLocalized.vaccination_booster_notification_later, style: .default, handler: { _ in
-                self.notifications[certificateIdentifier] = certificate.nextNotificationDate
-                DispatchQueue.main.async {
-                    Self.notificationAlert = nil
-                    self.presentAlertForCertificateIfNeeded(certificates: Array(remainingCertificates), window: window, certificateHash: certificateHash)
-                }
-            }))
+            
+            if (certificate.nextNotificationDate.isBefore(Date()) == false) {
+                // Later
+                alert.addAction(UIAlertAction(title: remindAgainButton, style: .default, handler: { _ in
+                    self.notifications[certificateIdentifier] = certificate.nextNotificationDate
+                    DispatchQueue.main.async {
+                        Self.notificationAlert = nil
+                        self.presentAlertForCertificateIfNeeded(certificates: Array(remainingCertificates), window: window, certificateHash: certificateHash)
+                    }
+                }))
+            }
             window?.rootViewController?.present(alert, animated: true, completion: nil)
             Self.notificationAlert = alert
         }
