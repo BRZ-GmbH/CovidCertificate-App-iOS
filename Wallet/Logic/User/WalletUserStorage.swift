@@ -19,8 +19,8 @@ class WalletUserStorage {
         }
     }
     
-    @UBUserDefault(key: "wallet.user.selectedValidationRegion", defaultValue: "")
-    var selectedValidationRegion: String {
+    @UBUserDefault(key: "wallet.user.selectedValidationRegion", defaultValue: nil)
+    var selectedValidationRegion: String? {
         didSet { UIStateManager.shared.stateChanged(forceRefresh: true) }
     }
     

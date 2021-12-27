@@ -17,7 +17,8 @@ class ExternalLinkButton: UBButton {
         super.init()
 
         self.title = title
-
+        
+        accessibilityLabel = [title, UBLocalized.accessibility_external_link].compactMap({ $0 }).joined(separator: ",")
         backgroundColor = .clear
         highlightedBackgroundColor = UIColor.cc_green_dark.withAlphaComponent(0.15)
 

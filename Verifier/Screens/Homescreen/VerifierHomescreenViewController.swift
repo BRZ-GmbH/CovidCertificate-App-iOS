@@ -43,8 +43,8 @@ class VerifierHomescreenViewController: HomescreenBaseViewController {
     // MARK: - Setup
 
     private func setupViews() {
-        let isSmall = view.frame.size.width <= 375
-        let isUltraSmall = view.frame.size.width <= 320
+        let isSmall = UIScreen.main.bounds.width <= 375
+        let isUltraSmall = UIScreen.main.bounds.width <= 320
 
         view.addSubview(supportButton)
 

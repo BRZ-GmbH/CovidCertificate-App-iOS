@@ -18,7 +18,9 @@ class RegionSelectionViewController: ViewController {
     
     private let tableHeaderView = RegionSelectionHeaderView(title: UBLocalized.wallet_region_selection_header_title, message: UBLocalized.wallet_region_selection_header_message)
     
-    private let regions: [Region] = Region.allCases
+    private let regions: [Region] = Region.allCases.sorted { r1, r2 in
+        return r1.validityName < r2.validityName
+    }
     
     // MARK: - Init
     
@@ -34,7 +36,13 @@ class RegionSelectionViewController: ViewController {
 
         setup()
 
-        addDismissButton()
+        if Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion) != nil {
+            addDismissButton()
+        } else {
+            if #available(iOS 13.0, *) {
+                isModalInPresentation = true
+            }
+        }
     }
     
     // MARK: - Setup

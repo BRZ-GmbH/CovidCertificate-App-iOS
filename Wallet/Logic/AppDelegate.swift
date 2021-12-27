@@ -69,11 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIStateManager.shared.addObserver(self) { [weak self] s in
             guard let self = self else { return }
             
-            guard let vaccinationRefreshCampaignStartDate = ConfigManager.currentConfig?.vaccinationRefreshCampaignStartDate else { return }
-            
-            guard vaccinationRefreshCampaignStartDate.isBefore(Date()) else { return }
-            
-            self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: s.certificateState.certificates)
+            self.notificationHandler.startCheckForJohnsonVaccinationBooster(window: self.window, certificates: s.certificateState.certificates) { [weak self] in
+                guard let self = self else { return }
+                
+                self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: s.certificateState.certificates)
+            }
         }
     
         return true

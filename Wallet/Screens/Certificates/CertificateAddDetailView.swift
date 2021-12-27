@@ -45,7 +45,8 @@ class CertificateAddDetailView: UIView {
         }
 
         stackScrollView.stackView.isLayoutMarginsRelativeArrangement = true
-        let p = Padding.large + Padding.medium
+        let isSmall = UIScreen.main.bounds.width <= 375
+        let p = isSmall ? Padding.medium : Padding.large + Padding.medium
         stackScrollView.stackView.layoutMargins = UIEdgeInsets(top: 0.0, left: p, bottom: 0.0, right: p)
     }
 
@@ -59,15 +60,15 @@ class CertificateAddDetailView: UIView {
         if let cert = certificate {
             if CertificateStorage.shared.userCertificates.contains(cert) {
                 stackScrollView.addSpacerView(Padding.medium)
-                stackScrollView.addArrangedView(CertificateAlreadyAddedView())
+                let certificateAlreadyAddedView = CertificateAlreadyAddedView()
+                stackScrollView.addArrangedView(certificateAlreadyAddedView)
+                UIAccessibility.post(notification: .screenChanged, argument: certificateAlreadyAddedView)
             }
         }
 
         stackScrollView.addSpacerView(Padding.large + Padding.medium)
 
         let qrCodeImageView = UIImageView.centered(with: UIImage(named: "ic-qrcode"))
-        qrCodeImageView.isAccessibilityElement = true
-        qrCodeImageView.accessibilityLabel = UBLocalized.certificate_details_qr_icon
         
         stackScrollView.addArrangedView(qrCodeImageView)
         stackScrollView.addSpacerView(Padding.large + Padding.medium)

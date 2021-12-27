@@ -27,10 +27,10 @@ class ViewController: UIViewController {
 
     // MARK: - Present
 
-    func presentInNavigationController(from rootViewController: UIViewController) {
+    func presentInNavigationController(from rootViewController: UIViewController, preferFullscreenOnSmallDevice: Bool = false) {
         let navCon = NavigationController(rootViewController: self, useNavigationBar: true)
 
-        if UIDevice.current.isSmallScreenPhone {
+        if UIDevice.current.isSmallScreenPhone && preferFullscreenOnSmallDevice {
             navCon.modalPresentationStyle = .fullScreen
         }
 

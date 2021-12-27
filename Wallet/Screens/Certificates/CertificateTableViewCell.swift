@@ -128,7 +128,9 @@ class CertificateTableViewCell: UITableViewCell {
             break
         }
 
-        accessibilityLabel = [nameLabel.accessibilityLabel, stateLabel.accessibilityLabel].compactMap { $0 }.joined(separator: ", ")
+        let accessibilityHint = self.state.isSuccess() ? UBLocalized.accessibility_certificate_list_valid : UBLocalized.accessibility_certificate_list_in_valid
+        
+        accessibilityLabel = [nameLabel.accessibilityLabel, stateLabel.accessibilityLabel, accessibilityHint].compactMap { $0 }.joined(separator: ", ")
     }
 
     private func updateState(animated: Bool) {

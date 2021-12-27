@@ -32,12 +32,14 @@ class WalletScannerViewController: ViewController {
     private var timer: Timer?
 
     private var cameraErrorView: CameraErrorView?
+    private var shouldReadVisibleError = true
 
     // MARK: - Init
 
     override init() {
         super.init()
         title = UBLocalized.wallet_scanner_title.uppercased()
+        navigationItem.accessibilityLabel = UBLocalized.wallet_scanner_title
         qrView = QRScannerView(delegate: self)
     }
 
@@ -72,7 +74,7 @@ class WalletScannerViewController: ViewController {
                 make.edges.equalToSuperview()
             }
 
-            let isSmall = view.frame.size.width <= 320
+            let isSmall = UIScreen.main.bounds.width <= 320
 
             var additionalInset: CGFloat = 0.0
             if !isSmall {
@@ -188,6 +190,12 @@ class WalletScannerViewController: ViewController {
     // MARK: - Show/hide
 
     private func startScanning() {
+        /// We have to delay the announcement until VoiceOver starts to read the FirstResponder. Then we can queue our announcement.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            /// It takes about atleast 1.5 seconds to find the FirstResponder.
+            UIAccessibility.post(notification: .announcement, argument: NSAttributedString(string: UBLocalized.accessibility_active_camera, attributes: [.accessibilitySpeechQueueAnnouncement: true]))
+        }
+        
         cameraErrorView?.alpha = 0.0
         qrView?.startScanning()
         qrView?.setCameraLight(on: isLightOn)
@@ -199,6 +207,11 @@ class WalletScannerViewController: ViewController {
         timer?.invalidate()
         timer = nil
         qrView?.stopScanning()
+        /// We have to delay the announcement until VoiceOver starts to read the FirstResponder. Then we can queue our announcement.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            /// It takes about atleast 1.5 seconds to find the FirstResponder.
+            UIAccessibility.post(notification: .announcement, argument: NSAttributedString(string: UBLocalized.accessibility_in_active_camera, attributes: [.accessibilitySpeechQueueAnnouncement: true]))
+        }
     }
 
     private func showDetail() {
@@ -227,6 +240,12 @@ class WalletScannerViewController: ViewController {
 
     private func showError(error: CovidCertError?) {
         if error != nil {
+            
+            if shouldReadVisibleError, let errorText = qrOverlay?.errorView.errorLabel.text {
+                shouldReadVisibleError.toggle()
+                UIAccessibility.post(notification: .announcement, argument: errorText)
+            }
+            
             qrOverlay?.showErrorView(error: error, animated: true)
 
             timer?.invalidate()
@@ -234,6 +253,7 @@ class WalletScannerViewController: ViewController {
                 guard let strongSelf = self else { return }
                 UIView.animate(withDuration: 0.2) {
                     strongSelf.showError(error: nil)
+                    strongSelf.shouldReadVisibleError.toggle()
                 }
             })
 

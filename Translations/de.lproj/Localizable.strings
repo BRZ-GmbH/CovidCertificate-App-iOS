@@ -215,11 +215,20 @@
 /*Header im Onboarding-Screen "Vorteile, Vorweisen"*/
 "wallet_onboarding_show_header" = "Vorteile";
 
+/*Accessibility: QR Scanner aktivierte Kamera */
+"accessibility_active_camera" = "Kamera ist Aktiv";
+
+/*Accessibility: QR Scanner deaktivierte Kamera */
+"accessibility_in_active_camera" = "Kamera ist nicht mehr Aktiv";
+
 /*Accessibility: Information*/
 "accessibility_info_button" = "Impressum";
 
 /*Accessibility: FAQ Button Titel*/
 "accessibility_faq_button" = "Häufige Fragen";
+
+/*Accessibility: Externer Link*/
+"accessibility_external_link" = "Öffnet in neuem Fenster";
 
 /*Accessibility: Button zur Liste der Zertifikate*/
 "accessibility_list_button" = "Liste Ihrer Zertifikate";
@@ -245,38 +254,38 @@
 /*Accessibility: So Funktioniert's Dritter Schritt*/
 "wallet_scanner_howitworks_icon3" = "Dritter Schritt";
 
-/*Accessibility: So Funktioniert's Österreich Flagge*/
-"wallet_scanner_howitworks_icon_Flag" = "Österreich-Flagge";
-
-/*Accessibility: Onboarding Schloss*/
-"wallet_onboarding_store_icon1" = "Schloss";
-
-/*Accessibility: Onboarding QR Code*/
-"wallet_onboarding_show_icon1" = "QR Code";
-
-/*Accessibility: Onboarding Grünes Häkchen*/
-"wallet_onboarding_show_icon2" = "Grünes Häkchen";
-
-/*Accessibility: Onboarding Grünes Schild mit Häkchen*/
-"wallet_onboarding_privacy_icon1" = "Grünes Schild mit Häkchen";
-
 /*Accessibility: Zertifikat Gültig für*/
 "region_type_valid" = "Gültig für";
 
 /*Accessibility: Zertifikat Ungültig für*/
 "region_type_invalid" = "Ungültig für";
 
+/*Accessibility: Zertifikat Liste Zertifikat Gültig */
+"accessibility_certificate_list_valid" = "Gültig";
+
+/*Accessibility: Zertifikat Liste Zertifikat Ungültig*/
+"accessibility_certificate_list_in_valid" = "Ungültig";
+
 /*Accessibility: Homescreen Ausgewählte Region*/
 "accessibility_selected_region" = "Aktuelle Region";
+
+/*Accessibility: Homescreen Detailansicht vom Zertifikat */
+"accessibility_detail_certificate" = "Für die Detailansicht Doppeltippen";
+
+/*Accessibility: Region Auswählen */
+"accessibility_region_active" = "Aktiv";
+
+/*Accessibility: Region Auswählen */
+"accessibility_region_in_active" = "Zum Ändern Doppeltippen";
 
 /*Accessibility: Homescreen Region ändern*/
 "accessibility_change_selected_region" = "Zum Ändern Doppeltippen";
 
-/*Accessibility: Zertifikat Details QR Code*/
-"certificate_details_qr_icon" = "QR Code, Bild";
-
 /*Accessibility: Zertifikat Details 2 "von" 2 Impfdosen */
 "accessibility_of_text" = "von";
+
+/*Accessibility: Page control Seite X von X */
+"accessibility_page_control_page" = "Seite";
 
 /*Titel des Impressum-Screens*/
 "impressum_title" = "Impressum";
@@ -455,7 +464,7 @@
 
 
 /*Titel Gültigkeit im Zertifikatsdetail*/
-"wallet_certificate_validity" = "Gültigkeit in\nÖsterreich";
+"wallet_certificate_validity" = "%@\n%@";
 
 /*"Bis" Label im Zertifikats-Detail*/
 "wallet_certificate_valid_until" = "bis";
@@ -484,6 +493,10 @@
 "region_type_ET" = "Eintritt";
 "region_type_NG" = "Nachtgastronomie";
 
+"region_type_ET_validity" = "Eintritt";
+"region_type_NG_validity" = "Nachtgastronomie";
+
+
 /* Warnung bei fehlender aktueller Zeit durch Timeserver */
 "wallet_time_missing" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
 "wallet_validation_data_expired" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
@@ -506,7 +519,23 @@
 "region_tirol" = "Tirol";
 "region_vorarlberg" = "Vorarlberg";
 
+"region_nationwide_validity" = "Bundesweit\n(exkl. Wien)";
+
 "vaccination_booster_notification_title" = "Achtung Zertifikat läuft ab!";
 "vaccination_booster_notification_message" = "Um weiterhin ein gültiges Zertifikat vorweisen zu können, wird eine Auffrischungsimpfung in den nächsten 3 Monaten empfohlen.";
 "vaccination_booster_notification_later" = "Erneut erinnern";
 "vaccination_booster_notification_read" = "Gelesen";
+
+"wallet_3g_status_validity_headline" = "Dieses Zertifikat berechtigt für";
+
+"wallet_notification_johnson_booster_message" = "Achtung: Holen Sie sich ab 28 Tagen nach Ihrer Erstimpfung mit dem COVID-19 Vaccine Janssen (\"Johnson&Johnson\") Ihre 2. Impfung!\nIhr Impfzertifikat für den Grünen Pass ist ab Montag, 03.01.2022, nur noch mit 2 Impfungen gültig.";
+"wallet_notification_johnson_booster_ok_button" = "OK";
+"wallet_notification_johnson_booster_info_button" = "Termin";
+"wallet_notification_johnson_booster_info_url" = "https://www.oesterreich-impft.at/jetzt-impfen/";
+
+"wallet_notification_booster_title" = "Achtung!";
+"wallet_notification_booster_message" = "Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.";
+"wallet_notification_booster_ok_button" = "OK";
+"wallet_notification_booster_later_button" = "Später";
+"wallet_notification_booster_info_button" = "Termin";
+"wallet_notification_booster_info_url" = "https://www.oesterreich-impft.at/jetzt-impfen/";

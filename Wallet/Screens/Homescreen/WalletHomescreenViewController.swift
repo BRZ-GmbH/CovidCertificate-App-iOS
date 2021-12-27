@@ -51,11 +51,20 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             strongSelf.state = s.certificateState.certificates.count == 0 ? .onboarding : .certificates
             strongSelf.infoBox = s.infoBoxState
             
-            strongSelf.regionSelectionButton.region = Region.init(rawValue: WalletUserStorage.shared.selectedValidationRegion)
+            strongSelf.regionSelectionButton.region = Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)
         }
 
         setupViews()
         setupInteraction()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion) == nil {
+            let vc = RegionSelectionViewController()
+            vc.presentInNavigationController(from: self)
+        }
     }
 
     // MARK: - Update
@@ -103,7 +112,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             strongSelf.addCertificateButton.changeAccessibilityTitle(title: UBLocalized.accessibility_add_button)
 
             let vc = WalletScannerViewController()
-            vc.presentInNavigationController(from: strongSelf)
+            vc.presentInNavigationController(from: strongSelf, preferFullscreenOnSmallDevice: true)
         }
 
         actionPopupView.addPDFCertificateTouchUpCallback = { [weak self] in
@@ -229,8 +238,10 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             make.left.right.bottom.equalToSuperview()
         }
 
+        let isSmall = UIScreen.main.bounds.width <= 375
+        
         addSubviewController(certificatesViewController) { make in
-            make.top.equalTo(self.logoView.snp.bottom).offset(48)
+            make.top.equalTo(self.logoView.snp.bottom).offset(isSmall ? Padding.large : Padding.large + Padding.medium)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(self.bottomView.snp.top)
         }

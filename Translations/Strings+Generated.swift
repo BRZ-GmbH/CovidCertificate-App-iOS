@@ -10,14 +10,26 @@ import Foundation
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
  enum UBLocalized {
    enum UBLocalizedKey : String {
+    /// Kamera ist Aktiv
+     case accessibility_active_camera_key = "accessibility_active_camera"
     /// Zertifikat hinzufügen
      case accessibility_add_button_key = "accessibility_add_button"
+    /// Ungültig
+     case accessibility_certificate_list_in_valid_key = "accessibility_certificate_list_in_valid"
+    /// Gültig
+     case accessibility_certificate_list_valid_key = "accessibility_certificate_list_valid"
     /// Zum Ändern Doppeltippen
      case accessibility_change_selected_region_key = "accessibility_change_selected_region"
     /// Schliessen
      case accessibility_close_button_key = "accessibility_close_button"
+    /// Für die Detailansicht Doppeltippen
+     case accessibility_detail_certificate_key = "accessibility_detail_certificate"
+    /// Öffnet in neuem Fenster
+     case accessibility_external_link_key = "accessibility_external_link"
     /// Häufige Fragen
      case accessibility_faq_button_key = "accessibility_faq_button"
+    /// Kamera ist nicht mehr Aktiv
+     case accessibility_in_active_camera_key = "accessibility_in_active_camera"
     /// Information
      case accessibility_info_box_key = "accessibility_info_box"
     /// Impressum
@@ -30,6 +42,12 @@ import Foundation
      case accessibility_list_button_key = "accessibility_list_button"
     /// von
      case accessibility_of_text_key = "accessibility_of_text"
+    /// Seite
+     case accessibility_page_control_page_key = "accessibility_page_control_page"
+    /// Aktiv
+     case accessibility_region_active_key = "accessibility_region_active"
+    /// Zum Ändern Doppeltippen
+     case accessibility_region_in_active_key = "accessibility_region_in_active"
     /// Aktuelle Region
      case accessibility_selected_region_key = "accessibility_selected_region"
     /// Zugriff auf Kamera erlauben
@@ -106,6 +124,8 @@ import Foundation
      case region_kaernten_key = "region_kaernten"
     /// Bundesweit
      case region_nationwide_key = "region_nationwide"
+    /// Bundesweit\n(exkl. Wien)
+     case region_nationwide_validity_key = "region_nationwide_validity"
     /// Niederösterreich
      case region_niederoesterreich_key = "region_niederoesterreich"
     /// Oberösterreich
@@ -118,10 +138,14 @@ import Foundation
      case region_tirol_key = "region_tirol"
     /// Eintritt
      case region_type_ET_key = "region_type_ET"
+    /// Eintritt
+     case region_type_ET_validity_key = "region_type_ET_validity"
     /// Ungültig für
      case region_type_invalid_key = "region_type_invalid"
     /// Nachtgastronomie
      case region_type_NG_key = "region_type_NG"
+    /// Nachtgastronomie
+     case region_type_NG_validity_key = "region_type_NG_validity"
     /// Gültig für
      case region_type_valid_key = "region_type_valid"
     /// Vorarlberg
@@ -194,13 +218,15 @@ import Foundation
      case verifier_verify_success_title_key = "verifier_verify_success_title"
     /// Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.
      case wallet_3g_status_disclaimer_key = "wallet_3g_status_disclaimer"
+    /// Dieses Zertifikat berechtigt für
+     case wallet_3g_status_validity_headline_key = "wallet_3g_status_validity_headline"
     /// Hinzufügen
      case wallet_add_certificate_key = "wallet_add_certificate"
     /// Hinzufügen
      case wallet_add_certificate_button_key = "wallet_add_certificate_button"
     /// Grüner Pass
      case wallet_app_name_key = "wallet_app_name"
-    /// http://itunes.apple.com/app/id1574155774
+    /// https://itunes.apple.com/app/id1574155774
      case wallet_apple_app_store_url_key = "wallet_apple_app_store_url"
     /// EU-konformes Zertifikat
      case wallet_certificate_key = "wallet_certificate"
@@ -260,7 +286,7 @@ import Foundation
      case wallet_certificate_vaccine_prophylaxis_key = "wallet_certificate_vaccine_prophylaxis"
     /// bis
      case wallet_certificate_valid_until_key = "wallet_certificate_valid_until"
-    /// Gültigkeit in\nÖsterreich
+    /// %@\n%@
      case wallet_certificate_validity_key = "wallet_certificate_validity"
     /// Prüfung erfolgreich
      case wallet_certificate_verify_success_key = "wallet_certificate_verify_success"
@@ -310,6 +336,26 @@ import Foundation
      case wallet_homescreen_qr_code_scannen_key = "wallet_homescreen_qr_code_scannen"
     /// Nächsten Schritt wählen
      case wallet_homescreen_what_to_do_key = "wallet_homescreen_what_to_do"
+    /// Termin
+     case wallet_notification_booster_info_button_key = "wallet_notification_booster_info_button"
+    /// https://www.oesterreich-impft.at/jetzt-impfen/
+     case wallet_notification_booster_info_url_key = "wallet_notification_booster_info_url"
+    /// Später
+     case wallet_notification_booster_later_button_key = "wallet_notification_booster_later_button"
+    /// Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.
+     case wallet_notification_booster_message_key = "wallet_notification_booster_message"
+    /// OK
+     case wallet_notification_booster_ok_button_key = "wallet_notification_booster_ok_button"
+    /// Achtung!
+     case wallet_notification_booster_title_key = "wallet_notification_booster_title"
+    /// Termin
+     case wallet_notification_johnson_booster_info_button_key = "wallet_notification_johnson_booster_info_button"
+    /// https://www.oesterreich-impft.at/jetzt-impfen/
+     case wallet_notification_johnson_booster_info_url_key = "wallet_notification_johnson_booster_info_url"
+    /// Achtung: Holen Sie sich ab 28 Tagen nach Ihrer Erstimpfung mit dem COVID-19 Vaccine Janssen ("Johnson&Johnson") Ihre 2. Impfung!\n\nIhr Impfzertifikat für den Grünen Pass ist ab Montag, 03.01.2022, nur noch mit 2 Impfungen gültig.
+     case wallet_notification_johnson_booster_message_key = "wallet_notification_johnson_booster_message"
+    /// OK
+     case wallet_notification_johnson_booster_ok_button_key = "wallet_notification_johnson_booster_ok_button"
     /// Weiter
      case wallet_notification_permission_button_key = "wallet_notification_permission_button"
     /// Die App kann Sie informieren, sobald das Zertifikat eingetroffen ist.  Erlauben Sie dazu der App, Ihnen Mitteilungen zu senden.
@@ -384,8 +430,6 @@ import Foundation
      case wallet_scanner_howitworks_icon2_key = "wallet_scanner_howitworks_icon2"
     /// Dritter Schritt
      case wallet_scanner_howitworks_icon3_key = "wallet_scanner_howitworks_icon3"
-    /// Österreich-Flagge
-     case wallet_scanner_howitworks_icon_Flag_key = "wallet_scanner_howitworks_icon_Flag"
     /// Wie und wo erhalte ich ein EU-konformes Zertifikat?
      case wallet_scanner_howitworks_question1_key = "wallet_scanner_howitworks_question1"
     /// Um ein Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.
@@ -412,14 +456,26 @@ import Foundation
      case warning_screen_recording_key = "warning_screen_recording"
   }
 
+  /// Kamera ist Aktiv
+   static let accessibility_active_camera = UBLocalized.tr(UBLocalizedKey.accessibility_active_camera_key)
   /// Zertifikat hinzufügen
    static let accessibility_add_button = UBLocalized.tr(UBLocalizedKey.accessibility_add_button_key)
+  /// Ungültig
+   static let accessibility_certificate_list_in_valid = UBLocalized.tr(UBLocalizedKey.accessibility_certificate_list_in_valid_key)
+  /// Gültig
+   static let accessibility_certificate_list_valid = UBLocalized.tr(UBLocalizedKey.accessibility_certificate_list_valid_key)
   /// Zum Ändern Doppeltippen
    static let accessibility_change_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_change_selected_region_key)
   /// Schliessen
    static let accessibility_close_button = UBLocalized.tr(UBLocalizedKey.accessibility_close_button_key)
+  /// Für die Detailansicht Doppeltippen
+   static let accessibility_detail_certificate = UBLocalized.tr(UBLocalizedKey.accessibility_detail_certificate_key)
+  /// Öffnet in neuem Fenster
+   static let accessibility_external_link = UBLocalized.tr(UBLocalizedKey.accessibility_external_link_key)
   /// Häufige Fragen
    static let accessibility_faq_button = UBLocalized.tr(UBLocalizedKey.accessibility_faq_button_key)
+  /// Kamera ist nicht mehr Aktiv
+   static let accessibility_in_active_camera = UBLocalized.tr(UBLocalizedKey.accessibility_in_active_camera_key)
   /// Information
    static let accessibility_info_box = UBLocalized.tr(UBLocalizedKey.accessibility_info_box_key)
   /// Impressum
@@ -432,6 +488,12 @@ import Foundation
    static let accessibility_list_button = UBLocalized.tr(UBLocalizedKey.accessibility_list_button_key)
   /// von
    static let accessibility_of_text = UBLocalized.tr(UBLocalizedKey.accessibility_of_text_key)
+  /// Seite
+   static let accessibility_page_control_page = UBLocalized.tr(UBLocalizedKey.accessibility_page_control_page_key)
+  /// Aktiv
+   static let accessibility_region_active = UBLocalized.tr(UBLocalizedKey.accessibility_region_active_key)
+  /// Zum Ändern Doppeltippen
+   static let accessibility_region_in_active = UBLocalized.tr(UBLocalizedKey.accessibility_region_in_active_key)
   /// Aktuelle Region
    static let accessibility_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_selected_region_key)
   /// Zugriff auf Kamera erlauben
@@ -510,6 +572,8 @@ import Foundation
    static let region_kaernten = UBLocalized.tr(UBLocalizedKey.region_kaernten_key)
   /// Bundesweit
    static let region_nationwide = UBLocalized.tr(UBLocalizedKey.region_nationwide_key)
+  /// Bundesweit\n(exkl. Wien)
+   static let region_nationwide_validity = UBLocalized.tr(UBLocalizedKey.region_nationwide_validity_key)
   /// Niederösterreich
    static let region_niederoesterreich = UBLocalized.tr(UBLocalizedKey.region_niederoesterreich_key)
   /// Oberösterreich
@@ -522,10 +586,14 @@ import Foundation
    static let region_tirol = UBLocalized.tr(UBLocalizedKey.region_tirol_key)
   /// Eintritt
    static let region_type_ET = UBLocalized.tr(UBLocalizedKey.region_type_ET_key)
+  /// Eintritt
+   static let region_type_ET_validity = UBLocalized.tr(UBLocalizedKey.region_type_ET_validity_key)
   /// Ungültig für
    static let region_type_invalid = UBLocalized.tr(UBLocalizedKey.region_type_invalid_key)
   /// Nachtgastronomie
    static let region_type_NG = UBLocalized.tr(UBLocalizedKey.region_type_NG_key)
+  /// Nachtgastronomie
+   static let region_type_NG_validity = UBLocalized.tr(UBLocalizedKey.region_type_NG_validity_key)
   /// Gültig für
    static let region_type_valid = UBLocalized.tr(UBLocalizedKey.region_type_valid_key)
   /// Vorarlberg
@@ -598,13 +666,15 @@ import Foundation
    static let verifier_verify_success_title = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_title_key)
   /// Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.
    static let wallet_3g_status_disclaimer = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_disclaimer_key)
+  /// Dieses Zertifikat berechtigt für
+   static let wallet_3g_status_validity_headline = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_validity_headline_key)
   /// Hinzufügen
    static let wallet_add_certificate = UBLocalized.tr(UBLocalizedKey.wallet_add_certificate_key)
   /// Hinzufügen
    static let wallet_add_certificate_button = UBLocalized.tr(UBLocalizedKey.wallet_add_certificate_button_key)
   /// Grüner Pass
    static let wallet_app_name = UBLocalized.tr(UBLocalizedKey.wallet_app_name_key)
-  /// http://itunes.apple.com/app/id1574155774
+  /// https://itunes.apple.com/app/id1574155774
    static let wallet_apple_app_store_url = UBLocalized.tr(UBLocalizedKey.wallet_apple_app_store_url_key)
   /// EU-konformes Zertifikat
    static let wallet_certificate = UBLocalized.tr(UBLocalizedKey.wallet_certificate_key)
@@ -664,8 +734,10 @@ import Foundation
    static let wallet_certificate_vaccine_prophylaxis = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccine_prophylaxis_key)
   /// bis
    static let wallet_certificate_valid_until = UBLocalized.tr(UBLocalizedKey.wallet_certificate_valid_until_key)
-  /// Gültigkeit in\nÖsterreich
-   static let wallet_certificate_validity = UBLocalized.tr(UBLocalizedKey.wallet_certificate_validity_key)
+  /// %@\n%@
+   static func wallet_certificate_validity(_ p1: Any, _ p2: Any) -> String {
+    return UBLocalized.tr(UBLocalizedKey.wallet_certificate_validity_key, String(describing: p1), String(describing: p2))
+  }
   /// Prüfung erfolgreich
    static let wallet_certificate_verify_success = UBLocalized.tr(UBLocalizedKey.wallet_certificate_verify_success_key)
   /// Das Zertifikat wird geprüft
@@ -714,6 +786,26 @@ import Foundation
    static let wallet_homescreen_qr_code_scannen = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_qr_code_scannen_key)
   /// Nächsten Schritt wählen
    static let wallet_homescreen_what_to_do = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_what_to_do_key)
+  /// Termin
+   static let wallet_notification_booster_info_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_info_button_key)
+  /// https://www.oesterreich-impft.at/jetzt-impfen/
+   static let wallet_notification_booster_info_url = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_info_url_key)
+  /// Später
+   static let wallet_notification_booster_later_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_later_button_key)
+  /// Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.
+   static let wallet_notification_booster_message = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_message_key)
+  /// OK
+   static let wallet_notification_booster_ok_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_ok_button_key)
+  /// Achtung!
+   static let wallet_notification_booster_title = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_title_key)
+  /// Termin
+   static let wallet_notification_johnson_booster_info_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_info_button_key)
+  /// https://www.oesterreich-impft.at/jetzt-impfen/
+   static let wallet_notification_johnson_booster_info_url = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_info_url_key)
+  /// Achtung: Holen Sie sich ab 28 Tagen nach Ihrer Erstimpfung mit dem COVID-19 Vaccine Janssen ("Johnson&Johnson") Ihre 2. Impfung!\n\nIhr Impfzertifikat für den Grünen Pass ist ab Montag, 03.01.2022, nur noch mit 2 Impfungen gültig.
+   static let wallet_notification_johnson_booster_message = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_message_key)
+  /// OK
+   static let wallet_notification_johnson_booster_ok_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_ok_button_key)
   /// Weiter
    static let wallet_notification_permission_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_permission_button_key)
   /// Die App kann Sie informieren, sobald das Zertifikat eingetroffen ist.  Erlauben Sie dazu der App, Ihnen Mitteilungen zu senden.
@@ -788,8 +880,6 @@ import Foundation
    static let wallet_scanner_howitworks_icon2 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon2_key)
   /// Dritter Schritt
    static let wallet_scanner_howitworks_icon3 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon3_key)
-  /// Österreich-Flagge
-   static let wallet_scanner_howitworks_icon_Flag = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_icon_Flag_key)
   /// Wie und wo erhalte ich ein EU-konformes Zertifikat?
    static let wallet_scanner_howitworks_question1 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_question1_key)
   /// Um ein Zertifikat zur App hinzufügen zu können, benötigen Sie das Originalzertifikat auf Papier oder als PDF.

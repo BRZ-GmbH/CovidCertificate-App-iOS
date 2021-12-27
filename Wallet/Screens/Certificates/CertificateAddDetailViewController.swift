@@ -52,6 +52,7 @@ class CertificateAddDetailViewController: ViewController {
         self.showScanAgainButton = showScanAgainButton
         super.init()
         title = UBLocalized.wallet_add_certificate.uppercased()
+        navigationItem.accessibilityLabel = UBLocalized.wallet_scanner_title
     }
 
     override func viewDidLoad() {

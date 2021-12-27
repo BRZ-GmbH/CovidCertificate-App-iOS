@@ -32,11 +32,13 @@
 		24780B5B2431B5A9003BB26C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24780B562431B5A9003BB26C /* DateFormatter.swift */; };
 		2485F4782456185100C3D8C3 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F4772456185000C3D8C3 /* DebugLog.swift */; };
 		2485F4802459631A00C3D8C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485F47F2459631A00C3D8C3 /* NetworkError.swift */; };
+		4B0411682716E74800B70AFA /* ScrollingPageControl in Frameworks */ = {isa = PBXBuildFile; productRef = 4B0411672716E74800B70AFA /* ScrollingPageControl */; };
 		4B19D4EB26FC815E0080C106 /* StaticContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B19D4EA26FC815E0080C106 /* StaticContentViewModel.swift */; };
 		4B19D4EC26FC815E0080C106 /* StaticContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B19D4EA26FC815E0080C106 /* StaticContentViewModel.swift */; };
 		4B19D4EE26FDD7EB0080C106 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B19D4ED26FDD7EB0080C106 /* IntroViewController.swift */; };
 		4B327F7226F09E1C00246E4E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B327F7126F09E1C00246E4E /* UIView.swift */; };
 		4B327F7326F09E1C00246E4E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B327F7126F09E1C00246E4E /* UIView.swift */; };
+		4B73FC3627185A4900060E45 /* AccessibilityScrollingPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B73FC3527185A4900060E45 /* AccessibilityScrollingPageControl.swift */; };
 		4BD3070026F8D53500AFC895 /* intros.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BD306FF26F8D53500AFC895 /* intros.json */; };
 		4BD3070A26FA253E00AFC895 /* AccessibilityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3070926FA253E00AFC895 /* AccessibilityImage.swift */; };
 		4BD3070E26FB23F000AFC895 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3070D26FB23F000AFC895 /* Intro.swift */; };
@@ -294,6 +296,7 @@
 		4B19D4EA26FC815E0080C106 /* StaticContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticContentViewModel.swift; sourceTree = "<group>"; };
 		4B19D4ED26FDD7EB0080C106 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		4B327F7126F09E1C00246E4E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		4B73FC3527185A4900060E45 /* AccessibilityScrollingPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityScrollingPageControl.swift; sourceTree = "<group>"; };
 		4BD306FF26F8D53500AFC895 /* intros.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intros.json; sourceTree = "<group>"; };
 		4BD3070926FA253E00AFC895 /* AccessibilityImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityImage.swift; sourceTree = "<group>"; };
 		4BD3070D26FB23F000AFC895 /* Intro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
@@ -467,6 +470,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B0411682716E74800B70AFA /* ScrollingPageControl in Frameworks */,
 				5BE852DC26D6DEB200E0BF7F /* SnapKit in Frameworks */,
 				5B55B15826A5959700466116 /* CovidCertificateSDK in Frameworks */,
 				5B5391872705D45800F9D5FE /* Kronos in Frameworks */,
@@ -1053,6 +1057,7 @@
 				DC445D322645828E007DC8F2 /* QRScanErrorView.swift */,
 				6E0281F126550E1100582904 /* InfoBoxView.swift */,
 				5BDBF08D26930D1900FA5B1C /* PopupView.swift */,
+				4B73FC3527185A4900060E45 /* AccessibilityScrollingPageControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1145,6 +1150,7 @@
 				5B5BBC7E26A5B6E400D08868 /* SnapKit */,
 				5BE852DB26D6DEB200E0BF7F /* SnapKit */,
 				5B5391862705D45800F9D5FE /* Kronos */,
+				4B0411672716E74800B70AFA /* ScrollingPageControl */,
 			);
 			productName = IVC;
 			productReference = 8E81CC95241FCC7D006F2437 /* CovidCertificateWallet.app */;
@@ -1187,6 +1193,7 @@
 			packageReferences = (
 				5BE852DA26D6DEB200E0BF7F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				5B5391852705D45800F9D5FE /* XCRemoteSwiftPackageReference "Kronos" */,
+				4B0411662716E74800B70AFA /* XCRemoteSwiftPackageReference "ScrollingPageControl" */,
 			);
 			productRefGroup = 8E81CC96241FCC7D006F2437 /* Products */;
 			projectDirPath = "";
@@ -1576,6 +1583,7 @@
 				6EC172C926407F5F002E27DB /* CertificateAddDetailViewController.swift in Sources */,
 				6E0281FE265660E500582904 /* CertificateDetailView.swift in Sources */,
 				6E0281FC26565AD200582904 /* BrightnessQRScanning.swift in Sources */,
+				4B73FC3627185A4900060E45 /* AccessibilityScrollingPageControl.swift in Sources */,
 				6EA5C35C2643E8DD00EA066F /* CertificateTableViewCell.swift in Sources */,
 				242D227B245D6557005DAEA8 /* Backend.swift in Sources */,
 				DC8ABDED264A62A800FDE0E1 /* OnboardingContentViewController.swift in Sources */,
@@ -1732,14 +1740,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.dev;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2083,14 +2091,145 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CovidCertificateWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.CovidCertificateWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCertificateWallet.app/CovidCertificateWallet";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Prod";
+		};
+		5BE4FD4226F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_NUMBER = 20200000.0.0;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EN_DEVELOPER_REGION = CH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE_PROD=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D RELEASE_PROD_TEST";
+				PRIMARY_BUNDLE_IDENTIFIER = "ch.admin.cc-wallet.dev";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE_PROD_TEST;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Prod-Test";
+		};
+		5BE4FD4326F1D8DC00F11CC2 /* Release-Prod-Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet.ptest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2381,14 +2520,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.abn;
 				PRODUCT_BUNDLE_IDENTIFIER = "at.gv.brz.wallet-abn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2484,14 +2623,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet.debug;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.oe.covid.wallet.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2574,14 +2713,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M8HLLAZUQZ;
 				INFOPLIST_FILE = "CovidCertificate/Supporting Files/Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRIMARY_BUNDLE_IDENTIFIER = ch.admin.bag.covidcertificate.wallet;
 				PRODUCT_BUNDLE_IDENTIFIER = at.gv.brz.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2679,6 +2818,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4B0411662716E74800B70AFA /* XCRemoteSwiftPackageReference "ScrollingPageControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EmilioPelaez/ScrollingPageControl.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		5B5391852705D45800F9D5FE /* XCRemoteSwiftPackageReference "Kronos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BRZ-GmbH/Kronos.git";
@@ -2706,6 +2853,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4B0411672716E74800B70AFA /* ScrollingPageControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B0411662716E74800B70AFA /* XCRemoteSwiftPackageReference "ScrollingPageControl" */;
+			productName = ScrollingPageControl;
+		};
 		5B5391862705D45800F9D5FE /* Kronos */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5B5391852705D45800F9D5FE /* XCRemoteSwiftPackageReference "Kronos" */;

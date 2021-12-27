@@ -31,11 +31,13 @@ class QRCodeNameView: UIView {
 
     private let qrCodeInset: CGFloat
     let qrCodeLayoutGuide = UILayoutGuide()
+    private let shrinkCodeIfNecessary: Bool
 
     // MARK: - Init
 
-    init(qrCodeInset: CGFloat = 0) {
+    init(qrCodeInset: CGFloat = 0, shrinkCodeIfNecessary: Bool) {
         self.qrCodeInset = qrCodeInset
+        self.shrinkCodeIfNecessary = shrinkCodeIfNecessary
         super.init(frame: .zero)
         setup()
 
@@ -68,7 +70,9 @@ class QRCodeNameView: UIView {
         }
 
         nameView.snp.makeConstraints { make in
-            make.top.equalTo(self.imageView.snp.bottom).offset(Padding.medium)
+            let isSmall = UIScreen.main.bounds.width <= 375
+            
+            make.top.equalTo(self.imageView.snp.bottom).offset(isSmall ? Padding.small : Padding.medium)
             make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
         }
 
@@ -98,5 +102,42 @@ class QRCodeNameView: UIView {
         imageView.setQrCode(cert.qrCode)
 
         accessibilityLabel = [imageView.accessibilityLabel, nameView.text, birthdayLabelView.text].compactMap { $0 }.joined(separator: ", ")
+    }
+    
+    override var frame: CGRect {
+        didSet {
+            updateLayout()
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayout()
+    }
+    
+    /// Some Devices with Large text can't show the full QRCode
+    /// Check if the QRCodeImageView is greater than the StackScrollView
+    func updateLayout() {
+        /// First Superview: StackView.
+        /// Second Superview: ContentView.
+        /// Third  Superview: StackScrollView
+        
+        guard shrinkCodeIfNecessary else { return }
+        
+        guard (self.superview?.frame.height ?? 0) > 0 else { return }
+        
+        guard let scrollViewContentHeight = self.superview?.frame.height,
+              let containerHeight = self.superview?.superview?.superview?.frame.height,
+              scrollViewContentHeight > containerHeight else { return }
+        
+        // Attempt to make ImageView small enough to fix all content without scrolling, but do not shrink below 100 pt
+        let imageHeight = fmax(containerHeight - (scrollViewContentHeight - imageView.frame.height), 80)
+        
+        /// Remake the Constraints when the ImageView is greater
+        imageView.snp.remakeConstraints { make in
+            make.top.centerX.equalToSuperview()
+            make.height.equalTo(imageHeight)
+            make.width.equalTo(imageHeight)
+        }
     }
 }

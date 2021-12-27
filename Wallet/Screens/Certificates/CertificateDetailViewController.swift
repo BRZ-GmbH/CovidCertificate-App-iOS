@@ -22,7 +22,7 @@ class CertificateDetailViewController: ViewController {
     private let certificate: UserCertificate
 
     private let stackScrollView = StackScrollView()
-    private let qrCodeNameView = QRCodeNameView()
+    private let qrCodeNameView = QRCodeNameView(shrinkCodeIfNecessary: false)
     private let dashedView = DashedLineView(style: .thin)
 
     private lazy var stateView = CertificateStateView(certificate: certificate, isHomescreen: false)
@@ -99,8 +99,10 @@ class CertificateDetailViewController: ViewController {
     // MARK: - Setup
 
     private func setup() {
+        let isSmall = UIScreen.main.bounds.width <= 375
+        
         stackScrollView.stackView.isLayoutMarginsRelativeArrangement = true
-        let p = Padding.large + Padding.medium
+        let p = isSmall ? Padding.medium : Padding.large + Padding.medium
         stackScrollView.stackView.layoutMargins = UIEdgeInsets(top: 0.0, left: p, bottom: 0.0, right: p)
 
         view.addSubview(stackScrollView)

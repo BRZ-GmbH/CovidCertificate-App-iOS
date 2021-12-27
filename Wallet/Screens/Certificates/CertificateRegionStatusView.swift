@@ -29,6 +29,9 @@ class CertificateRegionStatusView: UIView {
             } else if result?.region?.hasPrefix("NG") == true {
                 label.text = UBLocalized.region_type_NG
             }
+            
+            label.numberOfLines = 1
+            label.lineBreakMode = .byTruncatingTail
             backgroundColor = result?.valid == true ? .cc_green_valid : .cc_red_invalid
             imageView.image = result?.valid == true ? UIImage(named: "check-circle") : UIImage(named: "minus-circle")
             isAccessibilityElement = true

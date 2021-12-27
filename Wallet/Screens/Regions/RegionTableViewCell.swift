@@ -94,9 +94,13 @@ class RegionTableViewCell: UITableViewCell {
     }
     
     private func update() {
-        nameLabel.text = region?.name
-        regionImageView.image = region?.flag
+        guard let region = self.region else { return }
+        nameLabel.text = region.name
+        
+        accessibilityLabel = [region.name, isSelectedRegion ? UBLocalized.accessibility_region_active : UBLocalized.accessibility_region_in_active].compactMap({ $0 }).joined(separator: ",")
+        regionImageView.image = region.flag
         selectedIndicator.isHidden = isSelectedRegion == false
+
         bottomLineView.isHidden = showBottomSeparator == false
     }
 }

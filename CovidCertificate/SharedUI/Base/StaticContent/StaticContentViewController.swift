@@ -47,6 +47,7 @@ class StaticContentViewController: OnboardingContentViewController {
 
             let titleLabel = Label(.title, textAlignment: model.textAlignment)
 
+            titleLabel.accessibilityTraits = [.header]
             titleLabel.text = model.title
             let titleContainer = UIView()
             titleContainer.addSubview(titleLabel)

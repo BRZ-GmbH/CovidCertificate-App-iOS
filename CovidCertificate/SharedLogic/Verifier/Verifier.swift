@@ -35,6 +35,7 @@ enum RetryError: Equatable {
 struct VerificationRegionResult: Equatable {
     let region: String?
     let valid: Bool
+    let validUntil: String?
 }
 
 /**
@@ -250,17 +251,27 @@ class Verifier: NSObject {
         DispatchQueue.global(qos: important ? .userInitiated : .utility).async {
             CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, validationClock: validationClock, issuedAt: issuedAt, expiresAt: expiresAt, countryCode: "AT", region: region, forceUpdate: forceUpdate) { result in
                 switch result {
+                    
                 case let .success(result):
                     if result.isValid {
-                        callback(.success([VerificationRegionResult(region: region, valid: true)]))
+                        var validUntilString: String? = nil
+                        if let validUntil = result.validUntil {
+                            switch holder.healthCert.certificationType {
+                            case .test:
+                                validUntilString = DateFormatter.ub_dayTimeString(from: validUntil)
+                            default:
+                                validUntilString = DateFormatter.ub_dayString(from: validUntil)
+                            }
+                        }
+                        callback(.success([VerificationRegionResult(region: region, valid: true, validUntil: validUntilString)]))
                     } else {
-                        callback(.success([VerificationRegionResult(region: region, valid: false)]))
+                        callback(.success([VerificationRegionResult(region: region, valid: false, validUntil: nil)]))
                     }
                 case let .failure(error):
                     if error == .DATA_EXPIRED {
                         callback(.dataExpired)
                     } else {
-                        callback(.success([VerificationRegionResult(region: region, valid: false)]))
+                        callback(.success([VerificationRegionResult(region: region, valid: false, validUntil: nil)]))
                     }
                 }
 

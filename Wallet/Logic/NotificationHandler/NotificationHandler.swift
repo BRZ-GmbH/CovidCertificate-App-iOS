@@ -25,13 +25,17 @@ class NotificationHandler: NSObject {
     @KeychainPersisted(key: "wallet.user.notifications", defaultValue: [:])
     private var notifications: [String:Date]
     
+    @KeychainPersisted(key: "wallet.user.notification.johnson.booster.shot.shown", defaultValue: false)
+    private var hasNotifiedAboutJohnsonBoosterShot: Bool
+    
     private var certificateCombinationHash = 0
     
     /**
         Checks if a vaccination booster notifications needs to be presented for any of the provided certificates and presents them on the rootViewController of the provided window
      */
     public func startCertificateNotificationCheck(window: UIWindow?, certificates: [UserCertificate]) {
-        certificateCombinationHash = certificates.map({ $0.qrCode }).joined(separator: "_").hash
+        // EPIEMSCO-2173 Currently deactivate booster campaign
+        /*certificateCombinationHash = certificates.map({ $0.qrCode }).joined(separator: "_").hash
         let certificateHolders: [DGCHolder] = certificates.compactMap({
             switch $0.decodedCertificate {
             case let .success(result): return result
@@ -42,7 +46,42 @@ class NotificationHandler: NSObject {
         let eligibleCertificates = certificatesEligibleForNotification(certificateHolders: certificateHolders)
         let notifyableCertificates = certificatesToNotify(certificateHolders: eligibleCertificates)
         
-        self.presentAlertForCertificateIfNeeded(certificates: notifyableCertificates, window: window, certificateHash:  certificateCombinationHash)
+        self.presentAlertForCertificateIfNeeded(certificates: notifyableCertificates, window: window, certificateHash:  certificateCombinationHash)*/
+    }
+    
+    public func startCheckForJohnsonVaccinationBooster(window: UIWindow?, certificates: [UserCertificate], completion: @escaping (() -> ())) {
+        completion()
+        // EPIEMSCO-2173 Currently deactivate booster campaign
+        /*guard !hasNotifiedAboutJohnsonBoosterShot else {
+            completion()
+            return
+        }
+        
+        let certificateHolders: [DGCHolder] = certificates.compactMap({
+            switch $0.decodedCertificate {
+            case let .success(result): return result
+            case .failure(_): return nil
+            }
+        })
+        
+        if certificateHolders.contains(where: {
+            $0.healthCert.vaccinations?.first?.isJanssenVaccination == true
+            && $0.healthCert.vaccinations?.first?.doseNumber == 1
+        }) {
+            hasNotifiedAboutJohnsonBoosterShot = true
+            let alert = UIAlertController(title: nil, message: UBLocalized.wallet_notification_johnson_booster_message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: UBLocalized.wallet_notification_johnson_booster_ok_button, style: .cancel, handler: { _ in
+                completion()
+            }))
+            alert.addAction(UIAlertAction(title: UBLocalized.wallet_notification_johnson_booster_info_button, style: .default, handler: { _ in
+                guard let url = URL(string: UBLocalized.wallet_notification_johnson_booster_info_url) else { return }
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }))
+            window?.rootViewController?.present(alert, animated: true, completion: nil)
+        } else {
+            completion()
+        }*/
     }
     
     /**
@@ -60,24 +99,15 @@ class NotificationHandler: NSObject {
             guard $0.expiresAt?.isAfter(Date()) ?? true else { return false }
             
             // Only notify fully vaccinated
-            guard vaccination.doseNumber >= vaccination.totalDoses else { return false }
-            
-            // People over 65 should get booster after 6 months
-            if $0.healthCert.isOver65 && vaccination.atLeastSixMonthsAgo {
-                return true
+            guard vaccination.doseNumber >= vaccination.totalDoses else {
+                return false
             }
             
-            // People with AstraZeneca or Janssen should get booster after 6 months
-            if (vaccination.isJanssenVaccination || vaccination.isVaxzevriaVaccination) && vaccination.atLeastSixMonthsAgo {
-                return true
+            guard vaccination.atLeastSixMonthsAgo else {
+                return false
             }
             
-            // People over 18 with mRNA should get booster after 9 months
-            if $0.healthCert.isOver18 && !vaccination.isJanssenVaccination && !vaccination.isVaxzevriaVaccination && vaccination.atLeastNineMonthsAgo {
-                return true
-            }
-            
-            return false
+            return (!vaccination.isJanssenVaccination && vaccination.doseNumber <= 2) || (vaccination.isJanssenVaccination && vaccination.doseNumber == 2)            
         })
     }
     
@@ -112,19 +142,19 @@ class NotificationHandler: NSObject {
         certificateHash is compared again certificateCombinationHash to be able to cancel the recursive cycle in case the certificates change
      */
     private func presentAlertForCertificateIfNeeded(certificates: [DGCHolder], window: UIWindow?, certificateHash: Int) {
-        if Self.notificationAlert != nil {
+        if Self.notificationAlert != nil && certificateHash != certificateCombinationHash {
             dismissAlert()
         }
         if let certificate = certificates.first, let certificateIdentifier = certificate.healthCert.vaccinations?.first?.certificateIdentifier, certificateHash == certificateCombinationHash {
             let remainingCertificates = certificates.dropFirst()
-            let campaignText = ConfigManager.currentConfig?.vaccinationRefreshCampaignText?.value
-            let title = campaignText?.title ?? UBLocalized.vaccination_booster_notification_title
-            let message = campaignText?.message ?? UBLocalized.vaccination_booster_notification_message
-            let readButton = campaignText?.readButton ?? UBLocalized.vaccination_booster_notification_read
-            let remindAgainButton = campaignText?.remindAgainButton ?? UBLocalized.vaccination_booster_notification_later
+            let title = UBLocalized.wallet_notification_booster_title
+            let message = UBLocalized.wallet_notification_booster_message
+            let readButton = UBLocalized.wallet_notification_booster_ok_button
+            let remindAgainButton = UBLocalized.wallet_notification_booster_later_button
+            let appointmentButton = UBLocalized.wallet_notification_booster_info_button
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             // Read
-            alert.addAction(UIAlertAction(title: readButton, style: .cancel, handler: { _ in
+            alert.addAction(UIAlertAction(title: readButton, style: .default, handler: { _ in
                 self.notifications[certificateIdentifier] = Calendar.current.date(byAdding: .year, value: 100, to: Date())
                 DispatchQueue.main.async {
                     Self.notificationAlert = nil
@@ -142,6 +172,18 @@ class NotificationHandler: NSObject {
                     }
                 }))
             }
+            
+            alert.addAction(UIAlertAction(title: appointmentButton, style: .cancel, handler: { _ in
+                self.notifications[certificateIdentifier] = Calendar.current.date(byAdding: .year, value: 100, to: Date())
+                DispatchQueue.main.async {
+                    Self.notificationAlert = nil
+                    
+                    guard let url = URL(string: UBLocalized.wallet_notification_booster_info_url) else { return }
+                    
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }))
+            
             window?.rootViewController?.present(alert, animated: true, completion: nil)
             Self.notificationAlert = alert
         }
@@ -176,7 +218,7 @@ extension DGCHolder {
 }
 
 public extension Vaccination {
-    private func vaccinationIsOlderThan(months: Int) -> Bool {
+    func vaccinationIsOlderThan(months: Int) -> Bool {
         if let vaccinationDate = dateOfVaccination, let monthsAfterVaccination = Calendar.current.date(byAdding: .month, value: months, to:vaccinationDate) {
             return monthsAfterVaccination.isBefore(Date())
         }

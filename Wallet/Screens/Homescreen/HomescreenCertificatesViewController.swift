@@ -19,13 +19,23 @@ class HomescreenCertificatesViewController: ViewController {
     // MARK: - Subviews
 
     private let stackScrollView = StackScrollView(axis: .horizontal, spacing: 0)
-    private let pageControl = UIPageControl()
+    
+    private lazy var pageControl: UIView = {
+        // On iOS 14 or later, UIPageControl supports handling more pages than fit on the screen. Pre iOS 14 we use a custom PageControl that can handle this accordingly.
+        if #available(iOS 14.0, *) {
+            return UIPageControl()
+        } else {
+            return AccessibilityScrollingPageControl()
+        }
+    }()
+    
     private var certificateViews: [HomescreenCertificateView] = []
-
+    private let maxDots = 11
+    private let centerDots = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupInteraction()
 
         UIStateManager.shared.addObserver(self) { [weak self] state in
             guard let strongSelf = self else { return }
@@ -41,15 +51,14 @@ class HomescreenCertificatesViewController: ViewController {
 
     private func setup() {
         view.backgroundColor = .clear
-
-        let isSmall = view.frame.size.width <= 375
-        let pageControlBottomPaddig = isSmall ? Padding.large : (Padding.large + Padding.medium)
-
         view.addSubview(pageControl)
+        
+        let isSmall = UIScreen.main.bounds.width <= 375
+        let pageControlBottomPadding = isSmall ? Padding.small : (Padding.large + Padding.medium)
 
         pageControl.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().inset(pageControlBottomPaddig)
+            make.left.right.equalToSuperview().inset(Padding.large)
+            make.bottom.equalToSuperview().inset(pageControlBottomPadding)
         }
 
         stackScrollView.scrollView.isPagingEnabled = true
@@ -60,15 +69,40 @@ class HomescreenCertificatesViewController: ViewController {
             make.top.equalToSuperview()
             make.bottom.equalTo(self.pageControl.snp.top).offset(-Padding.medium)
         }
-
+        
+        if let pageControl = pageControl as? UIPageControl {
+            pageControl.accessibilityTraits = .adjustable
+            pageControl.addTarget(self, action: #selector(handlePageChange), for: .valueChanged)
+        } else if let pageControl = pageControl as? AccessibilityScrollingPageControl {
+            pageControl.dotSize = 7.5
+            pageControl.spacing = 10
+            pageControl.selectedColor = .cc_white
+            pageControl.dotColor = .cc_black
+            pageControl.accessibilityTraits = .adjustable
+            pageControl.pageChangeCallback = handlePageChange
+        }
         stackScrollView.clipsToBounds = false
         stackScrollView.scrollView.clipsToBounds = false
         stackScrollView.stackView.clipsToBounds = false
         stackScrollView.scrollView.delegate = self
     }
 
-    private func setupInteraction() {
-        pageControl.addTarget(self, action: #selector(handlePageChange), for: .valueChanged)
+    private var currentPageControlPage: Int {
+        get {
+            if let pageControl = pageControl as? UIPageControl {
+                return pageControl.currentPage
+            } else if let pageControl = pageControl as? AccessibilityScrollingPageControl {
+                return pageControl.selectedPage
+            }
+            return 0
+        }
+        set {
+            if let pageControl = pageControl as? UIPageControl {
+                pageControl.currentPage = newValue
+            } else if let pageControl = pageControl as? AccessibilityScrollingPageControl {
+                pageControl.selectedPage = newValue
+            }
+        }
     }
 
     @objc private func handlePageChange() {
@@ -76,10 +110,15 @@ class HomescreenCertificatesViewController: ViewController {
 
         stackScrollView.scrollView.delegate = nil
         UIView.animate(withDuration: 0.3) {
-            self.stackScrollView.scrollView.setContentOffset(CGPoint(x: width * CGFloat(self.pageControl.currentPage), y: 0.0), animated: false)
+            self.stackScrollView.scrollView.setContentOffset(CGPoint(x: width * CGFloat(self.currentPageControlPage), y: 0.0), animated: false)
         } completion: { _ in
             self.stackScrollView.scrollView.delegate = self
         }
+        
+        pageControl.accessibilityValue = [UBLocalized.accessibility_page_control_page,
+                              "\(currentPageControlPage + 1)",
+                              UBLocalized.accessibility_of_text,
+                              "\((self.pageControl as? UIPageControl)?.numberOfPages ?? 0)"].compactMap({$0}).joined(separator: " ")
     }
 
     private func refresh(_ certificates: [UserCertificate]) {
@@ -87,8 +126,17 @@ class HomescreenCertificatesViewController: ViewController {
 
         certificateViews.removeAll()
 
-        pageControl.numberOfPages = certificates.count
-        pageControl.alpha = certificates.count <= 1 ? 0.0 : 1.0
+        if let pageControl = pageControl as? UIPageControl {
+            pageControl.numberOfPages = certificates.count
+            pageControl.alpha = certificates.count <= 1 ? 0.0 : 1.0
+        } else if let pageControl = pageControl as? AccessibilityScrollingPageControl {
+            pageControl.maxDots = maxDots
+            pageControl.centerDots = certificates.count <= maxDots ? maxDots : centerDots
+            pageControl.selectedPage = 0
+            pageControl.isAccessibilityElement = true
+            pageControl.pages = certificates.count
+            pageControl.alpha = certificates.count <= 1 ? 0.0 : 1.0
+        }
 
         for c in certificates {
             let v = HomescreenCertificateView(certificate: c)
@@ -104,7 +152,6 @@ class HomescreenCertificatesViewController: ViewController {
                 strongSelf.touchedCertificateCallback?(c)
             }
         }
-
         startChecks()
     }
 
@@ -121,11 +168,14 @@ class HomescreenCertificatesViewController: ViewController {
 
 extension HomescreenCertificatesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentPage = pageControl.currentPage
-        let currentScrollPage = scrollView.currentPage
-
-        if currentPage != currentScrollPage {
-            pageControl.currentPage = currentScrollPage
+        let page = round(scrollView.contentOffset.x / scrollView.frame.width)
+        self.currentPageControlPage = Int(page)
+        
+        if let _ = pageControl as? UIPageControl {
+            pageControl.accessibilityValue = [UBLocalized.accessibility_page_control_page,
+                                  "\(currentPageControlPage + 1)",
+                                  UBLocalized.accessibility_of_text,
+                                  "\((self.pageControl as? UIPageControl)?.numberOfPages ?? 0)"].compactMap({$0}).joined(separator: " ")
         }
     }
 }

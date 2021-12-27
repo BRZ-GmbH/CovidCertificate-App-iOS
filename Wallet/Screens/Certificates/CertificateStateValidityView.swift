@@ -14,7 +14,7 @@ import UIKit
 class CertificateStateValidityView: UIView {
     // MARK: - Validity
 
-    private let validityTitleLabel = Label(.text, numberOfLines: 2)
+    let validityTitleLabel = Label(.text, numberOfLines: 3)
     private let untilTitleLabel = Label(.text, textAlignment: .right)
     private let untilTextLabel = Label(.textBold, textAlignment: .right)
     private let validityView = UIView()
@@ -78,9 +78,9 @@ class CertificateStateValidityView: UIView {
         validityView.addSubview(untilTitleLabel)
         validityView.addSubview(untilTextLabel)
 
-        validityTitleLabel.text = UBLocalized.wallet_certificate_validity
         validityTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(2 * Padding.small)
+            make.bottom.equalToSuperview().inset(2 * Padding.small)
             make.leading.equalToSuperview().inset(Padding.medium)
         }
 
@@ -93,7 +93,6 @@ class CertificateStateValidityView: UIView {
         untilTextLabel.text = "–"
         untilTextLabel.snp.makeConstraints { make in
             make.trailing.equalTo(untilTitleLabel)
-            make.top.equalTo(untilTitleLabel.snp.bottom)
             make.bottom.equalToSuperview().inset(2 * Padding.small)
         }
 

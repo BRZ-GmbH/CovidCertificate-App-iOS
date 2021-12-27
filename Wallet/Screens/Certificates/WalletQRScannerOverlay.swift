@@ -18,7 +18,7 @@ class WalletQRScannerFullOverlayView: UIView {
     private let fillLayer = CAShapeLayer()
 
     private let requestLabel = Label(.text, textAlignment: .center)
-    private let errorView = QRScanErrorView(imageColor: .cc_white, backgroundColor: .cc_red, textColor: .cc_white)
+    public let errorView = QRScanErrorView(imageColor: .cc_white, backgroundColor: .cc_red, textColor: .cc_white)
 
     private let errorLabel = Label(.smallError)
 
