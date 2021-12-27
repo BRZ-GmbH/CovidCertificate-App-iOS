@@ -22,7 +22,7 @@ class CertificateDetailViewController: ViewController {
     private let certificate: UserCertificate
 
     private let stackScrollView = StackScrollView()
-    private let qrCodeNameView = QRCodeNameView(shrinkCodeIfNecessary: false)
+    private let qrCodeNameView = QRCodeNameView(shrinkCodeIfNecessary: false, reversed: false)
     private let dashedView = DashedLineView(style: .thin)
 
     private lazy var stateView = CertificateStateView(certificate: certificate, isHomescreen: false)

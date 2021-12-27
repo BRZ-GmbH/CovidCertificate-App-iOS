@@ -32,12 +32,14 @@ class QRCodeNameView: UIView {
     private let qrCodeInset: CGFloat
     let qrCodeLayoutGuide = UILayoutGuide()
     private let shrinkCodeIfNecessary: Bool
+    private let reversed: Bool
 
     // MARK: - Init
 
-    init(qrCodeInset: CGFloat = 0, shrinkCodeIfNecessary: Bool) {
+    init(qrCodeInset: CGFloat = 0, shrinkCodeIfNecessary: Bool, reversed: Bool) {
         self.qrCodeInset = qrCodeInset
         self.shrinkCodeIfNecessary = shrinkCodeIfNecessary
+        self.reversed = reversed
         super.init(frame: .zero)
         setup()
 
@@ -56,32 +58,61 @@ class QRCodeNameView: UIView {
         addSubview(nameView)
         addSubview(birthdayLabelView)
 
-        imageView.snp.makeConstraints { make in
-            make.top.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(self.qrCodeInset).priority(.medium)
-            make.trailing.lessThanOrEqualToSuperview().inset(self.qrCodeInset)
-            make.leading.greaterThanOrEqualToSuperview().inset(self.qrCodeInset)
-            make.width.equalTo(self.imageView.snp.height)
-        }
+        if reversed {
+            nameView.snp.makeConstraints { make in
+                let isSmall = UIScreen.main.bounds.width <= 375
+                
+                make.top.equalToSuperview()
+                make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
+            }
 
-        addLayoutGuide(qrCodeLayoutGuide)
-        qrCodeLayoutGuide.snp.makeConstraints { make in
-            make.edges.equalTo(imageView)
-        }
-
-        nameView.snp.makeConstraints { make in
-            let isSmall = UIScreen.main.bounds.width <= 375
+            birthdayLabelView.snp.makeConstraints { make in
+                make.top.equalTo(self.nameView.snp.bottom).offset(Padding.small)
+                make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
+            }
             
-            make.top.equalTo(self.imageView.snp.bottom).offset(isSmall ? Padding.small : Padding.medium)
-            make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
-        }
+            
+            imageView.snp.makeConstraints { make in
+                make.top.equalTo(self.birthdayLabelView.snp.bottom).offset(Padding.medium)
+                make.centerX.equalToSuperview()
+                make.leading.trailing.equalToSuperview().inset(self.qrCodeInset).priority(.medium)
+                make.trailing.lessThanOrEqualToSuperview().inset(self.qrCodeInset)
+                make.leading.greaterThanOrEqualToSuperview().inset(self.qrCodeInset)
+                make.width.equalTo(self.imageView.snp.height)
+                make.bottom.equalToSuperview()
+            }
 
-        birthdayLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.nameView.snp.bottom).offset(Padding.small)
-            make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
-            make.bottom.equalToSuperview()
-        }
+            addLayoutGuide(qrCodeLayoutGuide)
+            qrCodeLayoutGuide.snp.makeConstraints { make in
+                make.edges.equalTo(imageView)
+            }
+        } else {
+            imageView.snp.makeConstraints { make in
+                make.top.centerX.equalToSuperview()
+                make.leading.trailing.equalToSuperview().inset(self.qrCodeInset).priority(.medium)
+                make.trailing.lessThanOrEqualToSuperview().inset(self.qrCodeInset)
+                make.leading.greaterThanOrEqualToSuperview().inset(self.qrCodeInset)
+                make.width.equalTo(self.imageView.snp.height)
+            }
 
+            addLayoutGuide(qrCodeLayoutGuide)
+            qrCodeLayoutGuide.snp.makeConstraints { make in
+                make.edges.equalTo(imageView)
+            }
+
+            nameView.snp.makeConstraints { make in
+                let isSmall = UIScreen.main.bounds.width <= 375
+                
+                make.top.equalTo(self.imageView.snp.bottom).offset(isSmall ? Padding.small : Padding.medium)
+                make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
+            }
+
+            birthdayLabelView.snp.makeConstraints { make in
+                make.top.equalTo(self.nameView.snp.bottom).offset(Padding.small)
+                make.leading.trailing.equalToSuperview().inset(self.qrCodeInset)
+                make.bottom.equalToSuperview()
+            }
+        }
         nameView.ub_setContentPriorityRequired()
         birthdayLabelView.ub_setContentPriorityRequired()
     }
@@ -131,11 +162,17 @@ class QRCodeNameView: UIView {
               scrollViewContentHeight > containerHeight else { return }
         
         // Attempt to make ImageView small enough to fix all content without scrolling, but do not shrink below 100 pt
-        let imageHeight = fmax(containerHeight - (scrollViewContentHeight - imageView.frame.height), 80)
+        let imageHeight = fmax(containerHeight - 20, 80)
         
         /// Remake the Constraints when the ImageView is greater
         imageView.snp.remakeConstraints { make in
-            make.top.centerX.equalToSuperview()
+            if reversed {
+                make.top.equalTo(self.birthdayLabelView.snp.bottom).offset(Padding.medium)
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview()
+            } else {
+                make.top.centerX.equalToSuperview()
+            }
             make.height.equalTo(imageHeight)
             make.width.equalTo(imageHeight)
         }

@@ -89,9 +89,9 @@ enum Environment {
             case .dev:
                 return ""
             case .abnahme:
-                return ""
+                return "GixQfE3Oje1dGOWT6S5eVF9Iv4GHTJMm"
             case .prod:
-                return ""
+                return "qAFg7d3kRdTN9A0IzoAComdd1lU8SwKf"
             }
         #endif
     }

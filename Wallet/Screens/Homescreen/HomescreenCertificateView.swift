@@ -21,7 +21,7 @@ class HomescreenCertificateView: UIView {
 
     private let titleLabel = Label(.uppercaseBold, textColor: .cc_greyText, textAlignment: .center)
 
-    private let nameView = QRCodeNameView(qrCodeInset: Padding.large, shrinkCodeIfNecessary: true)
+    private let nameView = QRCodeNameView(qrCodeInset: Padding.large, shrinkCodeIfNecessary: true, reversed: true)
     private let dashedView = DashedLineView(style: .thin)
     private let contentView = UIView()
     private let informationContentView = UIView()
