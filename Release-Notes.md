@@ -1,5 +1,9 @@
 # Grüner Pass - Release Notes
 
+## v2.2.2
+
+- Fehlerbehebung für seitlich abgeschnittenen QR-Code auf manchen Geräten (EPIEMSCO-2262)
+
 ## v2.2.1
 
 - Anzeige von Name und Geburtsdatum oberhalb von QR-Code (EPIEMSCO-2237)

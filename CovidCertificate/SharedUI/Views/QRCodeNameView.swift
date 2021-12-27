@@ -158,11 +158,12 @@ class QRCodeNameView: UIView {
         guard (self.superview?.frame.height ?? 0) > 0 else { return }
         
         guard let scrollViewContentHeight = self.superview?.frame.height,
+              let scrollViewContentWidth = self.superview?.frame.width,
               let containerHeight = self.superview?.superview?.superview?.frame.height,
               scrollViewContentHeight > containerHeight else { return }
         
         // Attempt to make ImageView small enough to fix all content without scrolling, but do not shrink below 100 pt
-        let imageHeight = fmax(containerHeight - 20, 80)
+        let imageHeight = fmin(fmax(containerHeight - 20, 80), scrollViewContentWidth - 32)
         
         /// Remake the Constraints when the ImageView is greater
         imageView.snp.remakeConstraints { make in
