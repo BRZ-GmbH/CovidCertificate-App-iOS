@@ -46,7 +46,7 @@ class ExpandableViewBody: UIView {
 
         textLabel.isHtmlContent = true
         textLabel.text = stringForContent(content: content, language: .languageKey) ?? stringForContent(content: content, language: .defaultLanguageKey)
-
+        
         commonInit()
     }
 
@@ -69,6 +69,7 @@ class ExpandableViewBody: UIView {
             addSubview(textLabel)
 
             let button = ExternalLinkButton(title: title)
+            button.accessibilityIdentifier = "item_faq_question_link_label"
             addSubview(button)
 
             textLabel.snp.makeConstraints { make in
@@ -91,6 +92,11 @@ class ExpandableViewBody: UIView {
                 make.edges.equalToSuperview().inset(Padding.medium)
             }
         }
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        textLabel.accessibilityIdentifier = "item_faq_question_answer"
     }
 
     @available(*, unavailable)

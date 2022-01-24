@@ -12,6 +12,7 @@
 import CovidCertificateSDK
 import Foundation
 import SnapKit
+import UIKit
 
 class CertificateStateView: UIView {
     // MARK: - Subviews
@@ -36,7 +37,7 @@ class CertificateStateView: UIView {
 
     private var hasValidityView: Bool = false
 
-    var states: (state: VerificationResultStatus, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
+    var state: VerificationResultStatus = .loading {
         didSet { update(animated: true) }
     }
 
@@ -66,6 +67,8 @@ class CertificateStateView: UIView {
 
     private func setup() {
         addSubview(validityHintView)
+        
+        regionStateView.isHomescreen = isHomescreen
 
         addSubview(backgroundView)
         addSubview(roundImageBackgroundView)
@@ -135,6 +138,20 @@ class CertificateStateView: UIView {
             entryValidityView.backgroundColor = .cc_greenish
             nightClubValidityView.backgroundColor = .cc_greenish
         }
+        
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        if isHomescreen {
+            imageView.accessibilityIdentifier = "certificate_page_status_icon"
+            textLabel.accessibilityIdentifier = "certificate_page_info"
+            validityHintView.accessibilityIdentifier = "certificate_page_validity_hint_et"
+        } else {
+            imageView.accessibilityIdentifier = "certificate_detail_status_icon"
+            textLabel.accessibilityIdentifier = "certificate_detail_info"
+            validityHintView.accessibilityIdentifier = "certificate_detail_validity_hint_et"
+        }
     }
 
     override func layoutSubviews() {
@@ -144,7 +161,7 @@ class CertificateStateView: UIView {
 
     private func update(animated: Bool) {
         // switch non-animatable states
-        switch states.state {
+        switch state {
         case .loading:
             loadingView.startAnimating()
         default:
@@ -154,160 +171,119 @@ class CertificateStateView: UIView {
         // switch animatable states
         let actions = {
             self.validityHintView.text = UBLocalized.wallet_3g_status_disclaimer
-            //self.validityView.isOfflineMode = false
             self.errorLabel.ub_setHidden(true)
             self.validityErrorStackView.ub_setHidden(false)
 
             self.textLabel.textColor = .cc_text
 
-            switch self.states.temporaryVerifierState {
-            case let .success(results):
-                self.imageView.image = UIImage(named: "ic-check-filled")?.ub_image(with: .cc_green)
-                self.textLabel.attributedText = UBLocalized.wallet_certificate_verify_success.bold()
-                self.backgroundView.backgroundColor = .cc_greenish
-                //self.validityView.backgroundColor = .cc_greenish
-                //self.validityView.textColor = .cc_black
-                self.regionStateView.results = results
-                self.regionStateView.ub_setHidden(false)
-                self.imageView.ub_setHidden(true)
-                self.validityHintView.ub_setHidden(false)
-                self.backgroundView.ub_setHidden(true)
-                self.textLabel.ub_setHidden(true)
-            case .failure:
-                if case .error = self.states.state {
-                    self.imageView.image = VerificationError.signature.icon(with: .cc_red)
-                    self.textLabel.attributedText = VerificationError.signature.displayName()
-                    self.backgroundView.backgroundColor = .cc_red_invalid
-                    //self.validityView.backgroundColor = .cc_red_invalid
-                    self.textLabel.textColor = .cc_white
-                    //self.validityView.textColor = .cc_white
-                }
-                self.regionStateView.ub_setHidden(true)
-                self.imageView.ub_setHidden(false)
-                self.validityHintView.ub_setHidden(true)
-                self.backgroundView.ub_setHidden(false)
-                self.textLabel.ub_setHidden(false)
-            case .verifying:
+            switch self.state {
+            
+            case .loading:
                 self.imageView.image = nil
-                self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_certificate_verifying)
+                self.textLabel.textColor = .cc_white
+                self.textLabel.text = UBLocalized.wallet_certificate_verifying
                 self.backgroundView.backgroundColor = .cc_greyish
-                //self.validityView.backgroundColor = .cc_greyish
-                //self.validityView.textColor = .cc_grey
+                self.entryValidityView.ub_setHidden(true)
+                self.nightClubValidityView.ub_setHidden(true)
+                self.validityHeadlineLabel.ub_setHidden(true)
                 self.validityErrorStackView.ub_setHidden(true)
                 self.regionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
-            case .idle:
-                switch self.states.state {
-                case .loading:
-                    self.imageView.image = nil
-                    self.textLabel.textColor = .cc_white
-                    self.textLabel.text = UBLocalized.wallet_certificate_verifying
-                    self.backgroundView.backgroundColor = .cc_greyish
+            case let .success(results):
+                self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_valid)
+                self.textLabel.attributedText = nil
+                self.backgroundView.backgroundColor = .cc_green_valid
+                self.textLabel.textColor = .cc_white
+                self.entryValidityView.ub_setHidden(false)
+                self.nightClubValidityView.ub_setHidden(false)
+                self.regionStateView.results = results
+                self.regionStateView.ub_setHidden(false)
+                self.imageView.ub_setHidden(true)
+                self.validityHintView.ub_setHidden(false)
+                self.backgroundView.ub_setHidden(true)
+                self.textLabel.ub_setHidden(true)
+                
+                let entryResult = results.first(where: { $0.region?.hasPrefix("ET") == true })
+                let nightClubResult = results.first(where: { $0.region?.hasPrefix("NG") == true })
+                
+                self.entryValidityView.textColor = .cc_black
+                self.nightClubValidityView.textColor = .cc_black
+                
+                if entryResult?.valid == true {
+                    self.entryValidityView.untilText = entryResult?.validUntil
+                    self.entryValidityView.validityTitleLabel.text = String(format: NSLocalizedString("wallet_certificate_validity", comment: ""), UBLocalized.region_type_ET_validity, Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)?.validityName ?? "")
+                } else {
                     self.entryValidityView.ub_setHidden(true)
-                    self.nightClubValidityView.ub_setHidden(true)
-                    self.validityHeadlineLabel.ub_setHidden(true)
-                    self.validityErrorStackView.ub_setHidden(true)
-                    self.regionStateView.ub_setHidden(true)
-                    self.imageView.ub_setHidden(false)
-                    self.validityHintView.ub_setHidden(true)
-                    self.backgroundView.ub_setHidden(false)
-                    self.textLabel.ub_setHidden(false)
-                case let .success(results):
-                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_green_valid)
-                    self.textLabel.attributedText = nil
-                    self.backgroundView.backgroundColor = .cc_green_valid
-                    self.textLabel.textColor = .cc_white
-                    self.entryValidityView.ub_setHidden(false)
-                    self.nightClubValidityView.ub_setHidden(false)
-                    self.regionStateView.results = results
-                    self.regionStateView.ub_setHidden(false)
-                    self.imageView.ub_setHidden(true)
-                    self.validityHintView.ub_setHidden(false)
-                    self.backgroundView.ub_setHidden(true)
-                    self.textLabel.ub_setHidden(true)
-                    
-                    let entryResult = results.first(where: { $0.region?.hasPrefix("ET") == true })
-                    let nightClubResult = results.first(where: { $0.region?.hasPrefix("NG") == true })
-                    
-                    self.entryValidityView.textColor = .cc_black
-                    self.nightClubValidityView.textColor = .cc_black
-                    
-                    if entryResult?.valid == true {
-                        self.entryValidityView.untilText = entryResult?.validUntil
-                        self.entryValidityView.validityTitleLabel.text = String(format: NSLocalizedString("wallet_certificate_validity", comment: ""), UBLocalized.region_type_ET_validity, Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)?.validityName ?? "")
-                    } else {
-                        self.entryValidityView.ub_setHidden(true)
-                    }
-                    
-                    if nightClubResult?.valid == true {
-                        self.nightClubValidityView.untilText = nightClubResult?.validUntil
-                        self.nightClubValidityView.validityTitleLabel.text = String(format: NSLocalizedString("wallet_certificate_validity", comment: ""), UBLocalized.region_type_NG_validity, Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)?.validityName ?? "")
-                    } else {
-                        self.nightClubValidityView.ub_setHidden(true)
-                    }
-                    self.validityHeadlineLabel.ub_setHidden(entryResult?.valid == false && nightClubResult?.valid == false)
-                    self.validityErrorStackViewTopConstraint?.update(offset: (entryResult?.valid == false && nightClubResult?.valid == false) ? 0 : Padding.large)
-                case .error:
-                    self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
-                    self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
-                    self.backgroundView.backgroundColor = .cc_red_invalid
-                    self.textLabel.textColor = .cc_white
-                    self.regionStateView.ub_setHidden(true)
-                    self.imageView.ub_setHidden(false)
-                    self.validityHintView.ub_setHidden(true)
-                    self.backgroundView.ub_setHidden(false)
-                    self.textLabel.ub_setHidden(false)
-                    self.entryValidityView.ub_setHidden(true)
-                    self.nightClubValidityView.ub_setHidden(true)
-                    self.validityHeadlineLabel.ub_setHidden(true)
-                    self.validityErrorStackViewTopConstraint?.update(offset: 0)
-                case .signatureInvalid:
-                    self.imageView.image = VerificationError.signature.icon()?.ub_image(with: .cc_red)
-                    self.textLabel.attributedText = VerificationError.signature.displayName()
-                    self.backgroundView.backgroundColor = .cc_red_invalid
-                    self.textLabel.textColor = .cc_white
-                    self.entryValidityView.ub_setHidden(true)
-                    self.nightClubValidityView.ub_setHidden(true)
-                    self.validityHeadlineLabel.ub_setHidden(true)
-                    self.regionStateView.ub_setHidden(true)
-                    self.imageView.ub_setHidden(false)
-                    self.validityHintView.ub_setHidden(true)
-                    self.backgroundView.ub_setHidden(false)
-                    self.textLabel.ub_setHidden(false)
-                    self.validityErrorStackViewTopConstraint?.update(offset: 0)
-                case .timeMissing:
-                    self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_orange)
-                    self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_time_missing)
-                    self.backgroundView.backgroundColor = .cc_orange
-                    self.textLabel.textColor = .cc_white
-                    self.entryValidityView.ub_setHidden(true)
-                    self.nightClubValidityView.ub_setHidden(true)
-                    self.validityHeadlineLabel.ub_setHidden(true)
-                    self.regionStateView.ub_setHidden(true)
-                    self.imageView.ub_setHidden(false)
-                    self.validityHintView.ub_setHidden(true)
-                    self.backgroundView.ub_setHidden(false)
-                    self.textLabel.ub_setHidden(false)
-                    self.validityErrorStackViewTopConstraint?.update(offset: 0)
-                case .dataExpired:
-                    self.imageView.image = UIImage(named: "ic-offline")?.ub_image(with: .cc_orange)
-                    self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_validation_data_expired)
-                    self.backgroundView.backgroundColor = .cc_orange
-                    self.textLabel.textColor = .cc_white
-                    self.entryValidityView.ub_setHidden(true)
-                    self.nightClubValidityView.ub_setHidden(true)
-                    self.validityHeadlineLabel.ub_setHidden(true)
-                    self.regionStateView.ub_setHidden(true)
-                    self.imageView.ub_setHidden(false)
-                    self.validityHintView.ub_setHidden(true)
-                    self.backgroundView.ub_setHidden(false)
-                    self.textLabel.ub_setHidden(false)
-                    self.validityErrorStackViewTopConstraint?.update(offset: 0)
-                    
                 }
+                
+                if nightClubResult?.valid == true {
+                    self.nightClubValidityView.untilText = nightClubResult?.validUntil
+                    self.nightClubValidityView.validityTitleLabel.text = String(format: NSLocalizedString("wallet_certificate_validity", comment: ""), UBLocalized.region_type_NG_validity, Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)?.validityName ?? "")
+                } else {
+                    self.nightClubValidityView.ub_setHidden(true)
+                }
+                self.validityHeadlineLabel.ub_setHidden(entryResult?.valid == false && nightClubResult?.valid == false)
+                self.validityErrorStackViewTopConstraint?.update(offset: (entryResult?.valid == false && nightClubResult?.valid == false) ? 0 : Padding.large)
+            case .error:
+                self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
+                self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
+                self.backgroundView.backgroundColor = .cc_red_invalid
+                self.textLabel.textColor = .cc_white
+                self.regionStateView.ub_setHidden(true)
+                self.imageView.ub_setHidden(false)
+                self.validityHintView.ub_setHidden(true)
+                self.backgroundView.ub_setHidden(false)
+                self.textLabel.ub_setHidden(false)
+                self.entryValidityView.ub_setHidden(true)
+                self.nightClubValidityView.ub_setHidden(true)
+                self.validityHeadlineLabel.ub_setHidden(true)
+                self.validityErrorStackViewTopConstraint?.update(offset: 0)
+            case .signatureInvalid:
+                self.imageView.image = VerificationError.signature.icon()?.ub_image(with: .cc_red)
+                self.textLabel.attributedText = VerificationError.signature.displayName()
+                self.backgroundView.backgroundColor = .cc_red_invalid
+                self.textLabel.textColor = .cc_white
+                self.entryValidityView.ub_setHidden(true)
+                self.nightClubValidityView.ub_setHidden(true)
+                self.validityHeadlineLabel.ub_setHidden(true)
+                self.regionStateView.ub_setHidden(true)
+                self.imageView.ub_setHidden(false)
+                self.validityHintView.ub_setHidden(true)
+                self.backgroundView.ub_setHidden(false)
+                self.textLabel.ub_setHidden(false)
+                self.validityErrorStackViewTopConstraint?.update(offset: 0)
+            case .timeMissing:
+                self.imageView.image = UIImage(named: "ic-info-filled")?.ub_image(with: .cc_orange)
+                self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_time_missing)
+                self.backgroundView.backgroundColor = .cc_orange
+                self.textLabel.textColor = .cc_white
+                self.entryValidityView.ub_setHidden(true)
+                self.nightClubValidityView.ub_setHidden(true)
+                self.validityHeadlineLabel.ub_setHidden(true)
+                self.regionStateView.ub_setHidden(true)
+                self.imageView.ub_setHidden(false)
+                self.validityHintView.ub_setHidden(true)
+                self.backgroundView.ub_setHidden(false)
+                self.textLabel.ub_setHidden(false)
+                self.validityErrorStackViewTopConstraint?.update(offset: 0)
+            case .dataExpired:
+                self.imageView.image = UIImage(named: "ic-offline")?.ub_image(with: .cc_orange)
+                self.textLabel.attributedText = NSAttributedString(string: UBLocalized.wallet_validation_data_expired)
+                self.backgroundView.backgroundColor = .cc_orange
+                self.textLabel.textColor = .cc_white
+                self.entryValidityView.ub_setHidden(true)
+                self.nightClubValidityView.ub_setHidden(true)
+                self.validityHeadlineLabel.ub_setHidden(true)
+                self.regionStateView.ub_setHidden(true)
+                self.imageView.ub_setHidden(false)
+                self.validityHintView.ub_setHidden(true)
+                self.backgroundView.ub_setHidden(false)
+                self.textLabel.ub_setHidden(false)
+                self.validityErrorStackViewTopConstraint?.update(offset: 0)
+                
             }
 
             if let text = self.textLabel.attributedText?.string {

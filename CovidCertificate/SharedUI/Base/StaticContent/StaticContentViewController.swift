@@ -13,9 +13,20 @@ import UIKit
 
 class StaticContentViewController: OnboardingContentViewController {
     private let models: [StaticContentViewModel]
-
-    init(models: [StaticContentViewModel]) {
+    private let contentViewType: StaticContentViewType
+    
+    /**
+        Enum to distinguish the context in which the static content view is used to correctly vary accessibility identifiers
+     */
+    enum StaticContentViewType {
+        case onboarding
+        case faq
+        case scannerHowTo
+    }
+    
+    init(models: [StaticContentViewModel], contentViewType: StaticContentViewType) {
         self.models = models
+        self.contentViewType = contentViewType
         super.init()
     }
 
@@ -32,6 +43,7 @@ class StaticContentViewController: OnboardingContentViewController {
                 
                 headingLabel.text = heading
                 headingLabel.accessibilityTraits = [.header]
+                headingLabel.accessibilityIdentifier = "onboarding_subtitle"
                 let headingContainer = UIView()
                 headingContainer.addSubview(headingLabel)
                 headingLabel.snp.makeConstraints { make in
@@ -46,7 +58,11 @@ class StaticContentViewController: OnboardingContentViewController {
             }
 
             let titleLabel = Label(.title, textAlignment: model.textAlignment)
-
+            if self.contentViewType == .onboarding {
+                titleLabel.accessibilityIdentifier = "onboarding_title"
+            } else {
+                titleLabel.accessibilityIdentifier = "item_faq_header_title"
+            }
             titleLabel.accessibilityTraits = [.header]
             titleLabel.text = model.title
             let titleContainer = UIView()
@@ -61,7 +77,7 @@ class StaticContentViewController: OnboardingContentViewController {
             }
 
             for textgroup in model.textGroups {
-                let v = OnboardingInfoView(accessibilityImage: textgroup.loadAccessibilityImage, text: textgroup.text, alignment: model.textAlignment)
+                let v = OnboardingInfoView(accessibilityImage: textgroup.loadAccessibilityImage, text: textgroup.text, alignment: model.textAlignment, textAccessibilityIdentifier: textgroup.accessibilityIdentifier)
                 addArrangedView(v)
                 v.snp.makeConstraints { make in
                     make.leading.trailing.equalTo(self.stackScrollView.stackView)

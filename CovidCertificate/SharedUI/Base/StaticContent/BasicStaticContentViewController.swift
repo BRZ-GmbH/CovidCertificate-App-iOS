@@ -12,8 +12,8 @@
 import Foundation
 
 class BasicStaticContentViewController: StaticContentViewController {
-    init(models: [StaticContentViewModel], title: String) {
-        super.init(models: models)
+    init(models: [StaticContentViewModel], title: String, contentViewType: StaticContentViewType) {
+        super.init(models: models, contentViewType: contentViewType)
 
         self.title = title
         addDismissButton()

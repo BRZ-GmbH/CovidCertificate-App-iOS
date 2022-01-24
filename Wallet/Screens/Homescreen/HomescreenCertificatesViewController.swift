@@ -36,7 +36,8 @@ class HomescreenCertificatesViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-
+        setupAccessibilityIdentifiers()
+        
         UIStateManager.shared.addObserver(self) { [weak self] state in
             guard let strongSelf = self else { return }
             strongSelf.refresh(state.certificateState.certificates)
@@ -85,6 +86,10 @@ class HomescreenCertificatesViewController: ViewController {
         stackScrollView.scrollView.clipsToBounds = false
         stackScrollView.stackView.clipsToBounds = false
         stackScrollView.scrollView.delegate = self
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        pageControl.accessibilityIdentifier = "homescreen_certificates_tab_layout"
     }
 
     private var currentPageControlPage: Int {

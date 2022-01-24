@@ -12,6 +12,7 @@
 import CovidCertificateSDK
 import Foundation
 import ValidationCore
+import UIKit
 
 class CertificateTableViewCell: UITableViewCell {
     // MARK: - Public API
@@ -103,6 +104,14 @@ class CertificateTableViewCell: UITableViewCell {
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
+        
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        qrCodeStateImageView.accessibilityIdentifier = "item_certificate_list_icon_qr"
+        nameLabel.accessibilityIdentifier = "item_certificate_list_name"
+        stateLabel.accessibilityIdentifier = "item_certificate_list_type"
     }
 
     private func update() {
@@ -235,30 +244,12 @@ class StateLabel: UIView {
                 backgroundColor = .cc_recovery
                 label.textColor = .cc_recovery_contrast
             case .vaccination:
-                /* if let vaccination = certificate.vaccinations?.first, vaccination.doseNumber == vaccination.totalDoses {
-                     label.text = UBLocalized.certificate_type_full_vaccination
-                     accessibilityLabel = UBLocalized.certificate_type_full_vaccination
-                 } else {
-                     label.text = UBLocalized.certificate_type_partial_vaccination
-                     accessibilityLabel = UBLocalized.certificate_type_partial_vaccination
-                 } */
                 label.text = certificate.type.displayName
                 accessibilityLabel = certificate.type.displayName
 
                 backgroundColor = .cc_vaccination
                 label.textColor = .cc_vaccination_contrast
             case .test:
-                /* if certificate.tests?.first?.isPcrTest == true {
-                     label.text = UBLocalized.certificate_type_pcr_test
-                     accessibilityLabel = UBLocalized.certificate_type_pcr_test
-                 } else if certificate.tests?.first?.isRatTest == true {
-                     label.text = UBLocalized.certificate_type_rat_test
-                     accessibilityLabel = UBLocalized.certificate_type_rat_test
-                 } else {
-                     label.text = certificate.type.displayName
-                     accessibilityLabel = certificate.type.displayName
-                 } */
-
                 label.text = certificate.type.displayName
                 accessibilityLabel = certificate.type.displayName
 
@@ -270,8 +261,6 @@ class StateLabel: UIView {
         }
 
         if !enabled {
-            // backgroundColor = .cc_red
-            // label.textColor = .cc_white
             backgroundColor = .cc_greyBackground
             label.textColor = .cc_greyText
         }

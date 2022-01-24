@@ -75,7 +75,7 @@ class WalletQRScannerFullOverlayView: UIView {
         errorView.alpha = 1.0
 
         addSubview(errorLabel)
-
+    
         errorLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(scannerOverlay.snp.top).offset(WalletQRScannerOverlay.lineWidth * 0.5)

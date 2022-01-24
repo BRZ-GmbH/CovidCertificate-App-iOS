@@ -58,6 +58,8 @@ class OnboardingBaseViewController: ViewController {
         addSplashViewController()
 
         addStatusBarBlurView()
+        
+        continueButton.accessibilityIdentifier = "onboarding_continue_button"
     }
 
     override func viewDidAppear(_ animated: Bool) {

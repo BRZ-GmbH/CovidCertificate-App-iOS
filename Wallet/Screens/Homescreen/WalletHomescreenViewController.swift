@@ -49,10 +49,11 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         UIStateManager.shared.addObserver(self) { [weak self] s in
             guard let strongSelf = self else { return }
             strongSelf.state = s.certificateState.certificates.count == 0 ? .onboarding : .certificates
-            strongSelf.infoBox = s.infoBoxState
             
             strongSelf.regionSelectionButton.region = Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)
         }
+        
+        addCertificateButton.accessibilityIdentifier = "homescreen_scan_button_small"
 
         setupViews()
         setupInteraction()
@@ -127,7 +128,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         bottomView.faqButtonCallback = { [weak self] in
             guard let strongSelf = self else { return }
 
-            let vc = BasicStaticContentViewController(models: ConfigManager.currentConfig?.viewModels ?? [], title: UBLocalized.wallet_faq_header.uppercased())
+            let vc = BasicStaticContentViewController(models: ConfigManager.currentConfig?.viewModels ?? [], title: UBLocalized.wallet_faq_header.uppercased(), contentViewType: .faq)
             vc.presentInNavigationController(from: strongSelf)
         }
 

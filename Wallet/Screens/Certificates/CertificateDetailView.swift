@@ -11,6 +11,7 @@
 
 import CovidCertificateSDK
 import Foundation
+import UIKit
 
 class CertificateDetailView: UIView {
     private let certificate: UserCertificate
@@ -18,7 +19,7 @@ class CertificateDetailView: UIView {
 
     private let stackView = UIStackView()
 
-    var states: (state: VerificationResultStatus, temporaryVerifierState: TemporaryVerifierState) = (.loading, .idle) {
+    var state: VerificationResultStatus = .loading {
         didSet { update(animated: true) }
     }
 
@@ -182,9 +183,11 @@ class CertificateDetailView: UIView {
     private func addTitle(title: (String, String)) {
         let label = Label(.uppercaseBold, textColor: .cc_black)
         label.text = title.0
+        label.accessibilityIdentifier = "item_title"
         stackView.addArrangedView(label)
 
         let englishLabel = Label(.text, textColor: .cc_greyText)
+        englishLabel.accessibilityIdentifier = "item_title_english"
         englishLabel.text = title.1
         stackView.addArrangedView(englishLabel)
 
@@ -217,14 +220,17 @@ class CertificateDetailView: UIView {
 
         let titleLabel = Label(.textBold)
         titleLabel.text = v
+        titleLabel.accessibilityIdentifier = "item_value_value"
         sv.addArrangedView(titleLabel)
 
         let textLabel = Label(.text)
         textLabel.text = title.0
+        textLabel.accessibilityIdentifier = "item_value_label"
         sv.addArrangedView(textLabel)
 
         if addEnglishLabels {
             let textLabelEnglish = Label(.text, textColor: .cc_greyText)
+            textLabelEnglish.accessibilityIdentifier = "item_value_label_english"
             textLabelEnglish.text = title.1
             sv.addArrangedView(textLabelEnglish)
             englishLabels.append(textLabelEnglish)
@@ -244,6 +250,7 @@ class CertificateDetailView: UIView {
 
         let textLabel = Label(.text)
         textLabel.text = v
+        textLabel.accessibilityIdentifier = "item_value_label"
         stackView.addArrangedView(textLabel)
 
         if spacing > 0.0 {
@@ -252,6 +259,7 @@ class CertificateDetailView: UIView {
 
         let englishLabel = Label(.text, textColor: .cc_grey)
         englishLabel.text = vEnglish
+        englishLabel.accessibilityIdentifier = "item_value_label_english"
         stackView.addArrangedView(englishLabel)
 
         stackView.addSpacerView(Padding.large)
@@ -294,25 +302,16 @@ class CertificateDetailView: UIView {
 
     private func update(animated: Bool) {
         // switch animatable states
-        let actions = {
-            switch self.states.temporaryVerifierState {
-            case .success:
-                self.applySuccessState()
-            case .failure:
-                self.applyErrorState()
-            case .verifying:
+        let actions = {            
+            switch self.state {
+            case .loading:
                 self.applyLoadingState()
-            case .idle:
-                switch self.states.state {
-                case .loading:
-                    self.applyLoadingState()
-                case .success, .timeMissing:
-                    self.applySuccessState()
-                case .error, .signatureInvalid:
-                    self.applyErrorState()
-                case .dataExpired:
-                    self.applySuccessState()
-                }
+            case .success, .timeMissing:
+                self.applySuccessState()
+            case .error, .signatureInvalid:
+                self.applyErrorState()
+            case .dataExpired:
+                self.applySuccessState()
             }
         }
 

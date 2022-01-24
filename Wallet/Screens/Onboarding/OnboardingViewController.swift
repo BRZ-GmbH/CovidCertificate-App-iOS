@@ -14,7 +14,7 @@ import UIKit
 class OnboardingViewController: OnboardingBaseViewController {
     
     var viewControllers: [StaticContentViewController] = {
-        var vcs = [.theApp, .store, .show].compactMap({ StaticContentViewController(models: [$0] )})
+        var vcs = [.theApp, .store, .show].compactMap({ StaticContentViewController(models: [$0], contentViewType: .onboarding )})
         /// OnboardingDisclaimerViewController needs to be created because of the extra settings inside
         vcs.append(OnboardingDisclaimerViewController())
         return vcs
@@ -31,5 +31,6 @@ class OnboardingViewController: OnboardingBaseViewController {
     override public func completedOnboarding() {
         WalletUserStorage.shared.hasCompletedOnboarding = true
         WalletUserStorage.lastInstalledAppVersion = ConfigManager.shortAppVersion
+        (UIApplication.shared.delegate as? AppDelegate)?.didCompleteOnboarding()
     }
 }

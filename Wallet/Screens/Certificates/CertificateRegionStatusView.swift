@@ -21,13 +21,28 @@ class CertificateRegionStatusView: UIView {
     private let containerView = UIView()
     private let imageView = UIImageView()
     private let label = Label(.text, textAlignment: .center)
+    private let isHomescreen: Bool
     
     var result: VerificationRegionResult? = nil {
         didSet {
             if result?.region?.hasPrefix("ET") == true {
                 label.text = UBLocalized.region_type_ET
+                if isHomescreen {
+                    label.accessibilityIdentifier = "certificate_page_info_et"
+                    imageView.accessibilityIdentifier = "certificate_page_info_et_icon"
+                } else {
+                    label.accessibilityIdentifier = "certificate_detail_info_et"
+                    imageView.accessibilityIdentifier = "certificate_detail_info_et_icon"
+                }
             } else if result?.region?.hasPrefix("NG") == true {
                 label.text = UBLocalized.region_type_NG
+                if isHomescreen {
+                    label.accessibilityIdentifier = "certificate_page_info_ng"
+                    imageView.accessibilityIdentifier = "certificate_page_info_ng_icon"
+                } else {
+                    label.accessibilityIdentifier = "certificate_detail_info_ng"
+                    imageView.accessibilityIdentifier = "certificate_detail_info_ng_icon"
+                }
             }
             
             label.numberOfLines = 1
@@ -39,7 +54,8 @@ class CertificateRegionStatusView: UIView {
         }
     }
     
-    init() {
+    init(isHomescreen: Bool) {
+        self.isHomescreen = isHomescreen
         super.init(frame: .zero)
         label.isAccessibilityElement = true
 

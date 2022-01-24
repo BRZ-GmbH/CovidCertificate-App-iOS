@@ -13,7 +13,7 @@
 import Foundation
 class IntroViewController: OnboardingBaseViewController {
     
-    let viewControllers = Intro.introModelForCurrentVersion.compactMap({ StaticContentViewController(models: [$0] )})
+    let viewControllers = Intro.introModelForCurrentVersion.compactMap({ StaticContentViewController(models: [$0], contentViewType: .onboarding )})
 
     override internal var stepViewControllers: [OnboardingContentViewController] {
         return viewControllers

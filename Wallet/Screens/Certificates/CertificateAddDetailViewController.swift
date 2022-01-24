@@ -61,6 +61,13 @@ class CertificateAddDetailViewController: ViewController {
 
         setupViews()
         setupInteraction()
+        
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        addOkButton.accessibilityIdentifier = "certificate_add_button"
+        scanAgainButton.accessibilityIdentifier = "certificate_add_retry"
     }
 
     // MARK: - Setup

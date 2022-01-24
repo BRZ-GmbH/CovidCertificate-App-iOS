@@ -40,6 +40,15 @@ Bugs oder Probleme sollten als Github issues gemeldet werden. Diese App steht in
 Das Projekt sollte mit Xcode 12.5 oder einer neueren Version geöffnet werden.
 Abhängigkeiten werden mit [Swift Package Manager](https://swift.org/package-manager) verwaltet, kein weiteres Setup benötigt.
 
+###Zusätzliche Build Hinweise
+Folgende Konfiguration muss in der Build-/Entwicklungsumgebung sichergestellt sein, damit Vertrauenslisten, Geschäftsregeln und weitere Informationen vom Service abgerufen werden können. Weitere Informationen können auch unter https://github.com/Federal-Ministry-of-Health-AT/green-pass-overview#getting-access-to-trust-list-business-rules-and-value-sets nachgelesen werden.
+
+Hierfür ist lokal eine Datei "Config.xcconfig" mit folgenden Inhalt anzulegen:
+
+ ```
+ WALLET_APP_SDK_API_TOKEN = <SETZEN SIE HIER IHREN TOKEN JE NACH GEWÜNSCHTER UMGEBUNG EIN>
+ ```
+
 ## Lizenz
 
 Dieses Projekt ist lizenziert unter den Bestimmungen der MPL 2 license. Siehe [LICENSE](LICENSE) für Details.

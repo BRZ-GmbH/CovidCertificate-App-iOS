@@ -10,13 +10,7 @@
  */
 
 import Foundation
-
-enum TemporaryVerifierState: Equatable {
-    case idle
-    case verifying
-    case success([VerificationRegionResult])
-    case failure
-}
+import UIKit
 
 class CertificateDetailViewController: ViewController {
     private let certificate: UserCertificate
@@ -30,10 +24,6 @@ class CertificateDetailViewController: ViewController {
 
     private let removeButton = Button(title: UBLocalized.delete_button, style: .normal(.cc_red))
 
-    // private let verifyButton = Button(image: UIImage(named: "ic-load")?.withRenderingMode(.alwaysTemplate), accessibilityName: "")
-
-    private lazy var qrCodeStateView = CertificateQRCodeStateView(initialState: temporaryVerifierState)
-
     private let brightnessQRScanning = BrightnessQRScanning()
 
     public var deinitCallback: (() -> Void)?
@@ -41,24 +31,6 @@ class CertificateDetailViewController: ViewController {
     private var state: VerificationResultStatus = .loading {
         didSet {
             update()
-        }
-    }
-
-    private var temporaryVerifierState: TemporaryVerifierState = .idle {
-        didSet {
-            UIView.animate(withDuration: 0.2) {
-                self.qrCodeStateView.state = self.temporaryVerifierState
-            }
-            if temporaryVerifierState != .idle && temporaryVerifierState != .verifying {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .pi) { [weak self] in
-                    guard let strongSelf = self else { return }
-                    UIView.animate(withDuration: 0.2) {
-                        strongSelf.temporaryVerifierState = .idle
-                        // strongSelf.verifyButton.alpha = 1
-                        strongSelf.update()
-                    }
-                }
-            }
         }
     }
 
@@ -77,6 +49,8 @@ class CertificateDetailViewController: ViewController {
         setupInteraction()
 
         addDismissButton()
+        
+        removeButton.accessibilityIdentifier = "certificate_detail_button_delete"
 
         // start check of certificate
         // also starts again when lists are updated
@@ -119,12 +93,6 @@ class CertificateDetailViewController: ViewController {
         
         qrCodeNameView.certificate = certificate
 
-        view.addSubview(qrCodeStateView)
-        qrCodeStateView.snp.makeConstraints { make in
-            make.edges.equalTo(qrCodeNameView.qrCodeLayoutGuide)
-        }
-        qrCodeStateView.alpha = 0
-
         stackScrollView.addSpacerView(Padding.small * 2.0)
         stackScrollView.addArrangedView(stateView)
 
@@ -139,30 +107,10 @@ class CertificateDetailViewController: ViewController {
 
         stackScrollView.addSpacerView(5.0 * Padding.large)
 
-        /* verifyButton.backgroundColor = .cc_green_dark
-         verifyButton.tintColor = .cc_white
-         let size: CGFloat = 50.0
-         verifyButton.layer.cornerRadius = size * 0.5
-         verifyButton.highlightCornerRadius = size * 0.5
-         verifyButton.ub_addShadow(radius: 4.0, opacity: 0.2, xOffset: 0.0, yOffset: 0.0)
-         view.addSubview(verifyButton)
-         verifyButton.snp.makeConstraints { make in
-             make.size.equalTo(size)
-             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(Padding.large)
-             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(Padding.large + Padding.small)
-         } */
-
         update()
     }
 
     private func setupInteraction() {
-        /* verifyButton.touchUpCallback = { [weak self] in
-             guard let strongSelf = self else { return }
-
-             strongSelf.stackScrollView.scrollToTop(animated: true)
-             strongSelf.startTemporaryCheck()
-         } */
-
         removeButton.touchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.removeCertificate()
@@ -171,39 +119,10 @@ class CertificateDetailViewController: ViewController {
 
     // MARK: - Check
 
-    private func startTemporaryCheck() {
-        /* No manual recheck offered at the moment
-         temporaryVerifierState = .verifying
-         state = .loading
-         UIView.animate(withDuration: 0.2) {
-             // self.verifyButton.alpha = 0
-             self.qrCodeStateView.state = self.temporaryVerifierState
-         }
-
-         VerifierManager.shared.addObserver(self, for: certificate.qrCode, regions: ["ET", "NG"], checkDefaultRegion: false, forceUpdate: true) { [weak self] state in
-             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                 guard let strongSelf = self else { return }
-                 switch state {
-                 case .loading: strongSelf.temporaryVerifierState = .verifying
-                 case .error, .signatureInvalid: strongSelf.temporaryVerifierState = .failure
-                 case let .success(results): strongSelf.temporaryVerifierState = .success(results)
-                 case .timeMissing:
-                     // TODO: Missing
-                     break
-                 }
-
-                 strongSelf.state = state
-             }
-         }
-          */
-    }
-
     private func startCheck() {
         state = .loading
         VerifierManager.shared.addObserver(self, for: certificate, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false, important: true) { [weak self] state in
             guard let strongSelf = self else { return }
-            strongSelf.qrCodeStateView.alpha = 0
-            // strongSelf.verifyButton.alpha = 1
             strongSelf.state = state
         }
     }
@@ -221,9 +140,9 @@ class CertificateDetailViewController: ViewController {
     }
 
     private func update() {
-        stateView.states = (state, temporaryVerifierState)
-        detailView.states = (state, temporaryVerifierState)
-        qrCodeNameView.enabled = temporaryVerifierState != .idle || !state.isInvalid()
+        stateView.state = state
+        detailView.state = state
+        qrCodeNameView.enabled = !state.isInvalid()
     }
 
     deinit {

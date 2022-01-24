@@ -91,6 +91,13 @@ class RegionTableViewCell: UITableViewCell {
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
+        
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        nameLabel.accessibilityIdentifier = "item_region_list_name"
+        selectedIndicator.accessibilityIdentifier = "item_region_list_radio"
     }
     
     private func update() {

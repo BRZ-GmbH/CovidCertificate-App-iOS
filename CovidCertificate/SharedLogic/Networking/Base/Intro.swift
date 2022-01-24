@@ -74,6 +74,7 @@ struct TextGroup: Codable, Equatable {
     let imageColor: String?
     let imageAltText: String?
     let text: String
+    let accessibilityIdentifier: String?
     
     static func == (lhs: TextGroup, rhs: TextGroup) -> Bool {
         return lhs.image == rhs.image &&

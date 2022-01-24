@@ -50,10 +50,22 @@ import Foundation
      case accessibility_region_in_active_key = "accessibility_region_in_active"
     /// Aktuelle Region
      case accessibility_selected_region_key = "accessibility_selected_region"
+    /// Aktualisierung der Zugangsregeln fehlgeschlagen.
+     case business_rule_update_failed_message_key = "business_rule_update_failed_message"
+    /// OK
+     case business_rule_update_ok_button_key = "business_rule_update_ok_button"
+    /// Zugangsregeln werden aktualisiert...
+     case business_rule_update_progress_key = "business_rule_update_progress"
+    /// Aktualisierung der Zugangsregeln erfolgreich abgeschlossen.
+     case business_rule_update_success_message_key = "business_rule_update_success_message"
     /// Zugriff auf Kamera erlauben
      case camera_permission_dialog_action_key = "camera_permission_dialog_action"
     /// Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.
      case camera_permission_dialog_text_key = "camera_permission_dialog_text"
+    /// Hinweismeldungen aktivieren
+     case campaigns_opt_in_action_key = "campaigns_opt_in_action"
+    /// Hinweismeldungen deaktivieren
+     case campaigns_opt_out_action_key = "campaigns_opt_out_action"
     /// Abbrechen
      case cancel_button_key = "cancel_button"
     /// QR Code, Bild
@@ -164,58 +176,6 @@ import Foundation
      case vaccination_booster_notification_read_key = "vaccination_booster_notification_read"
     /// Achtung Zertifikat läuft ab!
      case vaccination_booster_notification_title_key = "vaccination_booster_notification_title"
-    /// Grüner Pass
-     case verifier_app_name_key = "verifier_app_name"
-    /// Geburtsdatum
-     case verifier_covid_certificate_birthdate_key = "verifier_covid_certificate_birthdate"
-    /// Nachname
-     case verifier_covid_certificate_name_key = "verifier_covid_certificate_name"
-    /// Vorname
-     case verifier_covid_certificate_prename_key = "verifier_covid_certificate_prename"
-    /// Das Format des EU-konformen Zertifikats ist ungültig.
-     case verifier_error_invalid_format_key = "verifier_error_invalid_format"
-    /// Grüner Pass
-     case verifier_homescreen_header_title_key = "verifier_homescreen_header_title"
-    /// EU-konformen QR-Code scannen
-     case verifier_homescreen_pager_description_1_key = "verifier_homescreen_pager_description_1"
-    /// QR-Code scannen
-     case verifier_homescreen_scan_button_key = "verifier_homescreen_scan_button"
-    /// So funktioniert's
-     case verifier_homescreen_support_button_key = "verifier_homescreen_support_button"
-    /// Grüner Pass
-     case verifier_homescreen_title_key = "verifier_homescreen_title"
-    /// Ein unerwarteter Fehler ist aufgetreten
-     case verifier_network_error_text_key = "verifier_network_error_text"
-    /// Prüfung fehlgeschlagen
-     case verifier_network_error_title_key = "verifier_network_error_title"
-    /// QR-Code scannen
-     case verifier_qr_scanner_scan_qr_text_key = "verifier_qr_scanner_scan_qr_text"
-    /// Das Gerät befindet sich im Flugmodus.
-     case verifier_retry_flightmode_error_key = "verifier_retry_flightmode_error"
-    /// Ein Netzwerkfehler ist aufgetreten.
-     case verifier_retry_network_error_key = "verifier_retry_network_error"
-    /// https://gruenerpass.gv.at/app/datenschutz
-     case verifier_terms_privacy_link_key = "verifier_terms_privacy_link"
-    /// QR-Code scannen
-     case verifier_title_qr_scan_key = "verifier_title_qr_scan"
-    /// Das Zertifikat wurde widerrufen
-     case verifier_verify_error_info_for_blacklist_key = "verifier_verify_error_info_for_blacklist"
-    /// Das Zertifikat hat keine gültige Signatur
-     case verifier_verify_error_info_for_certificate_invalid_key = "verifier_verify_error_info_for_certificate_invalid"
-    /// Das Zertifikat entspricht nicht den gesetzlichen Erfordernissen.
-     case verifier_verify_error_info_for_national_rules_key = "verifier_verify_error_info_for_national_rules"
-    /// Ein unerwarteter Fehler ist aufgetreten.
-     case verifier_verify_error_list_info_text_key = "verifier_verify_error_list_info_text"
-    /// Prüfung fehlgeschlagen
-     case verifier_verify_error_list_title_key = "verifier_verify_error_list_title"
-    /// Zertifikat ungültig
-     case verifier_verify_error_title_key = "verifier_verify_error_title"
-    /// Zertifikat wird geprüft
-     case verifier_verify_loading_text_key = "verifier_verify_loading_text"
-    /// Nur mit einem amtlichen Lichtbildausweis gültig
-     case verifier_verify_success_info_key = "verifier_verify_success_info"
-    /// Prüfung erfolgreich
-     case verifier_verify_success_title_key = "verifier_verify_success_title"
     /// Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.
      case wallet_3g_status_disclaimer_key = "wallet_3g_status_disclaimer"
     /// Dieses Zertifikat berechtigt für
@@ -336,26 +296,8 @@ import Foundation
      case wallet_homescreen_qr_code_scannen_key = "wallet_homescreen_qr_code_scannen"
     /// Nächsten Schritt wählen
      case wallet_homescreen_what_to_do_key = "wallet_homescreen_what_to_do"
-    /// Termin
-     case wallet_notification_booster_info_button_key = "wallet_notification_booster_info_button"
-    /// https://www.oesterreich-impft.at/jetzt-impfen/
-     case wallet_notification_booster_info_url_key = "wallet_notification_booster_info_url"
-    /// Später
-     case wallet_notification_booster_later_button_key = "wallet_notification_booster_later_button"
-    /// Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.
-     case wallet_notification_booster_message_key = "wallet_notification_booster_message"
-    /// OK
-     case wallet_notification_booster_ok_button_key = "wallet_notification_booster_ok_button"
-    /// Achtung!
-     case wallet_notification_booster_title_key = "wallet_notification_booster_title"
-    /// Termin
-     case wallet_notification_johnson_booster_info_button_key = "wallet_notification_johnson_booster_info_button"
-    /// https://www.oesterreich-impft.at/jetzt-impfen/
-     case wallet_notification_johnson_booster_info_url_key = "wallet_notification_johnson_booster_info_url"
-    /// Achtung: Holen Sie sich ab 28 Tagen nach Ihrer Erstimpfung mit dem COVID-19 Vaccine Janssen ("Johnson&Johnson") Ihre 2. Impfung!\n\nIhr Impfzertifikat für den Grünen Pass ist ab Montag, 03.01.2022, nur noch mit 2 Impfungen gültig.
-     case wallet_notification_johnson_booster_message_key = "wallet_notification_johnson_booster_message"
-    /// OK
-     case wallet_notification_johnson_booster_ok_button_key = "wallet_notification_johnson_booster_ok_button"
+    /// Das Format des EU-konformen Zertifikats ist ungültig.
+     case wallet_import_error_invalid_format_key = "wallet_import_error_invalid_format"
     /// Weiter
      case wallet_notification_permission_button_key = "wallet_notification_permission_button"
     /// Die App kann Sie informieren, sobald das Zertifikat eingetroffen ist.  Erlauben Sie dazu der App, Ihnen Mitteilungen zu senden.
@@ -448,9 +390,17 @@ import Foundation
      case wallet_scanner_title_key = "wallet_scanner_title"
     /// https://gruenerpass.gv.at/app/datenschutz
      case wallet_terms_privacy_link_key = "wallet_terms_privacy_link"
-    /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+    /// Ja, entfernen
+     case wallet_test_certificate_cleanup_cleanup_button_key = "wallet_test_certificate_cleanup_cleanup_button"
+    /// Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit sie ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?
+     case wallet_test_certificate_cleanup_message_key = "wallet_test_certificate_cleanup_message"
+    /// Nie nachfragen
+     case wallet_test_certificate_cleanup_never_button_key = "wallet_test_certificate_cleanup_never_button"
+    /// Nein
+     case wallet_test_certificate_cleanup_no_button_key = "wallet_test_certificate_cleanup_no_button"
+    /// 3-G Status nicht verfügbar, bitte probieren Sie es zu einem späteren Zeitpunkt und überprüfen Sie Ihre Internetverbindung
      case wallet_time_missing_key = "wallet_time_missing"
-    /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+    /// 3-G Status nicht verfügbar, bitte probieren Sie es zu einem späteren Zeitpunkt und überprüfen Sie Ihre Internetverbindung
      case wallet_validation_data_expired_key = "wallet_validation_data_expired"
     /// Bildschirmaufnahme ist nicht erlaubt!
      case warning_screen_recording_key = "warning_screen_recording"
@@ -496,10 +446,22 @@ import Foundation
    static let accessibility_region_in_active = UBLocalized.tr(UBLocalizedKey.accessibility_region_in_active_key)
   /// Aktuelle Region
    static let accessibility_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_selected_region_key)
+  /// Aktualisierung der Zugangsregeln fehlgeschlagen.
+   static let business_rule_update_failed_message = UBLocalized.tr(UBLocalizedKey.business_rule_update_failed_message_key)
+  /// OK
+   static let business_rule_update_ok_button = UBLocalized.tr(UBLocalizedKey.business_rule_update_ok_button_key)
+  /// Zugangsregeln werden aktualisiert...
+   static let business_rule_update_progress = UBLocalized.tr(UBLocalizedKey.business_rule_update_progress_key)
+  /// Aktualisierung der Zugangsregeln erfolgreich abgeschlossen.
+   static let business_rule_update_success_message = UBLocalized.tr(UBLocalizedKey.business_rule_update_success_message_key)
   /// Zugriff auf Kamera erlauben
    static let camera_permission_dialog_action = UBLocalized.tr(UBLocalizedKey.camera_permission_dialog_action_key)
   /// Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.
    static let camera_permission_dialog_text = UBLocalized.tr(UBLocalizedKey.camera_permission_dialog_text_key)
+  /// Hinweismeldungen aktivieren
+   static let campaigns_opt_in_action = UBLocalized.tr(UBLocalizedKey.campaigns_opt_in_action_key)
+  /// Hinweismeldungen deaktivieren
+   static let campaigns_opt_out_action = UBLocalized.tr(UBLocalizedKey.campaigns_opt_out_action_key)
   /// Abbrechen
    static let cancel_button = UBLocalized.tr(UBLocalizedKey.cancel_button_key)
   /// QR Code, Bild
@@ -612,58 +574,6 @@ import Foundation
    static let vaccination_booster_notification_read = UBLocalized.tr(UBLocalizedKey.vaccination_booster_notification_read_key)
   /// Achtung Zertifikat läuft ab!
    static let vaccination_booster_notification_title = UBLocalized.tr(UBLocalizedKey.vaccination_booster_notification_title_key)
-  /// Grüner Pass
-   static let verifier_app_name = UBLocalized.tr(UBLocalizedKey.verifier_app_name_key)
-  /// Geburtsdatum
-   static let verifier_covid_certificate_birthdate = UBLocalized.tr(UBLocalizedKey.verifier_covid_certificate_birthdate_key)
-  /// Nachname
-   static let verifier_covid_certificate_name = UBLocalized.tr(UBLocalizedKey.verifier_covid_certificate_name_key)
-  /// Vorname
-   static let verifier_covid_certificate_prename = UBLocalized.tr(UBLocalizedKey.verifier_covid_certificate_prename_key)
-  /// Das Format des EU-konformen Zertifikats ist ungültig.
-   static let verifier_error_invalid_format = UBLocalized.tr(UBLocalizedKey.verifier_error_invalid_format_key)
-  /// Grüner Pass
-   static let verifier_homescreen_header_title = UBLocalized.tr(UBLocalizedKey.verifier_homescreen_header_title_key)
-  /// EU-konformen QR-Code scannen
-   static let verifier_homescreen_pager_description_1 = UBLocalized.tr(UBLocalizedKey.verifier_homescreen_pager_description_1_key)
-  /// QR-Code scannen
-   static let verifier_homescreen_scan_button = UBLocalized.tr(UBLocalizedKey.verifier_homescreen_scan_button_key)
-  /// So funktioniert's
-   static let verifier_homescreen_support_button = UBLocalized.tr(UBLocalizedKey.verifier_homescreen_support_button_key)
-  /// Grüner Pass
-   static let verifier_homescreen_title = UBLocalized.tr(UBLocalizedKey.verifier_homescreen_title_key)
-  /// Ein unerwarteter Fehler ist aufgetreten
-   static let verifier_network_error_text = UBLocalized.tr(UBLocalizedKey.verifier_network_error_text_key)
-  /// Prüfung fehlgeschlagen
-   static let verifier_network_error_title = UBLocalized.tr(UBLocalizedKey.verifier_network_error_title_key)
-  /// QR-Code scannen
-   static let verifier_qr_scanner_scan_qr_text = UBLocalized.tr(UBLocalizedKey.verifier_qr_scanner_scan_qr_text_key)
-  /// Das Gerät befindet sich im Flugmodus.
-   static let verifier_retry_flightmode_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_flightmode_error_key)
-  /// Ein Netzwerkfehler ist aufgetreten.
-   static let verifier_retry_network_error = UBLocalized.tr(UBLocalizedKey.verifier_retry_network_error_key)
-  /// https://gruenerpass.gv.at/app/datenschutz
-   static let verifier_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.verifier_terms_privacy_link_key)
-  /// QR-Code scannen
-   static let verifier_title_qr_scan = UBLocalized.tr(UBLocalizedKey.verifier_title_qr_scan_key)
-  /// Das Zertifikat wurde widerrufen
-   static let verifier_verify_error_info_for_blacklist = UBLocalized.tr(UBLocalizedKey.verifier_verify_error_info_for_blacklist_key)
-  /// Das Zertifikat hat keine gültige Signatur
-   static let verifier_verify_error_info_for_certificate_invalid = UBLocalized.tr(UBLocalizedKey.verifier_verify_error_info_for_certificate_invalid_key)
-  /// Das Zertifikat entspricht nicht den gesetzlichen Erfordernissen.
-   static let verifier_verify_error_info_for_national_rules = UBLocalized.tr(UBLocalizedKey.verifier_verify_error_info_for_national_rules_key)
-  /// Ein unerwarteter Fehler ist aufgetreten.
-   static let verifier_verify_error_list_info_text = UBLocalized.tr(UBLocalizedKey.verifier_verify_error_list_info_text_key)
-  /// Prüfung fehlgeschlagen
-   static let verifier_verify_error_list_title = UBLocalized.tr(UBLocalizedKey.verifier_verify_error_list_title_key)
-  /// Zertifikat ungültig
-   static let verifier_verify_error_title = UBLocalized.tr(UBLocalizedKey.verifier_verify_error_title_key)
-  /// Zertifikat wird geprüft
-   static let verifier_verify_loading_text = UBLocalized.tr(UBLocalizedKey.verifier_verify_loading_text_key)
-  /// Nur mit einem amtlichen Lichtbildausweis gültig
-   static let verifier_verify_success_info = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_info_key)
-  /// Prüfung erfolgreich
-   static let verifier_verify_success_title = UBLocalized.tr(UBLocalizedKey.verifier_verify_success_title_key)
   /// Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.
    static let wallet_3g_status_disclaimer = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_disclaimer_key)
   /// Dieses Zertifikat berechtigt für
@@ -786,26 +696,8 @@ import Foundation
    static let wallet_homescreen_qr_code_scannen = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_qr_code_scannen_key)
   /// Nächsten Schritt wählen
    static let wallet_homescreen_what_to_do = UBLocalized.tr(UBLocalizedKey.wallet_homescreen_what_to_do_key)
-  /// Termin
-   static let wallet_notification_booster_info_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_info_button_key)
-  /// https://www.oesterreich-impft.at/jetzt-impfen/
-   static let wallet_notification_booster_info_url = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_info_url_key)
-  /// Später
-   static let wallet_notification_booster_later_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_later_button_key)
-  /// Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.
-   static let wallet_notification_booster_message = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_message_key)
-  /// OK
-   static let wallet_notification_booster_ok_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_ok_button_key)
-  /// Achtung!
-   static let wallet_notification_booster_title = UBLocalized.tr(UBLocalizedKey.wallet_notification_booster_title_key)
-  /// Termin
-   static let wallet_notification_johnson_booster_info_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_info_button_key)
-  /// https://www.oesterreich-impft.at/jetzt-impfen/
-   static let wallet_notification_johnson_booster_info_url = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_info_url_key)
-  /// Achtung: Holen Sie sich ab 28 Tagen nach Ihrer Erstimpfung mit dem COVID-19 Vaccine Janssen ("Johnson&Johnson") Ihre 2. Impfung!\n\nIhr Impfzertifikat für den Grünen Pass ist ab Montag, 03.01.2022, nur noch mit 2 Impfungen gültig.
-   static let wallet_notification_johnson_booster_message = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_message_key)
-  /// OK
-   static let wallet_notification_johnson_booster_ok_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_johnson_booster_ok_button_key)
+  /// Das Format des EU-konformen Zertifikats ist ungültig.
+   static let wallet_import_error_invalid_format = UBLocalized.tr(UBLocalizedKey.wallet_import_error_invalid_format_key)
   /// Weiter
    static let wallet_notification_permission_button = UBLocalized.tr(UBLocalizedKey.wallet_notification_permission_button_key)
   /// Die App kann Sie informieren, sobald das Zertifikat eingetroffen ist.  Erlauben Sie dazu der App, Ihnen Mitteilungen zu senden.
@@ -898,9 +790,19 @@ import Foundation
    static let wallet_scanner_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_title_key)
   /// https://gruenerpass.gv.at/app/datenschutz
    static let wallet_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.wallet_terms_privacy_link_key)
-  /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+  /// Ja, entfernen
+   static let wallet_test_certificate_cleanup_cleanup_button = UBLocalized.tr(UBLocalizedKey.wallet_test_certificate_cleanup_cleanup_button_key)
+  /// Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit sie ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?
+   static func wallet_test_certificate_cleanup_message(_ p1: Any) -> String {
+    return UBLocalized.tr(UBLocalizedKey.wallet_test_certificate_cleanup_message_key, String(describing: p1))
+  }
+  /// Nie nachfragen
+   static let wallet_test_certificate_cleanup_never_button = UBLocalized.tr(UBLocalizedKey.wallet_test_certificate_cleanup_never_button_key)
+  /// Nein
+   static let wallet_test_certificate_cleanup_no_button = UBLocalized.tr(UBLocalizedKey.wallet_test_certificate_cleanup_no_button_key)
+  /// 3-G Status nicht verfügbar, bitte probieren Sie es zu einem späteren Zeitpunkt und überprüfen Sie Ihre Internetverbindung
    static let wallet_time_missing = UBLocalized.tr(UBLocalizedKey.wallet_time_missing_key)
-  /// 3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung
+  /// 3-G Status nicht verfügbar, bitte probieren Sie es zu einem späteren Zeitpunkt und überprüfen Sie Ihre Internetverbindung
    static let wallet_validation_data_expired = UBLocalized.tr(UBLocalizedKey.wallet_validation_data_expired_key)
   /// Bildschirmaufnahme ist nicht erlaubt!
    static let warning_screen_recording = UBLocalized.tr(UBLocalizedKey.warning_screen_recording_key)

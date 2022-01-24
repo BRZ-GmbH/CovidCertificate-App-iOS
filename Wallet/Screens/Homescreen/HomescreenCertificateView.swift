@@ -35,7 +35,7 @@ class HomescreenCertificateView: UIView {
 
     public var state: VerificationResultStatus = .loading {
         didSet {
-            stateView.states = (state, .idle)
+            stateView.state = state
             update(animated: true)
         }
     }
@@ -46,10 +46,16 @@ class HomescreenCertificateView: UIView {
         self.certificate = certificate
         super.init(frame: .zero)
         setup()
-
+        
         isAccessibilityElement = true
         accessibilityTraits = [.button]
         accessibilityHint = UBLocalized.accessibility_detail_certificate
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        accessibilityIdentifier = "certificate_page_main_group"
+        titleLabel.accessibilityIdentifier = "certificate_page_title"
     }
 
     @available(*, unavailable)
@@ -141,6 +147,7 @@ class HomescreenCertificateView: UIView {
     private func update(animated _: Bool) {
         let isInvalid = state.isInvalid()
         nameView.enabled = !isInvalid
+        nameView.updateLayout()
 
         accessibilityLabel = [titleLabel.text, nameView.accessibilityLabel, stateView.accessibilityLabel].compactMap { $0 }.joined(separator: ", ")
 

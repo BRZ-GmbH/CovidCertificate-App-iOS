@@ -10,6 +10,8 @@
 
 import CovidCertificateSDK
 import UIKit
+import SwiftyJSON
+import jsonlogic
 
 struct LocalizedValue<T: Codable>: Codable {
     let dic: [String: T]
@@ -36,22 +38,13 @@ struct LocalizedValue<T: Codable>: Codable {
     }
 }
 
-struct InfoBox: UBCodable, Equatable {
-    let title, msg: String
-    let url: URL?
-    let urlTitle: String?
-    let infoId: String?
-    let isDismissible: Bool?
-}
-
-class ConfigResponseBody: UBCodable, JWTExtension {
+class ConfigResponseBody: UBCodable {
     let ios: String?
     let iosForceDate: String?
-    let infoBox: LocalizedValue<InfoBox>?
     let questions: LocalizedValue<FAQEntriesContainer>?
     let works: LocalizedValue<FAQEntriesContainer>?
-    let vaccinationRefreshCampaignStart: String?
-    let vaccinationRefreshCampaignText: LocalizedValue<VaccinationRefreshCampaignText>?
+    let campaigns: [Campaign]?
+    let conditions: [String:CertificateCondition]?
     
     var forceUpdate: Bool {
         guard let iosForceDate = iosForceDate else { return false }
@@ -69,19 +62,13 @@ class ConfigResponseBody: UBCodable, JWTExtension {
         return DateFormatter.ub_dayString(from: date)
     }
     
-    var vaccinationRefreshCampaignStartDate: Date? {
-        guard let vaccinationRefreshCampaignStart = vaccinationRefreshCampaignStart else { return nil }
-        return ISO8601DateFormatter().date(from: vaccinationRefreshCampaignStart)
-    }
-    
     private enum CodingKeys: String, CodingKey {
         case ios = "ios"
         case iosForceDate = "ios_force_date"
-        case infoBox = "infoBox"
         case questions = "questions"
         case works = "works"
-        case vaccinationRefreshCampaignText = "refresh_vaccination_campaign_text"
-        case vaccinationRefreshCampaignStart = "refresh_vaccination_campaign_start"
+        case campaigns = "campaigns"
+        case conditions = "conditions"
     }
 
     class FAQEntriesContainer: UBCodable {
@@ -115,6 +102,25 @@ class ConfigResponseBody: UBCodable, JWTExtension {
     }
 }
 
+class CertificateCondition: UBCodable {
+    let logic: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case logic
+    }
+    
+    private var _parsedJsonLogic: JsonLogic? = nil
+    
+    func parsedJsonLogic() throws -> JsonLogic {
+      if let _parsedJsonLogic = _parsedJsonLogic {
+        return _parsedJsonLogic
+      }
+      let parsedJsonLogicObject = try JsonLogic(logic)
+      _parsedJsonLogic = parsedJsonLogicObject
+      return parsedJsonLogicObject
+    }
+}
+
 extension ConfigResponseBody {
     var viewModels: [StaticContentViewModel] {
         var models = [StaticContentViewModel]()
@@ -124,7 +130,7 @@ extension ConfigResponseBody {
             models.append(StaticContentViewModel(heading: nil,
                                                  foregroundImage: imageString1,
                                                  title: title1,
-                                                 textGroups: [TextGroup(image: nil,imageColor: nil,imageAltText: nil, text: subtitle1)],
+                                                 textGroups: [TextGroup(image: nil,imageColor: nil,imageAltText: nil, text: subtitle1, accessibilityIdentifier: "item_faq_header_text")],
                                                  expandableTextGroups: questions?.value?.faqEntries.compactMap { ExpandableTextGroup(title: $0.title, text: $0.text, linkTitle: $0.linkTitle, linkUrl: $0.linkUrl?.absoluteString) } ?? []))
         }
 
@@ -134,7 +140,7 @@ extension ConfigResponseBody {
             models.append(StaticContentViewModel(heading: nil,
                                                  foregroundImage: imageString2,
                                                  title: title2,
-                                                 textGroups: [TextGroup(image: nil,imageColor: nil,imageAltText: nil, text: subtitle2)],
+                                                 textGroups: [TextGroup(image: nil,imageColor: nil,imageAltText: nil, text: subtitle2, accessibilityIdentifier: "item_faq_header_text")],
                                                  expandableTextGroups: works?.value?.faqEntries.compactMap { ExpandableTextGroup(title: $0.title, text: $0.text, linkTitle: $0.linkTitle, linkUrl: $0.linkUrl?.absoluteString) } ?? []))
         }
 

@@ -9,6 +9,7 @@
  */
 
 #import "UIImage+UBHelpers.h"
+#import <UIKit/UIKit.h>
 
 @implementation UIImage (UBHelpers)
 

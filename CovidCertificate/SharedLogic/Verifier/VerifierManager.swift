@@ -43,6 +43,15 @@ final class VerifierManager {
     }
     
     private var lastKnownResults: [String: VerificationResult] = [:]
+    
+    var currentTime: Date? {
+        #if RELEASE_ABNAHME || RELEASE_PROD_TEST
+        if useDeviceTime {
+            return Date()
+        }
+        #endif
+        return timeStatus?.time
+    }
 
     func resetTime() {
         timeStatus = (false, Clock.now)

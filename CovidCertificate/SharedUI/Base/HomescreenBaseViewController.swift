@@ -17,15 +17,8 @@ class HomescreenBaseViewController: ViewController {
     private let backgroundView: AngledBackgroundView
     public let logoView = UIImageView(image: UIImage(named: "ic-bund"))
     private let infoButton = Button(image: UIImage(named: "ic-info-outline"), accessibilityName: UBLocalized.accessibility_info_button)
-    private let boxView = InfoBoxView()
-
-    public let infoBoxButton = InfoBoxButton()
 
     public var backgroundViewOffset: CGPoint = .zero
-
-    public var infoBox: InfoBox? {
-        didSet { updateInfoBox(true) }
-    }
     
     public let regionSelectionButton = RegionSelectionButton()
 
@@ -84,73 +77,17 @@ class HomescreenBaseViewController: ViewController {
             self?.regionSelectionButtonCallback?()
         }
         
-        view.addSubview(infoBoxButton)
-
-        infoBoxButton.snp.makeConstraints { make in
-            make.centerY.equalTo(self.logoView)
-            make.left.equalToSuperview().inset(Padding.medium)
-        }
-
-        view.addSubview(boxView)
-
-        boxView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
-        infoBoxButton.touchUpCallback = { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.presentInfoBox()
-        }
-
-        boxView.showCallback = { [weak self] show in
-            guard let strongSelf = self else { return }
-            strongSelf.infoBoxButton.isOn = show
-            strongSelf.infoBoxButton.isUserInteractionEnabled = !show
-        }
-
-        updateInfoBox(false)
+        setupAccessibilityIdentifiers()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.bringSubviewToFront(boxView)
-        view.bringSubviewToFront(infoBoxButton)
+    
+    private func setupAccessibilityIdentifiers() {
+        logoView.accessibilityIdentifier = "bund_logo"
+        infoButton.accessibilityIdentifier = "header_notification"
+        regionSelectionButton.accessibilityIdentifier = "header_region_text"
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backgroundView.updatePath()
-    }
-
-    private func presentInfoBox() {
-        boxView.infoBox = infoBox
-        boxView.presentFrom(view: infoBoxButton)
-    }
-
-    private func dismissInfoBox() {
-        boxView.dismiss()
-    }
-
-    public func updateInfoBox(_ animated: Bool) {
-        let actions = {
-            self.infoBoxButton.isOn = self.infoBox == nil
-            self.infoBoxButton.alpha = self.infoBox != nil ? 1.0 : 0.0
-        }
-
-        if animated {
-            UIView.animate(withDuration: 0.2) {
-                actions()
-            }
-
-        } else {
-            actions()
-        }
-
-        if let infoBox = infoBox,
-           !InfoBoxVisibilityManager.shared.dismissedInfoBoxIds.contains(infoBox.infoId ?? "") {
-            presentInfoBox()
-        } else {
-            dismissInfoBox()
-        }
     }
 }

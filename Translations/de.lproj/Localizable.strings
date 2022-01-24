@@ -1,25 +1,4 @@
 
-/*Android App Name*/
-"verifier_app_name" = "Grüner Pass";
-
-/*Title for the qr scanning screen*/
-"verifier_title_qr_scan" = "QR-Code scannen";
-
-/*Titel über dem Haupttitel*/
-"verifier_homescreen_header_title" = "Grüner Pass";
-
-/*Homescreen App Name*/
-"verifier_homescreen_title" = "Grüner Pass";
-
-/*Beschreibung für Pager Bild 1*/
-"verifier_homescreen_pager_description_1" = "EU-konformen QR-Code scannen";
-
-
-/*Homescreen Button für Scanning*/
-"verifier_homescreen_scan_button" = "QR-Code scannen";
-
-/*Homescreen Button für Support*/
-"verifier_homescreen_support_button" = "So funktioniert's";
 "error_network_title" = "Netzwerkfehler";
 "error_network_text" = "Überprüfen Sie Ihre Internet Verbindung.";
 "error_action_retry" = "Erneut versuchen";
@@ -31,16 +10,9 @@
 "ok_button" = "OK";
 "camera_permission_dialog_text" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
 "camera_permission_dialog_action" = "Zugriff auf Kamera erlauben";
-"verifier_qr_scanner_scan_qr_text" = "QR-Code scannen";
 
 /*Titel auf dem Verifikations-Screen*/
 "covid_certificate_title" = "EU-konformes Zertifikat";
-
-/*Name des/der Zertifikatsinhabers/Zertifikatsinhaberin*/
-"verifier_covid_certificate_name" = "Nachname";
-
-/*Geburtsdatum des/der Zertifikatsinhabers/Zertifikatsinhaberin*/
-"verifier_covid_certificate_birthdate" = "Geburtsdatum";
 
 /*Wallet: Zertifikat hinzufügen*/
 "wallet_add_certificate" = "Hinzufügen";
@@ -53,33 +25,6 @@
 
 /*Wallet: Scanner Titel*/
 "wallet_scanner_title" = "Hinzufügen";
-
-/*Titel bei erfolgreicher Prüfung*/
-"verifier_verify_success_title" = "Prüfung erfolgreich";
-
-/*Info Text bei erfolgreicher Prüfung*/
-"verifier_verify_success_info" = "Nur mit einem amtlichen Lichtbildausweis gültig";
-
-/*Prüfung loading text*/
-"verifier_verify_loading_text" = "Zertifikat wird geprüft";
-
-/*Fehler Title bei Prüfung*/
-"verifier_verify_error_title" = "Zertifikat ungültig";
-
-/*Fehler Infotext bei Prüfung (Nationale Regeln)*/
-"verifier_verify_error_info_for_national_rules" = "Das Zertifikat entspricht nicht den gesetzlichen Erfordernissen.";
-
-/*Fehler Infotext bei Prüfung (Zertifikat Fehler)*/
-"verifier_verify_error_info_for_certificate_invalid" = "Das Zertifikat hat keine gültige Signatur";
-
-/*Fehler Infotext bei Prüfung (Blacklist)*/
-"verifier_verify_error_info_for_blacklist" = "Das Zertifikat wurde widerrufen";
-
-/*Fehler bei der geladen Liste*/
-"verifier_verify_error_list_title" = "Prüfung fehlgeschlagen";
-
-/*Fehler Info bei laden der Liste*/
-"verifier_verify_error_list_info_text" = "Ein unerwarteter Fehler ist aufgetreten.";
 
 /*Wallet: Scanner Text unten*/
 "wallet_scanner_explanation" = "Scannen Sie den EU-konformen QR-Code auf dem Zertifikat.";
@@ -169,9 +114,6 @@
 /*Antwort 1 im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_answer1" = "Alle EU-konformen Zertifikate des Grünen Passes können mittels Handy-Signatur oder Bürgerkarte über gesundheit.gv.at abgerufen werden.";
 
-/*Verifier: Detail Check Vorname*/
-"verifier_covid_certificate_prename" = "Vorname";
-
 /*Config: Titel wenn App muss geupdatet werden*/
 "force_update_title" = "Update benötigt";
 
@@ -222,7 +164,7 @@
 "accessibility_in_active_camera" = "Kamera ist nicht mehr Aktiv";
 
 /*Accessibility: Information*/
-"accessibility_info_button" = "Impressum";
+"accessibility_info_button" = "Impressum / Information";
 
 /*Accessibility: FAQ Button Titel*/
 "accessibility_faq_button" = "Häufige Fragen";
@@ -288,17 +230,10 @@
 "accessibility_page_control_page" = "Seite";
 
 /*Titel des Impressum-Screens*/
-"impressum_title" = "Impressum";
+"impressum_title" = "Impressum / Informationen";
 
 /*Unbekannter Fehler*/
 "unknown_error" = "Ein unbekannter Fehler ist aufgetreten.";
-
-
-/*Verifier: Ein Netzwerkfehler ist aufgetreten.*/
-"verifier_retry_network_error" = "Ein Netzwerkfehler ist aufgetreten.";
-
-/*Verifier: Das Gerät befindet sich im Flugmodus.*/
-"verifier_retry_flightmode_error" = "Das Gerät befindet sich im Flugmodus.";
 
 /*Wallet: Zertifikat gültig ab: {DATE}*/
 "wallet_error_valid_from" = "In Österreich gültig ab:\n{DATE}";
@@ -401,7 +336,6 @@
 /*Wallet: Hinweis im Zertifikat Detail*/
 "wallet_certificate_detail_note" = "Dieses Zertifikat ist kein Reisedokument. \n\nDie wissenschaftlichen Erkenntnisse über Covid-19-Impfungen und -Tests sowie über die Genesung von einer Covid-19-Infektion entwickeln sich ständig weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. \n\nBitte informieren Sie sich vor der Reise über die am Zielort geltenden Gesundheitsmassnahmen und damit verbundenen Beschränkungen.";
 "wallet_terms_privacy_link" = "https://gruenerpass.gv.at/app/datenschutz";
-"verifier_terms_privacy_link" = "https://gruenerpass.gv.at/app/datenschutz";
 
 /*Wallet: Homescreen Was wollen sie machen?*/
 "wallet_homescreen_what_to_do" = "Nächsten Schritt wählen";
@@ -420,13 +354,6 @@
 /*Wallet: Detail Netzwerkfehler Text*/
 "wallet_detail_network_error_text" = "Versuchen Sie es später erneut.";
 
-
-/*Verifier: Fehler Titel bei Netzwerkfehler*/
-"verifier_network_error_title" = "Prüfung fehlgeschlagen";
-
-/*Verifier: Fehler Text bei Netzwerkfehler*/
-"verifier_network_error_text" = "Ein unerwarteter Fehler ist aufgetreten";
-
 /*Wallet: Titel im Custom-Popup Notification Permission*/
 "wallet_notification_permission_title" = "Mitteilungen erlauben";
 
@@ -440,7 +367,7 @@
 "wallet_scanner_howitworks_external_link" = "https://gruenerpass.gv.at/";
 
 /*Label der externen URL im "So funktionierts" Screen beim Scannen*/
-"wallet_scanner_howitworks_external_link_title" = "Weitere Informationen";
+"wallet_scanner_howitworks_external_link_title" = "Weitere Information";
 
 
 /*Wallet: Retry Titel Offline*/
@@ -476,7 +403,7 @@
 "wallet_certificate_verify_success" = "Prüfung erfolgreich";
 
 /*Verifier: Error Ungültiges Format*/
-"verifier_error_invalid_format" = "Das Format des EU-konformen Zertifikats ist ungültig.";
+"wallet_import_error_invalid_format" = "Das Format des EU-konformen Zertifikats ist ungültig.";
 
 /*Button zum QR Code Scannen öffnen*/
 "wallet_homescreen_qr_code_scannen" = "QR-Code scannen";
@@ -498,8 +425,8 @@
 
 
 /* Warnung bei fehlender aktueller Zeit durch Timeserver */
-"wallet_time_missing" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
-"wallet_validation_data_expired" = "3-G Status nicht verfügbar, bitte aktivieren Sie die Internetverbindung";
+"wallet_time_missing" = "3-G Status nicht verfügbar, bitte probieren Sie es zu einem späteren Zeitpunkt und überprüfen Sie Ihre Internetverbindung";
+"wallet_validation_data_expired" = "3-G Status nicht verfügbar, bitte probieren Sie es zu einem späteren Zeitpunkt und überprüfen Sie Ihre Internetverbindung";
 
 "wallet_3g_status_disclaimer" = "Nur in Verbindung mit einem amtlichen Lichtbildausweis gültig. Zur Überprüfung verwenden Sie bitte GreenCheck.";
 
@@ -528,14 +455,15 @@
 
 "wallet_3g_status_validity_headline" = "Dieses Zertifikat berechtigt für";
 
-"wallet_notification_johnson_booster_message" = "Achtung: Holen Sie sich ab 28 Tagen nach Ihrer Erstimpfung mit dem COVID-19 Vaccine Janssen (\"Johnson&Johnson\") Ihre 2. Impfung!\nIhr Impfzertifikat für den Grünen Pass ist ab Montag, 03.01.2022, nur noch mit 2 Impfungen gültig.";
-"wallet_notification_johnson_booster_ok_button" = "OK";
-"wallet_notification_johnson_booster_info_button" = "Termin";
-"wallet_notification_johnson_booster_info_url" = "https://www.oesterreich-impft.at/jetzt-impfen/";
+"wallet_test_certificate_cleanup_message" = "Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit sie ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?";
+"wallet_test_certificate_cleanup_no_button" = "Nein";
+"wallet_test_certificate_cleanup_never_button" = "Nie nachfragen";
+"wallet_test_certificate_cleanup_cleanup_button" = "Ja, entfernen";
 
-"wallet_notification_booster_title" = "Achtung!";
-"wallet_notification_booster_message" = "Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.";
-"wallet_notification_booster_ok_button" = "OK";
-"wallet_notification_booster_later_button" = "Später";
-"wallet_notification_booster_info_button" = "Termin";
-"wallet_notification_booster_info_url" = "https://www.oesterreich-impft.at/jetzt-impfen/";
+"business_rule_update_progress" = "Zugangsregeln werden aktualisiert";
+"business_rule_update_failed_message" = "Aktualisierung der Zugangsregeln fehlgeschlagen.";
+"business_rule_update_success_message" = "Aktualisierung der Zugangsregeln erfolgreich abgeschlossen.";
+"business_rule_update_ok_button" = "OK";
+
+"campaigns_opt_out_action" = "Hinweismeldungen deaktivieren";
+"campaigns_opt_in_action" = "Hinweismeldungen aktivieren";

@@ -22,6 +22,8 @@ class QRScanErrorView: UIView {
         self.backgroundColor = backgroundColor
         imageView.image = UIImage(named: "ic-info-alert")?.ub_image(with: imageColor)
         errorLabel.textColor = textColor
+        errorLabel.accessibilityIdentifier = "qr_code_scanner_invalid_code_text"
+
 
         setup()
     }

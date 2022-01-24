@@ -72,13 +72,6 @@ class ConfigManager: NSObject {
         }
 
         Logger.log("Load Config", appState: true)
-
-        guard Self.shouldLoadConfig(lastConfigLoad: Self.lastConfigLoad)
-          else {
-              Logger.log("Skipping config load request and returning from cache", appState: true)
-              completion(Self.currentConfig)
-              return
-          }
         dataTask = session.dataTask(with: request, completionHandler: { data, response, error in
             guard let _ = response as? HTTPURLResponse,
                   let data = data
@@ -106,18 +99,18 @@ class ConfigManager: NSObject {
         dataTask?.resume()
     }
 
-    public func startConfigRequest(force: Bool, window: UIWindow?, showForceUpdateDialogIfNecessary: Bool = true) {
+    public func startConfigRequest(force: Bool, window: UIWindow?, showForceUpdateDialogIfNecessary: Bool = true, completionBlock: @escaping (() -> ())) {
         loadConfig(force: force) { config in
             // self must be strong
             if let config = config, showForceUpdateDialogIfNecessary {
-                self.presentAlertIfNeeded(config: config, window: window)
+                self.presentAlertIfNeeded(config: config, window: window, completionBlock: completionBlock)
             }
         }
     }
 
     private static var configAlert: UIAlertController?
 
-    private func presentAlertIfNeeded(config: ConfigResponseBody, window: UIWindow?) {
+    private func presentAlertIfNeeded(config: ConfigResponseBody, window: UIWindow?, completionBlock: (() -> ())?) {
         if let minVersion = config.ios, Bundle.appVersion.versionCompare(minVersion) == .orderedAscending {
             if Self.configAlert != nil {
                 Self.configAlert?.dismiss(animated: false, completion: nil)
@@ -132,7 +125,7 @@ class ConfigManager: NSObject {
                 DispatchQueue.main.async {
                     // show alert again -> app should always be blocked
                     Self.configAlert = nil
-                    self.presentAlertIfNeeded(config: config, window: window)
+                    self.presentAlertIfNeeded(config: config, window: window, completionBlock: nil)
 
                     // jump to app store
                     UIApplication.shared.open(Environment.current.appStoreURL, options: [:], completionHandler: nil)
@@ -141,7 +134,9 @@ class ConfigManager: NSObject {
             }))
             
             if config.forceUpdate == false {
-                alert.addAction(UIAlertAction(title: UBLocalized.force_update_grace_period_skip_button, style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: UBLocalized.force_update_grace_period_skip_button, style: .default, handler: { _ in
+                    completionBlock?()
+                }))
             }
 
             window?.rootViewController?.topViewController.present(alert, animated: false, completion: nil)
@@ -151,18 +146,13 @@ class ConfigManager: NSObject {
                 Self.configAlert?.dismiss(animated: true, completion: nil)
                 Self.configAlert = nil
             }
+            completionBlock?()
         }
     }
 
     // In case the config has not yet been loaded at least once from the request, we use the bundled config as fallback
     public static var fallbackConfig: ConfigResponseBody? {
-        #if WALLET
-            let path = "config_wallet"
-        #elseif VERIFIER
-            let path = "config_check"
-        #else
-            let path = "" // Not supported
-        #endif
+        let path = "config_wallet"
         guard let resource = Bundle.main.path(forResource: path, ofType: "json"),
               let data = try? Data(contentsOf: URL(fileURLWithPath: resource), options: .mappedIfSafe),
               let config = try? JSONDecoder().decode(ConfigResponseBody.self, from: data)

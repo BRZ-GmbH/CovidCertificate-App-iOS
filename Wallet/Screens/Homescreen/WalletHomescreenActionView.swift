@@ -98,7 +98,9 @@ class AddCertificateView: UIView {
 
         topLabel.text = UBLocalized.wallet_homescreen_add_title
         textLabel.text = UBLocalized.wallet_homescreen_add_certificate_description
-
+        
+        
+        
         let lr = Padding.small + Padding.medium
         let tb = Padding.medium
 
@@ -137,6 +139,14 @@ class AddCertificateView: UIView {
         }
 
         accessibilityLabel = [topLabel.text, textLabel.text].compactMap { $0 }.joined(separator: ", ")
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        topLabel.accessibilityIdentifier = "homescreen_options_overlay_add_certificate_options_title"
+        textLabel.accessibilityIdentifier = "homescreen_options_overlay_add_certificate_options_text"
+        qrButton.accessibilityIdentifier = "option_scan_certificate"
+        pdfButton.accessibilityIdentifier = "option_import_pdf"
     }
 
     private func setupInteraction() {

@@ -11,12 +11,14 @@
 
 import CovidCertificateSDK
 import Foundation
+import UIKit
 
 /**
  Displays the individual verification states for regions
  */
 class CertificateRegionStateView: UIView {
     private let validityStackView = UIStackView()
+    var isHomescreen: Bool = false
 
     var results: [VerificationRegionResult] = [] {
         didSet {
@@ -54,8 +56,7 @@ class CertificateRegionStateView: UIView {
         validityStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         results.forEach { result in
-
-            let statusView = CertificateRegionStatusView()
+            let statusView = CertificateRegionStatusView(isHomescreen: isHomescreen)
             statusView.result = result
             validityStackView.addArrangedSubview(statusView)
         }

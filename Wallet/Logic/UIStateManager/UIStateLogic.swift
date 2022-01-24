@@ -18,20 +18,13 @@ class UIStateLogic {
     }
 
     func buildState() -> UIStateModel {
-        return UIStateModel(certificateState: buildCertificateState(), infoBoxState: buildInfoBoxState())
+        return UIStateModel(certificateState: buildCertificateState())
     }
 
     // MARK: - Substates
 
     private func buildCertificateState() -> CertificateState {
-        #if WALLET
-            return CertificateState(certificates: CertificateStorage.shared.userCertificates)
-        #elseif VERIFIER
-            return CertificateState(certificates: [])
-        #endif
+        return CertificateState(certificates: CertificateStorage.shared.userCertificates)
     }
 
-    private func buildInfoBoxState() -> InfoBox? {
-        return ConfigManager.currentConfig?.infoBox?.value
-    }
 }

@@ -15,7 +15,9 @@ class WalletUserStorage {
     @UBUserDefault(key: "wallet.user.hasCompletedOnboarding", defaultValue: false)
     var hasCompletedOnboarding: Bool {
         didSet {
-            ConfigManager().startConfigRequest(force: false, window: UIApplication.shared.keyWindow?.window)
+            ConfigManager().startConfigRequest(force: false, window: UIApplication.shared.keyWindow?.window, completionBlock: {
+                (UIApplication.shared.delegate as? AppDelegate)?.didUpdateConfig()
+            })
         }
     }
     
@@ -26,6 +28,12 @@ class WalletUserStorage {
     
     @UBUserDefault(key: "lastInstalledAppVersion", defaultValue: ConfigManager.shortAppVersion)
     static var lastInstalledAppVersion: String
+    
+    @UBUserDefault(key: "hasAskedForStoreReview", defaultValue: false)
+    static var hasAskedForStoreReview: Bool
+    
+    @UBUserDefault(key: "hasOptedOutOfNonImportantCampaigns", defaultValue: false)
+    static var hasOptedOutOfNonImportantCampaigns: Bool
 }
 
 class CertificateStorage {

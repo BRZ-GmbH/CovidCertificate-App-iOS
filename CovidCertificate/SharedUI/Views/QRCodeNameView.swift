@@ -11,6 +11,7 @@
 
 import CovidCertificateSDK
 import Foundation
+import UIKit
 
 class QRCodeNameView: UIView {
     // MARK: - Public API
@@ -29,6 +30,8 @@ class QRCodeNameView: UIView {
     private let nameView = Label(.title, textAlignment: .center)
     private let birthdayLabelView = Label(.textSmall, textAlignment: .center)
 
+    private let isHomescreen: Bool
+    
     private let qrCodeInset: CGFloat
     let qrCodeLayoutGuide = UILayoutGuide()
     private let shrinkCodeIfNecessary: Bool
@@ -40,6 +43,7 @@ class QRCodeNameView: UIView {
         self.qrCodeInset = qrCodeInset
         self.shrinkCodeIfNecessary = shrinkCodeIfNecessary
         self.reversed = reversed
+        self.isHomescreen = reversed
         super.init(frame: .zero)
         setup()
 
@@ -115,6 +119,20 @@ class QRCodeNameView: UIView {
         }
         nameView.ub_setContentPriorityRequired()
         birthdayLabelView.ub_setContentPriorityRequired()
+        
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        if isHomescreen {
+            imageView.accessibilityIdentifier = "certificate_page_qr_code"
+            nameView.accessibilityIdentifier = "certificate_page_name"
+            birthdayLabelView.accessibilityIdentifier = "certificate_page_birthdate"
+        } else {
+            imageView.accessibilityIdentifier = "certificate_detail_qr_code"
+            nameView.accessibilityIdentifier = "certificate_detail_name"
+            birthdayLabelView.accessibilityIdentifier = "certificate_detail_birthdate"
+        }
     }
 
     // MARK: - Update
@@ -157,13 +175,16 @@ class QRCodeNameView: UIView {
         
         guard (self.superview?.frame.height ?? 0) > 0 else { return }
         
-        guard let scrollViewContentHeight = self.superview?.frame.height,
-              let scrollViewContentWidth = self.superview?.frame.width,
-              let containerHeight = self.superview?.superview?.superview?.frame.height,
-              scrollViewContentHeight > containerHeight else { return }
+        guard let scrollViewContentWidth = self.superview?.frame.width,
+              let containerHeight = self.superview?.superview?.superview?.frame.height else { return }
         
-        // Attempt to make ImageView small enough to fix all content without scrolling, but do not shrink below 100 pt
-        let imageHeight = fmin(fmax(containerHeight - 20, 80), scrollViewContentWidth - 32)
+        // Attempt to make ImageView small enough to fix all content without scrolling, but do not shrink below 80 pt
+        let optimalImageHeight = floor(fmin(fmax(containerHeight - 20, 80), scrollViewContentWidth - 32))
+        
+        // Determine the remaining height for a fully visible QR code image (subtract padding that is applied to the StackView and 10pt extra room
+        let fullyVisibleHeight = floor(fmin(scrollViewContentWidth - 32, containerHeight - birthdayLabelView.frame.maxY - Padding.medium * 3 - 10))
+        
+        let imageHeight = (fullyVisibleHeight > scrollViewContentWidth * 0.6 && (fullyVisibleHeight < scrollViewContentWidth - 32)) ? fullyVisibleHeight : optimalImageHeight
         
         /// Remake the Constraints when the ImageView is greater
         imageView.snp.remakeConstraints { make in

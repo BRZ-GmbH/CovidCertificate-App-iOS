@@ -21,7 +21,9 @@ class RegionSelectionHeaderView: UIView {
         
         titleLabel.text = title
         messageLabel.text = message
+        
         setup()
+        setupAccessibilityIdentifiers()
     }
     
     @available(*, unavailable)
@@ -46,5 +48,10 @@ class RegionSelectionHeaderView: UIView {
             make.top.equalTo(titleLabel.snp.bottom).offset(Padding.medium)
             make.bottom.equalToSuperview().offset(-Padding.medium)
         }
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        titleLabel.accessibilityIdentifier = "region_list_header_title"
+        messageLabel.accessibilityIdentifier = "region_list_header_text"
     }
 }

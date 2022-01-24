@@ -10,6 +10,7 @@
  */
 
 import Foundation
+import UIKit
 
 extension VerificationError {
     func displayName() -> NSAttributedString {

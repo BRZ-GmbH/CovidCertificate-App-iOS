@@ -122,7 +122,7 @@ class WalletScannerViewController: ViewController {
         }
 
         explanationLabel.text = UBLocalized.wallet_scanner_explanation
-
+        
         explanationLabel.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(2.0 * Padding.small)
             make.left.right.equalToSuperview().inset(Padding.large)
@@ -149,6 +149,12 @@ class WalletScannerViewController: ViewController {
         }
 
         detailViewController.view.alpha = 0.0
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        explanationLabel.accessibilityIdentifier = "qr_code_scanner_explanation"
+        moreInfoButton.accessibilityIdentifier = "qr_code_scanner_button_how"
     }
 
     private func setupInteraction() {
@@ -166,7 +172,7 @@ class WalletScannerViewController: ViewController {
 
         moreInfoButton.touchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
-            let vc = BasicStaticContentViewController(models: [.howItWorks], title: UBLocalized.wallet_scanner_howitworks_header.uppercased())
+            let vc = BasicStaticContentViewController(models: [.howItWorks], title: UBLocalized.wallet_scanner_howitworks_header.uppercased(), contentViewType: .scannerHowTo)
             vc.presentInNavigationController(from: strongSelf)
         }
 

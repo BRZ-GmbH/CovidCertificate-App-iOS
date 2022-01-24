@@ -10,6 +10,7 @@
  */
 
 import Foundation
+import UIKit
 
 class CertificateNoteView: UIView {
     // MARK: - Subviews

@@ -40,7 +40,7 @@ class CertificateAlreadyAddedView: UIView {
         addSubview(roundImageBackgroundView)
         addSubview(imageView)
         addSubview(textLabel)
-
+        
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerY.equalTo(self.roundBackgroundView.snp.top)
@@ -67,6 +67,7 @@ class CertificateAlreadyAddedView: UIView {
 
         textLabel.text = UBLocalized.wallet_certificate_already_exists
         accessibilityLabel = textLabel.text
+        self.accessibilityIdentifier = "certificate_already_exists_info_text"
         roundBackgroundView.backgroundColor = .cc_white
 
         roundBackgroundView.ub_addShadow(radius: 20.0, opacity: 0.17, xOffset: 0.0, yOffset: 2.0)

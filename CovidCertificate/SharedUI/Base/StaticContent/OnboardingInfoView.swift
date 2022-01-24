@@ -16,7 +16,7 @@ class OnboardingInfoView: UIView {
 
     private let leftRightInset: CGFloat
 
-    init(accessibilityImage: AccessibilityImage?, text: String, alignment: NSTextAlignment, leftRightInset: CGFloat = 2 * Padding.medium) {
+    init(accessibilityImage: AccessibilityImage?, text: String, alignment: NSTextAlignment, leftRightInset: CGFloat = 2 * Padding.medium, textAccessibilityIdentifier: String?) {
         self.leftRightInset = leftRightInset
 
         super.init(frame: .zero)
@@ -50,6 +50,7 @@ class OnboardingInfoView: UIView {
         self.isAccessibilityElement = true
         self.accessibilityElements = [imgView, label]
         self.accessibilityLabel = [accessibilityImage?.altText, text].compactMap { $0 }.joined(separator: ", ")
+        self.accessibilityIdentifier = textAccessibilityIdentifier
     }
 
     @available(*, unavailable)

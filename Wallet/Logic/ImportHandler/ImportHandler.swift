@@ -68,6 +68,8 @@ class ImportHandler {
 
                 CertificateStorage.shared.insertCertificate(userCertificate: c)
 
+                (UIApplication.shared.delegate as? AppDelegate)?.didFinishImport()
+                
                 navVC.dismiss(animated: true, completion: {
                     
                     if let vc = strongSelf.delegate?.viewControllers.first as? WalletHomescreenViewController {
@@ -94,7 +96,7 @@ class ImportHandler {
     func presentError() {
         delegate?.topViewController?.dismiss(animated: false, completion: nil)
 
-        let alert = UIAlertController(title: UBLocalized.error_title, message: UBLocalized.verifier_error_invalid_format, preferredStyle: .alert)
+        let alert = UIAlertController(title: UBLocalized.error_title, message: UBLocalized.wallet_import_error_invalid_format, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UBLocalized.ok_button, style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))

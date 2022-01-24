@@ -16,5 +16,4 @@ import Foundation
 
 struct UIStateModel: Equatable {
     let certificateState: CertificateState
-    let infoBoxState: InfoBox?
 }

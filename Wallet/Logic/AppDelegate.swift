@@ -10,6 +10,7 @@
 
 import CovidCertificateSDK
 import UIKit
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,9 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private let linkHandler = LinkHandler()
     
-    let notificationHandler = NotificationHandler()
+    var notificationHandler: NotificationHandler!
 
     lazy var navigationController = NavigationController(rootViewController: WalletHomescreenViewController())
+    
+    private var hasUpdatedConfig = false
+    private var hasUpdatedValueSetData = false
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Pre-populate isFirstLaunch for users which already installed the app before we introduced this flag
@@ -42,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Keychain().deleteAll()
             isFirstLaunch = false
         }
+        
+        notificationHandler = NotificationHandler()
+
+        VerifierManager.shared.resetTime()
 
         VerifierManager.shared.resetTime()
 
@@ -67,16 +75,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         UIStateManager.shared.addObserver(self) { [weak self] s in
-            guard let self = self else { return }
-            
-            self.notificationHandler.startCheckForJohnsonVaccinationBooster(window: self.window, certificates: s.certificateState.certificates) { [weak self] in
-                guard let self = self else { return }
-                
-                self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: s.certificateState.certificates)
-            }
+            self?.queueCertificateNotificationChecks()
         }
     
         return true
+    }
+    
+    private var certificateNotificationCheckTimer: Timer? = nil
+    
+    func didCompleteOnboarding() {
+        queueCertificateNotificationChecks()
+    }
+    
+    private func queueCertificateNotificationChecks() {
+        certificateNotificationCheckTimer?.invalidate()
+        certificateNotificationCheckTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
+            self?.certificateNotificationCheckTimer = nil
+            self?.checkForCertificateCampaigns()
+        }
+    }
+    
+    private func checkForCertificateCampaigns() {
+        guard hasUpdatedConfig else { return }
+        guard hasUpdatedValueSetData else { return }
+        guard !isHandlingImport else { return }
+        guard WalletUserStorage.shared.hasCompletedOnboarding else { return }
+        
+        notificationHandler.checkForExpiredTestCertificates(window: window, UIStateManager.shared.uiState.certificateState.certificates) { [weak self] hasRemovedCertificates in
+            guard !hasRemovedCertificates else { return }
+            guard let self = self else { return }
+            
+            guard let config = ConfigManager.currentConfig else { return }
+            guard let time = VerifierManager.shared.currentTime else {
+                self.queueCertificateNotificationChecks()
+                return
+            }
+            
+            let certLogicValueSets = CovidCertificateSDK.currentValueSets().mapValues { $0.valueSetValues.map { $0.key } }
+            
+            self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: UIStateManager.shared.uiState.certificateState.certificates, valueSets: certLogicValueSets, validationClock: time, config: config)
+        }
     }
 
     func application(_: UIApplication,
@@ -129,6 +167,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             introViewController.modalPresentationStyle = .fullScreen
             window?.rootViewController?.present(introViewController, animated: false)
         } else {
+            if ConfigManager.shortAppVersion != WalletUserStorage.lastInstalledAppVersion {
+                if WalletUserStorage.hasAskedForStoreReview == false {
+                    WalletUserStorage.hasAskedForStoreReview = true
+                    
+                    DispatchQueue.main.async {
+                        if #available(iOS 14.0, *) {
+                            if let windowScene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene {
+                                SKStoreReviewController.requestReview(in: windowScene)
+                            } else {
+                                SKStoreReviewController.requestReview()
+                            }
+                        } else {
+                            SKStoreReviewController.requestReview()
+                        }
+                    }
+                }
+            }
             WalletUserStorage.lastInstalledAppVersion = ConfigManager.shortAppVersion
         }
 
@@ -143,10 +198,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Refresh trust list (public keys, revocation list, business rules,...)
-        CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: { wasUpdated in
+        CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: { [weak self] wasUpdated, failed in
             if wasUpdated {
                 VerifierManager.shared.restartAllVerifiers()
             }
+            self?.hasUpdatedValueSetData = true
+            self?.queueCertificateNotificationChecks()
             UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)                       
         })
     }
@@ -164,6 +221,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationHandler.dismissAlert()
         
         isHandlingImport = false
+        
+        hasUpdatedConfig = false
+        hasUpdatedValueSetData = false
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
@@ -171,7 +231,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Refresh config
         let backgroundTime = -(lastForegroundActivity?.timeIntervalSinceNow ?? 0)
-        ConfigManager().startConfigRequest(force: backgroundTime == 0, window: window, showForceUpdateDialogIfNecessary: isHandlingImport == false)
+        ConfigManager().startConfigRequest(force: backgroundTime == 0, window: window, showForceUpdateDialogIfNecessary: isHandlingImport == false) { [weak self] in
+            self?.didUpdateConfig()
+        }
+    }
+    
+    func didUpdateConfig() {
+        hasUpdatedConfig = true
+        queueCertificateNotificationChecks()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -223,6 +290,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.addSubview(bv)
 
         blurView = bv
+    }
+    
+    func didFinishImport() {
+        isHandlingImport = false
     }
 }
 

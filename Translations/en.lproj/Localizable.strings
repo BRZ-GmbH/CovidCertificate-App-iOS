@@ -1,25 +1,5 @@
 
-/*Android App Name*/
-"verifier_app_name" = "Green Pass";
 
-/*Title for the qr scanning screen*/
-"verifier_title_qr_scan" = "Scan QR code";
-
-/*Titel über dem Haupttitel*/
-"verifier_homescreen_header_title" = "Green Pass";
-
-/*Homescreen App Name*/
-"verifier_homescreen_title" = "Green Pass";
-
-/*Beschreibung für Pager Bild 1*/
-"verifier_homescreen_pager_description_1" = "Scan EU-compliant QR code";
-
-
-/*Homescreen Button für Scanning*/
-"verifier_homescreen_scan_button" = "Scan QR code";
-
-/*Homescreen Button für Support*/
-"verifier_homescreen_support_button" = "This is how it works";
 "error_network_title" = "Network error";
 "error_network_text" = "Please check your Internet connection.";
 "error_action_retry" = "Try again";
@@ -31,16 +11,9 @@
 "ok_button" = "OK";
 "camera_permission_dialog_text" = "The app requires access to the camera to scan the QR code.";
 "camera_permission_dialog_action" = "Allow access to camera";
-"verifier_qr_scanner_scan_qr_text" = "Scan QR code";
 
 /*Titel auf dem Verifikations-Screen*/
 "covid_certificate_title" = "EU-compliant certificates";
-
-/*Name des/der Zertifikatsinhabers/Zertifikatsinhaberin*/
-"verifier_covid_certificate_name" = "Surname";
-
-/*Geburtsdatum des/der Zertifikatsinhabers/Zertifikatsinhaberin*/
-"verifier_covid_certificate_birthdate" = "Date of birth";
 
 /*Wallet: Zertifikat hinzufügen*/
 "wallet_add_certificate" = "Add";
@@ -53,33 +26,6 @@
 
 /*Wallet: Scanner Titel*/
 "wallet_scanner_title" = "Add";
-
-/*Titel bei erfolgreicher Prüfung*/
-"verifier_verify_success_title" = "Check completed successfully";
-
-/*Info Text bei erfolgreicher Prüfung*/
-"verifier_verify_success_info" = "Only valid in combination with an official photo ID";
-
-/*Prüfung loading text*/
-"verifier_verify_loading_text" = "Checking the certificate...";
-
-/*Fehler Title bei Prüfung*/
-"verifier_verify_error_title" = "Invalid certificate";
-
-/*Fehler Infotext bei Prüfung (Nationale Regeln)*/
-"verifier_verify_error_info_for_national_rules" = "The certificate does not comply with statutory requirements.";
-
-/*Fehler Infotext bei Prüfung (Zertifikat Fehler)*/
-"verifier_verify_error_info_for_certificate_invalid" = "The certificate does not have any valid signature";
-
-/*Fehler Infotext bei Prüfung (Blacklist)*/
-"verifier_verify_error_info_for_blacklist" = "The certificate was revoked";
-
-/*Fehler bei der geladen Liste*/
-"verifier_verify_error_list_title" = "Check failed";
-
-/*Fehler Info bei laden der Liste*/
-"verifier_verify_error_list_info_text" = "An unexpected error has occurred.";
 
 /*Wallet: Scanner Text unten*/
 "wallet_scanner_explanation" = "Scan the EU-compliant QR code on the certificate.";
@@ -169,9 +115,6 @@
 /*Antwort 1 im "So funktionierts" Screen beim Scannen*/
 "wallet_scanner_howitworks_answer1" = "All Green Pass certificates can be retrieved from gesundheit.gv.at using a mobile phone signature or citizen card.";
 
-/*Verifier: Detail Check Vorname*/
-"verifier_covid_certificate_prename" = "First name";
-
 /*Config: Titel wenn App muss geupdatet werden*/
 "force_update_title" = "Update required";
 
@@ -222,7 +165,7 @@
 "accessibility_in_active_camera" = "Camera is no longer active";
 
 /*Accessibility: Information*/
-"accessibility_info_button" = "Legal notice";
+"accessibility_info_button" = "Imprint / Information";
 
 /*Accessibility: FAQ Button Titel*/
 "accessibility_faq_button" = "Frequently Asked Questions";
@@ -288,17 +231,10 @@
 "accessibility_page_control_page" = "Page";
 
 /*Titel des Impressum-Screens*/
-"impressum_title" = "Legal notice";
+"impressum_title" = "Imprint / Information";
 
 /*Unbekannter Fehler*/
 "unknown_error" = "An unknown error has occurred.";
-
-
-/*Verifier: Ein Netzwerkfehler ist aufgetreten.*/
-"verifier_retry_network_error" = "A network error occurred.";
-
-/*Verifier: Das Gerät befindet sich im Flugmodus.*/
-"verifier_retry_flightmode_error" = "The device is in flight mode.";
 
 /*Wallet: Zertifikat gültig ab: {DATE}*/
 "wallet_error_valid_from" = "In Austria valid from:\n{DATE}";
@@ -401,7 +337,6 @@
 /*Wallet: Hinweis im Zertifikat Detail*/
 "wallet_certificate_detail_note" = "This certificate is no travel document. \n\nThe scientific findings about Covid-19 vaccinations and tests and about recovery from Covid-19 infection continue to evolve, also with regard to worrying new coronavirus variants. \n\nPlease make sure you have the latest information about the health measures and any associated restrictions in place at your destination before starting your trip.";
 "wallet_terms_privacy_link" = "https://gruenerpass.gv.at/app/datenschutz";
-"verifier_terms_privacy_link" = "https://gruenerpass.gv.at/app/datenschutz";
 
 /*Wallet: Homescreen Was wollen sie machen?*/
 "wallet_homescreen_what_to_do" = "Select next step";
@@ -419,13 +354,6 @@
 
 /*Wallet: Detail Netzwerkfehler Text*/
 "wallet_detail_network_error_text" = "Please try again later.";
-
-
-/*Verifier: Fehler Titel bei Netzwerkfehler*/
-"verifier_network_error_title" = "Check failed";
-
-/*Verifier: Fehler Text bei Netzwerkfehler*/
-"verifier_network_error_text" = "An unexpected error has occurred.";
 
 /*Wallet: Titel im Custom-Popup Notification Permission*/
 "wallet_notification_permission_title" = "Allow notifications";
@@ -476,7 +404,7 @@
 "wallet_certificate_verify_success" = "Check completed successfully";
 
 /*Verifier: Error Ungültiges Format*/
-"verifier_error_invalid_format" = "The format of the EU-compliant certificate is invalid.";
+"wallet_import_error_invalid_format" = "The format of the EU-compliant certificate is invalid.";
 
 /*Button zum QR Code Scannen öffnen*/
 "wallet_homescreen_qr_code_scannen" = "Scan QR code";
@@ -497,9 +425,9 @@
 "region_type_NG_validity" = "Night Club";
 
 /* Warnung bei fehlender aktueller Zeit durch Timeserver */
-"wallet_time_missing" = "3-G Status not available, please activate internet connection";
+"wallet_time_missing" = "3-G Status not available, please try again later and check your internet connection";
 
-"wallet_validation_data_expired" = "3-G Status not available, please activate internet connection";
+"wallet_validation_data_expired" = "3-G Status not available, please try again later and check your internet connection";
 
 "wallet_3g_status_disclaimer" = "Only valid in combination with an official ID. Please use GreenCheck for verification.";
 
@@ -528,14 +456,15 @@
 
 "wallet_3g_status_validity_headline" = "This certificate entitles to";
 
-"wallet_notification_johnson_booster_message" = "Please note: from 28 days after your first vaccination with the COVID-19 Vaccine Janssen („Johnson&Johnson“), please get your second vaccination!\nFrom Monday 3 January 2022, your EU Digital COVID Certificate is only valid if you have been vaccinated twice.";
-"wallet_notification_johnson_booster_ok_button" = "OK";
-"wallet_notification_johnson_booster_info_button" = "Appointment";
-"wallet_notification_johnson_booster_info_url" = "https://www.oesterreich-impft.at/jetzt-impfen/";
+"wallet_test_certificate_cleanup_message" = "You have %@ expired test certificates added to your Green Pass. We recommend to remove those to find your valid certificates even faster. Do you want to remove the expired test certificates?";
+"wallet_test_certificate_cleanup_no_button" = "No";
+"wallet_test_certificate_cleanup_never_button" = "Don't ask again";
+"wallet_test_certificate_cleanup_cleanup_button" = "Yes, remove";
 
-"wallet_notification_booster_title" = "Achtung!";
-"wallet_notification_booster_message" = "Holen Sie sich ab 6 Monate nach Ihrer 2. Covid-19 Schutzimpfung Ihre 3. Impfung, um auch gegen die Delta-Variante geschützt zu bleiben!\nIhr Impfzertifikat für den Grünen Pass ist ab 06.12.2021 nur noch 9 Monate ab der 2. Impfung gültig und wird mit der 3. Impfung verlängert.";
-"wallet_notification_booster_ok_button" = "Gelesen";
-"wallet_notification_booster_later_button" = "Erneut erinnern";
-"wallet_notification_booster_info_button" = "Termin";
-"wallet_notification_booster_info_url" = "https://www.oesterreich-impft.at/jetzt-impfen/";
+"business_rule_update_progress" = "Updating entry rules";
+"business_rule_update_failed_message" = "Update of entry rules failed.";
+"business_rule_update_success_message" = "Update of entry rules successfully completed.";
+"business_rule_update_ok_button" = "OK";
+
+"campaigns_opt_out_action" = "Disable notifications";
+"campaigns_opt_in_action" = "Enable notifications";

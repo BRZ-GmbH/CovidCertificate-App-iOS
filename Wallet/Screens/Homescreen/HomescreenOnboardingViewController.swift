@@ -30,6 +30,7 @@ class HomescreenOnboardingViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupAccessibilityIdentifiers()
 
         homescreenButtons.addQRCertificateTouchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
@@ -40,6 +41,11 @@ class HomescreenOnboardingViewController: ViewController {
             guard let strongSelf = self else { return }
             strongSelf.addPDFCertificateTouchUpCallback?()
         }
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        titleLabel.accessibilityIdentifier = "homescreen_app_title"
+        questionLabel.accessibilityIdentifier = "homescreen_add_certificate_options_title"
     }
 
     // MARK: - Setup
@@ -72,5 +78,6 @@ class HomescreenOnboardingViewController: ViewController {
         titleLabel.text = UBLocalized.wallet_certificate
         questionLabel.text = UBLocalized.wallet_homescreen_what_to_do
         questionLabel.accessibilityTraits = [.header]
+        titleLabel.accessibilityIdentifier = "homescreen_app_title"
     }
 }

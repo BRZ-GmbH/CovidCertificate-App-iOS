@@ -27,7 +27,7 @@ class ExpandableViewHeader: UBButton {
         super.init()
 
         headerLabel.text = title
-
+        
         arrowImageview.ub_setContentPriorityRequired()
 
         addSubview(headerLabel)
@@ -73,5 +73,11 @@ class ExpandableViewHeader: UBButton {
 
         accessibilityLabel = headerLabel.text
         accessibilityTraits = [.header]
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        headerLabel.accessibilityIdentifier = "item_faq_question_title"
+
     }
 }

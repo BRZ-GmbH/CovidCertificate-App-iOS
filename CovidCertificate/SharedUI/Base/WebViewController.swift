@@ -10,6 +10,7 @@
 
 import UIKit
 import WebKit
+import CovidCertificateSDK
 
 class WebViewController: ViewController {
     // MARK: - Variables
@@ -48,7 +49,7 @@ class WebViewController: ViewController {
         }
 
         webView = WKWebView(frame: .zero, configuration: config)
-
+        
         super.init()
     }
 
@@ -66,6 +67,11 @@ class WebViewController: ViewController {
         if closeable {
             addDismissButton()
         }
+        setupAccessibilityIdentifiers()
+    }
+    
+    private func setupAccessibilityIdentifiers() {        
+        webView.accessibilityIdentifier = "html_webview"
     }
 
     private func loadLocal(_ local: String) {
@@ -82,13 +88,8 @@ class WebViewController: ViewController {
             string = string.replacingOccurrences(of: "{APPVERSION}", with: Bundle.appVersion)
             string = string.replacingOccurrences(of: "{RELEASEDATE}", with: DateFormatter.ub_dayString(from: Bundle.buildDate ?? Date()))
 
-            #if VERIFIER
-                string = string.replacingOccurrences(of: "{APP_NAME}", with: UBLocalized.verifier_app_title)
-                string = string.replacingOccurrences(of: "{LAW_LINK}", with: UBLocalized.verifier_terms_privacy_link)
-            #elseif WALLET
-                string = string.replacingOccurrences(of: "{APP_NAME}", with: UBLocalized.wallet_onboarding_app_title)
-                string = string.replacingOccurrences(of: "{LAW_LINK}", with: UBLocalized.wallet_terms_privacy_link)
-            #endif
+            string = string.replacingOccurrences(of: "{APP_NAME}", with: UBLocalized.wallet_onboarding_app_title)
+            string = string.replacingOccurrences(of: "{LAW_LINK}", with: UBLocalized.wallet_terms_privacy_link)
 
             webView.loadHTMLString(string, baseURL: url.deletingLastPathComponent())
         } catch {}
@@ -120,6 +121,18 @@ class WebViewController: ViewController {
 
     @objc private func didPressClose() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func updateData() {
+        ProgressOverlayView.showProgressOverlayIn(view: self.view, text: UBLocalized.business_rule_update_progress)
+        CovidCertificateSDK.restartTrustListUpdate(force: true) { [weak self] wasUpdated, failed in
+            guard let self = self else { return }
+            ProgressOverlayView.dismissProgressOverlayIn(view: self.view)
+            
+            let alert = UIAlertController(title: nil, message: failed ? UBLocalized.business_rule_update_failed_message : UBLocalized.business_rule_update_success_message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: UBLocalized.business_rule_update_ok_button, style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -160,6 +173,19 @@ extension WebViewController: WKNavigationDelegate {
                 decisionHandler(.cancel)
                 return
             }
+            
+            if scheme == "dataupdate" {
+                self.updateData()
+                decisionHandler(.cancel)
+                return
+            }
+            
+            if scheme == "togglecampaignoptout" {
+                WalletUserStorage.hasOptedOutOfNonImportantCampaigns = !WalletUserStorage.hasOptedOutOfNonImportantCampaigns
+                updateCampaignOptOutElement()
+                decisionHandler(.cancel)
+                return
+            }
 
             decisionHandler(.allow)
             return
@@ -168,6 +194,14 @@ extension WebViewController: WKNavigationDelegate {
             decisionHandler(.allow)
             return
         }
+    }
+    
+    private func updateCampaignOptOutElement() {
+        self.webView.evaluateJavaScript("document.getElementById('campaignOptOut').innerHTML = \"\(WalletUserStorage.hasOptedOutOfNonImportantCampaigns ? UBLocalized.campaigns_opt_in_action : UBLocalized.campaigns_opt_out_action)\";", completionHandler: nil)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+       updateCampaignOptOutElement()
     }
 }
 

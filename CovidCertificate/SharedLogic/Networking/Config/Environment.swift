@@ -35,19 +35,11 @@ enum Environment {
     }
 
     var appStoreURL: URL {
-        #if WALLET
-            return URL(string: UBLocalized.wallet_apple_app_store_url)!
-        #elseif VERIFIER
-            return URL(string: UBLocalized.verifier_apple_app_store_url)!
-        #endif
+        return URL(string: UBLocalized.wallet_apple_app_store_url)!
     }
 
     var privacyURL: URL {
-        #if WALLET
-            return URL(string: UBLocalized.wallet_terms_privacy_link)!
-        #elseif VERIFIER
-            return URL(string: UBLocalized.verifier_terms_privacy_link)!
-        #endif
+        return URL(string: UBLocalized.wallet_terms_privacy_link)!
     }
 
     var configService: Backend {
@@ -74,26 +66,14 @@ enum Environment {
 
     var appToken: String {
         // These app tokens are reserved for the official COVID Certificate and COVID Certificate Check app.
-        // If you intend to integrate the CovidCertificate-SDK into your app, please get in touch with BIT/BAG to get a token assigned.
-        #if VERIFIER
-            switch self {
-            case .dev:
-                return ""
-            case .abnahme:
-                return ""
-            case .prod:
-                return ""
-            }
-        #elseif WALLET
-            switch self {
-            case .dev:
-                return ""
-            case .abnahme:
-                return ""
-            case .prod:
-                return ""
-            }
-        #endif
+        // If you intend to integrate the CovidCertificate-SDK into your app, please read
+        // https://github.com/Federal-Ministry-of-Health-AT/green-pass-overview#getting-access-to-trust-list-business-rules-and-value-sets
+        return Environment.stageAPIKey("WALLET_APP_SDK_API_TOKEN")!
+    }
+    
+    fileprivate static func stageAPIKey(_ key: String) -> String? {
+        let rVal: String? = (Bundle.main.infoDictionary?[key] as? String)?.replacingOccurrences(of: "\\", with: "")
+        return rVal
     }
 }
 
@@ -102,13 +82,7 @@ extension Endpoint {
     /// let av = "ios-10"
     /// let os = "ios13"
     static func config(appversion _: String, osversion _: String, buildnr _: String) -> Endpoint {
-        #if WALLET
-            let path = "config_wallet.json"
-        #elseif VERIFIER
-            let path = "verifier/v1/config"
-        #else
-            let path = "" // Not supported
-        #endif
+        let path = "config_wallet.json"
         return Environment.current.configService.endpoint(path)
     }
 }
