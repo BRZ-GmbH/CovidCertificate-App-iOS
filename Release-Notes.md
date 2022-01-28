@@ -1,5 +1,9 @@
 # Grüner Pass - Release Notes
 
+## v2.3.1
+
+- Anpassung der Bedingungen der Namensgleichheit auf Zertifikaten für Kampagnenfunktionalität (EPIEMSCO-2217)
+
 ## v2.3.0
 
 - Automatisches Entfernen abgelaufener Testzertifikate (EPIEMSCO-1884)

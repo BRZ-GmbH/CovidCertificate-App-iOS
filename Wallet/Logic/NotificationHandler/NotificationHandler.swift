@@ -183,7 +183,7 @@ class NotificationHandler: NSObject {
         }).sorted(by: { ($0.issuedAt ?? Date()).isAfter($1.issuedAt ?? Date())}).filter({ $0.healthCert.certificationType == .vaccination && ($0.expiresAt ?? Date()).isAfter(Date()) })
         
         let groupedCertificateHolders = Dictionary(grouping: certificateHolders, by: {
-            "\($0.healthCert.displayFullName ?? "")_\($0.healthCert.dateOfBirth)"
+            $0.healthCert.comparableIdentifier
         })
         
         var campaignsToDisplay: [QueuedCampaignNotification] = []

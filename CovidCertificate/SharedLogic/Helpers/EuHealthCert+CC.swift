@@ -36,7 +36,23 @@ public extension DGCHolder {
     }
 }
 
+extension String {
+    var substringToFirstNonLetter: String {
+        if let firstNonLetter = self.firstIndex(where: { $0.isLetter == false }) {
+            return String(self[..<firstNonLetter])
+        }
+        return self
+    }
+}
+
 public extension EuHealthCert {
+    
+    var comparableIdentifier: String {
+        let familyName = person.standardizedFamilyName.localizedLowercase.substringToFirstNonLetter
+        let givenName = (person.standardizedGivenName?.localizedLowercase ?? "").substringToFirstNonLetter
+        return "\(familyName)_\(givenName)_\(dateOfBirth)"
+    }
+
     var displayFullName: String? {
         return [person.familyName, person.givenName].compactMap { $0 }.joined(separator: " ")
     }

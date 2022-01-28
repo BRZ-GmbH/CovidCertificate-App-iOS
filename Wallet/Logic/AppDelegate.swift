@@ -51,8 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         VerifierManager.shared.resetTime()
 
-        VerifierManager.shared.resetTime()
-
         CovidCertificateSDK.initialize(environment: Environment.current.sdkEnvironment, apiKey: Environment.current.appToken)
 
         // defer window initialization if app was launched in
