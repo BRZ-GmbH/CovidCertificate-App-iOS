@@ -10,6 +10,7 @@
  */
 
 import Foundation
+import UIKit
 
 class RegionSelectionViewController: ViewController {
     private static let reuseIdentifier = "region.cell"

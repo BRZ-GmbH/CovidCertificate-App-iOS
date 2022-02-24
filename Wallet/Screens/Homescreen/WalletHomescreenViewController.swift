@@ -165,9 +165,15 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             UIAccessibility.post(notification: .layoutChanged, argument: show ? strongSelf.actionPopupView : nil)
         }
 
-        infoButtonCallback = { [weak self] in
+        settingsButtonCallback = { [weak self] in
             guard let strongSelf = self else { return }
-            let vc = WalletImprintViewController()
+            let vc = WalletSettingsViewController()
+            vc.presentInNavigationController(from: strongSelf)
+        }
+        
+        regionSelectionButtonCallback = { [weak self] in
+            guard let strongSelf = self else { return }
+            let vc = RegionSelectionViewController()
             vc.presentInNavigationController(from: strongSelf)
         }
         

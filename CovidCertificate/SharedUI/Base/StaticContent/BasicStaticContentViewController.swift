@@ -24,6 +24,6 @@ class BasicStaticContentViewController: StaticContentViewController {
 
         view.backgroundColor = .cc_background
 
-        fadeAnimation(fromFactor: -1, toFactor: 0, delay: 0, completion: nil)
+        stackScrollView.stackView.arrangedSubviews.forEach({ $0.subviews.first?.alpha = 1 })
     }
 }

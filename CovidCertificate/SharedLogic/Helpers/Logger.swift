@@ -9,6 +9,7 @@
  */
 
 import Foundation
+import UIKit
 
 class Logger {
     #if ENABLE_LOGGING
@@ -56,8 +57,6 @@ class Logger {
                     Logger.debugLogs = Array(Logger.debugLogs.dropFirst())
                     Logger.debugDates = Array(Logger.debugDates.dropFirst())
                 }
-
-                UIStateManager.shared.refresh()
             }
 
         #endif

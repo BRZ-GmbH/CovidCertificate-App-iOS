@@ -11,6 +11,7 @@
 import CovidCertificateSDK
 import UIKit
 import StoreKit
+import BackgroundTasks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -75,8 +76,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIStateManager.shared.addObserver(self) { [weak self] s in
             self?.queueCertificateNotificationChecks()
         }
+        
+        if let bundleIdentifier = Bundle.main.bundleIdentifier {
+            if #available(iOS 13.0, *) {
+                BGTaskScheduler.shared.register(forTaskWithIdentifier: "\(bundleIdentifier).refresh", using: nil) { task in
+                    self.handleAppRefresh(task: task as! BGAppRefreshTask)
+                }
+            } else {
+            }
+        }
     
         return true
+    }
+    
+    @available(iOS 13.0, *)
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        scheduleAppRefresh()
+                
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
+        }
+        
+        CovidCertificateSDK.restartTrustListUpdate(force: false, completionHandler: { wasUpdated, failed in
+            if failed {
+                Logger.log("Background Data Update - Failed", appState: false)
+            } else {
+                if wasUpdated {
+                    Logger.log("Background Data Update - New Data", appState: false)
+                } else {
+                    Logger.log("Background Data Update - Unchanged", appState: false)
+                }
+            }
+            
+            task.setTaskCompleted(success: failed == false)
+        })
+    }
+    
+    func scheduleAppRefresh() {
+        if #available(iOS 13.0, *) {
+            if let bundleIdentifier = Bundle.main.bundleIdentifier {
+                let request = BGAppRefreshTaskRequest(identifier: "\(bundleIdentifier).refresh")
+                request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 60 * 8)
+                
+                do {
+                    BGTaskScheduler.shared.cancelAllTaskRequests()
+                    try BGTaskScheduler.shared.submit(request)
+                } catch {
+                }
+            }
+        }
     }
     
     private var certificateNotificationCheckTimer: Timer? = nil
@@ -196,7 +244,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Refresh trust list (public keys, revocation list, business rules,...)
+        VerifierManager.shared.isSyncingData = true
         CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: { [weak self] wasUpdated, failed in
+            if failed {
+                Logger.log("\(backgroundTime == 0 ? "Forced " : "")Data Update - Failed", appState: false)
+            } else {
+                if wasUpdated {
+                    Logger.log("\(backgroundTime == 0 ? "Forced " : "")Data Update - New Data", appState: false)
+                } else {
+                    Logger.log("\(backgroundTime == 0 ? "Forced " : "")Data Update - Unchanged", appState: false)
+                }
+            }
+            
+            VerifierManager.shared.isSyncingData = false
             if wasUpdated {
                 VerifierManager.shared.restartAllVerifiers()
             }
@@ -222,6 +282,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         hasUpdatedConfig = false
         hasUpdatedValueSetData = false
+        
+        scheduleAppRefresh()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {

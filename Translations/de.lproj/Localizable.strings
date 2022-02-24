@@ -465,5 +465,17 @@
 "business_rule_update_success_message" = "Aktualisierung der Zugangsregeln erfolgreich abgeschlossen.";
 "business_rule_update_ok_button" = "OK";
 
-"campaigns_opt_out_action" = "Hinweismeldungen deaktivieren";
-"campaigns_opt_in_action" = "Hinweismeldungen aktivieren";
+"settings_title" = "Über die App";
+"settings_row_imprint" = "Impressum";
+"settings_row_licenses" = "Lizenzen";
+"settings_row_faqs" = "Häufig gestellte Fragen";
+"settings_row_update_data" = "Zugangsregeln aktualisieren";
+"settings_row_campaign_notifications_title" = "Hinweismeldungen";
+"settings_row_campaign_notifications_message" = "Sie erhalten vereinzelt wichtige Hinweismeldungen die für Sie relevante Informationen, wie zum Beispiel Erinnerungen an Auffrischungsimpfungen, Änderungen zu den aktuellen COVID-19 Maßnahmen oder Ähnliches, beinhalten.";
+"settings_row_campaign_notifications_toggle_label" = "Hinweismeldungen anzeigen";
+"licenses_title" = "Lizenzen";
+
+"accessibility_settings_row_campaign_notifications_toggle_active" = "Hinweismeldungen sind aktiv";
+"accessibility_settings_row_campaign_notifications_toggle_inactive" = "Hinweismeldungen sind nicht aktiv";
+
+"accessibility_change_campaign_notifications_toggle" = "Zum Ändern Doppeltippen";

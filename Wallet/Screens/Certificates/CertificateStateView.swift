@@ -151,6 +151,7 @@ class CertificateStateView: UIView {
             imageView.accessibilityIdentifier = "certificate_detail_status_icon"
             textLabel.accessibilityIdentifier = "certificate_detail_info"
             validityHintView.accessibilityIdentifier = "certificate_detail_validity_hint_et"
+            validityHeadlineLabel.accessibilityIdentifier = "certificate_detail_info_validity_headline"            
         }
     }
 

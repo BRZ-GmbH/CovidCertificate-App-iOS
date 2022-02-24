@@ -19,6 +19,8 @@ import Foundation
     /// Gültig
      case accessibility_certificate_list_valid_key = "accessibility_certificate_list_valid"
     /// Zum Ändern Doppeltippen
+     case accessibility_change_campaign_notifications_toggle_key = "accessibility_change_campaign_notifications_toggle"
+    /// Zum Ändern Doppeltippen
      case accessibility_change_selected_region_key = "accessibility_change_selected_region"
     /// Schliessen
      case accessibility_close_button_key = "accessibility_close_button"
@@ -50,6 +52,10 @@ import Foundation
      case accessibility_region_in_active_key = "accessibility_region_in_active"
     /// Aktuelle Region
      case accessibility_selected_region_key = "accessibility_selected_region"
+    /// Hinweismeldungen sind aktiv
+     case accessibility_settings_row_campaign_notifications_toggle_active_key = "accessibility_settings_row_campaign_notifications_toggle_active"
+    /// Hinweismeldungen sind nicht aktiv
+     case accessibility_settings_row_campaign_notifications_toggle_inactive_key = "accessibility_settings_row_campaign_notifications_toggle_inactive"
     /// Aktualisierung der Zugangsregeln fehlgeschlagen.
      case business_rule_update_failed_message_key = "business_rule_update_failed_message"
     /// OK
@@ -124,6 +130,8 @@ import Foundation
      case ios_settings_open_key = "ios_settings_open"
     /// de
      case language_key_key = "language_key"
+    /// Lizenzen
+     case licenses_title_key = "licenses_title"
     /// Die App benötigt Zugriff auf die Kamera, um den EU-konformen QR-Code scannen zu können.
      case NSCameraUsageDescription_key = "NSCameraUsageDescription"
     /// OK
@@ -164,6 +172,22 @@ import Foundation
      case region_vorarlberg_key = "region_vorarlberg"
     /// Wien
      case region_wien_key = "region_wien"
+    /// Sie erhalten vereinzelt wichtige Hinweismeldungen die für Sie relevante Informationen, wie zum Beispiel Erinnerungen an Auffrischungsimpfungen, Änderungen zu den aktuellen COVID-19 Maßnahmen oder Ähnliches, beinhalten.
+     case settings_row_campaign_notifications_message_key = "settings_row_campaign_notifications_message"
+    /// Hinweismeldungen
+     case settings_row_campaign_notifications_title_key = "settings_row_campaign_notifications_title"
+    /// Hinweismeldungen anzeigen
+     case settings_row_campaign_notifications_toggle_label_key = "settings_row_campaign_notifications_toggle_label"
+    /// Häufig gestellte Fragen
+     case settings_row_faqs_key = "settings_row_faqs"
+    /// Impressum
+     case settings_row_imprint_key = "settings_row_imprint"
+    /// Lizenzen
+     case settings_row_licenses_key = "settings_row_licenses"
+    /// Zugangsregeln aktualisieren
+     case settings_row_update_data_key = "settings_row_update_data"
+    /// Über die App
+     case settings_title_key = "settings_title"
     /// Covid-19
      case target_disease_name_key = "target_disease_name"
     /// Ein unbekannter Fehler ist aufgetreten.
@@ -415,6 +439,8 @@ import Foundation
   /// Gültig
    static let accessibility_certificate_list_valid = UBLocalized.tr(UBLocalizedKey.accessibility_certificate_list_valid_key)
   /// Zum Ändern Doppeltippen
+   static let accessibility_change_campaign_notifications_toggle = UBLocalized.tr(UBLocalizedKey.accessibility_change_campaign_notifications_toggle_key)
+  /// Zum Ändern Doppeltippen
    static let accessibility_change_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_change_selected_region_key)
   /// Schliessen
    static let accessibility_close_button = UBLocalized.tr(UBLocalizedKey.accessibility_close_button_key)
@@ -446,6 +472,10 @@ import Foundation
    static let accessibility_region_in_active = UBLocalized.tr(UBLocalizedKey.accessibility_region_in_active_key)
   /// Aktuelle Region
    static let accessibility_selected_region = UBLocalized.tr(UBLocalizedKey.accessibility_selected_region_key)
+  /// Hinweismeldungen sind aktiv
+   static let accessibility_settings_row_campaign_notifications_toggle_active = UBLocalized.tr(UBLocalizedKey.accessibility_settings_row_campaign_notifications_toggle_active_key)
+  /// Hinweismeldungen sind nicht aktiv
+   static let accessibility_settings_row_campaign_notifications_toggle_inactive = UBLocalized.tr(UBLocalizedKey.accessibility_settings_row_campaign_notifications_toggle_inactive_key)
   /// Aktualisierung der Zugangsregeln fehlgeschlagen.
    static let business_rule_update_failed_message = UBLocalized.tr(UBLocalizedKey.business_rule_update_failed_message_key)
   /// OK
@@ -522,6 +552,8 @@ import Foundation
    static let ios_settings_open = UBLocalized.tr(UBLocalizedKey.ios_settings_open_key)
   /// de
    static let language_key = UBLocalized.tr(UBLocalizedKey.language_key_key)
+  /// Lizenzen
+   static let licenses_title = UBLocalized.tr(UBLocalizedKey.licenses_title_key)
   /// Die App benötigt Zugriff auf die Kamera, um den EU-konformen QR-Code scannen zu können.
    static let NSCameraUsageDescription = UBLocalized.tr(UBLocalizedKey.NSCameraUsageDescription_key)
   /// OK
@@ -562,6 +594,22 @@ import Foundation
    static let region_vorarlberg = UBLocalized.tr(UBLocalizedKey.region_vorarlberg_key)
   /// Wien
    static let region_wien = UBLocalized.tr(UBLocalizedKey.region_wien_key)
+  /// Sie erhalten vereinzelt wichtige Hinweismeldungen die für Sie relevante Informationen, wie zum Beispiel Erinnerungen an Auffrischungsimpfungen, Änderungen zu den aktuellen COVID-19 Maßnahmen oder Ähnliches, beinhalten.
+   static let settings_row_campaign_notifications_message = UBLocalized.tr(UBLocalizedKey.settings_row_campaign_notifications_message_key)
+  /// Hinweismeldungen
+   static let settings_row_campaign_notifications_title = UBLocalized.tr(UBLocalizedKey.settings_row_campaign_notifications_title_key)
+  /// Hinweismeldungen anzeigen
+   static let settings_row_campaign_notifications_toggle_label = UBLocalized.tr(UBLocalizedKey.settings_row_campaign_notifications_toggle_label_key)
+  /// Häufig gestellte Fragen
+   static let settings_row_faqs = UBLocalized.tr(UBLocalizedKey.settings_row_faqs_key)
+  /// Impressum
+   static let settings_row_imprint = UBLocalized.tr(UBLocalizedKey.settings_row_imprint_key)
+  /// Lizenzen
+   static let settings_row_licenses = UBLocalized.tr(UBLocalizedKey.settings_row_licenses_key)
+  /// Zugangsregeln aktualisieren
+   static let settings_row_update_data = UBLocalized.tr(UBLocalizedKey.settings_row_update_data_key)
+  /// Über die App
+   static let settings_title = UBLocalized.tr(UBLocalizedKey.settings_title_key)
   /// Covid-19
    static let target_disease_name = UBLocalized.tr(UBLocalizedKey.target_disease_name_key)
   /// Ein unbekannter Fehler ist aufgetreten.

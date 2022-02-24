@@ -16,13 +16,13 @@ class HomescreenBaseViewController: ViewController {
 
     private let backgroundView: AngledBackgroundView
     public let logoView = UIImageView(image: UIImage(named: "ic-bund"))
-    private let infoButton = Button(image: UIImage(named: "ic-info-outline"), accessibilityName: UBLocalized.accessibility_info_button)
+    private let settingsButton = Button(image: UIImage(named: "ic-settings-outline"), accessibilityName: UBLocalized.accessibility_info_button)
 
     public var backgroundViewOffset: CGPoint = .zero
     
     public let regionSelectionButton = RegionSelectionButton()
 
-    public var infoButtonCallback: (() -> Void)?
+    public var settingsButtonCallback: (() -> Void)?
     
     public var regionSelectionButtonCallback: (() -> Void)?
 
@@ -54,23 +54,23 @@ class HomescreenBaseViewController: ViewController {
             make.left.right.bottom.equalToSuperview()
         }
 
-        view.addSubview(infoButton)
+        view.addSubview(settingsButton)
 
-        infoButton.snp.makeConstraints { make in
+        settingsButton.snp.makeConstraints { make in
             make.centerY.equalTo(self.logoView)
             make.right.equalToSuperview().inset(Padding.medium)
             make.size.equalTo(44.0)
         }
 
-        infoButton.touchUpCallback = { [weak self] in
+        settingsButton.touchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.infoButtonCallback?()
+            strongSelf.settingsButtonCallback?()
         }
         
         view.addSubview(regionSelectionButton)
         regionSelectionButton.snp.makeConstraints { make in
             make.centerY.equalTo(self.logoView)
-            make.right.equalTo(infoButton.snp.left).offset(-Padding.small)
+            make.right.equalTo(settingsButton.snp.left).offset(-Padding.small)
         }
         
         regionSelectionButton.touchUpCallback = { [weak self] in
@@ -82,7 +82,7 @@ class HomescreenBaseViewController: ViewController {
     
     private func setupAccessibilityIdentifiers() {
         logoView.accessibilityIdentifier = "bund_logo"
-        infoButton.accessibilityIdentifier = "header_notification"
+        settingsButton.accessibilityIdentifier = "header_notification"
         regionSelectionButton.accessibilityIdentifier = "header_region_text"
     }
 

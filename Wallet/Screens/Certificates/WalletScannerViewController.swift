@@ -232,12 +232,11 @@ class WalletScannerViewController: ViewController {
     }
 
     private func hideDetail() {
-        startScanning()
-
         UIView.animate(withDuration: 0.25) {
             self.detailViewController.view.alpha = 0.0
         } completion: { _ in
             self.detailViewController.certificate = nil
+            self.startScanning()
         }
 
         detailViewController.view.accessibilityViewIsModal = false

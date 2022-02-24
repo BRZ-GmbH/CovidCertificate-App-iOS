@@ -12,9 +12,9 @@
 
 import Foundation
 
-class WalletImprintViewController: WebViewController {
+class WalletLicenseViewController: WebViewController {
     init() {
-        super.init(mode: .local("impressum"))
-        title = UBLocalized.impressum_title.uppercased()
+        super.init(mode: .local("licence"))
+        title = UBLocalized.licenses_title.uppercased()
     }
 }

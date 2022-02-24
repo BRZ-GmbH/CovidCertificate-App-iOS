@@ -100,6 +100,7 @@ class Verifier: NSObject {
     private let checkDefaultRegion: Bool
     private var stateUpdate: ((VerificationResultStatus) -> Void)?
     private var validationTime: Date?
+    private var realTime: Date?
 
     // MARK: - Init
 
@@ -110,10 +111,11 @@ class Verifier: NSObject {
         super.init()
     }
 
-    init(certificate: UserCertificate, regions: [String], checkDefaultRegion: Bool, validationTime: Date?) {
+    init(certificate: UserCertificate, regions: [String], checkDefaultRegion: Bool, validationTime: Date?, realTime: Date?) {
         self.regions = regions
         self.checkDefaultRegion = checkDefaultRegion
         self.validationTime = validationTime
+        self.realTime = realTime
 
         switch certificate.decodedCertificate {
         case let .success(holder):
@@ -184,13 +186,21 @@ class Verifier: NSObject {
             if states[0] == .error || states[0] == .signatureInvalid {
                 self.stateUpdate?(states[0])
             } else if states.contains(where: { $0 == VerificationResultStatus.dataExpired }) {
-                self.stateUpdate?(.dataExpired)
+                if VerifierManager.shared.isSyncingData {
+                    self.stateUpdate?(.loading)
+                } else {
+                    self.stateUpdate?(.dataExpired)
+                }
             } else if states.allSatisfy({ $0.isSuccess() }) {
                 if self.validationTime != nil {
                     let results = states.flatMap { $0.results() }
                     self.stateUpdate?(.success(results))
                 } else {
-                    self.stateUpdate?(.timeMissing)
+                    if VerifierManager.shared.isSyncingTime {
+                        self.stateUpdate?(.loading)
+                    } else {
+                        self.stateUpdate?(.timeMissing)
+                    }
                 }
             } else {
                 self.stateUpdate?(.error)
@@ -198,9 +208,10 @@ class Verifier: NSObject {
         }
     }
 
-    public func restart(forceUpdate: Bool = false, validationTime: Date?) {
+    public func restart(forceUpdate: Bool = false, validationTime: Date?, realTime: Date?) {
         guard let su = stateUpdate else { return }
         self.validationTime = validationTime
+        self.realTime = realTime
         start(forceUpdate: forceUpdate, stateUpdate: su)
     }
 
@@ -212,7 +223,7 @@ class Verifier: NSObject {
         group.enter()
 
         DispatchQueue.global(qos: .userInteractive).async {
-            CovidCertificateSDK.decodeAndCheckSignature(encodedData: holder.encodedData, validationClock: self.validationTime ?? Date()) { result in
+            CovidCertificateSDK.decodeAndCheckSignature(encodedData: holder.encodedData, validationClock: self.realTime ?? self.validationTime ?? Date()) { result in
                 switch result {
                 case let .success(result):
                     if result.isValid {
@@ -247,9 +258,11 @@ class Verifier: NSObject {
         guard let expiresAt = holder.expiresAt else { return }
         guard let validationClock = validationTime else { return }
 
+        let realTimeForCheck = realTime ?? validationClock
+        
         group.enter()
         DispatchQueue.global(qos: important ? .userInitiated : .utility).async {
-            CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, validationClock: validationClock, issuedAt: issuedAt, expiresAt: expiresAt, countryCode: "AT", region: region, forceUpdate: forceUpdate) { result in
+            CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, realTime: realTimeForCheck, validationClock: validationClock, issuedAt: issuedAt, expiresAt: expiresAt, countryCode: "AT", region: region, forceUpdate: forceUpdate) { result in
                 switch result {
                     
                 case let .success(result):

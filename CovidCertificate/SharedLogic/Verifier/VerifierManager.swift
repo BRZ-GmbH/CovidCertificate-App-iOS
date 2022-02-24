@@ -35,6 +35,10 @@ final class VerifierManager {
 
     private var observers: [String: [Observer]] = [:]
 
+    private(set) var isSyncingTime = false
+        
+    var isSyncingData = false
+    
     private var timeRetryTimer: Timer?
     
     struct VerificationResult {
@@ -70,8 +74,10 @@ final class VerifierManager {
 
     private func fetchCurrentTime(main: Bool) {
         let syncStart = Date().timeIntervalSinceReferenceDate
+        isSyncingTime = true
         Clock.sync(from: main ? "ts1.univie.ac.at" : "ts2.univie.ac.at", samples: 2, first: nil) { [weak self] fetchedDate, _ in
             guard let self = self else { return }
+            self.isSyncingTime = false
             let oldStatus = self.timeStatus?.time
             let syncDuration = Date().timeIntervalSinceReferenceDate - syncStart
 
@@ -89,7 +95,7 @@ final class VerifierManager {
                 }
             }
 
-            if oldStatus != self.timeStatus?.time {
+            if oldStatus != self.timeStatus?.time || (oldStatus == nil && self.timeStatus?.time == nil) {
                 var shouldRestart = true
                 // We need to take the response time for the sync into account to correctly compare
                 if let old = oldStatus, let new = self.timeStatus?.time, abs(old.addingTimeInterval(syncDuration).timeIntervalSince(new)) < 30 {
@@ -150,7 +156,7 @@ final class VerifierManager {
         lastKnownResults = [:]
         
         self.verifiers.forEach { _, verifier in
-            verifier.restart(forceUpdate: true, validationTime: validationTime)
+            verifier.restart(forceUpdate: true, validationTime: validationTime, realTime: timeStatus?.time)
         }
     }
 
@@ -182,13 +188,13 @@ final class VerifierManager {
                     return
                 }
                 v.important = important
-                v.restart(forceUpdate: forceUpdate, validationTime: validationTime)
+                v.restart(forceUpdate: forceUpdate, validationTime: validationTime, realTime: timeStatus?.time)
             }
         } else {
             if let v = verifiers[certificate.qrCode] {
                 v.cancelled = true
             }
-            let v = Verifier(certificate: certificate, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: validationTime)
+            let v = Verifier(certificate: certificate, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: validationTime, realTime: timeStatus?.time)
             v.important = important
             verifiers[certificate.qrCode] = v
             v.start(forceUpdate: forceUpdate) { state in

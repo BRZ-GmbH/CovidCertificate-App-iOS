@@ -66,12 +66,10 @@ class ConfigManager: NSObject {
 
         guard force || Self.shouldLoadConfig(lastConfigLoad: Self.lastConfigLoad)
         else {
-            Logger.log("Skipping config load request and returning from cache", appState: true)
             completion(Self.currentConfig)
             return
         }
 
-        Logger.log("Load Config", appState: true)
         dataTask = session.dataTask(with: request, completionHandler: { data, response, error in
             guard let _ = response as? HTTPURLResponse,
                   let data = data

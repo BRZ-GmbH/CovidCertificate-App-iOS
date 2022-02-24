@@ -84,9 +84,6 @@ class WebViewController: ViewController {
             var string = try String(contentsOf: url)
 
             string = string.replacingOccurrences(of: "{VERSION}", with: Bundle.appVersion)
-            string = string.replacingOccurrences(of: "{BUILD}", with: Bundle.buildNumber + Bundle.environment)
-            string = string.replacingOccurrences(of: "{APPVERSION}", with: Bundle.appVersion)
-            string = string.replacingOccurrences(of: "{RELEASEDATE}", with: DateFormatter.ub_dayString(from: Bundle.buildDate ?? Date()))
 
             string = string.replacingOccurrences(of: "{APP_NAME}", with: UBLocalized.wallet_onboarding_app_title)
             string = string.replacingOccurrences(of: "{LAW_LINK}", with: UBLocalized.wallet_terms_privacy_link)
@@ -156,33 +153,6 @@ extension WebViewController: WKNavigationDelegate {
 
             if scheme == "http" || scheme == "https" || scheme == "mailto" || scheme == "tel" {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                decisionHandler(.cancel)
-                return
-            }
-
-            if scheme == "ccert" {
-                let path = (url.host ?? url.lastPathComponent).replacingOccurrences(of: ".html", with: "")
-                let webVC = WebViewController(mode: .local(path))
-                webVC.title = title
-                if let navVC = navigationController {
-                    navVC.pushViewController(webVC, animated: true)
-                } else {
-                    present(NavigationController(rootViewController: webVC, useNavigationBar: true), animated: true, completion: nil)
-                }
-
-                decisionHandler(.cancel)
-                return
-            }
-            
-            if scheme == "dataupdate" {
-                self.updateData()
-                decisionHandler(.cancel)
-                return
-            }
-            
-            if scheme == "togglecampaignoptout" {
-                WalletUserStorage.hasOptedOutOfNonImportantCampaigns = !WalletUserStorage.hasOptedOutOfNonImportantCampaigns
-                updateCampaignOptOutElement()
                 decisionHandler(.cancel)
                 return
             }
