@@ -29,7 +29,9 @@ class HomescreenCertificateView: UIView {
 
 
     // private let stateLabel = HomescreenStateLabel()
-    private let stateView = CertificateStateView()
+    private lazy var stateView = {
+        return CertificateStateView(certificate: certificate, isHomescreen: true)
+    }()
 
     public let certificate: UserCertificate
 
@@ -104,7 +106,11 @@ class HomescreenCertificateView: UIView {
             make.left.right.equalToSuperview().inset(HomescreenCertificateView.inset)
         }
        
-        titleLabel.text = UBLocalized.wallet_certificate
+        if case let .success(result) = certificate.decodedCertificate, result.healthCert.type == .vaccinationExemption {
+            titleLabel.text = UBLocalized.wallet_certificate_vaccination_exemption
+        } else {
+            titleLabel.text = UBLocalized.wallet_certificate
+        }
         titleLabel.numberOfLines = 1
         titleLabel.lineBreakMode = .byTruncatingMiddle
         nameView.certificate = certificate

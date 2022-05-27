@@ -176,12 +176,6 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             let vc = RegionSelectionViewController()
             vc.presentInNavigationController(from: strongSelf)
         }
-        
-        regionSelectionButtonCallback = { [weak self] in
-            guard let strongSelf = self else { return }
-            let vc = RegionSelectionViewController()
-            vc.presentInNavigationController(from: strongSelf)
-        }
 
         certificatesViewController.touchedCertificateCallback = { [weak self] cert in
             guard let strongSelf = self else { return }

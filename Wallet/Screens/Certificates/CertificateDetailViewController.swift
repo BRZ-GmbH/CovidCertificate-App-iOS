@@ -38,7 +38,11 @@ class CertificateDetailViewController: ViewController {
         self.certificate = certificate
         super.init()
 
-        title = UBLocalized.wallet_certificate.uppercased()
+        if case let .success(result) = certificate.decodedCertificate, result.healthCert.type == .vaccinationExemption {
+            title = UBLocalized.wallet_certificate_vaccination_exemption.uppercased()
+        } else {
+            title = UBLocalized.wallet_certificate.uppercased()
+        }
     }
 
     // MARK: - View
@@ -100,7 +104,12 @@ class CertificateDetailViewController: ViewController {
         stackScrollView.addArrangedView(detailView)
 
         stackScrollView.addSpacerView(2.0 * Padding.large + 2.0 * Padding.small)
-        stackScrollView.addArrangedView(CertificateNoteView())
+        
+        if case let .success(result) = certificate.decodedCertificate {
+            stackScrollView.addArrangedView(CertificateNoteView(type: result.healthCert.type))
+        } else {
+            stackScrollView.addArrangedView(CertificateNoteView(type: nil))
+        }
 
         stackScrollView.addSpacerView(3.0 * Padding.large + Padding.medium)
         stackScrollView.addArrangedViewCentered(removeButton)

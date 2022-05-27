@@ -30,9 +30,9 @@ class WalletSettingsViewController: ViewController {
     }
     
 #if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
-    private let rows: [SettingsRow] = [.imprint, .licenses, .faq, .campaignNotifications, .dataUpdate, .log]
+    private let rows: [SettingsRow] = [.faq, .campaignNotifications, .dataUpdate, .imprint, .licenses, .log]
 #else
-    private let rows: [SettingsRow] = [.imprint, .licenses, .faq, .campaignNotifications, .dataUpdate]
+    private let rows: [SettingsRow] = [.faq, .campaignNotifications, .dataUpdate, .imprint, .licenses]
 #endif
     
     // MARK: - Init

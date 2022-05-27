@@ -26,6 +26,7 @@ class CertificateStateView: UIView {
     private let validityErrorStackView = UIStackView()
     private var validityErrorStackViewTopConstraint: Constraint? = nil
     private let validityHeadlineLabel = Label(.text, textAlignment: .center)
+    private let exemptionValidityView = CertificateStateValidityView()
     private let entryValidityView = CertificateStateValidityView()
     private let nightClubValidityView = CertificateStateValidityView()
     private let errorLabel = Label(.smallErrorLight, textAlignment: .center)
@@ -34,6 +35,9 @@ class CertificateStateView: UIView {
     private let validityHintView = Label(.smallErrorLight, textAlignment: .center)
 
     private let regionStateView = CertificateRegionStateView()
+    private lazy var exemptionStateView = {
+        return CertificateExemptionView(isHomescreen: self.isHomescreen)
+    }()
 
     private var hasValidityView: Bool = false
 
@@ -75,7 +79,11 @@ class CertificateStateView: UIView {
         addSubview(imageView)
         addSubview(loadingView)
         addSubview(textLabel)
-        addSubview(regionStateView)
+        if case let .success(result) = certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
+            addSubview(exemptionStateView)
+        } else {
+            addSubview(regionStateView)
+        }
 
         validityHintView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Padding.medium)
@@ -93,8 +101,14 @@ class CertificateStateView: UIView {
             make.height.greaterThanOrEqualTo(76)
         }
         
-        regionStateView.snp.makeConstraints { make in
-            make.edges.equalTo(backgroundView)
+        if case let .success(result) = certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
+            exemptionStateView.snp.makeConstraints { make in
+                make.edges.equalTo(backgroundView)
+            }
+        } else {
+            regionStateView.snp.makeConstraints { make in
+                make.edges.equalTo(backgroundView)
+            }
         }
 
         imageView.snp.makeConstraints { make in
@@ -128,15 +142,23 @@ class CertificateStateView: UIView {
                 make.bottom.equalToSuperview()
             }
 
-            validityHeadlineLabel.text = UBLocalized.wallet_3g_status_validity_headline
-            
-            validityErrorStackView.addArrangedSubview(validityHeadlineLabel)
-            validityErrorStackView.addArrangedSubview(entryValidityView)
-            validityErrorStackView.addArrangedSubview(nightClubValidityView)
-            validityErrorStackView.addArrangedSubview(errorLabel)
+            if case let .success(result) = certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
+                validityHeadlineLabel.text = "\u{00a0}"
+                validityErrorStackView.addArrangedSubview(exemptionValidityView)
+                validityErrorStackView.addArrangedSubview(errorLabel)
 
-            entryValidityView.backgroundColor = .cc_greenish
-            nightClubValidityView.backgroundColor = .cc_greenish
+                exemptionValidityView.backgroundColor = .cc_greenish
+            } else {
+                validityHeadlineLabel.text = UBLocalized.wallet_3g_status_validity_headline
+                
+                validityErrorStackView.addArrangedSubview(validityHeadlineLabel)
+                validityErrorStackView.addArrangedSubview(entryValidityView)
+                validityErrorStackView.addArrangedSubview(nightClubValidityView)
+                validityErrorStackView.addArrangedSubview(errorLabel)
+
+                entryValidityView.backgroundColor = .cc_greenish
+                nightClubValidityView.backgroundColor = .cc_greenish
+            }
         }
         
         setupAccessibilityIdentifiers()
@@ -186,9 +208,11 @@ class CertificateStateView: UIView {
                 self.backgroundView.backgroundColor = .cc_greyish
                 self.entryValidityView.ub_setHidden(true)
                 self.nightClubValidityView.ub_setHidden(true)
+                self.exemptionValidityView.ub_setHidden(true)
                 self.validityHeadlineLabel.ub_setHidden(true)
                 self.validityErrorStackView.ub_setHidden(true)
                 self.regionStateView.ub_setHidden(true)
+                self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
                 self.backgroundView.ub_setHidden(false)
@@ -200,8 +224,10 @@ class CertificateStateView: UIView {
                 self.textLabel.textColor = .cc_white
                 self.entryValidityView.ub_setHidden(false)
                 self.nightClubValidityView.ub_setHidden(false)
+                self.exemptionValidityView.ub_setHidden(false)
                 self.regionStateView.results = results
                 self.regionStateView.ub_setHidden(false)
+                self.exemptionStateView.ub_setHidden(false)
                 self.imageView.ub_setHidden(true)
                 self.validityHintView.ub_setHidden(false)
                 self.backgroundView.ub_setHidden(true)
@@ -226,20 +252,34 @@ class CertificateStateView: UIView {
                 } else {
                     self.nightClubValidityView.ub_setHidden(true)
                 }
-                self.validityHeadlineLabel.ub_setHidden(entryResult?.valid == false && nightClubResult?.valid == false)
-                self.validityErrorStackViewTopConstraint?.update(offset: (entryResult?.valid == false && nightClubResult?.valid == false) ? 0 : Padding.large)
+                
+                var validityIsVisible = entryResult?.valid == true || nightClubResult?.valid == true
+                if case let .success(result) = self.certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
+                    if results.first?.valid == true {
+                        validityIsVisible = true
+                        self.exemptionValidityView.validityTitleLabel.text = "\(UBLocalized.wallet_3g_status_validity_headline_vaccination_exemption)\n\u{00a0}"
+                        self.exemptionValidityView.untilText = result.healthCert.vaccinationExemption?.first?.displayValidUntilDate
+                    } else {
+                        self.exemptionValidityView.ub_setHidden(true)
+                    }
+                    self.exemptionStateView.result = results.first
+                }
+                self.validityHeadlineLabel.ub_setHidden(!validityIsVisible)
+                self.validityErrorStackViewTopConstraint?.update(offset: (!validityIsVisible) ? 0 : Padding.large)
             case .error:
                 self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
                 self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
                 self.backgroundView.backgroundColor = .cc_red_invalid
                 self.textLabel.textColor = .cc_white
                 self.regionStateView.ub_setHidden(true)
+                self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
                 self.entryValidityView.ub_setHidden(true)
                 self.nightClubValidityView.ub_setHidden(true)
+                self.exemptionValidityView.ub_setHidden(true)
                 self.validityHeadlineLabel.ub_setHidden(true)
                 self.validityErrorStackViewTopConstraint?.update(offset: 0)
             case .signatureInvalid:
@@ -249,8 +289,10 @@ class CertificateStateView: UIView {
                 self.textLabel.textColor = .cc_white
                 self.entryValidityView.ub_setHidden(true)
                 self.nightClubValidityView.ub_setHidden(true)
+                self.exemptionValidityView.ub_setHidden(true)
                 self.validityHeadlineLabel.ub_setHidden(true)
                 self.regionStateView.ub_setHidden(true)
+                self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
                 self.backgroundView.ub_setHidden(false)
@@ -263,8 +305,10 @@ class CertificateStateView: UIView {
                 self.textLabel.textColor = .cc_white
                 self.entryValidityView.ub_setHidden(true)
                 self.nightClubValidityView.ub_setHidden(true)
+                self.exemptionValidityView.ub_setHidden(true)
                 self.validityHeadlineLabel.ub_setHidden(true)
                 self.regionStateView.ub_setHidden(true)
+                self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
                 self.backgroundView.ub_setHidden(false)
@@ -277,8 +321,10 @@ class CertificateStateView: UIView {
                 self.textLabel.textColor = .cc_white
                 self.entryValidityView.ub_setHidden(true)
                 self.nightClubValidityView.ub_setHidden(true)
+                self.exemptionValidityView.ub_setHidden(true)
                 self.validityHeadlineLabel.ub_setHidden(true)
                 self.regionStateView.ub_setHidden(true)
+                self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
                 self.backgroundView.ub_setHidden(false)

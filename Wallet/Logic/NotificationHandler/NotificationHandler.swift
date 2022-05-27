@@ -24,7 +24,7 @@ extension Campaign {
     /**
      Returns a unique key for fetching/storing the last display timestamp for a given campaign. If the campaign applies/is displayed for individual certificates, the certificate identifier is also added to this key.
      */
-    func lastDisplayTimestampKeyForCertificate(_ certificate: EuHealthCert?) -> String? {
+    func lastDisplayTimestampKeyForCertificate(_ certificate: HealthCert?) -> String? {
         switch campaignType {
             case .singleForEachCertificate, .repeatingForEachCertificate:
                 guard let certificateIdentifier = certificate?.vaccinations?.first?.certificateIdentifier else { return nil }
@@ -38,7 +38,7 @@ extension Campaign {
     /**
      Returns whether the conditions for this campaign are fulfilled for the given certificate
      */
-    func appliesToCertificate(_ certificate: EuHealthCert, condititions: [String:CertificateCondition], externalParameterString: String) -> Bool {
+    func appliesToCertificate(_ certificate: HealthCert, condititions: [String:CertificateCondition], externalParameterString: String) -> Bool {
         if campaignType == .single || campaignType == .repeating {
             return true
         }
@@ -89,7 +89,7 @@ extension Campaign {
     /**
      Returns whether the campaign should be displayed given the provided last display timestamps, repeat interval and the given certificate. If the campaign does not apply to individual certificates, this method always returns false and the other variant of this method without the EuHealthCert should be used.
      */
-    func shouldBeDisplayedForCertificate(_ certificate: EuHealthCert, lastDisplayTimestamps: [String:Date]) -> Bool {
+    func shouldBeDisplayedForCertificate(_ certificate: HealthCert, lastDisplayTimestamps: [String:Date]) -> Bool {
         guard let key = lastDisplayTimestampKeyForCertificate(certificate) else { return false }
         
         switch campaignType {
@@ -128,7 +128,7 @@ extension Campaign {
  Helper class for queueing campaign notifications
  */
 struct QueuedCampaignNotification {
-    let certificate: EuHealthCert?
+    let certificate: HealthCert?
     let campaign: Campaign
     let title: String?
     let message: String?
@@ -180,7 +180,7 @@ class NotificationHandler: NSObject {
             case let .success(result): return result
             case .failure(_): return nil
             }
-        }).sorted(by: { ($0.issuedAt ?? Date()).isAfter($1.issuedAt ?? Date())}).filter({ $0.healthCert.certificationType == .vaccination && ($0.expiresAt ?? Date()).isAfter(Date()) })
+        }).sorted(by: { ($0.issuedAt ?? Date()).isAfter($1.issuedAt ?? Date())}).filter({ $0.healthCert.certificationType == .vaccination })
         
         let groupedCertificateHolders = Dictionary(grouping: certificateHolders, by: {
             $0.healthCert.comparableIdentifier

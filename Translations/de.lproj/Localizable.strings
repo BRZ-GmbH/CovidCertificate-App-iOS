@@ -39,7 +39,7 @@
 "wallet_add_certificate_button" = "Hinzufügen";
 
 /*Wallet: Titel der Liste Zertifikate*/
-"wallet_certificate_list_title" = "EU-konforme Zertifikate";
+"wallet_certificate_list_title" = "Zertifikate";
 
 /*Wallet: Löschen Button Titel*/
 "delete_button" = "Löschen";
@@ -479,3 +479,17 @@
 "accessibility_settings_row_campaign_notifications_toggle_inactive" = "Hinweismeldungen sind nicht aktiv";
 
 "accessibility_change_campaign_notifications_toggle" = "Zum Ändern Doppeltippen";
+
+
+/* Impfausnahmen */
+
+"wallet_certificate_vaccination_exemption_country_title" = "Ausstellungsland";
+"covid_certificate_vaccination_exemption_title" = "Impfausnahme";
+"wallet_certificate_vaccination_exemption_detail_note" = "Eine Ausnahme von der Impfpflicht besteht bis zum letzten Tage des Folgemonats, in dem der medizinische Ausnahmegrund wegfällt. Dieses End-Datum der Ausnahme von der Impfpflicht wird am Zertifikat angegeben.\n\nDieses Zertifikat ist kein Reisedokument.\n";
+"wallet_3g_status_validity_headline_vaccination_exemption" = "Ausnahme gültig";
+"wallet_certificate_vaccination_exemption" = "AT-konformes Zertifikat";
+"certificate_reason_vaccination_exemption" = "Impfausnahme";
+"region_type_valid_vaccination_exemption" = "Gültig";
+"region_type_invalid_vaccination_exemption" = "Ungültig";
+"wallet_certificate_exemption_reason_title" = "Ausnahmegrund";
+"wallet_certificate_exemption_reason_value" = "Ausnahme COVID-19-Impfung";

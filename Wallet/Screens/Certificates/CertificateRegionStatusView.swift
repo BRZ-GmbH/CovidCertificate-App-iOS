@@ -92,3 +92,71 @@ class CertificateRegionStatusView: UIView {
         }
     }
 }
+
+/**
+ Display the status for a vaccination exemption based on the valid until date
+ */
+class CertificateExemptionView: UIView {
+    private let containerView = UIView()
+    private let imageView = UIImageView()
+    private let label = Label(.text, textAlignment: .center)
+    private let isHomescreen: Bool
+    
+    var result: VerificationRegionResult? = nil {
+        didSet {
+            label.text = UBLocalized.covid_certificate_vaccination_exemption_title
+            if isHomescreen {
+                label.accessibilityIdentifier = "certificate_page_info_ve"
+                imageView.accessibilityIdentifier = "certificate_page_info_ve_icon"
+            } else {
+                label.accessibilityIdentifier = "certificate_detail_info_ve"
+                imageView.accessibilityIdentifier = "certificate_detail_info_ve_icon"
+            }
+            
+            label.numberOfLines = 1
+            label.lineBreakMode = .byTruncatingTail
+            backgroundColor = result?.valid == true ? .cc_green_valid : .cc_red_invalid
+            imageView.image = result?.valid == true ? UIImage(named: "check-circle") : UIImage(named: "minus-circle")
+            isAccessibilityElement = true
+            accessibilityLabel = result?.valid == true ? UBLocalized.region_type_valid_vaccination_exemption : UBLocalized.region_type_invalid_vaccination_exemption
+        }
+    }
+    
+    init(isHomescreen: Bool) {
+        self.isHomescreen = isHomescreen
+        super.init(frame: .zero)
+        label.isAccessibilityElement = true
+
+        setup()
+    }
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setup() {
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
+        
+        addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        containerView.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFit
+        imageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        containerView.addSubview(label)
+        label.textColor = .cc_white
+        label.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(imageView.snp.bottom).offset(8)
+        }
+    }
+}

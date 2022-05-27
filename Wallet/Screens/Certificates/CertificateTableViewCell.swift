@@ -192,7 +192,7 @@ class StateLabel: UIView {
 
     // MARK: - Properties
 
-    public var certificate: EuHealthCert? {
+    public var certificate: HealthCert? {
         didSet { update() }
     }
 
@@ -255,6 +255,12 @@ class StateLabel: UIView {
 
                 backgroundColor = .cc_test
                 label.textColor = .cc_test_contrast
+            case .vaccinationExemption:
+                label.text = certificate.type.displayName
+                accessibilityLabel = certificate.type.displayName
+
+                backgroundColor = .cc_vaccination
+                label.textColor = .cc_vaccination_contrast
             }
         } else {
             backgroundColor = .clear

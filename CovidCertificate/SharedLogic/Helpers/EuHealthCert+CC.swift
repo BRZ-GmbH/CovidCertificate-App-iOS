@@ -22,6 +22,8 @@ public extension CertType {
             return UBLocalized.certificate_reason_tested
         case .vaccination:
             return UBLocalized.certificate_reason_vaccinated
+        case .vaccinationExemption:
+            return UBLocalized.certificate_reason_vaccination_exemption
         }
     }
 }
@@ -45,7 +47,7 @@ extension String {
     }
 }
 
-public extension EuHealthCert {
+public extension HealthCert {
     
     var comparableIdentifier: String {
         let familyName = person.standardizedFamilyName.localizedLowercase.substringToFirstNonLetter
@@ -99,17 +101,10 @@ extension Vaccination {
         // fallback
         return vaccinationDate
     }
-
-    var displayCountry: String {
-        return Locale.current.localizedString(forRegionCode: country) ?? country
-    }
 }
 
 extension Recovery {
-    var displayCountry: String {
-        return Locale.current.localizedString(forRegionCode: countryOfTest) ?? countryOfTest
-    }
-
+    
     var displayFirstPositiveTest: String? {
         if let d = firstPositiveTestResultDate {
             return DateFormatter.ub_dayString(from: d)
@@ -120,10 +115,7 @@ extension Recovery {
 }
 
 extension Test {
-    var displayCountry: String? {
-        return Locale.current.localizedString(forRegionCode: country) ?? country
-    }
-
+    
     var displaySampleDateTime: String? {
         if let d = validFromDate {
             return DateFormatter.ub_dayTimeString(from: d)
@@ -138,5 +130,33 @@ extension Test {
         }
 
         return timestampResult
+    }
+}
+
+extension VaccinationExemption {
+    
+    var displayValidUntilDate: String {
+        if let d = validUntilDate {
+            return DateFormatter.ub_dayString(from: d)
+        }
+
+        // fallback
+        return validUntil
+    }
+    
+}
+
+
+extension String {
+    func asLocalizedDisplayCountry(showEnglishLocalization: Bool) -> String {
+        var country = Locale.current.localizedString(forRegionCode: self) ?? self
+        
+        if showEnglishLocalization {
+            if let englishLabel = Locale(identifier: "en").localizedString(forRegionCode: self) {
+                return "\(country) / \(englishLabel)"
+            }
+        }
+        
+        return country
     }
 }

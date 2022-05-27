@@ -24,7 +24,7 @@ class JsonLogicValidator {
     /**
      Returns a JSON object encoding the given EU Health certificate and external parameters
      */
-    class func jsonObjectForValidation(forCertificate certificate: EuHealthCert, externalParameter: String) -> JSON? {
+    class func jsonObjectForValidation(forCertificate certificate: HealthCert, externalParameter: String) -> JSON? {
         let certificatePayload = try! JSONEncoder().encode(certificate)
         let payloadString = String(data: certificatePayload, encoding: .utf8)!
         

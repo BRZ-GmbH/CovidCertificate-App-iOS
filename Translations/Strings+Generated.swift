@@ -34,7 +34,7 @@ import Foundation
      case accessibility_in_active_camera_key = "accessibility_in_active_camera"
     /// Information
      case accessibility_info_box_key = "accessibility_info_box"
-    /// Impressum
+    /// Impressum / Information
      case accessibility_info_button_key = "accessibility_info_button"
     /// Taschenlampe ausschalten
      case accessibility_lamp_off_button_key = "accessibility_lamp_off_button"
@@ -60,7 +60,7 @@ import Foundation
      case business_rule_update_failed_message_key = "business_rule_update_failed_message"
     /// OK
      case business_rule_update_ok_button_key = "business_rule_update_ok_button"
-    /// Zugangsregeln werden aktualisiert...
+    /// Zugangsregeln werden aktualisiert
      case business_rule_update_progress_key = "business_rule_update_progress"
     /// Aktualisierung der Zugangsregeln erfolgreich abgeschlossen.
      case business_rule_update_success_message_key = "business_rule_update_success_message"
@@ -82,6 +82,8 @@ import Foundation
      case certificate_reason_tested_key = "certificate_reason_tested"
     /// Impfung
      case certificate_reason_vaccinated_key = "certificate_reason_vaccinated"
+    /// Impfausnahme
+     case certificate_reason_vaccination_exemption_key = "certificate_reason_vaccination_exemption"
     /// Schliessen
      case close_button_key = "close_button"
     /// Weiter
@@ -92,6 +94,8 @@ import Foundation
      case covid_certificate_test_title_key = "covid_certificate_test_title"
     /// EU-konformes Zertifikat
      case covid_certificate_title_key = "covid_certificate_title"
+    /// Impfausnahme
+     case covid_certificate_vaccination_exemption_title_key = "covid_certificate_vaccination_exemption_title"
     /// Impfung
      case covid_certificate_vaccination_title_key = "covid_certificate_vaccination_title"
     /// Löschen
@@ -124,7 +128,7 @@ import Foundation
      case force_update_text_key = "force_update_text"
     /// Update benötigt
      case force_update_title_key = "force_update_title"
-    /// Impressum
+    /// Impressum / Informationen
      case impressum_title_key = "impressum_title"
     /// Einstellungen
      case ios_settings_open_key = "ios_settings_open"
@@ -162,12 +166,16 @@ import Foundation
      case region_type_ET_validity_key = "region_type_ET_validity"
     /// Ungültig für
      case region_type_invalid_key = "region_type_invalid"
+    /// Ungültig
+     case region_type_invalid_vaccination_exemption_key = "region_type_invalid_vaccination_exemption"
     /// Nachtgastronomie
      case region_type_NG_key = "region_type_NG"
     /// Nachtgastronomie
      case region_type_NG_validity_key = "region_type_NG_validity"
     /// Gültig für
      case region_type_valid_key = "region_type_valid"
+    /// Gültig
+     case region_type_valid_vaccination_exemption_key = "region_type_valid_vaccination_exemption"
     /// Vorarlberg
      case region_vorarlberg_key = "region_vorarlberg"
     /// Wien
@@ -204,6 +212,8 @@ import Foundation
      case wallet_3g_status_disclaimer_key = "wallet_3g_status_disclaimer"
     /// Dieses Zertifikat berechtigt für
      case wallet_3g_status_validity_headline_key = "wallet_3g_status_validity_headline"
+    /// Ausnahme gültig
+     case wallet_3g_status_validity_headline_vaccination_exemption_key = "wallet_3g_status_validity_headline_vaccination_exemption"
     /// Hinzufügen
      case wallet_add_certificate_key = "wallet_add_certificate"
     /// Hinzufügen
@@ -222,6 +232,10 @@ import Foundation
      case wallet_certificate_delete_confirm_text_key = "wallet_certificate_delete_confirm_text"
     /// Dieses Zertifikat ist kein Reisedokument. \n\nDie wissenschaftlichen Erkenntnisse über Covid-19-Impfungen und -Tests sowie über die Genesung von einer Covid-19-Infektion entwickeln sich ständig weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. \n\nBitte informieren Sie sich vor der Reise über die am Zielort geltenden Gesundheitsmassnahmen und damit verbundenen Beschränkungen.
      case wallet_certificate_detail_note_key = "wallet_certificate_detail_note"
+    /// Ausnahmegrund
+     case wallet_certificate_exemption_reason_title_key = "wallet_certificate_exemption_reason_title"
+    /// Ausnahme COVID-19-Impfung
+     case wallet_certificate_exemption_reason_value_key = "wallet_certificate_exemption_reason_value"
     /// UVCI
      case wallet_certificate_identifier_key = "wallet_certificate_identifier"
     /// Impfdosis
@@ -230,7 +244,7 @@ import Foundation
      case wallet_certificate_impfstoff_holder_key = "wallet_certificate_impfstoff_holder"
     /// Produkt
      case wallet_certificate_impfstoff_product_name_title_key = "wallet_certificate_impfstoff_product_name_title"
-    /// EU-konforme Zertifikate
+    /// Zertifikate
      case wallet_certificate_list_title_key = "wallet_certificate_list_title"
     /// Datum des ersten positiven Resultats
      case wallet_certificate_recovery_first_positiv_result_key = "wallet_certificate_recovery_first_positiv_result"
@@ -264,6 +278,12 @@ import Foundation
      case wallet_certificate_vaccination_country_title_key = "wallet_certificate_vaccination_country_title"
     /// Impfdatum
      case wallet_certificate_vaccination_date_title_key = "wallet_certificate_vaccination_date_title"
+    /// AT-konformes Zertifikat
+     case wallet_certificate_vaccination_exemption_key = "wallet_certificate_vaccination_exemption"
+    /// Ausstellungsland
+     case wallet_certificate_vaccination_exemption_country_title_key = "wallet_certificate_vaccination_exemption_country_title"
+    /// Eine Ausnahme von der Impfpflicht besteht bis zum letzten Tage des Folgemonats, in dem der medizinische Ausnahmegrund wegfällt. Dieses End-Datum der Ausnahme von der Impfpflicht wird am Zertifikat angegeben.\n\nDieses Zertifikat ist kein Reisedokument.\n
+     case wallet_certificate_vaccination_exemption_detail_note_key = "wallet_certificate_vaccination_exemption_detail_note"
     /// Herausgeber
      case wallet_certificate_vaccination_issuer_title_key = "wallet_certificate_vaccination_issuer_title"
     /// Art des Impfstoffs
@@ -386,7 +406,7 @@ import Foundation
      case wallet_scanner_howitworks_answer1_key = "wallet_scanner_howitworks_answer1"
     /// https://gruenerpass.gv.at/
      case wallet_scanner_howitworks_external_link_key = "wallet_scanner_howitworks_external_link"
-    /// Weitere Informationen
+    /// Weitere Information
      case wallet_scanner_howitworks_external_link_title_key = "wallet_scanner_howitworks_external_link_title"
     /// So funktioniert's
      case wallet_scanner_howitworks_header_key = "wallet_scanner_howitworks_header"
@@ -454,7 +474,7 @@ import Foundation
    static let accessibility_in_active_camera = UBLocalized.tr(UBLocalizedKey.accessibility_in_active_camera_key)
   /// Information
    static let accessibility_info_box = UBLocalized.tr(UBLocalizedKey.accessibility_info_box_key)
-  /// Impressum
+  /// Impressum / Information
    static let accessibility_info_button = UBLocalized.tr(UBLocalizedKey.accessibility_info_button_key)
   /// Taschenlampe ausschalten
    static let accessibility_lamp_off_button = UBLocalized.tr(UBLocalizedKey.accessibility_lamp_off_button_key)
@@ -480,7 +500,7 @@ import Foundation
    static let business_rule_update_failed_message = UBLocalized.tr(UBLocalizedKey.business_rule_update_failed_message_key)
   /// OK
    static let business_rule_update_ok_button = UBLocalized.tr(UBLocalizedKey.business_rule_update_ok_button_key)
-  /// Zugangsregeln werden aktualisiert...
+  /// Zugangsregeln werden aktualisiert
    static let business_rule_update_progress = UBLocalized.tr(UBLocalizedKey.business_rule_update_progress_key)
   /// Aktualisierung der Zugangsregeln erfolgreich abgeschlossen.
    static let business_rule_update_success_message = UBLocalized.tr(UBLocalizedKey.business_rule_update_success_message_key)
@@ -502,6 +522,8 @@ import Foundation
    static let certificate_reason_tested = UBLocalized.tr(UBLocalizedKey.certificate_reason_tested_key)
   /// Impfung
    static let certificate_reason_vaccinated = UBLocalized.tr(UBLocalizedKey.certificate_reason_vaccinated_key)
+  /// Impfausnahme
+   static let certificate_reason_vaccination_exemption = UBLocalized.tr(UBLocalizedKey.certificate_reason_vaccination_exemption_key)
   /// Schliessen
    static let close_button = UBLocalized.tr(UBLocalizedKey.close_button_key)
   /// Weiter
@@ -512,6 +534,8 @@ import Foundation
    static let covid_certificate_test_title = UBLocalized.tr(UBLocalizedKey.covid_certificate_test_title_key)
   /// EU-konformes Zertifikat
    static let covid_certificate_title = UBLocalized.tr(UBLocalizedKey.covid_certificate_title_key)
+  /// Impfausnahme
+   static let covid_certificate_vaccination_exemption_title = UBLocalized.tr(UBLocalizedKey.covid_certificate_vaccination_exemption_title_key)
   /// Impfung
    static let covid_certificate_vaccination_title = UBLocalized.tr(UBLocalizedKey.covid_certificate_vaccination_title_key)
   /// Löschen
@@ -546,7 +570,7 @@ import Foundation
    static let force_update_text = UBLocalized.tr(UBLocalizedKey.force_update_text_key)
   /// Update benötigt
    static let force_update_title = UBLocalized.tr(UBLocalizedKey.force_update_title_key)
-  /// Impressum
+  /// Impressum / Informationen
    static let impressum_title = UBLocalized.tr(UBLocalizedKey.impressum_title_key)
   /// Einstellungen
    static let ios_settings_open = UBLocalized.tr(UBLocalizedKey.ios_settings_open_key)
@@ -584,12 +608,16 @@ import Foundation
    static let region_type_ET_validity = UBLocalized.tr(UBLocalizedKey.region_type_ET_validity_key)
   /// Ungültig für
    static let region_type_invalid = UBLocalized.tr(UBLocalizedKey.region_type_invalid_key)
+  /// Ungültig
+   static let region_type_invalid_vaccination_exemption = UBLocalized.tr(UBLocalizedKey.region_type_invalid_vaccination_exemption_key)
   /// Nachtgastronomie
    static let region_type_NG = UBLocalized.tr(UBLocalizedKey.region_type_NG_key)
   /// Nachtgastronomie
    static let region_type_NG_validity = UBLocalized.tr(UBLocalizedKey.region_type_NG_validity_key)
   /// Gültig für
    static let region_type_valid = UBLocalized.tr(UBLocalizedKey.region_type_valid_key)
+  /// Gültig
+   static let region_type_valid_vaccination_exemption = UBLocalized.tr(UBLocalizedKey.region_type_valid_vaccination_exemption_key)
   /// Vorarlberg
    static let region_vorarlberg = UBLocalized.tr(UBLocalizedKey.region_vorarlberg_key)
   /// Wien
@@ -626,6 +654,8 @@ import Foundation
    static let wallet_3g_status_disclaimer = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_disclaimer_key)
   /// Dieses Zertifikat berechtigt für
    static let wallet_3g_status_validity_headline = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_validity_headline_key)
+  /// Ausnahme gültig
+   static let wallet_3g_status_validity_headline_vaccination_exemption = UBLocalized.tr(UBLocalizedKey.wallet_3g_status_validity_headline_vaccination_exemption_key)
   /// Hinzufügen
    static let wallet_add_certificate = UBLocalized.tr(UBLocalizedKey.wallet_add_certificate_key)
   /// Hinzufügen
@@ -644,6 +674,10 @@ import Foundation
    static let wallet_certificate_delete_confirm_text = UBLocalized.tr(UBLocalizedKey.wallet_certificate_delete_confirm_text_key)
   /// Dieses Zertifikat ist kein Reisedokument. \n\nDie wissenschaftlichen Erkenntnisse über Covid-19-Impfungen und -Tests sowie über die Genesung von einer Covid-19-Infektion entwickeln sich ständig weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. \n\nBitte informieren Sie sich vor der Reise über die am Zielort geltenden Gesundheitsmassnahmen und damit verbundenen Beschränkungen.
    static let wallet_certificate_detail_note = UBLocalized.tr(UBLocalizedKey.wallet_certificate_detail_note_key)
+  /// Ausnahmegrund
+   static let wallet_certificate_exemption_reason_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_exemption_reason_title_key)
+  /// Ausnahme COVID-19-Impfung
+   static let wallet_certificate_exemption_reason_value = UBLocalized.tr(UBLocalizedKey.wallet_certificate_exemption_reason_value_key)
   /// UVCI
    static let wallet_certificate_identifier = UBLocalized.tr(UBLocalizedKey.wallet_certificate_identifier_key)
   /// Impfdosis
@@ -652,7 +686,7 @@ import Foundation
    static let wallet_certificate_impfstoff_holder = UBLocalized.tr(UBLocalizedKey.wallet_certificate_impfstoff_holder_key)
   /// Produkt
    static let wallet_certificate_impfstoff_product_name_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_impfstoff_product_name_title_key)
-  /// EU-konforme Zertifikate
+  /// Zertifikate
    static let wallet_certificate_list_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_list_title_key)
   /// Datum des ersten positiven Resultats
    static let wallet_certificate_recovery_first_positiv_result = UBLocalized.tr(UBLocalizedKey.wallet_certificate_recovery_first_positiv_result_key)
@@ -686,6 +720,12 @@ import Foundation
    static let wallet_certificate_vaccination_country_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccination_country_title_key)
   /// Impfdatum
    static let wallet_certificate_vaccination_date_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccination_date_title_key)
+  /// AT-konformes Zertifikat
+   static let wallet_certificate_vaccination_exemption = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccination_exemption_key)
+  /// Ausstellungsland
+   static let wallet_certificate_vaccination_exemption_country_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccination_exemption_country_title_key)
+  /// Eine Ausnahme von der Impfpflicht besteht bis zum letzten Tage des Folgemonats, in dem der medizinische Ausnahmegrund wegfällt. Dieses End-Datum der Ausnahme von der Impfpflicht wird am Zertifikat angegeben.\n\nDieses Zertifikat ist kein Reisedokument.\n
+   static let wallet_certificate_vaccination_exemption_detail_note = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccination_exemption_detail_note_key)
   /// Herausgeber
    static let wallet_certificate_vaccination_issuer_title = UBLocalized.tr(UBLocalizedKey.wallet_certificate_vaccination_issuer_title_key)
   /// Art des Impfstoffs
@@ -810,7 +850,7 @@ import Foundation
    static let wallet_scanner_howitworks_answer1 = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_answer1_key)
   /// https://gruenerpass.gv.at/
    static let wallet_scanner_howitworks_external_link = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_external_link_key)
-  /// Weitere Informationen
+  /// Weitere Information
    static let wallet_scanner_howitworks_external_link_title = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_external_link_title_key)
   /// So funktioniert's
    static let wallet_scanner_howitworks_header = UBLocalized.tr(UBLocalizedKey.wallet_scanner_howitworks_header_key)

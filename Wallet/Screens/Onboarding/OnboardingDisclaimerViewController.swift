@@ -23,6 +23,7 @@ class OnboardingDisclaimerViewController: StaticContentViewController {
         super.setupViews(addBottomSpacer: false)
 
         let button = ExternalLinkButton(title: UBLocalized.wallet_onboarding_external_privacy_button)
+        button.accessibilityIdentifier = "item_agb_link_label"
         button.touchUpCallback = {
             let url = Environment.current.privacyURL
             UIApplication.shared.open(url, options: [:], completionHandler: nil)

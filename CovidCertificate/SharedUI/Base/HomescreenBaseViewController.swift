@@ -82,7 +82,7 @@ class HomescreenBaseViewController: ViewController {
     
     private func setupAccessibilityIdentifiers() {
         logoView.accessibilityIdentifier = "bund_logo"
-        settingsButton.accessibilityIdentifier = "header_notification"
+        settingsButton.accessibilityIdentifier = "header_settings"
         regionSelectionButton.accessibilityIdentifier = "header_region_text"
     }
 

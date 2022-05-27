@@ -64,6 +64,7 @@ class CertificateDetailView: UIView {
         addVaccinationEntries()
         addRecoveryEntries()
         addTestEntries()
+        addVaccinationExemptionEntries()
 
         updateEnglishLabelVisibility()
         applySuccessState()
@@ -93,7 +94,7 @@ class CertificateDetailView: UIView {
             addDividerLine()
 
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_date_title_key), value: vaccination.displayDateOfVaccination)
-            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_country_title_key), value: vaccination.displayCountry)
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_country_title_key), value: vaccination.country.asLocalizedDisplayCountry(showEnglishLocalization: showEnglishLabels))
 
             addDividerLine()
 
@@ -123,7 +124,7 @@ class CertificateDetailView: UIView {
 
             addDividerLine()
 
-            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_land_key), value: pastInfection.displayCountry)
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_land_key), value: pastInfection.countryOfTest.asLocalizedDisplayCountry(showEnglishLocalization: showEnglishLabels))
 
             addDividerLine()
 
@@ -167,7 +168,7 @@ class CertificateDetailView: UIView {
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_sample_date_title_key), value: test.displaySampleDateTime)
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_result_date_title_key), value: test.displayResultDateTime)
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_done_by_key), value: test.testCenter)
-            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_land_key), value: test.displayCountry)
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_test_land_key), value: test.country.asLocalizedDisplayCountry(showEnglishLocalization: showEnglishLabels))
 
             addDividerLine()
 
@@ -176,6 +177,38 @@ class CertificateDetailView: UIView {
 
             addIssuedDate(dateString: holder?.displayIssuedAt)
         }
+    }
+    
+    private func addVaccinationExemptionEntries() {
+        guard let vaccinationExemptions = holder?.healthCert.vaccinationExemption,
+                vaccinationExemptions.count > 0
+        else { return }
+        
+        addDividerLine()
+        
+        addTitle(title: UBLocalized.translationWithEnglish(key: .covid_certificate_vaccination_exemption_title_key))
+        
+        for exemption in vaccinationExemptions {
+            addDividerLine()
+            
+            let exemptionValue = showEnglishLabels ? "\(UBLocalized.wallet_certificate_exemption_reason_value) /\n\(UBLocalized.translate(.wallet_certificate_exemption_reason_value_key, languageKey: "en"))" : UBLocalized.wallet_certificate_exemption_reason_value
+            
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_exemption_reason_title_key), value: exemptionValue)
+            
+            if exemption.isTargetDiseaseCorrect {
+                addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_target_disease_title_key), value: UBLocalized.target_disease_name)
+            }
+            
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_exemption_country_title_key), value: exemption.country.asLocalizedDisplayCountry(showEnglishLocalization: showEnglishLabels))
+            
+            addDividerLine()
+
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_issuer_title_key), value: exemption.issuer)
+            addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_identifier_key), value: exemption.certificateIdentifier, addEnglishLabels: false)
+
+            addIssuedDate(dateString: holder?.displayIssuedAt)
+        }
+        
     }
 
     // MARK: - Content

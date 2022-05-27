@@ -11,6 +11,7 @@
 
 import Foundation
 import UIKit
+import ValidationCore
 
 class CertificateNoteView: UIView {
     // MARK: - Subviews
@@ -19,11 +20,15 @@ class CertificateNoteView: UIView {
 
     // MARK: - Init
 
-    init() {
+    init(type: CertType?) {
         super.init(frame: .zero)
         setup()
 
-        label.text = UBLocalized.wallet_certificate_detail_note
+        if type == .vaccinationExemption {
+            label.text = UBLocalized.wallet_certificate_vaccination_exemption_detail_note
+        } else {
+            label.text = UBLocalized.wallet_certificate_detail_note
+        }
     }
 
     @available(*, unavailable)

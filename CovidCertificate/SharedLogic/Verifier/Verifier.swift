@@ -11,6 +11,7 @@
 
 import CovidCertificateSDK
 import Foundation
+import ValidationCore
 
 enum VerificationError: Equatable, Comparable {
     case signature
@@ -85,7 +86,7 @@ enum VerificationResultStatus: Equatable {
      */
     public func containsOnlyInvalidVerification() -> Bool {
         switch self {
-        case let .success(result): return result.filter { $0.valid }.count == 0
+        case let .success(result): return result.filter { $0.valid }.count == 0 && result.count > 0
         default: return false
         }
     }
@@ -165,16 +166,20 @@ class Verifier: NSObject {
         checkSignature(group: group, forceUpdate: forceUpdate) { state in states[0] = state }
 
         if validationTime != nil {
-            if checkDefaultRegion {
-                let index = states.count
-                states.append(.loading)
-                checkNationalRules(group: group, region: nil, forceUpdate: forceUpdate, callback: { state in states[index] = state })
-            }
+            if holder?.healthCert.type == CertType.vaccinationExemption {
+                states.append(VerificationResultStatus.success([VerificationRegionResult(region: nil, valid: holder?.healthCert.vaccinationExemption?.first?.validUntilDate?.isAfter(validationTime!) == true, validUntil: nil)]))
+            } else {
+                if checkDefaultRegion {
+                    let index = states.count
+                    states.append(.loading)
+                    checkNationalRules(group: group, region: nil, forceUpdate: forceUpdate, callback: { state in states[index] = state })
+                }
 
-            regions.forEach { region in
-                let index = states.count
-                states.append(.loading)
-                checkNationalRules(group: group, region: region, forceUpdate: forceUpdate, callback: { state in states[index] = state })
+                regions.forEach { region in
+                    let index = states.count
+                    states.append(.loading)
+                    checkNationalRules(group: group, region: region, forceUpdate: forceUpdate, callback: { state in states[index] = state })
+                }
             }
         }
 

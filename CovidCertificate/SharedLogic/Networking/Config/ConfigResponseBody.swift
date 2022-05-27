@@ -86,20 +86,6 @@ class ConfigResponseBody: UBCodable {
         let linkTitle: String?
         let linkUrl: URL?
     }
-    
-    class VaccinationRefreshCampaignText: UBCodable {
-        let title: String
-        let message: String
-        let remindAgainButton: String
-        let readButton: String
-        
-        private enum CodingKeys: String, CodingKey {
-            case title
-            case message
-            case remindAgainButton = "remind_again_button"
-            case readButton = "read_button"
-        }
-    }
 }
 
 class CertificateCondition: UBCodable {

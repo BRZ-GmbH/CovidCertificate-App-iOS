@@ -1,6 +1,6 @@
 [submodule "covidcertificate-sdk-ios"]
-	path = covidcertificate-sdk-ios
-	url = https://github.com/BRZ-GmbH/CovidCertificate-SDK-iOS.git
+    path = covidcertificate-sdk-ios
+    url = https://github.com/BRZ-GmbH/CovidCertificate-SDK-iOS.git
     branch = main
 [submodule "SnapKit"]
 	path = SnapKit

@@ -374,8 +374,8 @@
 /*Wallet: Retry Titel Offline*/
 "wallet_detail_offline_retry_title" = "Offline check not possible";
 
-/*Homescreen Zertifikat: Offline Modus Text*/
-"wallet_homescreen_offline" = "Offline mode";
+/*Button zum QR Code Scannen öffnen*/
+"wallet_homescreen_qr_code_scannen" = "Scan QR code";
 
 
 /*Wallet: Detail Offline Text*/
@@ -387,8 +387,7 @@
 /*Wallet: Detail Netzwerkfehler Text*/
 "wallet_detail_network_error_text" = "Try again later.";
 
-/*Wallet: Text auf Zertifikat auf Homescreen bei Netzwerkfehler*/
-"wallet_homescreen_network_error" = "Validity could not be determined";
+"wallet_region_selection_title" = "Federal State Selection";
 
 
 /*Titel Gültigkeit im Zertifikatsdetail*/
@@ -480,3 +479,16 @@
 "accessibility_settings_row_campaign_notifications_toggle_active" = "Notifications are enabled";
 "accessibility_settings_row_campaign_notifications_toggle_inactive" = "Notifications are disabled";
 "accessibility_change_campaign_notifications_toggle" = "Double-tap to change";
+
+/* Vaccination Exemptions */
+
+"wallet_certificate_vaccination_exemption_country_title" = "Country of Issue";
+"covid_certificate_vaccination_exemption_title" = "Vaccination Exemption";
+"wallet_certificate_vaccination_exemption_detail_note" = "An exemption from mandatory vaccination exists until the last day of the month following the month the medical reason for exemption discontinues. This end date of the exemption from mandatory vaccination is indicated on this certificate.\n\nThis certificate is not a travel document.\n";
+"wallet_3g_status_validity_headline_vaccination_exemption" = "Exemption valid";
+"wallet_certificate_vaccination_exemption" = "AT-compliant certificate";
+"certificate_reason_vaccination_exemption" = "Vaccination Exemption";
+"region_type_valid_vaccination_exemption" = "Valid";
+"region_type_invalid_vaccination_exemption" = "Invalid";
+"wallet_certificate_exemption_reason_title" = "Reason for exemption";
+"wallet_certificate_exemption_reason_value" = "Exemption from COVID-19 vaccination";
