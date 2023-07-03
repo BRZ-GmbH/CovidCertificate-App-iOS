@@ -17,8 +17,8 @@ class ExternalLinkButton: UBButton {
         super.init()
 
         self.title = title
-        
-        accessibilityLabel = [title, UBLocalized.accessibility_external_link].compactMap({ $0 }).joined(separator: ",")
+
+        accessibilityLabel = [title, UBLocalized.accessibility_external_link].compactMap { $0 }.joined(separator: ",")
         backgroundColor = .clear
         highlightedBackgroundColor = UIColor.cc_green_dark.withAlphaComponent(0.15)
 
@@ -57,7 +57,7 @@ class SimpleTextButton: UBButton {
 
     // MARK: - Init
 
-    init(title: String, color: UIColor) {
+    init(title: String, color: UIColor = .cc_green_dark, font: UIFont = LabelType.text.font) {
         self.color = color
         super.init()
 
@@ -71,7 +71,7 @@ class SimpleTextButton: UBButton {
         highlightCornerRadius = 3.0
 
         setTitleColor(color, for: .normal)
-        titleLabel?.font = LabelType.text.font
+        titleLabel?.font = font
     }
 
     override func layoutSubviews() {

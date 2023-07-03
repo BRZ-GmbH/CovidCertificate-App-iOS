@@ -10,22 +10,20 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import UIKit
-import Foundation
-import CovidCertificateSDK
 import BusinessRulesValidationCore
+import Foundation
+import UIKit
 
 /**
  Display the status of a single region
  */
 class CertificateRegionStatusView: UIView {
-    
     private let containerView = UIView()
     private let imageView = UIImageView()
     private let label = Label(.text, textAlignment: .center)
     private let isHomescreen: Bool
-    
-    var result: (String, ValidationResult?)? = nil {
+
+    var result: (String, ValidationResult?)? {
         didSet {
             if result?.0 == "Entry" {
                 label.text = UBLocalized.region_type_ET
@@ -46,23 +44,23 @@ class CertificateRegionStatusView: UIView {
                     imageView.accessibilityIdentifier = "certificate_detail_info_ng_icon"
                 }
             }
-            
+
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
-            if case .valid(_) = result?.1 {
+            if case .valid = result?.1 {
                 backgroundColor = .cc_green_valid
                 imageView.image = UIImage(named: "check-circle")
                 isAccessibilityElement = true
-                accessibilityLabel = [UBLocalized.region_type_valid, label.text].compactMap({$0}).joined(separator: ", ")
+                accessibilityLabel = [UBLocalized.region_type_valid, label.text].compactMap { $0 }.joined(separator: ", ")
             } else {
                 backgroundColor = .cc_red_invalid
                 imageView.image = UIImage(named: "minus-circle")
                 isAccessibilityElement = true
-                accessibilityLabel = [UBLocalized.region_type_invalid, label.text].compactMap({$0}).joined(separator: ", ")
+                accessibilityLabel = [UBLocalized.region_type_invalid, label.text].compactMap { $0 }.joined(separator: ", ")
             }
         }
     }
-    
+
     init(isHomescreen: Bool) {
         self.isHomescreen = isHomescreen
         super.init(frame: .zero)
@@ -79,20 +77,20 @@ class CertificateRegionStatusView: UIView {
     private func setup() {
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        
+
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
         }
-        
+
         containerView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-        
+
         containerView.addSubview(label)
         label.textColor = .cc_white
         label.snp.makeConstraints { make in
@@ -110,8 +108,8 @@ class CertificateExemptionView: UIView {
     private let imageView = UIImageView()
     private let label = Label(.text, textAlignment: .center)
     private let isHomescreen: Bool
-    
-    var result: ValidationResult? = nil {
+
+    var result: ValidationResult? {
         didSet {
             label.text = UBLocalized.covid_certificate_vaccination_exemption_title
             if isHomescreen {
@@ -121,10 +119,10 @@ class CertificateExemptionView: UIView {
                 label.accessibilityIdentifier = "certificate_detail_info_ve"
                 imageView.accessibilityIdentifier = "certificate_detail_info_ve_icon"
             }
-            
+
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
-            if case .valid(_) = result {
+            if case .valid = result {
                 backgroundColor = .cc_green_valid
                 imageView.image = UIImage(named: "check-circle")
                 accessibilityLabel = UBLocalized.region_type_valid_vaccination_exemption
@@ -136,7 +134,7 @@ class CertificateExemptionView: UIView {
             isAccessibilityElement = true
         }
     }
-    
+
     init(isHomescreen: Bool) {
         self.isHomescreen = isHomescreen
         super.init(frame: .zero)
@@ -153,20 +151,20 @@ class CertificateExemptionView: UIView {
     private func setup() {
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        
+
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
         }
-        
+
         containerView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-        
+
         containerView.addSubview(label)
         label.textColor = .cc_white
         label.snp.makeConstraints { make in

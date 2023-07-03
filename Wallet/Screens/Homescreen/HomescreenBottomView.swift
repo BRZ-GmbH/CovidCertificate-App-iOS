@@ -81,10 +81,10 @@ class HomescreenBottomView: UIView {
         addButtonGuide.snp.makeConstraints { make in
             make.center.equalTo(v)
         }
-        
+
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         listButton.accessibilityIdentifier = "homescreen_list_button"
         faqButton.accessibilityIdentifier = "homescreen_support_button"

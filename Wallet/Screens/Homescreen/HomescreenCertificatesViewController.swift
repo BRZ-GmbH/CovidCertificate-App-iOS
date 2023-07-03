@@ -19,7 +19,7 @@ class HomescreenCertificatesViewController: ViewController {
     // MARK: - Subviews
 
     private let stackScrollView = StackScrollView(axis: .horizontal, spacing: 0)
-    
+
     private lazy var pageControl: UIView = {
         // On iOS 14 or later, UIPageControl supports handling more pages than fit on the screen. Pre iOS 14 we use a custom PageControl that can handle this accordingly.
         if #available(iOS 14.0, *) {
@@ -28,22 +28,22 @@ class HomescreenCertificatesViewController: ViewController {
             return AccessibilityScrollingPageControl()
         }
     }()
-    
+
     private var certificateViews: [HomescreenCertificateView] = []
     private let maxDots = 11
     private let centerDots = 5
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupAccessibilityIdentifiers()
-        
+
         UIStateManager.shared.addObserver(self) { [weak self] state in
             guard let strongSelf = self else { return }
             strongSelf.refresh(state.certificateState.certificates)
         }
     }
-    
+
     public func changeAccessibilityFocus(toCertificate certificate: UserCertificate) {
         if let certView = certificateViews.first(where: { $0.certificate == certificate }) {
             UIAccessibility.post(notification: .screenChanged, argument: certView)
@@ -70,7 +70,7 @@ class HomescreenCertificatesViewController: ViewController {
             make.top.equalToSuperview()
             make.bottom.equalTo(self.pageControl.snp.top).offset(-Padding.medium)
         }
-        
+
         if let pageControl = pageControl as? UIPageControl {
             pageControl.accessibilityTraits = .adjustable
             pageControl.addTarget(self, action: #selector(handlePageChange), for: .valueChanged)
@@ -87,7 +87,7 @@ class HomescreenCertificatesViewController: ViewController {
         stackScrollView.stackView.clipsToBounds = false
         stackScrollView.scrollView.delegate = self
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         pageControl.accessibilityIdentifier = "homescreen_certificates_tab_layout"
     }
@@ -119,11 +119,11 @@ class HomescreenCertificatesViewController: ViewController {
         } completion: { _ in
             self.stackScrollView.scrollView.delegate = self
         }
-        
+
         pageControl.accessibilityValue = [UBLocalized.accessibility_page_control_page,
-                              "\(currentPageControlPage + 1)",
-                              UBLocalized.accessibility_of_text,
-                              "\((self.pageControl as? UIPageControl)?.numberOfPages ?? 0)"].compactMap({$0}).joined(separator: " ")
+                                          "\(currentPageControlPage + 1)",
+                                          UBLocalized.accessibility_of_text,
+                                          "\((pageControl as? UIPageControl)?.numberOfPages ?? 0)"].compactMap { $0 }.joined(separator: " ")
     }
 
     private func refresh(_ certificates: [UserCertificate]) {
@@ -174,13 +174,13 @@ class HomescreenCertificatesViewController: ViewController {
 extension HomescreenCertificatesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = round(scrollView.contentOffset.x / scrollView.frame.width)
-        self.currentPageControlPage = Int(page)
-        
+        currentPageControlPage = Int(page)
+
         if let _ = pageControl as? UIPageControl {
             pageControl.accessibilityValue = [UBLocalized.accessibility_page_control_page,
-                                  "\(currentPageControlPage + 1)",
-                                  UBLocalized.accessibility_of_text,
-                                  "\((self.pageControl as? UIPageControl)?.numberOfPages ?? 0)"].compactMap({$0}).joined(separator: " ")
+                                              "\(currentPageControlPage + 1)",
+                                              UBLocalized.accessibility_of_text,
+                                              "\((pageControl as? UIPageControl)?.numberOfPages ?? 0)"].compactMap { $0 }.joined(separator: " ")
         }
     }
 }

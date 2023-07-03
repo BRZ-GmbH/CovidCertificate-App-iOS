@@ -24,7 +24,6 @@ class QRScanErrorView: UIView {
         errorLabel.textColor = textColor
         errorLabel.accessibilityIdentifier = "qr_code_scanner_invalid_code_text"
 
-
         setup()
     }
 

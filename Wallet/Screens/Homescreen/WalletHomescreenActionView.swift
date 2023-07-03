@@ -141,7 +141,7 @@ class AddCertificateView: UIView {
         accessibilityLabel = [topLabel.text, textLabel.text].compactMap { $0 }.joined(separator: ", ")
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         topLabel.accessibilityIdentifier = "homescreen_options_overlay_add_certificate_options_title"
         textLabel.accessibilityIdentifier = "homescreen_options_overlay_add_certificate_options_text"
@@ -170,11 +170,16 @@ class IconButton: UBButton {
 
     // MARK: - Init
 
-    init(text: String, iconName: String) {
+    init(text: String, iconName: String, original: Bool = false) {
         super.init()
 
         textLabel.text = text
-        icon.image = UIImage(named: iconName)?.ub_image(with: .cc_green_dark).withRenderingMode(.alwaysOriginal)
+
+        if original {
+            icon.image = UIImage(named: iconName)?.withRenderingMode(.alwaysOriginal)
+        } else {
+            icon.image = UIImage(named: iconName)?.ub_image(with: .cc_green_dark).withRenderingMode(.alwaysOriginal)
+        }
 
         setup()
     }

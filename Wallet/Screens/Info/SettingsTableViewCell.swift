@@ -11,24 +11,23 @@
  */
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
-    
     static let reuseIdentifier = "settings.cell"
-    
+
     private let titleLabel = Label(.textBold)
     private let bottomLineView = UIView()
     private let chevronImageView = UIImageView(image: UIImage(named: "ic-chevron-right"))
-    private var bottomLineLeadingConstraint: Constraint? = nil
-    
+    private var bottomLineLeadingConstraint: Constraint?
+
     public var showFullWithBottomSeparator: Bool = false {
         didSet {
             bottomLineLeadingConstraint?.update(inset: showFullWithBottomSeparator ? 0 : Padding.medium)
         }
     }
-    
+
     // MARK: - Init
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,27 +41,27 @@ class SettingsTableViewCell: UITableViewCell {
     }
 
     // MARK: - Setup
-    
+
     private func setup() {
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         contentView.addSubview(titleLabel)
         chevronImageView.tintColor = UIColor.cc_green_dark
         chevronImageView.contentMode = .right
         contentView.addSubview(chevronImageView)
-        
+
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(Padding.medium)
             make.trailing.equalTo(chevronImageView.snp.leading).inset(Padding.medium)
             make.top.equalToSuperview().inset(Padding.large)
             make.bottom.equalToSuperview().inset(Padding.large)
         }
-        
+
         chevronImageView.snp.makeConstraints { make in
             make.width.equalTo(10)
             make.trailing.equalToSuperview().inset(Padding.medium)
             make.centerY.equalToSuperview()
         }
-        
+
         bottomLineView.backgroundColor = UIColor.cc_line
         addSubview(bottomLineView)
         bottomLineView.snp.makeConstraints { make in
@@ -76,7 +75,7 @@ class SettingsTableViewCell: UITableViewCell {
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
     }
-    
+
     func setTitle(_ title: String) {
         titleLabel.text = title
         accessibilityLabel = title

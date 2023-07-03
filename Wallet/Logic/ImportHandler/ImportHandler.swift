@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
 import Foundation
 import PDFKit
 
@@ -52,7 +51,7 @@ class ImportHandler {
 
     public func handleMessage(message: String) {
         let certificate = UserCertificate(qrCode: message)
-        
+
         switch certificate.decodedCertificate {
         case .success:
             delegate?.topViewController?.dismiss(animated: false, completion: nil)
@@ -69,9 +68,8 @@ class ImportHandler {
                 CertificateStorage.shared.insertCertificate(userCertificate: c)
 
                 (UIApplication.shared.delegate as? AppDelegate)?.didFinishImport()
-                
+
                 navVC.dismiss(animated: true, completion: {
-                    
                     if let vc = strongSelf.delegate?.viewControllers.first as? WalletHomescreenViewController {
                         vc.certificatesViewController.changeAccessibilityFocus(toCertificate: c)
                     }
@@ -123,16 +121,16 @@ class ImportHandler {
                 let pageRect = page.getBoxRect(.mediaBox)
 
                 let scaling: CGFloat = 300 / 72
-                        
+
                 let colorSpace = CGColorSpaceCreateDeviceRGB()
                 let bitmapInfo = CGImageAlphaInfo.noneSkipLast.rawValue
-                
+
                 guard let context = CGContext(data: nil, width: Int(pageRect.size.width * scaling), height: Int(pageRect.size.height * scaling), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) else { continue }
                 context.interpolationQuality = .high
                 context.setFillColor(UIColor.white.cgColor)
                 context.fill(CGRect(x: 0, y: 0, width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
                 context.drawPDFPage(page)
-                
+
                 if let image = context.makeImage() {
                     images.append(image)
                 }

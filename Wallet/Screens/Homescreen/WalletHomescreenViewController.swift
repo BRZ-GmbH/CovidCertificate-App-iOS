@@ -35,9 +35,13 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
     private var actionViewIsShown = false
 
     let actionPopupView = WalletHomescreenActionPopupView()
+    let directLinkActionPopupView = DirectLinkActionPopupView(enableBackgroundDismiss: false)
 
     let documentPickerDelegate = DocumentPickerDelegate()
     var accessibilityViews = [UIView]()
+
+    var errorRetryHandler: ((UIAlertAction) -> Void)?
+    var onErrorMessage: String?
 
     init() {
         super.init(color: .cc_green_dark)
@@ -49,8 +53,10 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         UIStateManager.shared.addObserver(self) { [weak self] s in
             guard let strongSelf = self else { return }
             strongSelf.state = s.certificateState.certificates.count == 0 ? .onboarding : .certificates
-            
+
             strongSelf.regionSelectionButton.region = Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)
+
+            strongSelf.checkForNotificationPermission()
         }
         
         addCertificateButton.accessibilityIdentifier = "homescreen_scan_button_small"
@@ -58,13 +64,20 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         setupViews()
         setupInteraction()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion) == nil {
             let vc = RegionSelectionViewController()
             vc.presentInNavigationController(from: self)
+        }
+        checkForNotificationPermission()
+    }
+
+    private func checkForNotificationPermission() {
+        if Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion) != nil && WalletUserStorage.shared.hasCompletedOnboarding {
+            NotificationService.shared.requestPermissionForLocalNotificationsIfNecessary()
         }
     }
 
@@ -170,7 +183,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             let vc = WalletSettingsViewController()
             vc.presentInNavigationController(from: strongSelf)
         }
-        
+
         regionSelectionButtonCallback = { [weak self] in
             guard let strongSelf = self else { return }
             let vc = RegionSelectionViewController()
@@ -182,7 +195,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             let vc = CertificateDetailViewController(certificate: cert)
             vc.presentInNavigationController(from: strongSelf)
         }
-        
+
         /**
          In test builds (for Q as well as P environment) we support a double tap on the country flag to change the device time setting.
          This setting allows the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
@@ -194,36 +207,36 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
             logoView.addGestureRecognizer(tapGestureRecognizer)
         #endif
     }
-    
+
     private func changeAccessibilityStatus(isEnabled: Bool) {
-        accessibilityViews.forEach({
+        accessibilityViews.forEach {
             $0.isAccessibilityElement = isEnabled
-        })
+        }
     }
-    
+
     private func setAccessibilityView(forView: UIView) {
         guard accessibilityViews.isEmpty else { return }
-        
-        forView.recursiveSubviews.forEach({
+
+        forView.recursiveSubviews.forEach {
             if $0.isAccessibilityElement {
-                if let superView = $0.superview, !superView.isKind(of: AddCertificateView.self)
-                    && $0 != addCertificateButton {
+                if let superView = $0.superview, !superView.isKind(of: AddCertificateView.self),
+                   $0 != addCertificateButton {
                     accessibilityViews.append($0)
                 }
             }
-        })
+        }
     }
 
     #if RELEASE_ABNAHME || RELEASE_PROD_TEST
-    @objc private func toggleDeviceTimeSettings() {
-        VerifierManager.shared.useDeviceTime = !VerifierManager.shared.useDeviceTime
-        
-        let alert = UIAlertController(title: VerifierManager.shared.useDeviceTime ? "Using Device Time" : "Using Real Time", message: VerifierManager.shared.useDeviceTime ? "The app now uses the current device time for Business Rule Validation" : "The app now uses the real time (fetched from NTP-Server) for Business Rule Validation", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
+        @objc private func toggleDeviceTimeSettings() {
+            VerifierManager.shared.useDeviceTime = !VerifierManager.shared.useDeviceTime
+
+            let alert = UIAlertController(title: VerifierManager.shared.useDeviceTime ? "Using Device Time" : "Using Real Time", message: VerifierManager.shared.useDeviceTime ? "The app now uses the current device time for Business Rule Validation" : "The app now uses the real time (fetched from NTP-Server) for Business Rule Validation", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
     #endif
-    
+
     private func setupViews() {
         addCertificateButton.ub_addShadow(radius: 4.0, opacity: 0.2, xOffset: 0.0, yOffset: 0.0)
 
@@ -240,7 +253,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         }
 
         let isSmall = UIScreen.main.bounds.width <= 375
-        
+
         addSubviewController(certificatesViewController) { make in
             make.top.equalTo(self.logoView.snp.bottom).offset(isSmall ? Padding.large : Padding.large + Padding.medium)
             make.left.right.equalToSuperview()
@@ -255,6 +268,11 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
         view.addSubview(addCertificateButton)
         addCertificateButton.snp.makeConstraints { make in
             make.center.equalTo(self.bottomView.addButtonGuide.snp.center)
+        }
+
+        view.addSubview(directLinkActionPopupView)
+        directLinkActionPopupView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
 
         updateState(false)

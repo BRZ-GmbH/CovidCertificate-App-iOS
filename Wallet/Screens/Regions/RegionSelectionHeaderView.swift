@@ -13,25 +13,24 @@ import Foundation
 import UIKit
 
 class RegionSelectionHeaderView: UIView {
-    
     private let titleLabel = Label(.textBoldLarge)
     private let messageLabel = Label(.text)
-    
+
     init(title: String, message: String) {
         super.init(frame: .zero)
-        
+
         titleLabel.text = title
         messageLabel.text = message
-        
+
         setup()
         setupAccessibilityIdentifiers()
     }
-    
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setup() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -39,10 +38,10 @@ class RegionSelectionHeaderView: UIView {
             make.right.equalToSuperview().offset(-2.0 * Padding.small)
             make.top.equalToSuperview().offset(Padding.medium)
         }
-        
+
         addSubview(messageLabel)
         messageLabel.numberOfLines = 0
-        
+
         messageLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(2.0 * Padding.small)
             make.right.equalToSuperview().offset(-2.0 * Padding.small)
@@ -50,7 +49,7 @@ class RegionSelectionHeaderView: UIView {
             make.bottom.equalToSuperview().offset(-Padding.medium)
         }
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         titleLabel.accessibilityIdentifier = "region_list_header_title"
         messageLabel.accessibilityIdentifier = "region_list_header_text"

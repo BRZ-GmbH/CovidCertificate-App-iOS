@@ -4,3 +4,5 @@
 
 # Don't format generated swift files
 --exclude **/*Generated.swift
+# Don't format generated files
+--exclude **/Strings+Generated.swift

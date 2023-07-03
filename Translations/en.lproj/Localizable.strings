@@ -348,13 +348,6 @@
 "wallet_homescreen_add_certificate_description" = "You have an EU-compliant certificate on paper or as PDF and would like to add it to your app.";
 
 
-/*Homescreen Zertifikat: Offline Modus Text*/
-"wallet_homescreen_offline" = "Offline mode";
-
-
-/*Wallet: Detail Netzwerkfehler Text*/
-"wallet_detail_network_error_text" = "Please try again later.";
-
 /*Wallet: Titel im Custom-Popup Notification Permission*/
 "wallet_notification_permission_title" = "Allow notifications";
 
@@ -385,7 +378,7 @@
 "wallet_detail_network_error_title" = "Check currently not possible";
 
 /*Wallet: Detail Netzwerkfehler Text*/
-"wallet_detail_network_error_text" = "Try again later.";
+"wallet_detail_network_error_text" = "Please try again later.";
 
 /*Wallet: Text auf Zertifikat auf Homescreen bei Netzwerkfehler*/
 "wallet_homescreen_network_error" = "Validity could not be determined";
@@ -411,9 +404,6 @@
 
 /*Button zum PDF importieren*/
 "wallet_homescreen_pdf_import" = "Import PDF";
-
-/*Wallet: Homescreen Was wollen sie machen?*/
-"wallet_homescreen_what_to_do" = "Select next step";
 
 /* Warnung bei aktivem Screen Recording */
 "warning_screen_recording" = "Screen recording is not allowed!";
@@ -493,3 +483,11 @@
 "region_type_invalid_vaccination_exemption" = "Invalid";
 "wallet_certificate_exemption_reason_title" = "Reason for exemption";
 "wallet_certificate_exemption_reason_value" = "Exemption from COVID-19 vaccination";
+
+/* Direct Link */
+"enter_birthday_text" = "Please enter your date of birth to receive your certificate.";
+"retrieve_certificate" = "Retrieve certificate";
+"error_retrieving_certificate" = "Certificate could not be retrieved. Please make sure that the date of birth is correct and the link has not expired.";
+"invalid_link_title" = "Invalid direct link";
+"invalid_link_text" = "Certificate could not be added";
+"error_retrieve_certificate_bypass" = "Certificate could not be retrieved. Please make sure that the link has not expired.";

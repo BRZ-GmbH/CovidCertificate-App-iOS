@@ -12,12 +12,10 @@
 
 import Foundation
 import UIKit
-import CovidCertificateSDK
 
 class WalletSettingsViewController: ViewController {
-    
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    
+
     enum SettingsRow {
         case imprint
         case licenses
@@ -25,38 +23,38 @@ class WalletSettingsViewController: ViewController {
         case campaignNotifications
         case dataUpdate
         #if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
-        case log
+            case log
         #endif
     }
-    
-#if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
-    private let rows: [SettingsRow] = [.faq, .campaignNotifications, .dataUpdate, .imprint, .licenses, .log]
-#else
-    private let rows: [SettingsRow] = [.faq, .campaignNotifications, .dataUpdate, .imprint, .licenses]
-#endif
-    
+
+    #if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
+        private let rows: [SettingsRow] = [.faq, .campaignNotifications, .dataUpdate, .imprint, .licenses, .log]
+    #else
+        private let rows: [SettingsRow] = [.faq, .campaignNotifications, .dataUpdate, .imprint, .licenses]
+    #endif
+
     // MARK: - Init
-    
+
     override init() {
         super.init()
         title = UBLocalized.settings_title.uppercased()
     }
-    
+
     // MARK: - View
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
-        
+
         addDismissButton()
     }
-    
+
     // MARK: - Setup
 
     private func setup() {
         view.addSubview(tableView)
-        
+
         let topLineView = UIView()
         topLineView.backgroundColor = UIColor.cc_line
         view.addSubview(topLineView)
@@ -67,36 +65,36 @@ class WalletSettingsViewController: ViewController {
             make.trailing.equalToSuperview()
             make.top.equalToSuperview()
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
         setupTableView()
     }
-    
+
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorInset = .zero
-        
+
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNonzeroMagnitude))
 
         tableView.sectionHeaderHeight = 0.0
         tableView.sectionFooterHeight = 0.0
         tableView.separatorStyle = .none
-        
+
         tableView.register(SettingsTableViewCell.classForCoder(), forCellReuseIdentifier: SettingsTableViewCell.reuseIdentifier)
         tableView.register(SettingsActionCell.classForCoder(), forCellReuseIdentifier: SettingsActionCell.reuseIdentifier)
         tableView.register(SettingsToggleCell.classForCoder(), forCellReuseIdentifier: SettingsToggleCell.reuseIdentifier)
     }
-    
+
     private func updateData() {
-        ProgressOverlayView.showProgressOverlayIn(view: self.view, text: UBLocalized.business_rule_update_progress)
-        CovidCertificateSDK.restartTrustListUpdate(force: true) { [weak self] wasUpdated, failed in
+        ProgressOverlayView.showProgressOverlayIn(view: view, text: UBLocalized.business_rule_update_progress)
+        CovidCertificateSDK.restartTrustListUpdate(force: true) { [weak self] _, failed in
             guard let self = self else { return }
             ProgressOverlayView.dismissProgressOverlayIn(view: self.view)
-            
+
             let alert = UIAlertController(title: nil, message: failed ? UBLocalized.business_rule_update_failed_message : UBLocalized.business_rule_update_success_message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: UBLocalized.business_rule_update_ok_button, style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -105,10 +103,9 @@ class WalletSettingsViewController: ViewController {
 }
 
 extension WalletSettingsViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         switch rows[indexPath.row] {
         case .imprint:
             let vc = WalletImprintViewController()
@@ -120,33 +117,29 @@ extension WalletSettingsViewController: UITableViewDelegate {
             let vc = BasicStaticContentViewController(models: ConfigManager.currentConfig?.viewModels ?? [], title: UBLocalized.wallet_faq_header.uppercased(), contentViewType: .faq)
             navigationController?.pushViewController(vc, animated: true)
         case .campaignNotifications:
-            if (UIAccessibility.isVoiceOverRunning) {
+            if UIAccessibility.isVoiceOverRunning {
                 toggleCampaignNotifications()
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            break
         case .dataUpdate:
             updateData()
-#if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
-        case .log:
-            navigationController?.pushViewController(LogViewController(), animated: true)
-#endif
-            
+        #if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
+            case .log:
+                navigationController?.pushViewController(LogViewController(), animated: true)
+        #endif
         }
     }
-    
 }
 
 extension WalletSettingsViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return rows.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch rows[indexPath.row] {
         case .imprint:
@@ -181,17 +174,17 @@ extension WalletSettingsViewController: UITableViewDataSource {
             cell.setTitle(UBLocalized.settings_row_update_data)
             cell.accessibilityIdentifier = "item_faq"
             return cell
-#if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
-        case .log:
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as! SettingsTableViewCell
-            cell.showFullWithBottomSeparator = indexPath.row == rows.count - 1
-            cell.setTitle("Log anzeigen")
-            cell.accessibilityIdentifier = "item_log"
-            return cell
-#endif
+        #if DEBUG || RELEASE_ABNAHME || RELEASE_PROD_TEST
+            case .log:
+                let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as! SettingsTableViewCell
+                cell.showFullWithBottomSeparator = indexPath.row == rows.count - 1
+                cell.setTitle("Log anzeigen")
+                cell.accessibilityIdentifier = "item_log"
+                return cell
+        #endif
         }
     }
-    
+
     @objc private func toggleCampaignNotifications() {
         WalletUserStorage.hasOptedOutOfNonImportantCampaigns = !WalletUserStorage.hasOptedOutOfNonImportantCampaigns
     }

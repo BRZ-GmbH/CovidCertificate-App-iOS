@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
 import Foundation
 import UIKit
 
@@ -178,29 +177,29 @@ class CertificateDetailView: UIView {
             addIssuedDate(dateString: holder?.displayIssuedAt)
         }
     }
-    
+
     private func addVaccinationExemptionEntries() {
         guard let vaccinationExemptions = holder?.healthCert.vaccinationExemption,
-                vaccinationExemptions.count > 0
+              vaccinationExemptions.count > 0
         else { return }
-        
+
         addDividerLine()
-        
+
         addTitle(title: UBLocalized.translationWithEnglish(key: .covid_certificate_vaccination_exemption_title_key))
-        
+
         for exemption in vaccinationExemptions {
             addDividerLine()
-            
+
             let exemptionValue = showEnglishLabels ? "\(UBLocalized.wallet_certificate_exemption_reason_value) /\n\(UBLocalized.translate(.wallet_certificate_exemption_reason_value_key, languageKey: "en"))" : UBLocalized.wallet_certificate_exemption_reason_value
-            
+
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_exemption_reason_title_key), value: exemptionValue)
-            
+
             if exemption.isTargetDiseaseCorrect {
                 addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_target_disease_title_key), value: UBLocalized.target_disease_name)
             }
-            
+
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_exemption_country_title_key), value: exemption.country.asLocalizedDisplayCountry(showEnglishLocalization: showEnglishLabels))
-            
+
             addDividerLine()
 
             addValueItem(title: UBLocalized.translationWithEnglish(key: .wallet_certificate_vaccination_issuer_title_key), value: exemption.issuer)
@@ -208,7 +207,6 @@ class CertificateDetailView: UIView {
 
             addIssuedDate(dateString: holder?.displayIssuedAt)
         }
-        
     }
 
     // MARK: - Content
@@ -240,12 +238,12 @@ class CertificateDetailView: UIView {
         var accessibilityLabels = [title.0, v]
         // we add what the screen shows to accessibility
 
-        if !UBLocalized.languageIsEnglish() && addEnglishLabels && showEnglishLabels  {
+        if !UBLocalized.languageIsEnglish(), addEnglishLabels, showEnglishLabels {
             accessibilityLabels.insert(title.1, at: accessibilityLabels.startIndex + 1)
         }
-        
+
         sv.accessibilityLabel = accessibilityLabels.joined(separator: ", ")
-        
+
         // This is only for the "Vaccine Dose", where "/" gets replaced with "of".
         if title == UBLocalized.translationWithEnglish(key: .wallet_certificate_impfdosis_title_key) {
             sv.accessibilityLabel = sv.accessibilityLabel?.replacingOccurrences(of: "/", with: " \(UBLocalized.accessibility_of_text) ")
@@ -335,7 +333,7 @@ class CertificateDetailView: UIView {
 
     private func update(animated: Bool) {
         // switch animatable states
-        let actions = {            
+        let actions = {
             switch self.state {
             case .loading:
                 self.applyLoadingState()
@@ -366,12 +364,11 @@ class CertificateDetailView: UIView {
 }
 
 class DashedLineView: UIView {
-    
     enum Style {
         case thick
         case thin
     }
-    
+
     private var shapeLayer = CAShapeLayer()
     private let style: Style
 
@@ -405,7 +402,6 @@ class DashedLineView: UIView {
             shapeLayer.lineDashPattern = [NSNumber(value: Float(6)), NSNumber(value: Float(2.0))]
             shapeLayer.lineCap = .square
         }
-        
     }
 
     // MARK: - Layout

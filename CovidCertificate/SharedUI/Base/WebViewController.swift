@@ -69,8 +69,8 @@ class WebViewController: ViewController {
         }
         setupAccessibilityIdentifiers()
     }
-    
-    private func setupAccessibilityIdentifiers() {        
+
+    private func setupAccessibilityIdentifiers() {
         webView.accessibilityIdentifier = "html_webview"
     }
 

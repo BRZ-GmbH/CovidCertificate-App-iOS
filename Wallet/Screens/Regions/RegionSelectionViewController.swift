@@ -14,22 +14,22 @@ import UIKit
 
 class RegionSelectionViewController: ViewController {
     private static let reuseIdentifier = "region.cell"
-    
+
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    
+
     private let tableHeaderView = RegionSelectionHeaderView(title: UBLocalized.wallet_region_selection_header_title, message: UBLocalized.wallet_region_selection_header_message)
-    
+
     private let regions: [Region] = Region.allCases.sorted { r1, r2 in
-        return r1.validityName < r2.validityName
+        r1.validityName < r2.validityName
     }
-    
+
     // MARK: - Init
-    
+
     override init() {
         super.init()
         title = UBLocalized.wallet_region_selection_title.uppercased()
     }
-    
+
     // MARK: - View
 
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class RegionSelectionViewController: ViewController {
             }
         }
     }
-    
+
     // MARK: - Setup
 
     private func setup() {
@@ -72,49 +72,45 @@ class RegionSelectionViewController: ViewController {
         tableView.separatorStyle = .none
 
         tableView.register(RegionTableViewCell.classForCoder(), forCellReuseIdentifier: RegionSelectionViewController.reuseIdentifier)
-        
+
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(tableHeaderView)
         tableHeaderView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         tableView.tableHeaderView = containerView
-        
+
         containerView.snp.makeConstraints { make in
             make.centerX.equalTo(tableView.snp.centerX)
             make.width.equalTo(tableView.snp.width)
             make.top.equalTo(tableView.snp.top)
         }
-        
-        self.tableView.tableHeaderView?.layoutIfNeeded()
-        self.tableView.tableHeaderView = self.tableView.tableHeaderView
+
+        tableView.tableHeaderView?.layoutIfNeeded()
+        tableView.tableHeaderView = tableView.tableHeaderView
     }
 }
 
 extension RegionSelectionViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let region = regions[indexPath.row]
         WalletUserStorage.shared.selectedValidationRegion = region.rawValue
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 extension RegionSelectionViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return regions.count
     }
-    
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RegionSelectionViewController.reuseIdentifier, for: indexPath) as! RegionTableViewCell
         let region = regions[indexPath.row]
@@ -123,5 +119,4 @@ extension RegionSelectionViewController: UITableViewDataSource {
         cell.showBottomSeparator = indexPath.row < (regions.count - 1)
         return cell
     }
-    
 }

@@ -346,14 +346,6 @@
 /*Wallet: Homescreen Zertifikat Description Text*/
 "wallet_homescreen_add_certificate_description" = "Sie haben ein EU-konformes Zertifikat auf Papier oder als PDF und möchten es zur App hinzufügen.";
 
-
-/*Homescreen Zertifikat: Offline Modus Text*/
-"wallet_homescreen_offline" = "Offline Modus";
-
-
-/*Wallet: Detail Netzwerkfehler Text*/
-"wallet_detail_network_error_text" = "Versuchen Sie es später erneut.";
-
 /*Wallet: Titel im Custom-Popup Notification Permission*/
 "wallet_notification_permission_title" = "Mitteilungen erlauben";
 
@@ -410,9 +402,6 @@
 
 /*Button zum PDF importieren*/
 "wallet_homescreen_pdf_import" = "PDF importieren";
-
-/*Wallet: Homescreen Was wollen sie machen?*/
-"wallet_homescreen_what_to_do" = "Nächsten Schritt wählen";
 
 /* Warnung bei aktivem Screen Recording */
 "warning_screen_recording" = "Bildschirmaufnahme ist nicht erlaubt!";
@@ -493,3 +482,11 @@
 "region_type_invalid_vaccination_exemption" = "Ungültig";
 "wallet_certificate_exemption_reason_title" = "Ausnahmegrund";
 "wallet_certificate_exemption_reason_value" = "Ausnahme COVID-19-Impfung";
+
+/* Direct Link */
+"enter_birthday_text" = "Bitte geben Sie Ihr Geburtsdatum ein, um Ihr Zertifikat zu erhalten.";
+"retrieve_certificate" = "Zertifikat abrufen";
+"error_retrieving_certificate" = "Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass das Geburtsdatum korrekt ist und der Link noch nicht abgelaufen ist.";
+"invalid_link_title" = "Ungültiger Direktlink";
+"invalid_link_text" = "Zertifikat konnte nicht hinzugefügt werden";
+"error_retrieve_certificate_bypass" = "Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass der Link noch nicht abgelaufen ist.";

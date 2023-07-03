@@ -42,7 +42,7 @@ class HomescreenOnboardingViewController: ViewController {
             strongSelf.addPDFCertificateTouchUpCallback?()
         }
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         titleLabel.accessibilityIdentifier = "homescreen_app_title"
         questionLabel.accessibilityIdentifier = "homescreen_add_certificate_options_title"

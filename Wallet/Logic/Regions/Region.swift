@@ -21,7 +21,7 @@ enum Region: String, CaseIterable {
     case steiermark = "STMK"
     case tirol = "T"
     case vorarlberg = "VBG"
-    
+
     var flag: UIImage? {
         switch self {
         case .vienna: return UIImage(named: "flag_w")
@@ -35,7 +35,7 @@ enum Region: String, CaseIterable {
         case .vorarlberg: return UIImage(named: "flag_vbg")
         }
     }
-    
+
     var name: String {
         switch self {
         case .vienna: return UBLocalized.region_wien
@@ -49,11 +49,11 @@ enum Region: String, CaseIterable {
         case .vorarlberg: return UBLocalized.region_vorarlberg
         }
     }
-    
+
     var validityName: String {
         return name
     }
-    
+
     static func regionFromString(_ value: String?) -> Region? {
         if let value = value {
             for region in Region.allCases {

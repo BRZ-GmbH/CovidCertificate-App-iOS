@@ -58,7 +58,7 @@ class OnboardingBaseViewController: ViewController {
         addSplashViewController()
 
         addStatusBarBlurView()
-        
+
         continueButton.accessibilityIdentifier = "onboarding_continue_button"
     }
 
@@ -290,7 +290,7 @@ class OnboardingBaseViewController: ViewController {
             // next page
             return didSwipeLeft()
         }
-        
+
         return super.accessibilityScroll(direction)
     }
 

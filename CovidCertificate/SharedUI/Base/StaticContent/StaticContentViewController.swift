@@ -14,7 +14,10 @@ import UIKit
 class StaticContentViewController: OnboardingContentViewController {
     private let models: [StaticContentViewModel]
     private let contentViewType: StaticContentViewType
-    
+
+    internal let continueButton = Button(title: UBLocalized.continue_button, style: .normal(.cc_green_dark))
+    internal let continueButtonShown: Bool!
+
     /**
         Enum to distinguish the context in which the static content view is used to correctly vary accessibility identifiers
      */
@@ -23,10 +26,11 @@ class StaticContentViewController: OnboardingContentViewController {
         case faq
         case scannerHowTo
     }
-    
-    init(models: [StaticContentViewModel], contentViewType: StaticContentViewType) {
+
+    init(models: [StaticContentViewModel], contentViewType: StaticContentViewType, continueButtonShown: Bool = false) {
         self.models = models
         self.contentViewType = contentViewType
+        self.continueButtonShown = continueButtonShown
         super.init()
     }
 
@@ -40,7 +44,7 @@ class StaticContentViewController: OnboardingContentViewController {
         for model in models {
             if let heading = model.heading {
                 let headingLabel = Label(.uppercaseBold)
-                
+
                 headingLabel.text = heading
                 headingLabel.accessibilityTraits = [.header]
                 headingLabel.accessibilityIdentifier = "onboarding_subtitle"
@@ -58,7 +62,7 @@ class StaticContentViewController: OnboardingContentViewController {
             }
 
             let titleLabel = Label(.title, textAlignment: model.textAlignment)
-            if self.contentViewType == .onboarding {
+            if contentViewType == .onboarding {
                 titleLabel.accessibilityIdentifier = "onboarding_title"
             } else {
                 titleLabel.accessibilityIdentifier = "item_faq_header_title"
@@ -86,9 +90,49 @@ class StaticContentViewController: OnboardingContentViewController {
 
             if !model.expandableTextGroups.isEmpty {
                 stackScrollView.addSpacerView(2 * Padding.medium)
-                
+
                 for expandableTextGroup in model.expandableTextGroups {
                     addExpandableBox((expandableTextGroup.title, expandableTextGroup.text, expandableTextGroup.linkTitle, expandableTextGroup.link))
+                }
+            }
+
+            if let externalLink = model.externalLink, let url = externalLink.url {
+                let button = ExternalLinkButton(title: externalLink.label)
+                button.touchUpCallback = {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+
+                let v = UIView()
+                v.addSubview(button)
+
+                button.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(Padding.large + Padding.medium)
+                    make.bottom.equalToSuperview()
+                    make.left.equalToSuperview().offset(70.0)
+                    make.right.lessThanOrEqualToSuperview().inset(Padding.medium)
+                }
+
+                button.accessibilityIdentifier = externalLink.accessibilityIdentifier
+
+                addArrangedView(v)
+
+                v.snp.makeConstraints { make in
+                    make.width.equalTo(self.view)
+                    make.left.right.equalToSuperview()
+                }
+            }
+
+            if let buttonText = model.continueButtonText {
+                continueButtonText = buttonText
+            }
+
+            if continueButtonShown {
+                stackScrollView.addSpacerView(2 * Padding.medium)
+
+                addArrangedView(continueButton)
+                continueButton.snp.makeConstraints { make in
+                    make.top.equalToSuperview()
+                    make.leading.trailing.equalToSuperview().inset(Padding.medium)
                 }
             }
 

@@ -12,8 +12,8 @@
 import Foundation
 
 class BasicStaticContentViewController: StaticContentViewController {
-    init(models: [StaticContentViewModel], title: String, contentViewType: StaticContentViewType) {
-        super.init(models: models, contentViewType: contentViewType)
+    init(models: [StaticContentViewModel], title: String, contentViewType: StaticContentViewType, continueButton: Bool = false) {
+        super.init(models: models, contentViewType: contentViewType, continueButtonShown: continueButton)
 
         self.title = title
         addDismissButton()
@@ -24,6 +24,6 @@ class BasicStaticContentViewController: StaticContentViewController {
 
         view.backgroundColor = .cc_background
 
-        stackScrollView.stackView.arrangedSubviews.forEach({ $0.subviews.first?.alpha = 1 })
+        stackScrollView.stackView.arrangedSubviews.forEach { $0.subviews.first?.alpha = 1 }
     }
 }

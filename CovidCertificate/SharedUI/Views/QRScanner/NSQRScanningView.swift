@@ -101,7 +101,7 @@ extension QRScannerView {
     }
 
     func startCapture() {
-        guard let videoCaptureDevice = self.videoCaptureDevice else {
+        guard let videoCaptureDevice = videoCaptureDevice else {
             return
         }
 
@@ -148,8 +148,7 @@ extension QRScannerView {
 extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_: AVCaptureMetadataOutput,
                         didOutput metadataObjects: [AVMetadataObject],
-                        from _: AVCaptureConnection)
-    {
+                        from _: AVCaptureConnection) {
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }

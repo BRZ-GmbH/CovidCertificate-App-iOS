@@ -13,30 +13,29 @@ import Foundation
 import UIKit
 
 class RegionTableViewCell: UITableViewCell {
-    
     public var region: Region? {
         didSet {
             update()
         }
     }
-    
+
     private let regionImageView = UIImageView()
     private let nameLabel = Label(.textBold)
     private let selectedIndicator = UIImageView(image: UIImage(named: "ic-check")?.ub_image(with: .cc_green_dark))
     private let bottomLineView = UIView()
-    
+
     public var showBottomSeparator: Bool = true {
         didSet {
             update()
         }
     }
-    
+
     public var isSelectedRegion: Bool = false {
         didSet {
             update()
         }
     }
-    
+
     // MARK: - Init
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -64,14 +63,14 @@ class RegionTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.height.width.equalTo(20)
         }
-        
+
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(Padding.medium + 2.0)
             make.left.equalTo(self.regionImageView.snp.right).offset(2.0 * Padding.small)
             make.bottom.equalToSuperview().inset(Padding.medium + 2.0)
         }
-        
+
         contentView.addSubview(selectedIndicator)
         selectedIndicator.contentMode = .center
         selectedIndicator.snp.makeConstraints { make in
@@ -79,7 +78,7 @@ class RegionTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.height.width.equalTo(24)
         }
-        
+
         bottomLineView.backgroundColor = UIColor.cc_line
         addSubview(bottomLineView)
         bottomLineView.snp.makeConstraints { make in
@@ -92,20 +91,20 @@ class RegionTableViewCell: UITableViewCell {
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
-        
+
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         nameLabel.accessibilityIdentifier = "item_region_list_name"
         selectedIndicator.accessibilityIdentifier = "item_region_list_radio"
     }
-    
+
     private func update() {
-        guard let region = self.region else { return }
+        guard let region = region else { return }
         nameLabel.text = region.name
-        
-        accessibilityLabel = [region.name, isSelectedRegion ? UBLocalized.accessibility_region_active : UBLocalized.accessibility_region_in_active].compactMap({ $0 }).joined(separator: ",")
+
+        accessibilityLabel = [region.name, isSelectedRegion ? UBLocalized.accessibility_region_active : UBLocalized.accessibility_region_in_active].compactMap { $0 }.joined(separator: ",")
         regionImageView.image = region.flag
         selectedIndicator.isHidden = isSelectedRegion == false
 

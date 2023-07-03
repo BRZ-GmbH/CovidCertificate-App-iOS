@@ -62,10 +62,6 @@ class PopupView: UIView {
     }
 
     @objc public func dismiss() {
-        if viewPoint == .zero {
-            return
-        }
-
         showCallback?(false)
 
         isUserInteractionEnabled = false

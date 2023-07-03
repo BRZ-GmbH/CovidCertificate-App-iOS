@@ -13,25 +13,24 @@
 import Foundation
 
 class TestUtil {
-    
     enum VaccineType: String {
         case johnson = "EU\\/1\\/20\\/1525"
         case moderna = "EU\\/1\\/21\\/1618"
     }
-    
+
     class func generateVaccination(_ vaccine: VaccineType, vaccinationAgeInDays: Int, dateOfBirthAge: (years: Int, days: Int), doses: Int, sequence: Int) -> String {
         return generateVaccination(vaccine.rawValue, vaccinationAgeInDays: vaccinationAgeInDays, dateOfBirthAge: dateOfBirthAge, doses: doses, sequence: sequence)
     }
-    
+
     class func generateVaccination(_ vaccineTypeString: String, vaccinationAgeInDays: Int, dateOfBirthAge: (years: Int, days: Int), doses: Int, sequence: Int) -> String {
         let vaccinationDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -vaccinationAgeInDays, to: Date())!
         let birthDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -dateOfBirthAge.days, to: Calendar.autoupdatingCurrent.date(byAdding: .year, value: -dateOfBirthAge.years, to: Date())!)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+
         return generateVaccinationCertificate(vaccineTypeString, vaccinationDate: dateFormatter.string(from: vaccinationDate), dateOfBirth: dateFormatter.string(from: birthDate), doses: doses, sequence: sequence)
     }
-    
+
     private class func generateVaccinationCertificate(_ vaccinationType: String, vaccinationDate: String, dateOfBirth: String, doses: Int, sequence: Int) -> String {
         return """
         {
@@ -60,17 +59,17 @@ class TestUtil {
         }
         """
     }
-    
+
     private class func generateRecoveryCertificate(positiveResultAgeInDays: Int, dateOfBirthAge: (years: Int, days: Int)) -> String {
         let positiveResultDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -positiveResultAgeInDays, to: Date())!
-        
+
         let birthDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -dateOfBirthAge.days, to: Calendar.autoupdatingCurrent.date(byAdding: .year, value: -dateOfBirthAge.years, to: Date())!)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+
         return generateRecoveryCertificate(positiveResultDate: dateFormatter.string(from: positiveResultDate), dateOfBirth: dateFormatter.string(from: birthDate))
     }
-    
+
     private class func generateRecoveryCertificate(positiveResultDate: String, dateOfBirth: String) -> String {
         return """
         {
@@ -96,32 +95,32 @@ class TestUtil {
         }
         """
     }
-    
+
     enum TestResult: String {
         case negative = "260415000"
         case positive = "123"
     }
-    
+
     class func generateRATTestCertificate(sampleCollectionDateAge: (hours: Int, minutes: Int), dateOfBirthAge: (years: Int, days: Int), result: TestResult) -> String {
         let sampleCollectionDate = Calendar.autoupdatingCurrent.date(byAdding: .minute, value: -sampleCollectionDateAge.minutes, to: Calendar.autoupdatingCurrent.date(byAdding: .hour, value: -sampleCollectionDateAge.hours, to: Date())!)!
-        
+
         let birthDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -dateOfBirthAge.days, to: Calendar.autoupdatingCurrent.date(byAdding: .year, value: -dateOfBirthAge.years, to: Date())!)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+
         return generateTestCertificate(sampleCollectionDate: ISO8601DateFormatter().string(from: sampleCollectionDate), dateOfBirth: dateFormatter.string(from: birthDate), testType: "LP217198-3", result: result.rawValue)
     }
-    
+
     class func generatePCRTestCertificate(sampleCollectionDateAge: (hours: Int, minutes: Int), dateOfBirthAge: (years: Int, days: Int), result: TestResult) -> String {
         let sampleCollectionDate = Calendar.autoupdatingCurrent.date(byAdding: .minute, value: -sampleCollectionDateAge.minutes, to: Calendar.autoupdatingCurrent.date(byAdding: .hour, value: -sampleCollectionDateAge.hours, to: Date())!)!
-        
+
         let birthDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -dateOfBirthAge.days, to: Calendar.autoupdatingCurrent.date(byAdding: .year, value: -dateOfBirthAge.years, to: Date())!)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+
         return generateTestCertificate(sampleCollectionDate: ISO8601DateFormatter().string(from: sampleCollectionDate), dateOfBirth: dateFormatter.string(from: birthDate), testType: "LP6464-4", result: result.rawValue)
     }
-    
+
     private class func generateTestCertificate(sampleCollectionDate: String, dateOfBirth: String, testType: String, result: String) -> String {
         return """
         {

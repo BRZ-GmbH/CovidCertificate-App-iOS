@@ -75,9 +75,8 @@ class ExpandableViewHeader: UBButton {
         accessibilityTraits = [.header]
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         headerLabel.accessibilityIdentifier = "item_faq_question_title"
-
     }
 }

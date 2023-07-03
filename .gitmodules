@@ -1,11 +1,11 @@
-[submodule "covidcertificate-sdk-ios"]
-    path = covidcertificate-sdk-ios
-    url = https://github.com/BRZ-GmbH/CovidCertificate-SDK-iOS.git
-    branch = main
 [submodule "SnapKit"]
     path = SnapKit
     url = https://github.com/SnapKit/SnapKit.git
 [submodule "businessrules-core-ios"]
     path = businessrules-core-ios
     url = https://github.com/BRZ-GmbH/dgc-businessrules-validation-core-ios.git
+    branch = main
+[submodule "validationcore-ios"]
+    path = validationcore-ios
+    url = https://github.com/BRZ-GmbH/ValidationCore-iOS.git
     branch = main

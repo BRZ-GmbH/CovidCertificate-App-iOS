@@ -78,7 +78,7 @@ class CertificateDetailViewController: ViewController {
 
     private func setup() {
         let isSmall = UIScreen.main.bounds.width <= 375
-        
+
         stackScrollView.stackView.isLayoutMarginsRelativeArrangement = true
         let p = isSmall ? Padding.medium : Padding.large + Padding.medium
         stackScrollView.stackView.layoutMargins = UIEdgeInsets(top: 0.0, left: p, bottom: 0.0, right: p)
@@ -94,7 +94,7 @@ class CertificateDetailViewController: ViewController {
 
         stackScrollView.addSpacerView(Padding.small * 2.0)
         stackScrollView.addArrangedView(dashedView)
-        
+
         qrCodeNameView.certificate = certificate
 
         stackScrollView.addSpacerView(Padding.small * 2.0)
@@ -104,7 +104,7 @@ class CertificateDetailViewController: ViewController {
         stackScrollView.addArrangedView(detailView)
 
         stackScrollView.addSpacerView(2.0 * Padding.large + 2.0 * Padding.small)
-        
+
         if case let .success(result) = certificate.decodedCertificate {
             stackScrollView.addArrangedView(CertificateNoteView(type: result.healthCert.type))
         } else {
@@ -137,10 +137,9 @@ class CertificateDetailViewController: ViewController {
     }
 
     private func removeCertificate() {
-        
         let alert = UIAlertController(title: nil, message: UBLocalized.wallet_certificate_delete_confirm_text, preferredStyle: UIDevice.current.userInterfaceIdiom == .pad ? .alert : .actionSheet)
         alert.addAction(UIAlertAction(title: UBLocalized.delete_button, style: .destructive, handler: { _ in
-            CertificateStorage.shared.userCertificates = CertificateStorage.shared.userCertificates.filter { $0 != self.certificate }
+            CertificateStorage.shared.removeCertificate(userCertificate: self.certificate)
             (UIApplication.shared.delegate as? AppDelegate)?.notificationHandler.removeCertificate(self.certificate)
             self.dismiss(animated: true, completion: nil)
         }))

@@ -31,14 +31,18 @@ Bugs oder Probleme sollten als Github issues gemeldet werden. Diese App steht in
 ## Repositories
 
 * Android App: [CovidCertificate-App-Android](https://github.com/BRZ-GmbH/CovidCertificate-App-Android)
-* Android SDK: [CovidCertificate-SDK-Android](https://github.com/BRZ-GmbH/CovidCertificate-SDK-Android)
 * iOS App: [CovidCertificate-App-iOS](https://github.com/BRZ-GmbH/CovidCertificate-App-iOS)
-* iOS SDK: [CovidCertificate-SDK-iOS](https://github.com/BRZ-GmbH/CovidCertificate-SDK-iOS)
 
 ## Installation and Building
 
 Das Projekt sollte mit Xcode 12.5 oder einer neueren Version geöffnet werden.
 Abhängigkeiten werden mit [Swift Package Manager](https://swift.org/package-manager) verwaltet, kein weiteres Setup benötigt.
+
+Vor dem Öffnen des Projekts ist die Initialisierung der Git Submodules notwendig. Hierfür ist im Root-Ordner nach dem Checkout folgender Befehl im Terminal auszuführen:
+
+```
+git submodule update --init
+```
 
 ###Zusätzliche Build Hinweise
 Folgende Konfiguration muss in der Build-/Entwicklungsumgebung sichergestellt sein, damit Vertrauenslisten, Geschäftsregeln und weitere Informationen vom Service abgerufen werden können. Weitere Informationen können auch unter https://github.com/Federal-Ministry-of-Health-AT/green-pass-overview#getting-access-to-trust-list-business-rules-and-value-sets nachgelesen werden.

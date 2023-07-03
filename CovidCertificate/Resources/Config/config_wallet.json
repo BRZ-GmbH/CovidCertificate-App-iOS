@@ -12,13 +12,13 @@
             "faqIconIos": "ic-faq-image",
             "faqIconAndroid": "ic_faq_image",
             "faqEntries": [{
-                    "title": "Wo kann ich mich über die EU-konformen Zertifikate informieren?",
-                    "text": "Alle Informationen zu den EU-konformen Zertifikaten des Grünen Passes erhalten Sie unter https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "Weitere Informationen",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
+                "title": "Wo kann ich mich über die EU-konformen Zertifikate informieren?",
+                "text": "Alle Informationen zu den EU-konformen Zertifikaten des Grünen Passes erhalten Sie unter https://gruenerpass.gv.at/.",
+                "iconAndroid": null,
+                "iconIos": null,
+                "linkTitle": "Weitere Informationen",
+                "linkUrl": "https://gruenerpass.gv.at/"
+            },
                 {
                     "title": "Wie kann ich meine EU-konformen Zertifikate vorweisen?",
                     "text": "Alle EU-konformen Zertifikate des Grünen Passes können entweder ausgedruckt (analog) oder digital vorgewiesen werden. Für den digitalen Vorweis steht Ihnen die Grüner Pass App zur Verfügung. In dieser App können Sie Ihre EU-konformen Zertifikate abspeichern und direkt aus der App vorweisen. \n\nBeachten Sie, dass Sie auf Verlangen der überprüfenden Stelle auch einen amtlichen Lichtbildausweis vorweisen müssen.",
@@ -44,13 +44,13 @@
             "faqIconIos": "ic-faq-image",
             "faqIconAndroid": "ic_faq_image",
             "faqEntries": [{
-                    "title": "Where can I get information about EU-compliant certificates?",
-                    "text": "For all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "More information",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
+                "title": "Where can I get information about EU-compliant certificates?",
+                "text": "For all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
+                "iconAndroid": null,
+                "iconIos": null,
+                "linkTitle": "More information",
+                "linkUrl": "https://gruenerpass.gv.at/"
+            },
                 {
                     "title": "In what ways can I present my EU-compliant certificates?",
                     "text": "Any EU-compliant Green Pass certificates can be presented either as printout (analogue) or in a digital form. The Green Pass app is available for digital presentation. In this app you can store your EU-compliant certificates and present them directly from the app. \n\nPlease note that you will also need to present an official photo ID upon request by the person performing the check.",
@@ -77,13 +77,13 @@
             "faqIconIos": "ic-faq-image",
             "faqIconAndroid": "ic_faq_image",
             "faqEntries": [{
-                    "title": "Wie kann ich meine EU-konformen Zertifikate zur App hinzufügen?",
-                    "text": "Um ein Zertifikat zur App hinzuzufügen, benötigen Sie das Originalzertifikat als PDF-Datei oder auf Papier. Sie können das PDF des Zertifikats direkt in die App laden oder das ausgedruckte Zertifikat mit der Grünen Pass App scannen und hinzufügen. Anschließend erscheint Ihr Zertifikat direkt in der App.\n\nAlle Informationen zu den EU-konformen Zertifikaten des Grünen Passes erhalten Sie unter https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "Weitere Informationen",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
+                "title": "Wie kann ich meine EU-konformen Zertifikate zur App hinzufügen?",
+                "text": "Um ein Zertifikat zur App hinzuzufügen, benötigen Sie das Originalzertifikat als PDF-Datei oder auf Papier. Sie können das PDF des Zertifikats direkt in die App laden oder das ausgedruckte Zertifikat mit der Grünen Pass App scannen und hinzufügen. Anschließend erscheint Ihr Zertifikat direkt in der App.\n\nAlle Informationen zu den EU-konformen Zertifikaten des Grünen Passes erhalten Sie unter https://gruenerpass.gv.at/.",
+                "iconAndroid": null,
+                "iconIos": null,
+                "linkTitle": "Weitere Informationen",
+                "linkUrl": "https://gruenerpass.gv.at/"
+            },
                 {
                     "title": "Können auch mehrere EU-konforme Zertifikate hinzugefügt werden?",
                     "text": "Ja, das ist möglich. So können Sie z. B. alle EU-konformen Zertifikate von Familienangehörigen in Ihrer App speichern. Durch die Auswahl der Listenansicht (Symbol mit 3 Balken am unteren Rand der App) können Sie alle in Ihrer App gespeicherten Zertifikate in einer Übersicht sehen und diese bei Bedarf auch neu reihen. In dieser Ansicht sehen Sie auch auf den ersten Blick ob es sich bei den Zertifikaten um Test-, Impf- oder Genesenenzertifikate handelt. Auch in diesem Fall gilt: Das EU-konforme Zertifikat ist nur in Kombination mit einem amtlichen Lichtbildausweis des Zertifikatsinhabers / der Zertifikatsinhaberin gültig.",
@@ -94,7 +94,7 @@
                 },
                 {
                     "title": "Sehe ich, ob mein EU-konformes Zertifikat gültig ist?",
-                    "text": "In der Grüner Pass App wird die Vertrauenswürdigkeit der importierten Zertifikate geprüft. Weiters enthält die App eine Voransicht der Gültigkeit des jeweiligen Zertifikats im Sinne der 3-G-Regeln (grün = gültig, rot = ungültig). Diese Voransicht berücksichtigt auch bundeslandspezifische Regelungen - aktuell etwa die abweichende Gültigkeitsdauer von 3-G-Nachweisen in Wien für Eintrittstests und Nachtgastronomie. Wählen Sie dazu bitte rechts oben das richtige Bundesland aus. Diese Voransicht ersetzt jedoch nicht die Prüfung, etwa in Hotels oder Kulturinstitutionen, durch einen Scan des QR-Codes unter qr.gv.at oder greencheck.gv.at. In bestimmten Fällen ist die Voransicht des 3-G-Status nicht verfügbar (z.b. wenn das Endgerät längere Zeit offline ist), aktivieren Sie dann bitte die Internetverbindung.",
+                    "text": "In der Grüner Pass App wird die Vertrauenswürdigkeit der importierten Zertifikate geprüft. Weiters enthält die App eine Voransicht der Gültigkeit des jeweiligen Zertifikats im Sinne der 3-G-Regeln (grün = gültig, rot = ungültig). Diese Voransicht berücksichtigt auch bundeslandspezifische Regelungen - aktuell etwa die abweichende Gültigkeitsdauer von 3-G-Nachweisen in Wien für Eintrittstests und Nachtgastronomie. Wählen Sie dazu bitte rechts oben das richtige Bundesland aus. Diese Voransicht ersetzt jedoch nicht die Prüfung, etwa in Hotels oder Kulturinstitutionen, durch einen Scan des QR-Codes unter greencheck.gv.at. In bestimmten Fällen ist die Voransicht des 3-G-Status nicht verfügbar (z.b. wenn das Endgerät längere Zeit offline ist), aktivieren Sie dann bitte die Internetverbindung.",
                     "iconAndroid": null,
                     "iconIos": null,
                     "linkTitle": null,
@@ -132,7 +132,6 @@
                     "linkTitle": null,
                     "linkUrl": null
                 }
-
             ]
         },
         "en": {
@@ -141,13 +140,13 @@
             "faqIconIos": "ic-faq-image",
             "faqIconAndroid": "ic_faq_image",
             "faqEntries": [{
-                    "title": "How can I add my EU-compliant certificates to the app?",
-                    "text": "In order to add a certificate to the app, you need the original certificate on paper or as PDF. You can use the Green Pass app to scan and add the EU-compliant QR code. Subsequently, your certificate will be shown directly in the app.\n\nFor all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "More information",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
+                "title": "How can I add my EU-compliant certificates to the app?",
+                "text": "In order to add a certificate to the app, you need the original certificate on paper or as PDF. You can use the Green Pass app to scan and add the EU-compliant QR code. Subsequently, your certificate will be shown directly in the app.\n\nFor all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
+                "iconAndroid": null,
+                "iconIos": null,
+                "linkTitle": "More information",
+                "linkUrl": "https://gruenerpass.gv.at/"
+            },
                 {
                     "title": "Can I add several EU-compliant certificates?",
                     "text": "Yes, this is possible. For instance, you can store all EU-compliant certificates of family members in your app. By selecting the list view (symbol with 3 bars at the bottom of the app) you can see all the certificates stored in your app in an overview and rearrange them if necessary. In this view you can also see at a glance whether the certificates are related to a test, vaccination or recovery. Please note that in that case, too, the EU-compliant certificate is valid only in combination with an official photo ID of the certificate holder.",
@@ -196,63 +195,6 @@
                     "linkTitle": null,
                     "linkUrl": null
                 }
-
-            ]
-        },
-        "en": {
-            "faqTitle": "How does \nthe app work?",
-            "faqSubTitle": "You can use the Green Pass app to save and present your EU-compliant certificates easily and securely on your smartphone.",
-            "faqIconIos": "ic-faq-image",
-            "faqIconAndroid": "ic_faq_image",
-            "faqEntries": [{
-                    "title": "How can I add my EU-compliant certificates to the app?",
-                    "text": "In order to add a certificate to the app, you need the original certificate on paper or as PDF. You can use the Green Pass app to scan and add the EU-compliant QR code. Subsequently, your certificate will be shown directly in the app.\n\nFor all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "More information",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
-                {
-                    "title": "Can I add several EU-compliant certificates?",
-                    "text": "Yes, this is possible. For instance, you can store all EU-compliant certificates of family members in your app. By selecting the list view (symbol with 3 bars at the bottom of the app) you can see all the certificates stored in your app in an overview and rearrange them if necessary. In this view you can also see at a glance whether the certificates are related to a test, vaccination or recovery. Please note that in that case, too, the EU-compliant certificate is valid only in combination with an official photo ID of the certificate holder.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": null,
-                    "linkUrl": null
-                },
-                {
-                    "title": "Can I see whether my EU-compliant health certificate is valid?",
-                    "text": "The Green Pass app checks the authenticity of imported certificates. The app also contains a preview of the validity in accordance with 3G rules in Austria (green = valid, red = invalid). This preview also takes into account state-specific regulations - currently, for example, the different validity period of 3-G certificates in Vienna for entrance tests and night clubs. To switch between states please make the correct selection at the top right within the app.  However, this preview does not replace verification by a third party. These certificates are checked, for example, in restaurants, cinemas, gyms or at the borders. The verifying authority scans the EU-compliant QR code and receives information via Web App whether a valid certificate is available. In certain cases the preview of the 3G status is not available (e.g. if the device is offline for multiple days), to enable the preview please activate the internet connection.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": null,
-                    "linkUrl": null
-                },
-                {
-                    "title": "How is my data protected?",
-                    "text": "Your personal data in the Green Pass app will not be stored in a central system, but only locally on your mobile phone.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": null,
-                    "linkUrl": null
-                },
-                {
-                    "title": "What data is contained in the QR code?",
-                    "text": "The QR code contains the same information that you can find in plain text on your EU-compliant health certificate on the print-out or PDF. The QR code also contains a deposited, secure signature that can be used to check the authenticity of the EU-compliant certificate.\n\nFor all information about EU-compliant Green Pass certificates, please go to https://gruenerpass.gv.at/.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": "More information",
-                    "linkUrl": "https://gruenerpass.gv.at/"
-                },
-                {
-                    "title": "What do I have to do if I delete the EU-compliant certificate or the app?",
-                    "text": "You can simply store your EU-compliant certificate on your smartphone again. For this purpose, download the app again and then scan the EU-compliant QR code on your certificate on paper or as PDF.",
-                    "iconAndroid": null,
-                    "iconIos": null,
-                    "linkTitle": null,
-                    "linkUrl": null
-                }
-
             ]
         }
     }

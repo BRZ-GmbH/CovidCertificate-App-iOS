@@ -11,23 +11,22 @@
  */
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class SettingsActionCell: UITableViewCell {
-    
     static let reuseIdentifier = "settings.action_cell"
-    
+
     private let titleLabel = Label(.textBold)
     private let bottomLineView = UIView()
-    private var bottomLineLeadingConstraint: Constraint? = nil
-    
+    private var bottomLineLeadingConstraint: Constraint?
+
     public var showFullWithBottomSeparator: Bool = false {
         didSet {
             bottomLineLeadingConstraint?.update(inset: showFullWithBottomSeparator ? 0 : Padding.medium)
         }
     }
-    
+
     // MARK: - Init
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -41,7 +40,7 @@ class SettingsActionCell: UITableViewCell {
     }
 
     // MARK: - Setup
-    
+
     private func setup() {
         titleLabel.textColor = UIColor.cc_green_dark
         contentView.addSubview(titleLabel)
@@ -51,7 +50,7 @@ class SettingsActionCell: UITableViewCell {
             make.top.equalToSuperview().inset(Padding.large)
             make.bottom.equalToSuperview().inset(Padding.large)
         }
-        
+
         bottomLineView.backgroundColor = UIColor.cc_line
         addSubview(bottomLineView)
         bottomLineView.snp.makeConstraints { make in
@@ -65,7 +64,7 @@ class SettingsActionCell: UITableViewCell {
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
     }
-    
+
     func setTitle(_ title: String) {
         titleLabel.text = title
         accessibilityLabel = title

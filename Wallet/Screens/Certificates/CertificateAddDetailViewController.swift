@@ -42,7 +42,7 @@ class CertificateAddDetailViewController: ViewController {
     private let certificateDetailView = CertificateAddDetailView()
 
     private let addOkButton = Button(title: UBLocalized.wallet_add_certificate_button)
-    private let scanAgainButton = SimpleTextButton(title: UBLocalized.wallet_scan_again, color: .cc_green_dark)
+    private let scanAgainButton = SimpleTextButton(title: UBLocalized.wallet_scan_again)
 
     let showScanAgainButton: Bool
 
@@ -61,10 +61,10 @@ class CertificateAddDetailViewController: ViewController {
 
         setupViews()
         setupInteraction()
-        
+
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         addOkButton.accessibilityIdentifier = "certificate_add_button"
         scanAgainButton.accessibilityIdentifier = "certificate_add_retry"

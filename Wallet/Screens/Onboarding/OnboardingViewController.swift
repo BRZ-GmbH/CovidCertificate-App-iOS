@@ -12,11 +12,8 @@
 import UIKit
 
 class OnboardingViewController: OnboardingBaseViewController {
-    
     var viewControllers: [StaticContentViewController] = {
-        var vcs = [.theApp, .store, .show].compactMap({ StaticContentViewController(models: [$0], contentViewType: .onboarding )})
-        /// OnboardingDisclaimerViewController needs to be created because of the extra settings inside
-        vcs.append(OnboardingDisclaimerViewController())
+        var vcs = [.theApp, .store, .show, .privacy].compactMap { StaticContentViewController(models: [$0], contentViewType: .onboarding) }
         return vcs
     }()
 

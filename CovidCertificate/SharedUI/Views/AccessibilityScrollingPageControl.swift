@@ -15,29 +15,28 @@ import ScrollingPageControl
 
 /// The ScrollingPageControl doesn't support accessibility.
 class AccessibilityScrollingPageControl: ScrollingPageControl {
-
-    var pageChangeCallback: (() -> ())?
+    var pageChangeCallback: (() -> Void)?
     override var selectedPage: Int {
         didSet {
             updatePageControllAccessibilityValue()
         }
     }
-    
+
     func updatePageControllAccessibilityValue() {
         accessibilityValue = [UBLocalized.accessibility_page_control_page,
                               "\(selectedPage + 1)",
                               UBLocalized.accessibility_of_text,
-                              "\(pages)"].compactMap({$0}).joined(separator: " ")
+                              "\(pages)"].compactMap { $0 }.joined(separator: " ")
     }
-    
-    open override func accessibilityIncrement() {
+
+    override open func accessibilityIncrement() {
         /// Parent class handles the overflows
         selectedPage += 1
         updatePageControllAccessibilityValue()
         pageChangeCallback?()
     }
-    
-    open override func accessibilityDecrement() {
+
+    override open func accessibilityDecrement() {
         /// Parent class handles the overflows
         selectedPage -= 1
         updatePageControllAccessibilityValue()

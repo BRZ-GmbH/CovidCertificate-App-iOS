@@ -9,10 +9,9 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
 import Foundation
-import ValidationCore
 import UIKit
+import ValidationCore
 
 class CertificateTableViewCell: UITableViewCell {
     // MARK: - Public API
@@ -26,12 +25,14 @@ class CertificateTableViewCell: UITableViewCell {
         }
     }
 
+    public var noValidationNecessary: Bool = false
+
     // MARK: - Subviews
 
     private let qrCodeStateImageView = UIImageView()
     private let nameLabel = Label(.textBoldLarge)
     private let loadingView = UIActivityIndicatorView(style: .gray)
-
+    let dateLabel = Label(.text)
     private let stateLabel = StateLabel()
 
     private var state: VerificationResultStatus = .loading {
@@ -68,11 +69,18 @@ class CertificateTableViewCell: UITableViewCell {
             make.right.equalToSuperview().inset(2.0 * Padding.small)
         }
 
+        contentView.addSubview(dateLabel)
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(Padding.small)
+            make.right.equalToSuperview().inset(2.0 * Padding.small)
+            make.bottom.lessThanOrEqualToSuperview().inset(2.0 * Padding.small)
+        }
+
         contentView.addSubview(stateLabel)
         stateLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(Padding.small)
             make.left.equalTo(self.qrCodeStateImageView.snp.right).offset(Padding.small)
-            make.right.lessThanOrEqualToSuperview().inset(2.0 * Padding.small)
+            make.right.lessThanOrEqualTo(dateLabel).inset(2.0 * Padding.small)
             make.bottom.lessThanOrEqualToSuperview().inset(2.0 * Padding.small)
         }
 
@@ -104,10 +112,10 @@ class CertificateTableViewCell: UITableViewCell {
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
-        
+
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         qrCodeStateImageView.accessibilityIdentifier = "item_certificate_list_icon_qr"
         nameLabel.accessibilityIdentifier = "item_certificate_list_name"
@@ -137,12 +145,18 @@ class CertificateTableViewCell: UITableViewCell {
             break
         }
 
-        let accessibilityHint = self.state.isSuccess() ? UBLocalized.accessibility_certificate_list_valid : UBLocalized.accessibility_certificate_list_in_valid
-        
+        let accessibilityHint = state.isSuccess() ? UBLocalized.accessibility_certificate_list_valid : UBLocalized.accessibility_certificate_list_in_valid
+
         accessibilityLabel = [nameLabel.accessibilityLabel, stateLabel.accessibilityLabel, accessibilityHint].compactMap { $0 }.joined(separator: ", ")
     }
 
     private func updateState(animated: Bool) {
+        if noValidationNecessary {
+            loadingView.stopAnimating()
+            qrCodeStateImageView.image = UIImage(named: "ic-qrcode-small")
+            return
+        }
+
         switch state {
         case .loading:
             loadingView.startAnimating()

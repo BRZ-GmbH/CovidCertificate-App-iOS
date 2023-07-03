@@ -100,6 +100,8 @@ import Foundation
      case covid_certificate_vaccination_title_key = "covid_certificate_vaccination_title"
     /// Löschen
      case delete_button_key = "delete_button"
+    /// Bitte geben Sie Ihr Geburtsdatum ein, um Ihr Zertifikat zu erhalten.
+     case enter_birthday_text_key = "enter_birthday_text"
     /// Einstellungen ändern
      case error_action_change_settings_key = "error_action_change_settings"
     /// Erneut versuchen
@@ -112,6 +114,10 @@ import Foundation
      case error_network_text_key = "error_network_text"
     /// Netzwerkfehler
      case error_network_title_key = "error_network_title"
+    /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass der Link noch nicht abgelaufen ist.
+     case error_retrieve_certificate_bypass_key = "error_retrieve_certificate_bypass"
+    /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass das Geburtsdatum korrekt ist und der Link noch nicht abgelaufen ist.
+     case error_retrieving_certificate_key = "error_retrieving_certificate"
     /// Fehler
      case error_title_key = "error_title"
     /// Aktualisieren
@@ -130,6 +136,10 @@ import Foundation
      case force_update_title_key = "force_update_title"
     /// Impressum / Informationen
      case impressum_title_key = "impressum_title"
+    /// Zertifikat konnte nicht hinzugefügt werden
+     case invalid_link_text_key = "invalid_link_text"
+    /// Ungültiger Direktlink
+     case invalid_link_title_key = "invalid_link_title"
     /// Einstellungen
      case ios_settings_open_key = "ios_settings_open"
     /// de
@@ -180,6 +190,8 @@ import Foundation
      case region_vorarlberg_key = "region_vorarlberg"
     /// Wien
      case region_wien_key = "region_wien"
+    /// Zertifikat abrufen
+     case retrieve_certificate_key = "retrieve_certificate"
     /// Sie erhalten vereinzelt wichtige Hinweismeldungen die für Sie relevante Informationen, wie zum Beispiel Erinnerungen an Auffrischungsimpfungen, Änderungen zu den aktuellen COVID-19 Maßnahmen oder Ähnliches, beinhalten.
      case settings_row_campaign_notifications_message_key = "settings_row_campaign_notifications_message"
     /// Hinweismeldungen
@@ -436,7 +448,7 @@ import Foundation
      case wallet_terms_privacy_link_key = "wallet_terms_privacy_link"
     /// Ja, entfernen
      case wallet_test_certificate_cleanup_cleanup_button_key = "wallet_test_certificate_cleanup_cleanup_button"
-    /// Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit sie ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?
+    /// Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit Sie Ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?
      case wallet_test_certificate_cleanup_message_key = "wallet_test_certificate_cleanup_message"
     /// Nie nachfragen
      case wallet_test_certificate_cleanup_never_button_key = "wallet_test_certificate_cleanup_never_button"
@@ -540,6 +552,8 @@ import Foundation
    static let covid_certificate_vaccination_title = UBLocalized.tr(UBLocalizedKey.covid_certificate_vaccination_title_key)
   /// Löschen
    static let delete_button = UBLocalized.tr(UBLocalizedKey.delete_button_key)
+  /// Bitte geben Sie Ihr Geburtsdatum ein, um Ihr Zertifikat zu erhalten.
+   static let enter_birthday_text = UBLocalized.tr(UBLocalizedKey.enter_birthday_text_key)
   /// Einstellungen ändern
    static let error_action_change_settings = UBLocalized.tr(UBLocalizedKey.error_action_change_settings_key)
   /// Erneut versuchen
@@ -552,6 +566,10 @@ import Foundation
    static let error_network_text = UBLocalized.tr(UBLocalizedKey.error_network_text_key)
   /// Netzwerkfehler
    static let error_network_title = UBLocalized.tr(UBLocalizedKey.error_network_title_key)
+  /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass der Link noch nicht abgelaufen ist.
+   static let error_retrieve_certificate_bypass = UBLocalized.tr(UBLocalizedKey.error_retrieve_certificate_bypass_key)
+  /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass das Geburtsdatum korrekt ist und der Link noch nicht abgelaufen ist.
+   static let error_retrieving_certificate = UBLocalized.tr(UBLocalizedKey.error_retrieving_certificate_key)
   /// Fehler
    static let error_title = UBLocalized.tr(UBLocalizedKey.error_title_key)
   /// Aktualisieren
@@ -572,6 +590,10 @@ import Foundation
    static let force_update_title = UBLocalized.tr(UBLocalizedKey.force_update_title_key)
   /// Impressum / Informationen
    static let impressum_title = UBLocalized.tr(UBLocalizedKey.impressum_title_key)
+  /// Zertifikat konnte nicht hinzugefügt werden
+   static let invalid_link_text = UBLocalized.tr(UBLocalizedKey.invalid_link_text_key)
+  /// Ungültiger Direktlink
+   static let invalid_link_title = UBLocalized.tr(UBLocalizedKey.invalid_link_title_key)
   /// Einstellungen
    static let ios_settings_open = UBLocalized.tr(UBLocalizedKey.ios_settings_open_key)
   /// de
@@ -622,6 +644,8 @@ import Foundation
    static let region_vorarlberg = UBLocalized.tr(UBLocalizedKey.region_vorarlberg_key)
   /// Wien
    static let region_wien = UBLocalized.tr(UBLocalizedKey.region_wien_key)
+  /// Zertifikat abrufen
+   static let retrieve_certificate = UBLocalized.tr(UBLocalizedKey.retrieve_certificate_key)
   /// Sie erhalten vereinzelt wichtige Hinweismeldungen die für Sie relevante Informationen, wie zum Beispiel Erinnerungen an Auffrischungsimpfungen, Änderungen zu den aktuellen COVID-19 Maßnahmen oder Ähnliches, beinhalten.
    static let settings_row_campaign_notifications_message = UBLocalized.tr(UBLocalizedKey.settings_row_campaign_notifications_message_key)
   /// Hinweismeldungen
@@ -880,7 +904,7 @@ import Foundation
    static let wallet_terms_privacy_link = UBLocalized.tr(UBLocalizedKey.wallet_terms_privacy_link_key)
   /// Ja, entfernen
    static let wallet_test_certificate_cleanup_cleanup_button = UBLocalized.tr(UBLocalizedKey.wallet_test_certificate_cleanup_cleanup_button_key)
-  /// Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit sie ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?
+  /// Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit Sie Ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?
    static func wallet_test_certificate_cleanup_message(_ p1: Any) -> String {
     return UBLocalized.tr(UBLocalizedKey.wallet_test_certificate_cleanup_message_key, String(describing: p1))
   }

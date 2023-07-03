@@ -8,13 +8,20 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
+import BackgroundTasks
+import StoreKit
 import UIKit
 import StoreKit
 import BackgroundTasks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    #if RELEASE_PROD || RELEASE_PROD_TEST
+        static let backgroundTaskInterval: TimeInterval = 60 * 60 * 8
+    #else
+        static let backgroundTaskInterval: TimeInterval = 60 * 60 * 1
+    #endif
+
     internal var window: UIWindow?
     private var lastForegroundActivity: Date?
     private var blurView: UIVisualEffectView?
@@ -24,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @UBUserDefault(key: "isFirstLaunch", defaultValue: true)
     var isFirstLaunch: Bool
-    
+
     private var isHandlingImport = false
-    
+
     private let linkHandler = LinkHandler()
     
     var notificationHandler: NotificationHandler!
@@ -36,11 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var hasUpdatedConfig = false
     private var hasUpdatedValueSetData = false
 
+    private var campaignIdToOpenFromNotification: String?
+    private var campaignTimestampKeyFromNotification: String?
+
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Pre-populate isFirstLaunch for users which already installed the app before we introduced this flag
         if WalletUserStorage.shared.hasCompletedOnboarding {
             isFirstLaunch = false
         }
+        UNUserNotificationCenter.current().delegate = self
 
         // Reset keychain on first launch
         if isFirstLaunch {
@@ -70,23 +81,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         #if RELEASE_ABNAHME || RELEASE_PROD_TEST
         #else
-        screenProtecter.startPreventingRecording()
+            screenProtecter.startPreventingRecording()
         #endif
-        
-        UIStateManager.shared.addObserver(self) { [weak self] s in
+
+        UIStateManager.shared.addObserver(self) { [weak self] _ in
             self?.queueCertificateNotificationChecks()
             VerifierManager.shared.restartAllVerifiers()
         }
-        
+
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             if #available(iOS 13.0, *) {
                 BGTaskScheduler.shared.register(forTaskWithIdentifier: "\(bundleIdentifier).refresh", using: nil) { task in
                     self.handleAppRefresh(task: task as! BGAppRefreshTask)
                 }
-            } else {
-            }
+            } else {}
         }
-    
+
         return true
     }
     
@@ -164,14 +174,134 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(_: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler _: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
-    {
-        if let url = userActivity.webpageURL {
-            return linkHandler.handle(url: url)
+    @available(iOS 13.0, *)
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        scheduleAppRefresh()
+
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
         }
-        return false
+
+        CovidCertificateSDK.restartTrustListUpdate(force: false, completionHandler: { wasUpdated, failed in
+            if failed {
+                Logger.log("Background Data Update - Failed", appState: false)
+            } else {
+                if wasUpdated {
+                    Logger.log("Background Data Update - New Data", appState: false)
+                } else {
+                    Logger.log("Background Data Update - Unchanged", appState: false)
+                }
+            }
+            ConfigManager().startConfigRequest(force: false, window: nil, showForceUpdateDialogIfNecessary: false) { [weak self] in
+                self?.checkForCertificateCampaignsToQueueAndDisplay()
+                task.setTaskCompleted(success: failed == false)
+            }
+        })
+    }
+
+    func scheduleAppRefresh() {
+        if #available(iOS 13.0, *) {
+            if let bundleIdentifier = Bundle.main.bundleIdentifier {
+                let request = BGAppRefreshTaskRequest(identifier: "\(bundleIdentifier).refresh")
+                request.earliestBeginDate = Date(timeIntervalSinceNow: AppDelegate.backgroundTaskInterval)
+                do {
+                    BGTaskScheduler.shared.cancelAllTaskRequests()
+                    try BGTaskScheduler.shared.submit(request)
+                } catch {}
+            }
+        }
+    }
+
+    private var certificateNotificationCheckTimer: Timer?
+
+    func didCompleteOnboarding() {
+        queueCertificateNotificationChecks()
+    }
+
+    private func queueCertificateNotificationChecks() {
+        certificateNotificationCheckTimer?.invalidate()
+        certificateNotificationCheckTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
+            self?.certificateNotificationCheckTimer = nil
+            self?.checkForCertificateCampaigns()
+        }
+    }
+
+    private func checkForCertificateCampaigns() {
+        guard hasUpdatedConfig else { return }
+        guard hasUpdatedValueSetData else { return }
+        guard !isHandlingImport else { return }
+        guard WalletUserStorage.shared.hasCompletedOnboarding else { return }
+
+        notificationHandler.checkForExpiredTestCertificates(window: window, UIStateManager.shared.uiState.certificateState.certificates) { [weak self] hasRemovedCertificates in
+            guard !hasRemovedCertificates else { return }
+
+            self?.checkForCertificateCampaignsToQueueAndDisplay()
+        }
+    }
+
+    private func checkForCertificateCampaignsToQueueAndDisplay() {
+        guard let config = ConfigManager.currentConfig else { return }
+        guard let time = VerifierManager.shared.currentTime else {
+            if UIApplication.shared.applicationState != .background {
+                queueCertificateNotificationChecks()
+            }
+            return
+        }
+
+        let certLogicValueSets = CovidCertificateSDK.currentValueSets().mapValues { $0.valueSetValues.map { $0.key } }
+
+        let campaignCheckResult = notificationHandler.startCertificateNotificationCheck(window: window, certificates: UIStateManager.shared.uiState.certificateState.certificates, valueSets: certLogicValueSets, validationClock: time, config: config)
+
+        if NotificationService.shared.hasDeterminedNotificationPermission, campaignIdToOpenFromNotification == nil {
+            if UIApplication.shared.applicationState == .background && NotificationService.shared.canDisplayLocalNotifications {
+                NotificationService.shared.updateLocalNotificationsForCampaignCheckResult(campaignCheckResult, excludingVisibleCampaignTimestampKey: campaignTimestampKeyFromNotification)
+            } else if UIApplication.shared.applicationState == .active {
+                if NotificationService.shared.canDisplayLocalNotifications {
+                    if CertificateStorage.shared.hasModifiedCertificatesInSession {
+                        NotificationService.shared.getCampaignTimestampKeysFromDeliveredLocalNotifications { [weak self] deliveredCampaignTimestampKeys in
+                            guard let self = self else { return }
+                            self.notificationHandler.displayCampaignsForCheckResult(campaignCheckResult, window: self.window, excludingCampaignsWithTimestampKeys: deliveredCampaignTimestampKeys)
+                        }
+                    } else {
+                        NotificationService.shared.updateLocalNotificationsForCampaignCheckResult(campaignCheckResult, excludingVisibleCampaignTimestampKey: campaignTimestampKeyFromNotification)
+                    }
+                } else {
+                    notificationHandler.displayCampaignsForCheckResult(campaignCheckResult, window: window)
+                }
+            }
+        }
+    }
+
+    func application(_: UIApplication, continue userActivity: NSUserActivity, restorationHandler _: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity.webpageURL,
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            return false
+        }
+
+        let linkType = linkHandler.handle(urlComponents: components)
+        return handleLinkType(urlComponents: components, linkType: linkType)
+    }
+
+    func handleLinkType(urlComponents _: URLComponents, linkType: WalletAppLinkType) -> Bool {
+        guard let viewController = navigationController.viewControllers.first as? WalletHomescreenViewController else {
+            return false
+        }
+
+        switch linkType {
+        case let .directLink(secret: secret, signature: signature):
+            viewController.addCertificateDirectly(secret: secret, signature: signature)
+            return true
+        case let .directLinkWithBpt(secret: secret, signature: signature, bpt: bpt):
+            viewController.addCertificateDirectlyWithBpt(secret: secret, secretSignature: signature, bpt: bpt)
+            return true
+        case let .directQRCode(data: qrCode):
+            viewController.addCertificate(qrCode: qrCode)
+            return true
+        case .none:
+            viewController.invalidLinkError()
+            return false
+        }
     }
 
     private func shouldSetupWindow(application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -217,7 +347,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if ConfigManager.shortAppVersion != WalletUserStorage.lastInstalledAppVersion {
                 if WalletUserStorage.hasAskedForStoreReview == false {
                     WalletUserStorage.hasAskedForStoreReview = true
-                    
+
                     DispatchQueue.main.async {
                         if #available(iOS 14.0, *) {
                             if let windowScene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene {
@@ -239,11 +369,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func willAppearAfterColdstart(_: UIApplication, coldStart: Bool, backgroundTime: TimeInterval) {
         VerifierManager.shared.updateTime()
-        
+
         if !coldStart {
             UIStateManager.shared.stateChanged(forceRefresh: true)
         }
-        
+
         // Refresh trust list (public keys, revocation list, business rules,...)
         VerifierManager.shared.isSyncingData = true
         CovidCertificateSDK.restartTrustListUpdate(force: backgroundTime == 0, completionHandler: { [weak self] wasUpdated, failed in
@@ -256,15 +386,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     Logger.log("\(backgroundTime == 0 ? "Forced " : "")Data Update - Unchanged", appState: false)
                 }
             }
-            
-            VerifierManager.shared.isSyncingData = false            
+
+            VerifierManager.shared.isSyncingData = false
             self?.hasUpdatedValueSetData = true
             self?.queueCertificateNotificationChecks()
-            UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)                       
+            UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)
         })
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        campaignIdToOpenFromNotification = nil
+        campaignTimestampKeyFromNotification = nil
+
+        CertificateStorage.shared.hasModifiedCertificatesInSession = false
         lastForegroundActivity = Date()
 
         // App should not have badges
@@ -273,27 +407,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         addBlurView()
         VerifierManager.shared.resetTime()
-        
+
         notificationHandler.dismissAlert()
-        
+
         isHandlingImport = false
-        
+
         hasUpdatedConfig = false
         hasUpdatedValueSetData = false
-        
+
         scheduleAppRefresh()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
         removeBlurView()
-        
+
         // Refresh config
         let backgroundTime = -(lastForegroundActivity?.timeIntervalSinceNow ?? 0)
         ConfigManager().startConfigRequest(force: backgroundTime == 0, window: window, showForceUpdateDialogIfNecessary: isHandlingImport == false) { [weak self] in
             self?.didUpdateConfig()
         }
     }
-    
+
     func didUpdateConfig() {
         hasUpdatedConfig = true
         queueCertificateNotificationChecks()
@@ -349,9 +483,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         blurView = bv
     }
-    
+
     func didFinishImport() {
         isHandlingImport = false
+    }
+
+    private func handleTapOnCampaignNotification(_ campaignId: String, title: String, message: String, timestampKey: String) {
+        guard let campaign = ConfigManager.currentConfig?.campaigns?.first(where: { $0.id == campaignId }) else { return }
+
+        campaignIdToOpenFromNotification = campaignId
+        campaignTimestampKeyFromNotification = timestampKey
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + (UIApplication.shared.applicationState == .active ? 0 : 1)) { [weak self] in
+            self?.notificationHandler.presentAlertForCampaign(campaign, title: title, message: message, window: self?.window, timestampKey: timestampKey, certificateHash: nil, autoCloseOnUpdates: false) { [weak self] in
+                self?.campaignIdToOpenFromNotification = nil
+                self?.campaignTimestampKeyFromNotification = nil
+                self?.queueCertificateNotificationChecks()
+            }
+        }
     }
 }
 
@@ -371,7 +520,25 @@ extension AppDelegate {
 
         isHandlingImport = true
         importHandler?.handle(url: url)
-        
+
         return true
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            if let campaignId = response.notification.request.content.userInfo["campaignId"] as? String,
+               let timestampKey = response.notification.request.content.userInfo["campaignTimestampKey"] as? String {
+                handleTapOnCampaignNotification(campaignId, title: response.notification.request.content.title, message: response.notification.request.content.body, timestampKey: timestampKey)
+            }
+        } else if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            if let campaignId = response.notification.request.content.userInfo["campaignId"] as? String,
+               let timestampKey = response.notification.request.content.userInfo["campaignTimestampKey"] as? String,
+               let campaign = ConfigManager.currentConfig?.campaigns?.first(where: { $0.id == campaignId }) {
+                notificationHandler.dismissCampaignNotificationForCampaign(campaign, timestampKey: timestampKey)
+            }
+        }
+        completionHandler()
     }
 }

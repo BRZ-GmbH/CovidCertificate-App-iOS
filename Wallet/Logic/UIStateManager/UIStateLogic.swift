@@ -26,5 +26,4 @@ class UIStateLogic {
     private func buildCertificateState() -> CertificateState {
         return CertificateState(certificates: CertificateStorage.shared.userCertificates)
     }
-
 }

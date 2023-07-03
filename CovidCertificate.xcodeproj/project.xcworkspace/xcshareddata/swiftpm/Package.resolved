@@ -15,35 +15,8 @@
         "repositoryURL": "https://github.com/ehn-digital-green-development/base45-swift",
         "state": {
           "branch": "main",
-          "revision": "db4ccbe535b91d780a08997708c6abf189e98661",
+          "revision": "b2fd6c1ff48f6ea1d2877368afd326700427f261",
           "version": null
-        }
-      },
-      {
-        "package": "Cryptor",
-        "repositoryURL": "https://github.com/Kitura/BlueCryptor.git",
-        "state": {
-          "branch": null,
-          "revision": "ee5880e031da4c609f372cf7472476ab51d5dd19",
-          "version": "1.0.200"
-        }
-      },
-      {
-        "package": "CryptorECC",
-        "repositoryURL": "https://github.com/Kitura/BlueECC.git",
-        "state": {
-          "branch": null,
-          "revision": "baf6ed3fc1a622675f0041b4aff7c02dd1a93818",
-          "version": "1.2.200"
-        }
-      },
-      {
-        "package": "CryptorRSA",
-        "repositoryURL": "https://github.com/Kitura/BlueRSA.git",
-        "state": {
-          "branch": null,
-          "revision": "440f78db26d8bb073f29590f1c7bd31004da09ae",
-          "version": "1.0.201"
         }
       },
       {
@@ -56,12 +29,30 @@
         }
       },
       {
+        "package": "CwlCatchException",
+        "repositoryURL": "https://github.com/mattgallagher/CwlCatchException.git",
+        "state": {
+          "branch": null,
+          "revision": "35f9e770f54ce62dd8526470f14c6e137cef3eea",
+          "version": "2.1.1"
+        }
+      },
+      {
+        "package": "CwlPreconditionTesting",
+        "repositoryURL": "https://github.com/mattgallagher/CwlPreconditionTesting.git",
+        "state": {
+          "branch": null,
+          "revision": "c21f7bab5ca8eee0a9998bbd17ca1d0eb45d4688",
+          "version": "2.1.0"
+        }
+      },
+      {
         "package": "Gzip",
         "repositoryURL": "https://github.com/1024jp/GzipSwift",
         "state": {
           "branch": null,
-          "revision": "ba0b6cb51cc6202f896e469b87d2889a46b10d1b",
-          "version": "5.1.1"
+          "revision": "7a7f17761c76a932662ab77028a4329f67d645a4",
+          "version": "5.2.0"
         }
       },
       {
@@ -74,15 +65,6 @@
         }
       },
       {
-        "package": "KituraContracts",
-        "repositoryURL": "https://github.com/Kitura/KituraContracts.git",
-        "state": {
-          "branch": null,
-          "revision": "8418006e39e2efae9b31ae92721cb597ac29c617",
-          "version": "1.2.200"
-        }
-      },
-      {
         "package": "Kronos",
         "repositoryURL": "https://github.com/BRZ-GmbH/Kronos.git",
         "state": {
@@ -92,12 +74,39 @@
         }
       },
       {
-        "package": "LoggerAPI",
-        "repositoryURL": "https://github.com/Kitura/LoggerAPI.git",
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
           "branch": null,
-          "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
-          "version": "1.9.200"
+          "revision": "c93f16c25af5770f0d3e6af27c9634640946b068",
+          "version": "9.2.1"
+        }
+      },
+      {
+        "package": "OHHTTPStubs",
+        "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs",
+        "state": {
+          "branch": null,
+          "revision": "12f19662426d0434d6c330c6974d53e2eb10ecd9",
+          "version": "9.1.0"
+        }
+      },
+      {
+        "package": "Quick",
+        "repositoryURL": "https://github.com/Quick/Quick",
+        "state": {
+          "branch": null,
+          "revision": "8cce6acd38f965f5baa3167b939f86500314022b",
+          "version": "3.1.2"
+        }
+      },
+      {
+        "package": "ScrollingPageControl",
+        "repositoryURL": "https://github.com/EmilioPelaez/ScrollingPageControl.git",
+        "state": {
+          "branch": "master",
+          "revision": "76d4833b12baebf7123bb0ff133f7bcbb0b61595",
+          "version": null
         }
       },
       {
@@ -116,15 +125,6 @@
           "branch": null,
           "revision": "d458564516e5676af9c70b4f4b2a9178294f1bc6",
           "version": "5.0.1"
-        }
-      },
-      {
-        "package": "SwiftJWT",
-        "repositoryURL": "https://github.com/Kitura/Swift-JWT.git",
-        "state": {
-          "branch": null,
-          "revision": "2f2fc12ae88660e0760b04d9e6c341517b31ad7b",
-          "version": "3.6.200"
         }
       },
       {

@@ -14,20 +14,18 @@ import CovidCertificateSDK
 
 class UserCertificate: Codable, Equatable {
     let qrCode: String
-        
-    lazy var decodedCertificate: Result<DGCHolder, CovidCertError> = {
-        return CovidCertificateSDK.decode(encodedData: qrCode)
-    }()
-    
-    init(qrCode: String) {
+    let uniqueId: String?
+    let createDate: String?
+
+    lazy var decodedCertificate: Result<DGCHolder, CovidCertError> = CovidCertificateSDK.decode(encodedData: qrCode)
+
+    init(qrCode: String, uniqueId: String? = nil, createDate: String? = nil) {
         self.qrCode = qrCode
+        self.uniqueId = uniqueId
+        self.createDate = createDate
     }
-    
+
     static func == (lhs: UserCertificate, rhs: UserCertificate) -> Bool {
         return lhs.qrCode == rhs.qrCode
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case qrCode
     }
 }

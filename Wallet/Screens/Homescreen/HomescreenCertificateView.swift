@@ -27,11 +27,8 @@ class HomescreenCertificateView: UIView {
     private let informationContentView = UIView()
     private let stackScrollView = StackScrollView(axis: .vertical, spacing: 15)
 
-
     // private let stateLabel = HomescreenStateLabel()
-    private lazy var stateView = {
-        return CertificateStateView(certificate: certificate, isHomescreen: true)
-    }()
+    private lazy var stateView = CertificateStateView(certificate: certificate, isHomescreen: true)
 
     public let certificate: UserCertificate
 
@@ -54,7 +51,7 @@ class HomescreenCertificateView: UIView {
         accessibilityHint = UBLocalized.accessibility_detail_certificate
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         accessibilityIdentifier = "certificate_page_main_group"
         titleLabel.accessibilityIdentifier = "certificate_page_title"
@@ -73,7 +70,7 @@ class HomescreenCertificateView: UIView {
         contentView.ub_addShadow(radius: shadowRadius, opacity: shadowOpacity, xOffset: 0.0, yOffset: 2.0)
         contentView.layer.cornerRadius = 20.0
         addSubview(contentView)
-        
+
         contentView.addSubview(informationContentView)
         contentView.addSubview(stackScrollView)
 
@@ -81,7 +78,7 @@ class HomescreenCertificateView: UIView {
         stackScrollView.addArrangedView(nameView)
 
         let isSmall = UIScreen.main.bounds.width <= 375
-        
+
         stackScrollView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(isSmall ? Padding.medium - HomescreenCertificateView.inset : Padding.large - HomescreenCertificateView.inset)
             make.top.equalToSuperview().offset(Padding.medium)
@@ -94,18 +91,18 @@ class HomescreenCertificateView: UIView {
         stackScrollView.scrollView.alwaysBounceVertical = false
         stackScrollView.scrollView.showsVerticalScrollIndicator = true
         stackScrollView.scrollView.flashScrollIndicators()
-        
+
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.left.right.equalToSuperview().inset(HomescreenCertificateView.inset)
         }
-        
+
         informationContentView.snp.makeConstraints { make in
             make.top.equalTo(stackScrollView.snp.bottom).offset(Padding.small)
             make.bottom.equalToSuperview()
             make.left.right.equalToSuperview().inset(HomescreenCertificateView.inset)
         }
-       
+
         if case let .success(result) = certificate.decodedCertificate, result.healthCert.type == .vaccinationExemption {
             titleLabel.text = UBLocalized.wallet_certificate_vaccination_exemption
         } else {
@@ -137,19 +134,19 @@ class HomescreenCertificateView: UIView {
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(performTap))
         addGestureRecognizer(tap)
-        
+
         update(animated: false)
     }
-    
+
     @objc private func performTap() {
         touchUpCallback?()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         nameView.updateLayout()
     }
-    
+
     private func update(animated _: Bool) {
         let isInvalid = state.isInvalid()
         nameView.enabled = !isInvalid

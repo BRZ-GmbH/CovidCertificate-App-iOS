@@ -9,10 +9,9 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
+import BusinessRulesValidationCore
 import Foundation
 import UIKit
-import BusinessRulesValidationCore
 
 /**
  Displays the individual verification states for regions
@@ -21,7 +20,7 @@ class CertificateRegionStateView: UIView {
     private let validityStackView = UIStackView()
     var isHomescreen: Bool = false
 
-    var results: [String:ValidationResult] = [:] {
+    var results: [String: ValidationResult] = [:] {
         didSet {
             update(animated: true)
         }
@@ -59,11 +58,11 @@ class CertificateRegionStateView: UIView {
         var statusView = CertificateRegionStatusView(isHomescreen: isHomescreen)
         statusView.result = ("Entry", results["Entry"])
         validityStackView.addArrangedSubview(statusView)
-        
+
         statusView = CertificateRegionStatusView(isHomescreen: isHomescreen)
         statusView.result = ("NightClub", results["NightClub"])
         validityStackView.addArrangedSubview(statusView)
 
-        accessibilityLabel = validityStackView.subviews.compactMap({$0.accessibilityLabel}).joined(separator: ", ")
+        accessibilityLabel = validityStackView.subviews.compactMap { $0.accessibilityLabel }.joined(separator: ", ")
     }
 }

@@ -14,31 +14,31 @@ import Foundation
 import UIKit
 
 class ProgressOverlayView: UIView {
-    static let containerViewTag = 456987123
+    static let containerViewTag = 456_987_123
     static let cornerRadius = CGFloat(10)
     static let padding = CGFloat(10)
-    
+
     static let backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
     static let textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-    
+
     class func showProgressOverlayIn(view: UIView, text: String) {
         let accessoryView = UIActivityIndicatorView(style: .white)
         accessoryView.startAnimating()
-        
+
         let label = Label(.text)
         label.text = text
         label.textColor = textColor
-        
+
         // Container view
         let containerView = UIView()
-        
+
         containerView.tag = containerViewTag
         containerView.layer.cornerRadius = cornerRadius
         containerView.backgroundColor = backgroundColor
-        
+
         containerView.addSubview(accessoryView)
         containerView.addSubview(label)
-        
+
         accessoryView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(Padding.medium)
             make.top.equalToSuperview().offset(Padding.medium)
@@ -50,13 +50,13 @@ class ProgressOverlayView: UIView {
             make.bottom.equalToSuperview().offset(-Padding.medium)
             make.trailing.equalToSuperview().offset(-Padding.medium)
         }
-        
+
         view.addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }
-    
+
     class func dismissProgressOverlayIn(view: UIView) {
         view.subviews
             .filter { $0.tag == containerViewTag }

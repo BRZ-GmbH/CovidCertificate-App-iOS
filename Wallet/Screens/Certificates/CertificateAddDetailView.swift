@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
 import Foundation
 
 class CertificateAddDetailView: UIView {
@@ -69,7 +68,7 @@ class CertificateAddDetailView: UIView {
         stackScrollView.addSpacerView(Padding.large + Padding.medium)
 
         let qrCodeImageView = UIImageView.centered(with: UIImage(named: "ic-qrcode"))
-        
+
         stackScrollView.addArrangedView(qrCodeImageView)
         stackScrollView.addSpacerView(Padding.large + Padding.medium)
 

@@ -12,7 +12,6 @@
 import UIKit
 
 struct StaticContentViewModel: Codable, Equatable {
-
     var textAlignment: NSTextAlignment {
         switch alignment {
         case "center":
@@ -21,33 +20,38 @@ struct StaticContentViewModel: Codable, Equatable {
             return .left
         }
     }
-    
-       var image: UIImage? {
-           guard let imageName = foregroundImage else { return nil }
 
-           return UIImage(named: imageName)
-       }
-    
+    var image: UIImage? {
+        guard let imageName = foregroundImage else { return nil }
+
+        return UIImage(named: imageName)
+    }
+
     let heading: String?
     let foregroundImage: String?
     let title: String
     let alignment: String
     let textGroups: [TextGroup]
     let expandableTextGroups: [ExpandableTextGroup]
+    let externalLink: ExternalLink?
+    let continueButtonText: String?
 
     init(heading: String? = nil,
          foregroundImage: String? = nil,
          title: String,
          alignment: String = "left",
          textGroups: [TextGroup] = [],
-         expandableTextGroups: [ExpandableTextGroup] = [])
-    {
+         expandableTextGroups: [ExpandableTextGroup] = [],
+         externalLink: ExternalLink? = nil,
+         continueButtonText: String? = nil) {
         self.heading = heading
         self.foregroundImage = foregroundImage
         self.title = title
         self.alignment = alignment
         self.textGroups = textGroups
         self.expandableTextGroups = expandableTextGroups
+        self.externalLink = externalLink
+        self.continueButtonText = continueButtonText
     }
 
     static func == (lhs: StaticContentViewModel, rhs: StaticContentViewModel) -> Bool {
@@ -85,7 +89,9 @@ struct StaticContentViewModel: Codable, Equatable {
     static let privacy = StaticContentViewModel(heading: UBLocalized.wallet_onboarding_privacy_header,
                                                 foregroundImage: "illu-onboarding-data-protection",
                                                 title: UBLocalized.wallet_onboarding_privacy_title,
-                                                textGroups: [TextGroup(image: "ic-data-protection", imageColor: UIColor.cc_green_dark.ub_hexString, imageAltText: nil, text: UBLocalized.wallet_onboarding_privacy_text, accessibilityIdentifier: nil)])
+                                                textGroups: [TextGroup(image: "ic-data-protection", imageColor: UIColor.cc_green_dark.ub_hexString, imageAltText: nil, text: UBLocalized.wallet_onboarding_privacy_text, accessibilityIdentifier: nil)],
+                                                externalLink: ExternalLink(label: UBLocalized.wallet_onboarding_external_privacy_button, linkUrl: Environment.current.privacyURL, accessibilityIdentifier: "item_agb_link_label"),
+                                                continueButtonText: UBLocalized.wallet_onboarding_accept_button)
 
     static let howItWorks = StaticContentViewModel(foregroundImage: "illu-how-it-works",
                                                    title: UBLocalized.wallet_scanner_howitworks_title,
@@ -94,6 +100,5 @@ struct StaticContentViewModel: Codable, Equatable {
                                                                 TextGroup(image: "ic-two", imageColor: UIColor.cc_green_dark.ub_hexString, imageAltText: nil, text: UBLocalized.wallet_scanner_howitworks_text3, accessibilityIdentifier: nil),
                                                                 TextGroup(image: "ic-three", imageColor: UIColor.cc_green_dark.ub_hexString, imageAltText: nil, text: UBLocalized.wallet_scanner_howitworks_text4, accessibilityIdentifier: nil)],
                                                    expandableTextGroups: [ExpandableTextGroup(title: UBLocalized.wallet_scanner_howitworks_question1, text: UBLocalized.wallet_scanner_howitworks_answer1, linkTitle: UBLocalized.wallet_scanner_howitworks_external_link_title, linkUrl: UBLocalized.wallet_scanner_howitworks_external_link)])
- 
 }
 

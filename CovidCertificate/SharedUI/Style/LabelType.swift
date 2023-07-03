@@ -24,9 +24,7 @@ class FontSize {
         return min(max(minimum, bfs), maximum)
     }
 
-    public static let fontSizeMultiplicator: CGFloat = {
-        max(1.0, bodyFontSize() / normalBodyFontSize)
-    }()
+    public static let fontSizeMultiplicator: CGFloat = max(1.0, bodyFontSize() / normalBodyFontSize)
 }
 
 public enum LabelType: UBLabelType {

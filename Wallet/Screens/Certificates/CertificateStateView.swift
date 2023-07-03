@@ -9,11 +9,10 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
+import BusinessRulesValidationCore
 import Foundation
 import SnapKit
 import UIKit
-import BusinessRulesValidationCore
 
 class CertificateStateView: UIView {
     // MARK: - Subviews
@@ -25,7 +24,7 @@ class CertificateStateView: UIView {
     private let textLabel = Label(.textLarge, textAlignment: .center)
 
     private let validityErrorStackView = UIStackView()
-    private var validityErrorStackViewTopConstraint: Constraint? = nil
+    private var validityErrorStackViewTopConstraint: Constraint?
     private let validityHeadlineLabel = Label(.text, textAlignment: .center)
     private let exemptionValidityView = CertificateStateValidityView()
     private let entryValidityView = CertificateStateValidityView()
@@ -36,9 +35,7 @@ class CertificateStateView: UIView {
     private let validityHintView = Label(.smallErrorLight, textAlignment: .center)
 
     private let regionStateView = CertificateRegionStateView()
-    private lazy var exemptionStateView = {
-        return CertificateExemptionView(isHomescreen: self.isHomescreen)
-    }()
+    private lazy var exemptionStateView = CertificateExemptionView(isHomescreen: self.isHomescreen)
 
     private var hasValidityView: Bool = false
 
@@ -53,7 +50,7 @@ class CertificateStateView: UIView {
     init(certificate: UserCertificate? = nil, isHomescreen: Bool = true) {
         self.isHomescreen = isHomescreen
         self.certificate = certificate
-        self.hasValidityView = isHomescreen == false
+        hasValidityView = isHomescreen == false
 
         super.init(frame: .zero)
 
@@ -72,7 +69,7 @@ class CertificateStateView: UIView {
 
     private func setup() {
         addSubview(validityHintView)
-        
+
         regionStateView.isHomescreen = isHomescreen
 
         addSubview(backgroundView)
@@ -101,7 +98,7 @@ class CertificateStateView: UIView {
             }
             make.height.greaterThanOrEqualTo(76)
         }
-        
+
         if case let .success(result) = certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
             exemptionStateView.snp.makeConstraints { make in
                 make.edges.equalTo(backgroundView)
@@ -151,7 +148,7 @@ class CertificateStateView: UIView {
                 exemptionValidityView.backgroundColor = .cc_greenish
             } else {
                 validityHeadlineLabel.text = UBLocalized.wallet_3g_status_validity_headline
-                
+
                 validityErrorStackView.addArrangedSubview(validityHeadlineLabel)
                 validityErrorStackView.addArrangedSubview(entryValidityView)
                 validityErrorStackView.addArrangedSubview(nightClubValidityView)
@@ -161,10 +158,10 @@ class CertificateStateView: UIView {
                 nightClubValidityView.backgroundColor = .cc_greenish
             }
         }
-        
+
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         if isHomescreen {
             imageView.accessibilityIdentifier = "certificate_page_status_icon"
@@ -174,7 +171,7 @@ class CertificateStateView: UIView {
             imageView.accessibilityIdentifier = "certificate_detail_status_icon"
             textLabel.accessibilityIdentifier = "certificate_detail_info"
             validityHintView.accessibilityIdentifier = "certificate_detail_validity_hint_et"
-            validityHeadlineLabel.accessibilityIdentifier = "certificate_detail_info_validity_headline"            
+            validityHeadlineLabel.accessibilityIdentifier = "certificate_detail_info_validity_headline"
         }
     }
 
@@ -201,7 +198,6 @@ class CertificateStateView: UIView {
             self.textLabel.textColor = .cc_text
 
             switch self.state {
-            
             case .loading:
                 self.imageView.image = nil
                 self.textLabel.textColor = .cc_white
@@ -234,10 +230,10 @@ class CertificateStateView: UIView {
                 self.validityHintView.ub_setHidden(false)
                 self.backgroundView.ub_setHidden(true)
                 self.textLabel.ub_setHidden(true)
-                
+
                 self.entryValidityView.textColor = .cc_black
                 self.nightClubValidityView.textColor = .cc_black
-                
+
                 var entryValid = false
                 var nightClubValid = false
                 if case let .valid(result) = results["Entry"] {
@@ -254,10 +250,10 @@ class CertificateStateView: UIView {
                 } else {
                     self.nightClubValidityView.ub_setHidden(true)
                 }
-                
+
                 var validityIsVisible = entryValid == true || nightClubValid == true
                 if case let .success(result) = self.certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
-                    if case .valid(_) = results.values.first {
+                    if case .valid = results.values.first {
                         validityIsVisible = true
                         self.exemptionValidityView.validityTitleLabel.text = "\(UBLocalized.wallet_3g_status_validity_headline_vaccination_exemption)\n\u{00a0}"
                         self.exemptionValidityView.untilText = result.healthCert.vaccinationExemption?.first?.displayValidUntilDate
@@ -267,7 +263,7 @@ class CertificateStateView: UIView {
                     self.exemptionStateView.result = results.values.first
                 }
                 self.validityHeadlineLabel.ub_setHidden(!validityIsVisible)
-                self.validityErrorStackViewTopConstraint?.update(offset: (!validityIsVisible) ? 0 : Padding.large)
+                self.validityErrorStackViewTopConstraint?.update(offset: !validityIsVisible ? 0 : Padding.large)
             case .error:
                 self.imageView.image = VerificationError.typeInvalid.icon()?.ub_image(with: .cc_red)
                 self.textLabel.attributedText = VerificationError.typeInvalid.displayName()
@@ -336,13 +332,12 @@ class CertificateStateView: UIView {
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
                 self.validityErrorStackViewTopConstraint?.update(offset: 0)
-                
             }
 
             if let text = self.textLabel.attributedText?.string {
                 self.accessibilityLabel = text
             } else {
-                self.accessibilityLabel = [self.validityHintView.text, self.regionStateView.accessibilityLabel].compactMap({$0}).joined(separator: ",")
+                self.accessibilityLabel = [self.validityHintView.text, self.regionStateView.accessibilityLabel].compactMap { $0 }.joined(separator: ",")
             }
         }
 

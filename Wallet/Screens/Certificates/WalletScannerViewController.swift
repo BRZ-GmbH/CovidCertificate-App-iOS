@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import CovidCertificateSDK
 import Foundation
 
 class WalletScannerViewController: ViewController {
@@ -24,7 +23,7 @@ class WalletScannerViewController: ViewController {
 
     private let imageView = UIImageView(image: UIImage(named: "ic-scan-code"))
     private let explanationLabel = Label(.textBoldLarge, textAlignment: .center)
-    private let moreInfoButton = SimpleTextButton(title: UBLocalized.wallet_scanner_info_button, color: .cc_green_dark)
+    private let moreInfoButton = SimpleTextButton(title: UBLocalized.wallet_scanner_info_button)
 
     private var isLightOn: Bool = false
     private let lightButton = ScannerLightButton.walletButton()
@@ -151,7 +150,7 @@ class WalletScannerViewController: ViewController {
         detailViewController.view.alpha = 0.0
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         explanationLabel.accessibilityIdentifier = "qr_code_scanner_explanation"
         moreInfoButton.accessibilityIdentifier = "qr_code_scanner_button_how"
@@ -201,7 +200,7 @@ class WalletScannerViewController: ViewController {
             /// It takes about atleast 1.5 seconds to find the FirstResponder.
             UIAccessibility.post(notification: .announcement, argument: NSAttributedString(string: UBLocalized.accessibility_active_camera, attributes: [.accessibilitySpeechQueueAnnouncement: true]))
         }
-        
+
         cameraErrorView?.alpha = 0.0
         qrView?.startScanning()
         qrView?.setCameraLight(on: isLightOn)
@@ -245,12 +244,11 @@ class WalletScannerViewController: ViewController {
 
     private func showError(error: CovidCertError?) {
         if error != nil {
-            
             if shouldReadVisibleError, let errorText = qrOverlay?.errorView.errorLabel.text {
                 shouldReadVisibleError.toggle()
                 UIAccessibility.post(notification: .announcement, argument: errorText)
             }
-            
+
             qrOverlay?.showErrorView(error: error, animated: true)
 
             timer?.invalidate()
@@ -280,7 +278,7 @@ extension WalletScannerViewController: QRScannerViewDelegate {
     func qrScanningSucceededWithCode(_ str: String?) {
         if let s = str {
             let cert = UserCertificate(qrCode: s)
-            
+
             switch cert.decodedCertificate {
             case .success:
                 let feedback = UIImpactFeedbackGenerator(style: .heavy)

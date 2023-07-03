@@ -10,8 +10,8 @@
  */
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class HomescreenBaseViewController: ViewController {
     // MARK: - Content
@@ -21,11 +21,11 @@ class HomescreenBaseViewController: ViewController {
     private let settingsButton = Button(image: UIImage(named: "ic-settings-outline"), accessibilityName: UBLocalized.accessibility_info_button)
 
     public var backgroundViewOffset: CGPoint = .zero
-    
+
     public let regionSelectionButton = RegionSelectionButton()
 
     public var settingsButtonCallback: (() -> Void)?
-    
+
     public var regionSelectionButtonCallback: (() -> Void)?
 
     // MARK: - Init
@@ -68,20 +68,20 @@ class HomescreenBaseViewController: ViewController {
             guard let strongSelf = self else { return }
             strongSelf.settingsButtonCallback?()
         }
-        
+
         view.addSubview(regionSelectionButton)
         regionSelectionButton.snp.makeConstraints { make in
             make.centerY.equalTo(self.logoView)
             make.right.equalTo(settingsButton.snp.left).offset(-Padding.small)
         }
-        
+
         regionSelectionButton.touchUpCallback = { [weak self] in
             self?.regionSelectionButtonCallback?()
         }
-        
+
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         logoView.accessibilityIdentifier = "bund_logo"
         settingsButton.accessibilityIdentifier = "header_settings"

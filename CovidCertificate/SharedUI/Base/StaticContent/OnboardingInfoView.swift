@@ -46,11 +46,11 @@ class OnboardingInfoView: UIView {
             }
             make.trailing.equalToSuperview().inset(leftRightInset)
         }
-        
-        self.isAccessibilityElement = true
-        self.accessibilityElements = [imgView, label]
-        self.accessibilityLabel = [accessibilityImage?.altText, text].compactMap { $0 }.joined(separator: ", ")
-        self.accessibilityIdentifier = textAccessibilityIdentifier
+
+        isAccessibilityElement = true
+        accessibilityElements = [imgView, label]
+        accessibilityLabel = [accessibilityImage?.altText, text].compactMap { $0 }.joined(separator: ", ")
+        accessibilityIdentifier = textAccessibilityIdentifier
     }
 
     @available(*, unavailable)

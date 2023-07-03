@@ -94,7 +94,7 @@ class ExpandableViewBody: UIView {
         }
         setupAccessibilityIdentifiers()
     }
-    
+
     private func setupAccessibilityIdentifiers() {
         textLabel.accessibilityIdentifier = "item_faq_question_answer"
     }

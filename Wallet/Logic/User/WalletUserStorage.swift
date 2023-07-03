@@ -20,24 +20,26 @@ class WalletUserStorage {
             })
         }
     }
-    
+
     @UBUserDefault(key: "wallet.user.selectedValidationRegion", defaultValue: nil)
     var selectedValidationRegion: String? {
         didSet { UIStateManager.shared.stateChanged(forceRefresh: true) }
     }
-    
+
     @UBUserDefault(key: "lastInstalledAppVersion", defaultValue: ConfigManager.shortAppVersion)
     static var lastInstalledAppVersion: String
-    
+
     @UBUserDefault(key: "hasAskedForStoreReview", defaultValue: false)
     static var hasAskedForStoreReview: Bool
-    
+
     @UBUserDefault(key: "hasOptedOutOfNonImportantCampaigns", defaultValue: false)
     static var hasOptedOutOfNonImportantCampaigns: Bool
 }
 
 class CertificateStorage {
     static let shared = CertificateStorage()
+
+    var hasModifiedCertificatesInSession = false
 
     @KeychainPersisted(key: "wallet.user.certificates", defaultValue: [])
     var userCertificates: [UserCertificate] {
@@ -46,7 +48,13 @@ class CertificateStorage {
 
     func insertCertificate(userCertificate: UserCertificate) {
         if !userCertificates.contains(userCertificate) {
+            hasModifiedCertificatesInSession = true
             userCertificates.insert(userCertificate, at: 0)
         }
+    }
+
+    func removeCertificate(userCertificate: UserCertificate) {
+        userCertificates = userCertificates.filter { $0 != userCertificate }
+        hasModifiedCertificatesInSession = true
     }
 }

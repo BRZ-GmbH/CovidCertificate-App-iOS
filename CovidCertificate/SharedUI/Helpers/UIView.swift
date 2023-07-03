@@ -13,7 +13,6 @@
 import Foundation
 
 extension UIView {
-
     var recursiveSubviews: [UIView] {
         return subviews + subviews.flatMap { $0.recursiveSubviews }
     }
