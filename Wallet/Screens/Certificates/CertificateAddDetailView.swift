@@ -74,7 +74,7 @@ class CertificateAddDetailView: UIView {
 
         let nameLabel = Label(.title, textAlignment: .center)
         let birthdayLabel = Label(.text, textAlignment: .center)
-        
+
         nameLabel.accessibilityIdentifier = "certificate_add_name"
         birthdayLabel.accessibilityIdentifier = "certificate_add_birthday"
 

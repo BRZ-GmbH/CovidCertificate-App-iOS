@@ -110,15 +110,6 @@
         }
       },
       {
-        "package": "ScrollingPageControl",
-        "repositoryURL": "https://github.com/EmilioPelaez/ScrollingPageControl.git",
-        "state": {
-          "branch": "master",
-          "revision": "76d4833b12baebf7123bb0ff133f7bcbb0b61595",
-          "version": null
-        }
-      },
-      {
         "package": "SnapKit",
         "repositoryURL": "https://github.com/SnapKit/SnapKit.git",
         "state": {

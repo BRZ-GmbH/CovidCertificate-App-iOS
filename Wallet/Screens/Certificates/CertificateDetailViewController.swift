@@ -53,7 +53,7 @@ class CertificateDetailViewController: ViewController {
         setupInteraction()
 
         addDismissButton()
-        
+
         removeButton.accessibilityIdentifier = "certificate_detail_button_delete"
 
         // start check of certificate

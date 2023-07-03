@@ -116,6 +116,8 @@ import Foundation
      case error_network_title_key = "error_network_title"
     /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass der Link noch nicht abgelaufen ist.
      case error_retrieve_certificate_bypass_key = "error_retrieve_certificate_bypass"
+    /// Zertifikat konnte nicht abgerufen werden. Bitte versuchen Sie den Abruf Ihres Zertifikates im Browser.
+     case error_retrieve_certificate_no_code_key = "error_retrieve_certificate_no_code"
     /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass das Geburtsdatum korrekt ist und der Link noch nicht abgelaufen ist.
      case error_retrieving_certificate_key = "error_retrieving_certificate"
     /// Fehler
@@ -150,6 +152,8 @@ import Foundation
      case NSCameraUsageDescription_key = "NSCameraUsageDescription"
     /// OK
      case ok_button_key = "ok_button"
+    /// Im Browser öffnen
+     case open_browser_button_key = "open_browser_button"
     /// Kein gültiger Code
      case qr_scanner_error_key = "qr_scanner_error"
     /// Burgenland
@@ -568,6 +572,8 @@ import Foundation
    static let error_network_title = UBLocalized.tr(UBLocalizedKey.error_network_title_key)
   /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass der Link noch nicht abgelaufen ist.
    static let error_retrieve_certificate_bypass = UBLocalized.tr(UBLocalizedKey.error_retrieve_certificate_bypass_key)
+  /// Zertifikat konnte nicht abgerufen werden. Bitte versuchen Sie den Abruf Ihres Zertifikates im Browser.
+   static let error_retrieve_certificate_no_code = UBLocalized.tr(UBLocalizedKey.error_retrieve_certificate_no_code_key)
   /// Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass das Geburtsdatum korrekt ist und der Link noch nicht abgelaufen ist.
    static let error_retrieving_certificate = UBLocalized.tr(UBLocalizedKey.error_retrieving_certificate_key)
   /// Fehler
@@ -604,6 +610,8 @@ import Foundation
    static let NSCameraUsageDescription = UBLocalized.tr(UBLocalizedKey.NSCameraUsageDescription_key)
   /// OK
    static let ok_button = UBLocalized.tr(UBLocalizedKey.ok_button_key)
+  /// Im Browser öffnen
+   static let open_browser_button = UBLocalized.tr(UBLocalizedKey.open_browser_button_key)
   /// Kein gültiger Code
    static let qr_scanner_error = UBLocalized.tr(UBLocalizedKey.qr_scanner_error_key)
   /// Burgenland

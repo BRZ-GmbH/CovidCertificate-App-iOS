@@ -53,7 +53,7 @@ class HomescreenCertificatesViewController: ViewController {
     private func setup() {
         view.backgroundColor = .clear
         view.addSubview(pageControl)
-        
+
         let isSmall = UIScreen.main.bounds.width <= 375
         let pageControlBottomPadding = isSmall ? Padding.small : (Padding.large + Padding.medium)
 

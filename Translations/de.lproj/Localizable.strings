@@ -490,3 +490,6 @@
 "invalid_link_title" = "Ungültiger Direktlink";
 "invalid_link_text" = "Zertifikat konnte nicht hinzugefügt werden";
 "error_retrieve_certificate_bypass" = "Zertifikat konnte nicht abgerufen werden. Bitte vergewissern Sie sich, dass der Link noch nicht abgelaufen ist.";
+
+"error_retrieve_certificate_no_code" = "Zertifikat konnte nicht abgerufen werden. Bitte versuchen Sie den Abruf Ihres Zertifikates im Browser.";
+"open_browser_button" = "Im Browser öffnen";

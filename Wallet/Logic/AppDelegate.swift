@@ -35,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var isHandlingImport = false
 
     private let linkHandler = LinkHandler()
-    
+
     var notificationHandler: NotificationHandler!
 
     lazy var navigationController = NavigationController(rootViewController: WalletHomescreenViewController())
-    
+
     private var hasUpdatedConfig = false
     private var hasUpdatedValueSetData = false
 
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Keychain().deleteAll()
             isFirstLaunch = false
         }
-        
+
         notificationHandler = NotificationHandler()
 
         VerifierManager.shared.resetTime()
@@ -98,80 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
-    }
-    
-    @available(iOS 13.0, *)
-    func handleAppRefresh(task: BGAppRefreshTask) {
-        scheduleAppRefresh()
-                
-        task.expirationHandler = {
-            task.setTaskCompleted(success: false)
-        }
-        
-        CovidCertificateSDK.restartTrustListUpdate(force: false, completionHandler: { wasUpdated, failed in
-            if failed {
-                Logger.log("Background Data Update - Failed", appState: false)
-            } else {
-                if wasUpdated {
-                    Logger.log("Background Data Update - New Data", appState: false)
-                } else {
-                    Logger.log("Background Data Update - Unchanged", appState: false)
-                }
-            }
-            
-            task.setTaskCompleted(success: failed == false)
-        })
-    }
-    
-    func scheduleAppRefresh() {
-        if #available(iOS 13.0, *) {
-            if let bundleIdentifier = Bundle.main.bundleIdentifier {
-                let request = BGAppRefreshTaskRequest(identifier: "\(bundleIdentifier).refresh")
-                request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 60 * 8)
-                
-                do {
-                    BGTaskScheduler.shared.cancelAllTaskRequests()
-                    try BGTaskScheduler.shared.submit(request)
-                } catch {
-                }
-            }
-        }
-    }
-    
-    private var certificateNotificationCheckTimer: Timer? = nil
-    
-    func didCompleteOnboarding() {
-        queueCertificateNotificationChecks()
-    }
-    
-    private func queueCertificateNotificationChecks() {
-        certificateNotificationCheckTimer?.invalidate()
-        certificateNotificationCheckTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
-            self?.certificateNotificationCheckTimer = nil
-            self?.checkForCertificateCampaigns()
-        }
-    }
-    
-    private func checkForCertificateCampaigns() {
-        guard hasUpdatedConfig else { return }
-        guard hasUpdatedValueSetData else { return }
-        guard !isHandlingImport else { return }
-        guard WalletUserStorage.shared.hasCompletedOnboarding else { return }
-        
-        notificationHandler.checkForExpiredTestCertificates(window: window, UIStateManager.shared.uiState.certificateState.certificates) { [weak self] hasRemovedCertificates in
-            guard !hasRemovedCertificates else { return }
-            guard let self = self else { return }
-            
-            guard let config = ConfigManager.currentConfig else { return }
-            guard let time = VerifierManager.shared.currentTime else {
-                self.queueCertificateNotificationChecks()
-                return
-            }
-            
-            let certLogicValueSets = CovidCertificateSDK.currentValueSets().mapValues { $0.valueSetValues.map { $0.key } }
-            
-            self.notificationHandler.startCertificateNotificationCheck(window: self.window, certificates: UIStateManager.shared.uiState.certificateState.certificates, valueSets: certLogicValueSets, validationClock: time, config: config)
-        }
     }
 
     @available(iOS 13.0, *)
@@ -280,20 +206,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let linkType = linkHandler.handle(urlComponents: components)
-        return handleLinkType(urlComponents: components, linkType: linkType)
+        return handleLinkType(url: url, urlComponents: components, linkType: linkType)
     }
 
-    func handleLinkType(urlComponents _: URLComponents, linkType: WalletAppLinkType) -> Bool {
+    func handleLinkType(url: URL, urlComponents _: URLComponents, linkType: WalletAppLinkType) -> Bool {
         guard let viewController = navigationController.viewControllers.first as? WalletHomescreenViewController else {
             return false
         }
 
         switch linkType {
         case let .directLink(secret: secret, signature: signature):
-            viewController.addCertificateDirectly(secret: secret, signature: signature)
+            viewController.addCertificateDirectly(url: url, secret: secret, signature: signature)
             return true
         case let .directLinkWithBpt(secret: secret, signature: signature, bpt: bpt):
-            viewController.addCertificateDirectlyWithBpt(secret: secret, secretSignature: signature, bpt: bpt)
+            viewController.addCertificateDirectlyWithBpt(url: url, secret: secret, secretSignature: signature, bpt: bpt)
             return true
         case let .directQRCode(data: qrCode):
             viewController.addCertificate(qrCode: qrCode)

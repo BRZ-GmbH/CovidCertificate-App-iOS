@@ -491,3 +491,6 @@
 "invalid_link_title" = "Invalid direct link";
 "invalid_link_text" = "Certificate could not be added";
 "error_retrieve_certificate_bypass" = "Certificate could not be retrieved. Please make sure that the link has not expired.";
+
+"error_retrieve_certificate_no_code" = "Certificate could not be retrieved. Please try retrieving the certificate in your browser.";
+"open_browser_button" = "Open in Browser";

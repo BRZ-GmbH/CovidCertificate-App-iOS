@@ -42,6 +42,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
 
     var errorRetryHandler: ((UIAlertAction) -> Void)?
     var onErrorMessage: String?
+    var activeDirectLinkURL: URL? = nil
 
     init() {
         super.init(color: .cc_green_dark)
@@ -58,7 +59,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
 
             strongSelf.checkForNotificationPermission()
         }
-        
+
         addCertificateButton.accessibilityIdentifier = "homescreen_scan_button_small"
 
         setupViews()

@@ -69,7 +69,7 @@ class Button: UBButton {
             make.height.greaterThanOrEqualTo(44.0)
         }
     }
-    
+
     public func changeAccessibilityTitle(title: String) {
         accessibilityLabel = title
     }

@@ -65,7 +65,7 @@ public extension HealthCert {
 
         return dateOfBirth
     }
-    
+
     var birthDate: Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
