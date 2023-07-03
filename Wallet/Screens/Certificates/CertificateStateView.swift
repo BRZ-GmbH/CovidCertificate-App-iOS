@@ -13,6 +13,7 @@ import CovidCertificateSDK
 import Foundation
 import SnapKit
 import UIKit
+import BusinessRulesValidationCore
 
 class CertificateStateView: UIView {
     // MARK: - Subviews
@@ -215,6 +216,7 @@ class CertificateStateView: UIView {
                 self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.validityHintView.text = nil
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
             case let .success(results):
@@ -233,36 +235,36 @@ class CertificateStateView: UIView {
                 self.backgroundView.ub_setHidden(true)
                 self.textLabel.ub_setHidden(true)
                 
-                let entryResult = results.first(where: { $0.region?.hasPrefix("ET") == true })
-                let nightClubResult = results.first(where: { $0.region?.hasPrefix("NG") == true })
-                
                 self.entryValidityView.textColor = .cc_black
                 self.nightClubValidityView.textColor = .cc_black
                 
-                if entryResult?.valid == true {
-                    self.entryValidityView.untilText = entryResult?.validUntil
+                var entryValid = false
+                var nightClubValid = false
+                if case let .valid(result) = results["Entry"] {
+                    entryValid = true
+                    self.entryValidityView.untilText = result.formattedValidUntil
                     self.entryValidityView.validityTitleLabel.text = String(format: NSLocalizedString("wallet_certificate_validity", comment: ""), UBLocalized.region_type_ET_validity, Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)?.validityName ?? "")
                 } else {
                     self.entryValidityView.ub_setHidden(true)
                 }
-                
-                if nightClubResult?.valid == true {
-                    self.nightClubValidityView.untilText = nightClubResult?.validUntil
+                if case let .valid(result) = results["NightClub"] {
+                    nightClubValid = true
+                    self.nightClubValidityView.untilText = result.formattedValidUntil
                     self.nightClubValidityView.validityTitleLabel.text = String(format: NSLocalizedString("wallet_certificate_validity", comment: ""), UBLocalized.region_type_NG_validity, Region.regionFromString(WalletUserStorage.shared.selectedValidationRegion)?.validityName ?? "")
                 } else {
                     self.nightClubValidityView.ub_setHidden(true)
                 }
                 
-                var validityIsVisible = entryResult?.valid == true || nightClubResult?.valid == true
+                var validityIsVisible = entryValid == true || nightClubValid == true
                 if case let .success(result) = self.certificate?.decodedCertificate, result.healthCert.type == .vaccinationExemption {
-                    if results.first?.valid == true {
+                    if case .valid(_) = results.values.first {
                         validityIsVisible = true
                         self.exemptionValidityView.validityTitleLabel.text = "\(UBLocalized.wallet_3g_status_validity_headline_vaccination_exemption)\n\u{00a0}"
                         self.exemptionValidityView.untilText = result.healthCert.vaccinationExemption?.first?.displayValidUntilDate
                     } else {
                         self.exemptionValidityView.ub_setHidden(true)
                     }
-                    self.exemptionStateView.result = results.first
+                    self.exemptionStateView.result = results.values.first
                 }
                 self.validityHeadlineLabel.ub_setHidden(!validityIsVisible)
                 self.validityErrorStackViewTopConstraint?.update(offset: (!validityIsVisible) ? 0 : Padding.large)
@@ -275,6 +277,7 @@ class CertificateStateView: UIView {
                 self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.validityHintView.text = nil
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
                 self.entryValidityView.ub_setHidden(true)
@@ -282,9 +285,9 @@ class CertificateStateView: UIView {
                 self.exemptionValidityView.ub_setHidden(true)
                 self.validityHeadlineLabel.ub_setHidden(true)
                 self.validityErrorStackViewTopConstraint?.update(offset: 0)
-            case .signatureInvalid:
+            case .signatureInvalid, .signatureExpired:
                 self.imageView.image = VerificationError.signature.icon()?.ub_image(with: .cc_red)
-                self.textLabel.attributedText = VerificationError.signature.displayName()
+                self.textLabel.attributedText = self.state == .signatureExpired ? VerificationError.signatureExpired.displayName() : VerificationError.signature.displayName()
                 self.backgroundView.backgroundColor = .cc_red_invalid
                 self.textLabel.textColor = .cc_white
                 self.entryValidityView.ub_setHidden(true)
@@ -295,6 +298,7 @@ class CertificateStateView: UIView {
                 self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.validityHintView.text = nil
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
                 self.validityErrorStackViewTopConstraint?.update(offset: 0)
@@ -311,6 +315,7 @@ class CertificateStateView: UIView {
                 self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.validityHintView.text = nil
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
                 self.validityErrorStackViewTopConstraint?.update(offset: 0)
@@ -327,6 +332,7 @@ class CertificateStateView: UIView {
                 self.exemptionStateView.ub_setHidden(true)
                 self.imageView.ub_setHidden(false)
                 self.validityHintView.ub_setHidden(true)
+                self.validityHintView.text = nil
                 self.backgroundView.ub_setHidden(false)
                 self.textLabel.ub_setHidden(false)
                 self.validityErrorStackViewTopConstraint?.update(offset: 0)

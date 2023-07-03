@@ -12,6 +12,7 @@
 import CovidCertificateSDK
 import Foundation
 import UIKit
+import BusinessRulesValidationCore
 
 /**
  Displays the individual verification states for regions
@@ -20,7 +21,7 @@ class CertificateRegionStateView: UIView {
     private let validityStackView = UIStackView()
     var isHomescreen: Bool = false
 
-    var results: [VerificationRegionResult] = [] {
+    var results: [String:ValidationResult] = [:] {
         didSet {
             update(animated: true)
         }
@@ -55,11 +56,14 @@ class CertificateRegionStateView: UIView {
     private func update(animated _: Bool) {
         validityStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        results.forEach { result in
-            let statusView = CertificateRegionStatusView(isHomescreen: isHomescreen)
-            statusView.result = result
-            validityStackView.addArrangedSubview(statusView)
-        }
+        var statusView = CertificateRegionStatusView(isHomescreen: isHomescreen)
+        statusView.result = ("Entry", results["Entry"])
+        validityStackView.addArrangedSubview(statusView)
+        
+        statusView = CertificateRegionStatusView(isHomescreen: isHomescreen)
+        statusView.result = ("NightClub", results["NightClub"])
+        validityStackView.addArrangedSubview(statusView)
+
         accessibilityLabel = validityStackView.subviews.compactMap({$0.accessibilityLabel}).joined(separator: ", ")
     }
 }

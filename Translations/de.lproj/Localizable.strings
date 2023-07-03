@@ -455,7 +455,7 @@
 
 "wallet_3g_status_validity_headline" = "Dieses Zertifikat berechtigt für";
 
-"wallet_test_certificate_cleanup_message" = "Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit sie ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?";
+"wallet_test_certificate_cleanup_message" = "Sie haben %@ abgelaufene Testzertifikate in der App. Wir empfehlen, diese zu entfernen, damit Sie Ihre noch gültigen Zertifikate schneller finden! Möchten Sie die abgelaufenen Zertifikate entfernen?";
 "wallet_test_certificate_cleanup_no_button" = "Nein";
 "wallet_test_certificate_cleanup_never_button" = "Nie nachfragen";
 "wallet_test_certificate_cleanup_cleanup_button" = "Ja, entfernen";

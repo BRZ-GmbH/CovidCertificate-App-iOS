@@ -10,8 +10,10 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+import UIKit
 import Foundation
 import CovidCertificateSDK
+import BusinessRulesValidationCore
 
 /**
  Display the status of a single region
@@ -23,9 +25,9 @@ class CertificateRegionStatusView: UIView {
     private let label = Label(.text, textAlignment: .center)
     private let isHomescreen: Bool
     
-    var result: VerificationRegionResult? = nil {
+    var result: (String, ValidationResult?)? = nil {
         didSet {
-            if result?.region?.hasPrefix("ET") == true {
+            if result?.0 == "Entry" {
                 label.text = UBLocalized.region_type_ET
                 if isHomescreen {
                     label.accessibilityIdentifier = "certificate_page_info_et"
@@ -34,7 +36,7 @@ class CertificateRegionStatusView: UIView {
                     label.accessibilityIdentifier = "certificate_detail_info_et"
                     imageView.accessibilityIdentifier = "certificate_detail_info_et_icon"
                 }
-            } else if result?.region?.hasPrefix("NG") == true {
+            } else if result?.0 == "NightClub" {
                 label.text = UBLocalized.region_type_NG
                 if isHomescreen {
                     label.accessibilityIdentifier = "certificate_page_info_ng"
@@ -47,10 +49,17 @@ class CertificateRegionStatusView: UIView {
             
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
-            backgroundColor = result?.valid == true ? .cc_green_valid : .cc_red_invalid
-            imageView.image = result?.valid == true ? UIImage(named: "check-circle") : UIImage(named: "minus-circle")
-            isAccessibilityElement = true
-            accessibilityLabel = [(result?.valid == true ? UBLocalized.region_type_valid : UBLocalized.region_type_invalid), label.text].compactMap({$0}).joined(separator: ", ")
+            if case .valid(_) = result?.1 {
+                backgroundColor = .cc_green_valid
+                imageView.image = UIImage(named: "check-circle")
+                isAccessibilityElement = true
+                accessibilityLabel = [UBLocalized.region_type_valid, label.text].compactMap({$0}).joined(separator: ", ")
+            } else {
+                backgroundColor = .cc_red_invalid
+                imageView.image = UIImage(named: "minus-circle")
+                isAccessibilityElement = true
+                accessibilityLabel = [UBLocalized.region_type_invalid, label.text].compactMap({$0}).joined(separator: ", ")
+            }
         }
     }
     
@@ -102,7 +111,7 @@ class CertificateExemptionView: UIView {
     private let label = Label(.text, textAlignment: .center)
     private let isHomescreen: Bool
     
-    var result: VerificationRegionResult? = nil {
+    var result: ValidationResult? = nil {
         didSet {
             label.text = UBLocalized.covid_certificate_vaccination_exemption_title
             if isHomescreen {
@@ -115,10 +124,16 @@ class CertificateExemptionView: UIView {
             
             label.numberOfLines = 1
             label.lineBreakMode = .byTruncatingTail
-            backgroundColor = result?.valid == true ? .cc_green_valid : .cc_red_invalid
-            imageView.image = result?.valid == true ? UIImage(named: "check-circle") : UIImage(named: "minus-circle")
+            if case .valid(_) = result {
+                backgroundColor = .cc_green_valid
+                imageView.image = UIImage(named: "check-circle")
+                accessibilityLabel = UBLocalized.region_type_valid_vaccination_exemption
+            } else {
+                backgroundColor = .cc_red_invalid
+                imageView.image = UIImage(named: "minus-circle")
+                accessibilityLabel = UBLocalized.region_type_invalid_vaccination_exemption
+            }
             isAccessibilityElement = true
-            accessibilityLabel = result?.valid == true ? UBLocalized.region_type_valid_vaccination_exemption : UBLocalized.region_type_invalid_vaccination_exemption
         }
     }
     

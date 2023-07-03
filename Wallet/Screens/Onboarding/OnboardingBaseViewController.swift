@@ -290,8 +290,8 @@ class OnboardingBaseViewController: ViewController {
             // next page
             return didSwipeLeft()
         }
-
-        return true
+        
+        return super.accessibilityScroll(direction)
     }
 
     private func didSwipeLeft() -> Bool {

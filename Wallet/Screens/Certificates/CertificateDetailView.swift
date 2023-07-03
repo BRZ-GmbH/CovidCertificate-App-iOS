@@ -341,7 +341,7 @@ class CertificateDetailView: UIView {
                 self.applyLoadingState()
             case .success, .timeMissing:
                 self.applySuccessState()
-            case .error, .signatureInvalid:
+            case .error, .signatureInvalid, .signatureExpired:
                 self.applyErrorState()
             case .dataExpired:
                 self.applySuccessState()

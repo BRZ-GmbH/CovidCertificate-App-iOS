@@ -13,6 +13,7 @@
 import Foundation
 import SwiftyJSON
 import ValidationCore
+import BusinessRulesValidationCore
 
 /**
  Type of campaign
@@ -75,6 +76,15 @@ struct Campaign: UBCodable {
     
     private let appliesToString: String
     
+    private let certificateTypeString: String?
+    
+    var certificateType: BusinessRuleCertificateType? {
+        if let certificateTypeString = certificateTypeString {
+            return certificateTypeString.parsedCertificateType()
+        }
+        return .vaccination
+    }
+    
     var appliesTo: CampaignApplicationType {
         return CampaignApplicationType(rawValue: appliesToString) ?? .all
     }
@@ -95,6 +105,7 @@ struct Campaign: UBCodable {
         case appliesToString = "applies_to"
         case buttons
         case conditionGroups = "conditions"
+        case certificateTypeString = "certificate_type"
     }
 }
 

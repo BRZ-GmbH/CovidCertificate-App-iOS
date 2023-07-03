@@ -12,8 +12,7 @@
 }
 
 h1 {
-    font-family: 'Source Sans Pro';
-    font-size: 22px;
+    font: -apple-system-headline;
     font-weight: 700;
     font-stretch: normal;
     font-style: normal;
@@ -24,8 +23,7 @@ h1 {
 }
 
 h2 {
-    font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font: -apple-system-subheadline;
     font-weight: 700;
     font-stretch: normal;
     font-style: normal;
@@ -36,8 +34,7 @@ h2 {
 }
 
 p {
-    font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font: -apple-system-body;
     line-height: 1.5;
     color: #000;
     margin: 0
@@ -48,8 +45,7 @@ p strong {
 }
 
 ul li {
-    font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font: -apple-system-body;
     line-height: 1.5;
     color: #000
 }
@@ -59,8 +55,7 @@ ul li strong {
 }
 
 a {
-    font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font: -apple-system-body;
     font-weight: 700;
     font-stretch: normal;
     font-style: normal;
@@ -83,8 +78,7 @@ body header {
 }
 
 body header div {
-    font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font: -apple-system-body;
     line-height: 1.5;
     color: #000;
     letter-spacing: normal;
@@ -107,12 +101,11 @@ body footer {
 }
 
 body footer p {
-    font-size: 13px
+    font: -apple-system-footnote
 }
 
 body footer div.build {
-    font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font: -apple-system-body;
     line-height: 1.5;
     color: #000;
     letter-spacing: normal;
@@ -227,7 +220,7 @@ body .container .licence-list ul li:not(:first-child) {
 body .container .licence-list ul li:before {
     content: "";
     display: block;
-    background: url(../img/ic-arrow-blue.svg)no-repeat;
+    background: url(../img/ic-link-external.svg)no-repeat;
     width: 24px;
     height: 24px;
     position: absolute;

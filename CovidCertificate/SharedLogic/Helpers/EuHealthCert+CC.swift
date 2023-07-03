@@ -12,6 +12,7 @@
 import CovidCertificateSDK
 import Foundation
 import ValidationCore
+import BusinessRulesValidationCore
 
 public extension CertType {
     var displayName: String {
@@ -50,9 +51,7 @@ extension String {
 public extension HealthCert {
     
     var comparableIdentifier: String {
-        let familyName = person.standardizedFamilyName.localizedLowercase.substringToFirstNonLetter
-        let givenName = (person.standardizedGivenName?.localizedLowercase ?? "").substringToFirstNonLetter
-        return "\(familyName)_\(givenName)_\(dateOfBirth)"
+        return String.personGroupingIdentiferForDGCCertificate(withFamilyName: person.standardizedFamilyName, givenName: person.standardizedGivenName, dateOfBirth: dateOfBirth)
     }
 
     var displayFullName: String? {

@@ -130,14 +130,15 @@ class CertificateDetailViewController: ViewController {
 
     private func startCheck() {
         state = .loading
-        VerifierManager.shared.addObserver(self, for: certificate, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false, important: true) { [weak self] state in
+        VerifierManager.shared.addObserver(self, for: certificate, region: WalletUserStorage.shared.selectedValidationRegion ?? "W", important: true) { [weak self] state in
             guard let strongSelf = self else { return }
             strongSelf.state = state
         }
     }
 
     private func removeCertificate() {
-        let alert = UIAlertController(title: nil, message: UBLocalized.wallet_certificate_delete_confirm_text, preferredStyle: .actionSheet)
+        
+        let alert = UIAlertController(title: nil, message: UBLocalized.wallet_certificate_delete_confirm_text, preferredStyle: UIDevice.current.userInterfaceIdiom == .pad ? .alert : .actionSheet)
         alert.addAction(UIAlertAction(title: UBLocalized.delete_button, style: .destructive, handler: { _ in
             CertificateStorage.shared.userCertificates = CertificateStorage.shared.userCertificates.filter { $0 != self.certificate }
             (UIApplication.shared.delegate as? AppDelegate)?.notificationHandler.removeCertificate(self.certificate)

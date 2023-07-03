@@ -11,6 +11,7 @@
 
 import CovidCertificateSDK
 import Foundation
+import BusinessRulesValidationCore
 import ValidationCore
 
 enum VerificationError: Equatable, Comparable {
@@ -24,81 +25,12 @@ enum VerificationError: Equatable, Comparable {
     case unknown
 }
 
-enum RetryError: Equatable {
-    case network
-    case noInternetConnection
-    case unknown
-}
-
-/**
- Represents the verification result for an invididual region
- */
-struct VerificationRegionResult: Equatable {
-    let region: String?
-    let valid: Bool
-    let validUntil: String?
-}
-
-/**
- Represents the verification result for a certificate
- */
-enum VerificationResultStatus: Equatable {
-    case loading
-    case signatureInvalid
-    case error
-    case timeMissing
-    case dataExpired
-    case success([VerificationRegionResult])
-
-    public func isSuccess() -> Bool {
-        switch self {
-        case .success:
-            return true
-        default:
-            return false
-        }
-    }
-
-    /**
-     Return the invididual region results for the success state
-     */
-    public func results() -> [VerificationRegionResult] {
-        switch self {
-        case let .success(result): return result
-        default: return []
-        }
-    }
-
-    /**
-     Returns true if the result is error, signatureInvalid or contains any invalid region result
-     */
-    public func isInvalid() -> Bool {
-        switch self {
-        case .signatureInvalid: return true
-        case .error: return true
-        case .success: return containsOnlyInvalidVerification()
-        default: return false
-        }
-    }
-
-    /**
-     Returns true if the result contains any invalid region result
-     */
-    public func containsOnlyInvalidVerification() -> Bool {
-        switch self {
-        case let .success(result): return result.filter { $0.valid }.count == 0 && result.count > 0
-        default: return false
-        }
-    }
-}
-
 class Verifier: NSObject {
     private var finished: Bool = false
     public var cancelled: Bool = false
     public var important: Bool = false
     private let holder: DGCHolder?
-    public let regions: [String]
-    private let checkDefaultRegion: Bool
+    public let region: String
     private var stateUpdate: ((VerificationResultStatus) -> Void)?
     private var validationTime: Date?
     private var realTime: Date?
@@ -107,14 +39,12 @@ class Verifier: NSObject {
 
     init(holder: DGCHolder) {
         self.holder = holder
-        regions = []
-        checkDefaultRegion = true
+        region = "W"
         super.init()
     }
 
-    init(certificate: UserCertificate, regions: [String], checkDefaultRegion: Bool, validationTime: Date?, realTime: Date?) {
-        self.regions = regions
-        self.checkDefaultRegion = checkDefaultRegion
+    init(certificate: UserCertificate, region: String, validationTime: Date?, realTime: Date?) {
+        self.region = region
         self.validationTime = validationTime
         self.realTime = realTime
 
@@ -158,55 +88,47 @@ class Verifier: NSObject {
         DispatchQueue.main.async {
             self.stateUpdate?(.loading)
         }
-
+        
         let group = DispatchGroup()
 
-        var states: [VerificationResultStatus] = [.loading]
-
-        checkSignature(group: group, forceUpdate: forceUpdate) { state in states[0] = state }
+        var signatureCheck: VerificationResultStatus = .loading
+        var rulesCheck: VerificationResultStatus = .loading
 
         if validationTime != nil {
-            if holder?.healthCert.type == CertType.vaccinationExemption {
-                states.append(VerificationResultStatus.success([VerificationRegionResult(region: nil, valid: holder?.healthCert.vaccinationExemption?.first?.validUntilDate?.isAfter(validationTime!) == true, validUntil: nil)]))
-            } else {
-                if checkDefaultRegion {
-                    let index = states.count
-                    states.append(.loading)
-                    checkNationalRules(group: group, region: nil, forceUpdate: forceUpdate, callback: { state in states[index] = state })
-                }
-
-                regions.forEach { region in
-                    let index = states.count
-                    states.append(.loading)
-                    checkNationalRules(group: group, region: region, forceUpdate: forceUpdate, callback: { state in states[index] = state })
+            checkSignature(group: group, forceUpdate: forceUpdate) { [weak self] state in
+                signatureCheck = state
+                
+                if case .success = signatureCheck {                    
+                    self?.checkNationalRules(group: group, region: self?.region ?? "W", forceUpdate: forceUpdate, callback: { state in
+                        rulesCheck = state
+                    })
                 }
             }
         }
 
         group.notify(queue: .main) {
             self.finished = true
+            
             if self.cancelled {
                 return
             }
-            if states[0] == .error || states[0] == .signatureInvalid {
-                self.stateUpdate?(states[0])
-            } else if states.contains(where: { $0 == VerificationResultStatus.dataExpired }) {
+            
+            if signatureCheck == .error || signatureCheck == .signatureInvalid || signatureCheck == .signatureExpired {
+                self.stateUpdate?(signatureCheck)
+            } else if signatureCheck == .dataExpired || rulesCheck == .dataExpired {
                 if VerifierManager.shared.isSyncingData {
                     self.stateUpdate?(.loading)
                 } else {
                     self.stateUpdate?(.dataExpired)
                 }
-            } else if states.allSatisfy({ $0.isSuccess() }) {
-                if self.validationTime != nil {
-                    let results = states.flatMap { $0.results() }
-                    self.stateUpdate?(.success(results))
+            } else if self.validationTime == nil {
+                if VerifierManager.shared.isSyncingTime {
+                    self.stateUpdate?(.loading)
                 } else {
-                    if VerifierManager.shared.isSyncingTime {
-                        self.stateUpdate?(.loading)
-                    } else {
-                        self.stateUpdate?(.timeMissing)
-                    }
+                    self.stateUpdate?(.timeMissing)
                 }
+            } else if case .success = signatureCheck, case .success(let result) = rulesCheck {
+                self.stateUpdate?(.success(result))
             } else {
                 self.stateUpdate?(.error)
             }
@@ -219,9 +141,11 @@ class Verifier: NSObject {
         self.realTime = realTime
         start(forceUpdate: forceUpdate, stateUpdate: su)
     }
+}
 
-    // MARK: - Signature
+// MARK: - Signature
 
+extension Verifier {
     private func checkSignature(group: DispatchGroup, forceUpdate _: Bool, callback: @escaping (VerificationResultStatus) -> Void) {
         guard let holder = self.holder else { return }
 
@@ -232,7 +156,7 @@ class Verifier: NSObject {
                 switch result {
                 case let .success(result):
                     if result.isValid {
-                        callback(.success([]))
+                        callback(.success([:]))
                     } else {
                         callback(.signatureInvalid)
                     }
@@ -242,7 +166,7 @@ class Verifier: NSObject {
                     case .CBOR_DESERIALIZATION_FAILED:
                         callback(.error)
                     case .CWT_EXPIRED:
-                        callback(.success([]))
+                        callback(.success([:]))
                     case .KEY_NOT_IN_TRUST_LIST:
                         callback(.signatureInvalid)
                     case .DATA_EXPIRED:
@@ -256,8 +180,12 @@ class Verifier: NSObject {
             }
         }
     }
+}
 
-    private func checkNationalRules(group: DispatchGroup, region: String?, forceUpdate: Bool, callback: @escaping (VerificationResultStatus) -> Void) {
+// MARK: - Business Rules
+
+extension Verifier {
+    private func checkNationalRules(group: DispatchGroup, region: String, forceUpdate: Bool, callback: @escaping (VerificationResultStatus) -> Void) {
         guard let holder = self.holder else { return }
         guard let issuedAt = holder.issuedAt else { return }
         guard let expiresAt = holder.expiresAt else { return }
@@ -265,36 +193,85 @@ class Verifier: NSObject {
 
         let realTimeForCheck = realTime ?? validationClock
         
+        CovidCertificateSDK.updateDateServiceForRules(validationClock: realTimeForCheck)
+        
         group.enter()
         DispatchQueue.global(qos: important ? .userInitiated : .utility).async {
-            CovidCertificateSDK.checkNationalRules(dgc: holder.healthCert, realTime: realTimeForCheck, validationClock: validationClock, issuedAt: issuedAt, expiresAt: expiresAt, countryCode: "AT", region: region, forceUpdate: forceUpdate) { result in
-                switch result {
-                    
-                case let .success(result):
-                    if result.isValid {
-                        var validUntilString: String? = nil
-                        if let validUntil = result.validUntil {
-                            switch holder.healthCert.certificationType {
-                            case .test:
-                                validUntilString = DateFormatter.ub_dayTimeString(from: validUntil)
-                            default:
-                                validUntilString = DateFormatter.ub_dayString(from: validUntil)
-                            }
-                        }
-                        callback(.success([VerificationRegionResult(region: region, valid: true, validUntil: validUntilString)]))
+            let certLogicValueSets = CovidCertificateSDK.currentValueSets().mapValues { $0.valueSetValues.map { $0.key } }
+            
+            let currentBusinessRules = CovidCertificateSDK.currentBusinessRules()
+            switch currentBusinessRules {
+                case let .success(rules):
+                    if let rule = rules.first,
+                       let data = rule.data(using: .utf8),
+                       let businessRuleContainer = try? BusinessRuleContainer.parsedFrom(data: data) {
+                        
+                        let core = BusinessRuleValidator(businessRules: businessRuleContainer, valueSets: certLogicValueSets, validationClock: validationClock, externalConditionEvaluator: self, externalConditionEvaluationStrategy: .defaultToFalse)
+                        
+                        let certificatePayload = try! JSONEncoder().encode(holder.healthCert)
+                        let payloadString = String(data: certificatePayload, encoding: .utf8)!
+                        
+                        let validationResult = core.evaluateCertificate(payloadString, certificateType: holder.healthCert.businessRuleCertificationType!, expiration: expiresAt, issue: issuedAt, country: "AT", region: region, profiles: ["Entry", "NightClub"], originalCertificateObject: holder)
+                        callback(.success(validationResult))
                     } else {
-                        callback(.success([VerificationRegionResult(region: region, valid: false, validUntil: nil)]))
+                        callback(.error)
                     }
                 case let .failure(error):
-                    if error == .DATA_EXPIRED {
+                    if error == ValidationError.DATA_EXPIRED {
                         callback(.dataExpired)
                     } else {
-                        callback(.success([VerificationRegionResult(region: region, valid: false, validUntil: nil)]))
+                        callback(.error)
+                    }
+            }
+            group.leave()
+        }
+    }
+}
+
+// MARK: - Business Rules External Conditions
+
+extension Verifier : ExternalConditionEvaluator {
+    func evaluateExternalCondition(_ condition: String, parameters: [String:String], fromRuleWithId ruleId: String, ruleCertificateType: String?, region: String, profile: String, originalCertificateObject: Any?) -> Bool? {
+        guard let originalCertificateObject = originalCertificateObject as? DGCHolder else {
+            return nil
+        }
+
+        let originalIdentifier = originalCertificateObject.healthCert.comparableIdentifier
+        
+        let otherCertificates = VerifierManager.shared.allCertificates.filter({ $0.encodedData != originalCertificateObject.encodedData })
+        let otherCertificatesForSamePerson = otherCertificates.filter({
+            return originalIdentifier == $0.healthCert.comparableIdentifier
+        })
+        let certLogicValueSets = CovidCertificateSDK.currentValueSets().mapValues { $0.valueSetValues.map { $0.key } }
+        
+        let currentBusinessRules = CovidCertificateSDK.currentBusinessRules()
+        switch currentBusinessRules {
+            case let .success(rules):
+                if let rule = rules.first,
+                   let data = rule.data(using: .utf8),
+                   let businessRuleContainer = try? BusinessRuleContainer.parsedFrom(data: data) {
+                    let core = BusinessRuleValidator(businessRules: businessRuleContainer, valueSets: certLogicValueSets, validationClock: validationTime ?? Date(), externalConditionEvaluator: nil, externalConditionEvaluationStrategy: .defaultToTrue)
+                    
+                    let evaluator = ExternalConditionVerifier(originalCertificate: originalCertificateObject, otherCertificates: otherCertificates, otherCertificatesForSamePerson: otherCertificatesForSamePerson, condition: condition, parameters: parameters, region: region, profile: profile, validationTime: validationTime ?? Date(), validationCore: core)
+                    if let result = evaluator.evaluateCondition() as? Bool {
+                        return result
                     }
                 }
+            case .failure(_):
+                return nil
+        }
+        return nil
+    }
+}
 
-                group.leave()
-            }
+
+extension HealthCert {
+    var businessRuleCertificationType: BusinessRuleCertificateType? {
+        switch type {
+            case .vaccination: return .vaccination
+            case .test: return .test
+            case .recovery: return .recovery
+            case .vaccinationExemption: return .vaccinationExemption
         }
     }
 }

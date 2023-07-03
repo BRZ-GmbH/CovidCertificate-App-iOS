@@ -15,6 +15,7 @@ import Foundation
 import UIKit
 import ValidationCore
 import JSON
+import BusinessRulesValidationCore
 
 /**
  Extensions for Vaccination Campaigns
@@ -38,22 +39,74 @@ extension Campaign {
     /**
      Returns whether the conditions for this campaign are fulfilled for the given certificate
      */
-    func appliesToCertificate(_ certificate: HealthCert, condititions: [String:CertificateCondition], externalParameterString: String) -> Bool {
+    func appliesToCertificate(_ certificate: DGCHolder,
+                              condititions: [String:CertificateCondition],
+                              externalParameterString: String,
+                              otherCertificates: [DGCHolder],
+                              otherCertificatesForSamePerson: [DGCHolder],
+                              validationTime: Date?
+    ) -> Bool {
         if campaignType == .single || campaignType == .repeating {
             return true
         }
         
         guard let conditionGroups = conditionGroups, !conditionGroups.isEmpty else { return true }
         
-        let jsonObjectForValidation = JsonLogicValidator.jsonObjectForValidation(forCertificate: certificate, externalParameter: externalParameterString)
+        let certificatePayload = try! JSONEncoder().encode(certificate.healthCert)
+        let payloadString = String(data: certificatePayload, encoding: .utf8)!
+        
+        let jsonObjectForValidation = BusinessRulesCoreHelper.jsonObjectForValidation(forCertificatePayload: payloadString, externalParameter: externalParameterString)
         
         for group in conditionGroups {
             var isMatchingAllConditions = true
             for condition in group {
-                if let jsonLogic = try? condititions[condition]?.parsedJsonLogic(),
-                   let validationResult = JsonLogicValidator.evaluateBooleanRule(jsonLogic, forValidationObject: jsonObjectForValidation), validationResult == true {
-                    // The rule was successfully validated and matches
+                if condition.isExternalCondition {
+                    if let conditionNameAndArguments = condition.externalConditionNameAndArguments {
+                        let evaluator = ExternalConditionVerifier(originalCertificate: certificate, otherCertificates: otherCertificates, otherCertificatesForSamePerson: otherCertificatesForSamePerson, condition: conditionNameAndArguments.condition, parameters: conditionNameAndArguments.parameters, region: "", profile: "", validationTime: validationTime ?? Date(), validationCore: nil)
+                        if let result = evaluator.evaluateCondition() as? Bool, result == true {
+                            // The rule was successfully validated and matches
+                        } else {
+                            isMatchingAllConditions = false
+                        }
+                    }
                 } else {
+                    if let validationResult = BusinessRulesCoreHelper.evaluateBooleanRule(try? condititions[condition]?.parsedJsonLogic(), forValidationObject: jsonObjectForValidation), validationResult == true {
+                        // The rule was successfully validated and matches
+                    } else {
+                        isMatchingAllConditions = false
+                    }
+                }
+            }
+            if isMatchingAllConditions {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    /**
+     Returns whether the conditions for this campaign are fulfilled for the given certificate
+     */
+    func appliesToConditionsWithCertificates(certificates: [DGCHolder],
+                                             validationTime: Date?
+    ) -> Bool {
+        guard let conditionGroups = conditionGroups, !conditionGroups.isEmpty else { return true }
+        
+        for group in conditionGroups {
+            var isMatchingAllConditions = true
+            for condition in group {
+                if condition.isExternalCondition {
+                    if let conditionNameAndArguments = condition.externalConditionNameAndArguments {
+                        let evaluator = ExternalConditionVerifier(originalCertificate: nil, otherCertificates: certificates, otherCertificatesForSamePerson: [], condition: conditionNameAndArguments.condition, parameters: conditionNameAndArguments.parameters, region: "", profile: "", validationTime: validationTime ?? Date(), validationCore: nil)
+                        if let result = evaluator.evaluateCondition() as? Bool, result == true {
+                            // The rule was successfully validated and matches
+                        } else {
+                            isMatchingAllConditions = false
+                        }
+                    }
+                } else {
+                    // Campaign unspecific to a certificate can only match verify against external conditions
                     isMatchingAllConditions = false
                 }
             }
@@ -114,13 +167,13 @@ extension Campaign {
     func localizedTitleWithPlaceholders(forValidationObject validationObject: JSON?) -> String? {
         guard let title = title?.value else { return nil }
         
-        return JsonLogicValidator.evaluatePlaceholdersInString(title, data: validationObject)
+        return BusinessRulesCoreHelper.evaluatePlaceholdersInString(title, onValidationObject: validationObject)
     }
     
     func localizedMessageWithPlaceholders(forValidationObject validationObject: JSON?) -> String? {
         guard let message = message?.value else { return nil }
                
-        return JsonLogicValidator.evaluatePlaceholdersInString(message, data: validationObject)
+        return BusinessRulesCoreHelper.evaluatePlaceholdersInString(message, onValidationObject: validationObject)
     }
 }
 
@@ -139,7 +192,7 @@ struct QueuedCampaignNotification {
  */
 class NotificationHandler: NSObject {
     
-    static let maximumSupportedCampaignVersion: Int = 1
+    static let maximumSupportedCampaignVersion: Int = 2
     
     private static var notificationAlert: UIAlertController?
     
@@ -180,7 +233,7 @@ class NotificationHandler: NSObject {
             case let .success(result): return result
             case .failure(_): return nil
             }
-        }).sorted(by: { ($0.issuedAt ?? Date()).isAfter($1.issuedAt ?? Date())}).filter({ $0.healthCert.certificationType == .vaccination })
+        }).sorted(by: { ($0.issuedAt ?? Date()).isAfter($1.issuedAt ?? Date())})
         
         let groupedCertificateHolders = Dictionary(grouping: certificateHolders, by: {
             $0.healthCert.comparableIdentifier
@@ -196,32 +249,47 @@ class NotificationHandler: NSObject {
             
             if campaign.campaignType == .single || campaign.campaignType == .repeating {
                 if campaign.shouldBeDisplayed(lastDisplayTimestamps: certificateCampaignLastDisplayTimestamps) {
-                    campaignsToDisplay.append(QueuedCampaignNotification(certificate: nil, campaign: campaign, title: campaign.title?.value, message: campaign.message?.value))
+                    if campaign.appliesToConditionsWithCertificates(certificates: certificateHolders, validationTime: validationClock) {
+                        campaignsToDisplay.append(QueuedCampaignNotification(certificate: nil, campaign: campaign, title: campaign.title?.value, message: campaign.message?.value))
+                    }
                 }
             } else {
                 var hasAddedCampaign = false
                 
-                var certificatesToCheck = certificateHolders
+                var certificatesToCheck = certificateHolders.filter { holder in
+                    campaign.certificateType == nil || holder.healthCert.businessRuleCertificationType == campaign.certificateType
+                }
                 if campaign.appliesTo == .newestCertificatePerPerson {
                     certificatesToCheck = []
                     groupedCertificateHolders.forEach { key, holders in
-                        if let first = holders.first {
+                        if let first = holders.first(where: { campaign.certificateType == nil || $0.healthCert.businessRuleCertificationType == campaign.certificateType }) {
                             certificatesToCheck.append(first)
                         }
                     }
                 }
                 
                 for certificateHolder in certificatesToCheck {
-                    let externalParameter = JsonLogicValidator.getExternalParameterStringForValidation(valueSets: valueSets, validationClock: validationClock, issuedAt: certificateHolder.issuedAt ?? Date(), expiresAt: certificateHolder.expiresAt ?? Date())
-                    if !hasAddedCampaign && campaign.appliesToCertificate(certificateHolder.healthCert, condititions: config.conditions ?? [:], externalParameterString: externalParameter) {
+                    let externalParameter = BusinessRulesCoreHelper.getExternalParameterStringForValidation(certificateIssueDate: certificateHolder.issuedAt ?? Date(), certificateExpiresDate: certificateHolder.expiresAt ?? Date(), countryCode: "AT", valueSets: valueSets, validationClock: validationClock)
+                    
+                    if !hasAddedCampaign {
+                        let otherCertificates = certificateHolders.filter({ $0.encodedData != certificateHolder.encodedData })
+                        let otherCertificatesForSamePerson = otherCertificates.filter({
+                            return certificateHolder.healthCert.comparableIdentifier == $0.healthCert.comparableIdentifier
+                        })
                         
-                        if campaign.shouldBeDisplayedForCertificate(certificateHolder.healthCert, lastDisplayTimestamps: certificateCampaignLastDisplayTimestamps) {
-                            if campaign.campaignType == .singleForAnyCertificate || campaign.campaignType == .repeatingForAnyCertificate {
-                                hasAddedCampaign = true
+                        if campaign.appliesToCertificate(certificateHolder, condititions: config.conditions ?? [:], externalParameterString: externalParameter, otherCertificates: otherCertificates, otherCertificatesForSamePerson: otherCertificatesForSamePerson, validationTime: validationClock) {
+                            if campaign.shouldBeDisplayedForCertificate(certificateHolder.healthCert, lastDisplayTimestamps: certificateCampaignLastDisplayTimestamps) {
+                                if campaign.campaignType == .singleForAnyCertificate || campaign.campaignType == .repeatingForAnyCertificate {
+                                    hasAddedCampaign = true
+                                }
+                                
+                                let certificatePayload = try! JSONEncoder().encode(certificateHolder.healthCert)
+                                let payloadString = String(data: certificatePayload, encoding: .utf8)!
+                                
+                                let jsonObject = BusinessRulesCoreHelper.jsonObjectForValidation(forCertificatePayload: payloadString, externalParameter: externalParameter)
+                                
+                                campaignsToDisplay.append(QueuedCampaignNotification(certificate: certificateHolder.healthCert, campaign: campaign, title: campaign.localizedTitleWithPlaceholders(forValidationObject: jsonObject), message: campaign.localizedMessageWithPlaceholders(forValidationObject: jsonObject)))
                             }
-                            
-                            let jsonObject = JsonLogicValidator.jsonObjectForValidation(forCertificate: certificateHolder.healthCert, externalParameter: externalParameter)
-                            campaignsToDisplay.append(QueuedCampaignNotification(certificate: certificateHolder.healthCert, campaign: campaign, title: campaign.localizedTitleWithPlaceholders(forValidationObject: jsonObject), message: campaign.localizedMessageWithPlaceholders(forValidationObject: jsonObject)))
                         }
                     }
                 }
@@ -377,7 +445,7 @@ extension UserCertificate {
     func isExpiredTestCertificate() -> Bool {
         switch decodedCertificate {
         case let .success(result):
-            return result.healthCert.certificationType == .test
+            return result.healthCert.businessRuleCertificationType == .test
                 && abs((result.expiresAt ?? Date()).timeIntervalSinceNow) > NotificationHandler.testCertificateExpirationPeriod
         case .failure(_): return false
         }

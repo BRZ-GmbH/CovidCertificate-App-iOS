@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIStateManager.shared.addObserver(self) { [weak self] s in
             self?.queueCertificateNotificationChecks()
+            VerifierManager.shared.restartAllVerifiers()
         }
         
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
@@ -256,10 +257,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             
-            VerifierManager.shared.isSyncingData = false
-            if wasUpdated {
-                VerifierManager.shared.restartAllVerifiers()
-            }
+            VerifierManager.shared.isSyncingData = false            
             self?.hasUpdatedValueSetData = true
             self?.queueCertificateNotificationChecks()
             UIStateManager.shared.stateChanged(forceRefresh: wasUpdated)                       

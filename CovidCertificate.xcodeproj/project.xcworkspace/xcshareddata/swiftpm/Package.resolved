@@ -56,15 +56,6 @@
         }
       },
       {
-        "package": "CertLogic",
-        "repositoryURL": "https://github.com/BRZ-GmbH/dgc-certlogic-ios.git",
-        "state": {
-          "branch": "feature/avoid-unnecessary-parsing",
-          "revision": "ab5b7f3e10e0a77f96f588698899405eaca42951",
-          "version": null
-        }
-      },
-      {
         "package": "Gzip",
         "repositoryURL": "https://github.com/1024jp/GzipSwift",
         "state": {

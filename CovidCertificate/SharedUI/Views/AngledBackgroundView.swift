@@ -10,6 +10,7 @@
  */
 
 import Foundation
+import UIKit
 
 class AngledBackgroundView: UIView {
     let angleLayer = CAShapeLayer()

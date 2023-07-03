@@ -141,8 +141,12 @@ final class VerifierManager {
     }
     #endif
     
+    private(set) var allCertificates: [DGCHolder] = []
+    
     public func restartAllVerifiers() {
         var validationTime = timeStatus?.time
+        
+        allCertificates = reloadAllCertificates()
         
         /**
          In test builds (for Q as well as P environment) we allow switching a setting for the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
@@ -161,8 +165,17 @@ final class VerifierManager {
     }
 
     // MARK: - Public API
+    
+    private func reloadAllCertificates() -> [DGCHolder] {
+        return CertificateStorage.shared.userCertificates.compactMap({
+            if case let .success(holder) = $0.decodedCertificate {
+                return holder
+            }
+            return nil
+        }).sorted(by: { ($0.issuedAt ?? Date()).isAfter($1.issuedAt ?? Date())})
+    }
 
-    func addObserver(_ object: AnyObject, for certificate: UserCertificate, regions: [String], checkDefaultRegion: Bool, forceUpdate: Bool = false, important: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
+    func addObserver(_ object: AnyObject, for certificate: UserCertificate, region: String, forceUpdate: Bool = false, important: Bool = false, block: @escaping (VerificationResultStatus) -> Void) {
         var validationTime = timeStatus?.time
         /**
          In test builds (for Q as well as P environment) we allow switching a setting for the app to either use the real time fetched from a time server (behaviour in the published app) or to use the current device time for validating the business rules.
@@ -180,7 +193,7 @@ final class VerifierManager {
             observers[certificate.qrCode] = [Observer(object: object, block: block)]
         }
 
-        if let v = verifiers[certificate.qrCode], v.regions.elementsEqual(regions) {
+        if let v = verifiers[certificate.qrCode], v.region == region {
             if v.isRunningWith(validationTime) == false {
                 // EPIEMSCO-1506: Cache the last known result for up to five minutes if not invalidated for some other reason
                 if let knownResult = lastKnownResults[certificate.qrCode], (Clock.now ?? Date()).timeIntervalSince(knownResult.timestamp) < (5 * 60) {
@@ -194,7 +207,7 @@ final class VerifierManager {
             if let v = verifiers[certificate.qrCode] {
                 v.cancelled = true
             }
-            let v = Verifier(certificate: certificate, regions: regions, checkDefaultRegion: checkDefaultRegion, validationTime: validationTime, realTime: timeStatus?.time)
+            let v = Verifier(certificate: certificate, region: region, validationTime: validationTime, realTime: timeStatus?.time)
             v.important = important
             verifiers[certificate.qrCode] = v
             v.start(forceUpdate: forceUpdate) { state in

@@ -128,7 +128,7 @@ class CertificateTableViewCell: UITableViewCell {
             nameLabel.text = holder.healthCert.displayFullName
             stateLabel.certificate = holder.healthCert
 
-            VerifierManager.shared.addObserver(self, for: cert, regions: ["ET".regionModifiedProfile, "NG".regionModifiedProfile], checkDefaultRegion: false) { [weak self] state in
+            VerifierManager.shared.addObserver(self, for: cert, region: WalletUserStorage.shared.selectedValidationRegion ?? "W") { [weak self] state in
                 guard let strongSelf = self else { return }
                 strongSelf.state = state
             }
@@ -163,7 +163,7 @@ class CertificateTableViewCell: UITableViewCell {
                 self.qrCodeStateImageView.image = self.state.containsOnlyInvalidVerification() ? invalid : normal
             case .error:
                 self.qrCodeStateImageView.image = invalid
-            case .signatureInvalid:
+            case .signatureInvalid, .signatureExpired:
                 self.qrCodeStateImageView.image = invalid
             case .dataExpired:
                 self.qrCodeStateImageView.image = noInternet

@@ -182,7 +182,7 @@ class QRCodeNameView: UIView {
         let optimalImageHeight = floor(fmin(fmax(containerHeight - 20, 80), scrollViewContentWidth - 32))
         
         // Determine the remaining height for a fully visible QR code image (subtract padding that is applied to the StackView and 10pt extra room
-        let fullyVisibleHeight = floor(fmin(scrollViewContentWidth - 32, containerHeight - birthdayLabelView.frame.maxY - Padding.medium * 3 - 10))
+        let fullyVisibleHeight = floor(fmin(scrollViewContentWidth - 32, containerHeight - birthdayLabelView.frame.maxY - Padding.medium * 3 - 10) - (UIDevice.current.userInterfaceIdiom == .pad ? 32 : 0))
         
         let imageHeight = (fullyVisibleHeight > scrollViewContentWidth * 0.6 && (fullyVisibleHeight < scrollViewContentWidth - 32)) ? fullyVisibleHeight : optimalImageHeight
         

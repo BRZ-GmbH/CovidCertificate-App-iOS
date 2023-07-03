@@ -374,8 +374,8 @@
 /*Wallet: Retry Titel Offline*/
 "wallet_detail_offline_retry_title" = "Offline check not possible";
 
-/*Button zum QR Code Scannen öffnen*/
-"wallet_homescreen_qr_code_scannen" = "Scan QR code";
+/*Homescreen Zertifikat: Offline Modus Text*/
+"wallet_homescreen_offline" = "Offline mode";
 
 
 /*Wallet: Detail Offline Text*/
@@ -387,7 +387,8 @@
 /*Wallet: Detail Netzwerkfehler Text*/
 "wallet_detail_network_error_text" = "Try again later.";
 
-"wallet_region_selection_title" = "Federal State Selection";
+/*Wallet: Text auf Zertifikat auf Homescreen bei Netzwerkfehler*/
+"wallet_homescreen_network_error" = "Validity could not be determined";
 
 
 /*Titel Gültigkeit im Zertifikatsdetail*/
