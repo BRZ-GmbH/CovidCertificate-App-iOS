@@ -36,12 +36,12 @@ public extension UIColor {
     static var cc_greenish = UIColor(ub_hexString: "#dfedda")!
     static var cc_orangish = UIColor(ub_hexString: "#FCE6BF")!
     static var cc_redish = UIColor(ub_hexString: "#f2cac6")!
-    
+
     static var cc_green_valid = UIColor(ub_hexString: "#228028")!
     static var cc_red_invalid = UIColor(ub_hexString: "#bf0603")!
-    
+
     static var cc_greyTextLight = UIColor(ub_hexString: "#646d75")!
-    
+
     static var cc_dashedLine = UIColor(ub_hexString: "#ECEEEE")!
 
     // makes cc_black -> cc_grey
