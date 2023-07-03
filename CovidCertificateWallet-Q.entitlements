@@ -6,6 +6,7 @@
 	<array>
 		<string>applinks:nachweistest.gesundheit.gv.at</string>
 		<string>applinks:secure2.gesundheit.gv.at</string>
+		<string>applinks:nachweist.gesundheit.gv.at?mode=developer</string>
 	</array>
 </dict>
 </plist>

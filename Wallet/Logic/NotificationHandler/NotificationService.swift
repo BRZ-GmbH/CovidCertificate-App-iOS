@@ -76,12 +76,12 @@ class NotificationService {
     func updateLocalNotificationsForCampaignCheckResult(_ checkResult: CampaignCheckResult, excludingVisibleCampaignTimestampKey: String?) {
         let triggerInterval = triggerIntervalForNotifications()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
+
         UNUserNotificationCenter.current().getDeliveredNotifications { [weak self] visibleNotifications in
             let visibleCampaignTimestampKeys: [String] = visibleNotifications.compactMap { $0.request.content.userInfo["campaignTimestampKey"] as? String }
 
-            let timestampKeysToShow = checkResult.campaignsToDisplay.compactMap({ $0.campaign.lastDisplayTimestampKeyForCertificate($0.certificate) })
-            
+            let timestampKeysToShow = checkResult.campaignsToDisplay.compactMap { $0.campaign.lastDisplayTimestampKeyForCertificate($0.certificate) }
+
             let campaignsToAdd = checkResult.campaignsToDisplay.filter { campaignToDisplay in
                 if let timestampKey = campaignToDisplay.campaign.lastDisplayTimestampKeyForCertificate(campaignToDisplay.certificate) {
                     return visibleCampaignTimestampKeys.contains(timestampKey) == false && timestampKey != excludingVisibleCampaignTimestampKey

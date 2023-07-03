@@ -97,6 +97,8 @@ class SettingsToggleCell: UITableViewCell {
         messageLabel.text = message
         toggleLabel.text = toggle
         toggleSwitch.isOn = toggleEnabled
-        accessibilityLabel = [toggleEnabled ? activeAccessibilityLabel : inactiveAccessbilityLabel, message, performToggleAccessibilityLabel].joined(separator: ", ")
+        toggleSwitch.isAccessibilityElement = false
+        accessibilityLabel = [toggleEnabled ? activeAccessibilityLabel : inactiveAccessbilityLabel, performToggleAccessibilityLabel].joined(separator: ", ")
+        accessibilityHint = message
     }
 }

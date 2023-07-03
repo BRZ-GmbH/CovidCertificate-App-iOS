@@ -42,7 +42,7 @@ class WalletHomescreenViewController: HomescreenBaseViewController {
 
     var errorRetryHandler: ((UIAlertAction) -> Void)?
     var onErrorMessage: String?
-    var activeDirectLinkURL: URL? = nil
+    var activeDirectLinkURL: URL?
 
     init() {
         super.init(color: .cc_green_dark)

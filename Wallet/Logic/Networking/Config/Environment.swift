@@ -55,7 +55,7 @@ enum Environment {
     var directLinkUrl: String {
         switch self {
         case .dev:
-            return "https://nachweistest.gesundheit.gv.at/result/wallet/v1/directLink"
+            return "https://nachweist.gesundheit.gv.at/result/wallet/v1/directLink"
         case .abnahme:
             return "https://nachweistest.gesundheit.gv.at/result/wallet/v1/directLink"
         case .prod:

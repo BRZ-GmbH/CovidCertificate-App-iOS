@@ -119,19 +119,20 @@ class ImportHandler {
         for i in 1 ..< document.numberOfPages + 1 {
             if let page = document.page(at: i) {
                 let pageRect = page.getBoxRect(.mediaBox)
+                let renderer = UIGraphicsImageRenderer(size: pageRect.size)
 
-                let scaling: CGFloat = 300 / 72
+                let img = renderer.image { ctx in
+                    UIColor.white.set()
+                    ctx.fill(pageRect)
 
-                let colorSpace = CGColorSpaceCreateDeviceRGB()
-                let bitmapInfo = CGImageAlphaInfo.noneSkipLast.rawValue
+                    ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+                    ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+                    ctx.cgContext.interpolationQuality = .high
 
-                guard let context = CGContext(data: nil, width: Int(pageRect.size.width * scaling), height: Int(pageRect.size.height * scaling), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) else { continue }
-                context.interpolationQuality = .high
-                context.setFillColor(UIColor.white.cgColor)
-                context.fill(CGRect(x: 0, y: 0, width: pageRect.size.width * scaling, height: pageRect.size.height * scaling))
-                context.drawPDFPage(page)
+                    ctx.cgContext.drawPDFPage(page)
+                }
 
-                if let image = context.makeImage() {
+                if let image = img.cgImage {
                     images.append(image)
                 }
             }

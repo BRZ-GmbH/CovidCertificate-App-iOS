@@ -342,9 +342,8 @@ class NotificationHandler: NSObject {
         certificateCombinationHash = campaignCheckResult.certificateCombinationHash
         queuedCampaignNotifications = campaignCheckResult.campaignsToDisplay.filter { campaignToDisplay in
             guard let timestampKey = campaignToDisplay.campaign.lastDisplayTimestampKeyForCertificate(campaignToDisplay.certificate) else { return false }
-            
+
             return excludingCampaignsWithTimestampKeys.contains(timestampKey) == false
-            
         }
         presentAlertForNextQueuedCampaignNotification(window: window, certificateHash: certificateCombinationHash)
     }

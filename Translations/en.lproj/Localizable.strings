@@ -336,7 +336,7 @@
 
 /*Wallet: Hinweis im Zertifikat Detail*/
 "wallet_certificate_detail_note" = "This certificate is no travel document. \n\nThe scientific findings about Covid-19 vaccinations and tests and about recovery from Covid-19 infection continue to evolve, also with regard to worrying new coronavirus variants. \n\nPlease make sure you have the latest information about the health measures and any associated restrictions in place at your destination before starting your trip.";
-"wallet_terms_privacy_link" = "https://gruenerpass.gv.at/app/datenschutz";
+"wallet_terms_privacy_link" = "https://www.sozialministerium.at/gruener-pass-datenschutz";
 
 /*Wallet: Homescreen Was wollen sie machen?*/
 "wallet_homescreen_what_to_do" = "Select next step";

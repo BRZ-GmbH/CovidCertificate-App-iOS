@@ -13,8 +13,8 @@ import Foundation
 
 /* Different types of links which are handled in the app*/
 enum WalletAppLinkType {
-    case directLink(secret: String, signature: String)
-    case directLinkWithBpt(secret: String, signature: String, bpt: String)
+    case directLink(secret: String, secretSignature: String, clientId: String? = nil, clientIdSignature: String? = nil)
+    case directLinkWithBpt(secret: String, secretSignature: String, clientId: String? = nil, clientIdSignature: String? = nil, bpt: String)
     case directQRCode(data: String)
     case none
 }
@@ -30,9 +30,14 @@ class LinkHandler {
 
         if parts.count == 3, String(parts[0]) == "result" {
             if let bpt = urlComponents.queryItems?.first(where: { $0.name == "bpt" })?.value {
-                return .directLinkWithBpt(secret: String(parts[1]), signature: String(parts[2]), bpt: bpt)
+                return .directLinkWithBpt(secret: String(parts[1]), secretSignature: String(parts[2]), bpt: bpt)
             }
-            return .directLink(secret: String(parts[1]), signature: String(parts[2]))
+            return .directLink(secret: String(parts[1]), secretSignature: String(parts[2]))
+        } else if parts.count == 5, String(parts[0]) == "result" {
+            if let bpt = urlComponents.queryItems?.first(where: { $0.name == "bpt" })?.value {
+                return .directLinkWithBpt(secret: String(parts[1]), secretSignature: String(parts[2]), clientId: String(parts[3]), clientIdSignature: String(parts[4]), bpt: bpt)
+            }
+            return .directLink(secret: String(parts[1]), secretSignature: String(parts[2]), clientId: String(parts[3]), clientIdSignature: String(parts[4]))
         } else if parts.count == 5, String(parts[0]) == "gruenerpass", String(parts[1]) == "download", String(parts[2]) == "qr-code", String(parts[3]) == "wallet" {
             // Feature temporarely deactivated
             return .none

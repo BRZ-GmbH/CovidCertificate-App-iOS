@@ -63,6 +63,7 @@ class SettingsActionCell: UITableViewCell {
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor.cc_touchState
         self.selectedBackgroundView = selectedBackgroundView
+        accessibilityTraits = .button
     }
 
     func setTitle(_ title: String) {

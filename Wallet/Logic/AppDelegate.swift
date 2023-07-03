@@ -215,11 +215,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         switch linkType {
-        case let .directLink(secret: secret, signature: signature):
-            viewController.addCertificateDirectly(url: url, secret: secret, signature: signature)
+        case let .directLink(secret, secretSignature, clientId, clientIdSignature):
+            viewController.addCertificateDirectly(url: url, secret: secret, secretSignature: secretSignature, clientId: clientId, clientIdSignature: clientIdSignature)
             return true
-        case let .directLinkWithBpt(secret: secret, signature: signature, bpt: bpt):
-            viewController.addCertificateDirectlyWithBpt(url: url, secret: secret, secretSignature: signature, bpt: bpt)
+        case let .directLinkWithBpt(secret, secretSignature, clientId, clientIdSignature, bpt):
+            viewController.addCertificateDirectlyWithBpt(url: url, secret: secret, secretSignature: secretSignature, clientId: clientId, clientIdSignature: clientIdSignature, bpt: bpt)
             return true
         case let .directQRCode(data: qrCode):
             viewController.addCertificate(qrCode: qrCode)
